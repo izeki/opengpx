@@ -2,7 +2,7 @@
 
 = OpenGPX - You Are The Search Engine. =
 
-Current Version: '''1.0.1''' (Release 08.12.2010) [[ChangeLog]]
+Current Version: *1.0.1* (Release 08.12.2010) [ChangeLog]
 
 *Info*: ScreenShots, PlannedFeatures, CompassNavi
 
