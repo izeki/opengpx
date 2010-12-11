@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary Wiki index page.
 
 = OpenGPX - You Are The Search Engine. =
 
@@ -56,4 +56,4 @@ Variant 3 (Online):
 
 === Snapshots ===
 
-  * I'm regularily building development snapshots for testing. If you want to access those snapshots, I'll invite you to the Dropbox folder, just [mailto:martin.preishuber@digiforge.at drop me a note]. If you're no Dropbox user, I'd be happy to invite you (and earn 250 gigs) ;-))
+  * I'm regularily building development snapshots for testing. If you want to access those snapshots, I'll invite you to the Dropbox folder, just [mailto:martin.preishuber@digiforge.at drop me a note]. If you're no Dropbox user, I'd be happy to invite you (and earn 250mb) ;-))
