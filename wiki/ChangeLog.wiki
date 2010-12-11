@@ -3,6 +3,7 @@
 Next version (not released yet):
 
   * internal refactoring of classes (moved all classes to the org.opengpx namespace)
+  * fixed date parsing for opencaching.us gpx files
 
 Version *1.0.1* (8. December 2010)
 
