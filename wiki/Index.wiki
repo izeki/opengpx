@@ -1,0 +1,59 @@
+#summary One-sentence summary of this page.
+
+= OpenGPX - You Are The Search Engine. =
+
+Current Version: '''1.0.1''' (Release 08.12.2010) [[ChangeLog]]
+
+*Info*: ScreenShots, PlannedFeatures, CompassNavi
+
+== Usage ==
+
+Variant 1:
+
+  # Copy gpx files to the folder /sdcard/gpx (or /sdcard/download)
+  # [Optional] Create / Edit the text file /sdcard/gpx/info.txt (e.g. your personal cache search order)
+  # Run OpenGPX
+
+Variant 2 (faster imports):
+
+  # Create a cache database by using the [[Client Cache Database Management]] tool
+  # Copy database.db4o to /sdcard/gpx/database
+
+Variant 3 (Online):
+
+  # Use the "Search Online" feature (requires a free account at http://www.bcaching.com)
+
+== Features ==
+
+  * Lists all caches found in all GPX/LOC files (sorted by name or distance)
+  * Uses WebView for HTML cache descriptions
+  * Supports [http://www.geocaching.com geocaching.com] (single GPX and pocket queries), [http://opencaching.de opencaching.de], [http://geocaching.hu geocaching.hu], [http://code.google.com/p/geotoad/ GeoToad], [http://gctour.madd.in/ GCTour] files
+  * [[Client Cache Database Management]] for managing caches with clients
+  * Multiple cache database support
+  * Shows the main information about each cache (info, description, waypoints, logs)
+  * Extracts coordinates (Waypoints) from description and logs
+  * Internal image viewer for spoiler images (filenames have to contain one word of the cache name or the cache code)
+  * Uses [[CompassNavi]] activity for simple compass / GPS navigation
+  * Radar view (context menu on Waypoints) - requires [http://www.cyrket.com/package/com.google.android.radar Radar] library!
+  * [http://map.google.com Google map] / [http://www.andnav.org/ OpenStreetMap] view (All caches, all waypoints of one cache, single waypoint view [context menu on Waypoints])
+  * Detailed waypoint information (incl. distance and bearing to other waypoints)
+  * Navigation to waypoints with AndNav2
+  * Caching Tools (Calculator, Groundspeak en/decode, Caesar en/decode, Morse en/decode, Prime factorization, Text2Number, Roman numbers, Checksum, Sum Ascii, Vanity numbers). Calculation tool supports variables (a=5, b=a+2)
+  * Online Search via bcaching.com (requires a free account at http://www.bcaching.com)
+  * Log finds vie bcaching.com field notes
+
+== Reviews & Blog Entries ==
+
+  * [http://www.androids.lv/2009/09/paperless-geocaching-opengpx/ Androids.lv] (latvian)
+  * [http://blogausgraz.wordpress.com/2009/10/05/schnitzeljagt-mit-dem-android-geocaching/ BlogAusGraz] (german)
+  * [http://google-produkt-kompass.blogspot.com/2009/10/geocoaching-mit-android.html Google Produkt Kompass] (german, actually just a short mention at the end of the article)
+
+== Notes ==
+
+=== Crash logs ===
+
+  * <strike>Crash exceptions will be uploaded to http://flux.dnsdojo.org/opengpx/trace (if a network connection is available)</strike> (disabled)
+
+=== Snapshots ===
+
+  * I'm regularily building development snapshots for testing. If you want to access those snapshots, I'll invite you to the Dropbox folder, just [mailto:martin.preishuber@digiforge.at drop me a note]. If you're no Dropbox user, I'd be happy to invite you (and earn 250 gigs) ;-))
