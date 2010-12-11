@@ -2,6 +2,8 @@
 
 Next version (not released yet):
 
+  * internal refactoring of classes (moved all classes to the org.opengpx namespace)
+
 Version *1.0.1* (8. December 2010)
 
   * added GCVotes in bcaching.com search results
