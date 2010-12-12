@@ -39,12 +39,12 @@ Usage as RADAR:
 
 == ChangeLog ==
 
-Version '''0.4''' (04. Aug 2010):
+Version *0.4* (04. Aug 2010):
 
   * added possibility to keep screen on
   * added preferences to tune GPS update interval
 
-Version '''0.3''' (17. May 2010):
+Version *0.3* (17. May 2010):
 
   * CompassNavi listens to the SHOW_RADAR intent (com.google.android.radar.SHOW_RADAR)
   * new preferences layout
