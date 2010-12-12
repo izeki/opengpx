@@ -2,11 +2,12 @@ package org.opengpx.lib;
 
 import java.io.IOException;
 
-import org.opengpx.CacheListActivity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 
@@ -20,8 +21,9 @@ public class ResourceHelper
 
 	private Context mContext;
 	private float mfltDensity;
+	private String mPackageName = "org.opengpx"; // default value (should be valid)
 
-	private static final Logger mLogger = LoggerFactory.getLogger(CacheListActivity.class);
+	private static final Logger mLogger = LoggerFactory.getLogger(ResourceHelper.class);
 
 	/**
 	 * 
@@ -35,6 +37,13 @@ public class ResourceHelper
 		// http://developer.android.com/guide/practices/screens_support.html
 		this.mfltDensity = this.mContext.getResources().getDisplayMetrics().density;
 		mLogger.debug("Display metrics density: " + Float.toString(this.mfltDensity));
+
+		try 
+		{
+			final PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+			mPackageName = packageInfo.packageName;
+		} 
+		catch (NameNotFoundException e) { }
 	}
 	
 	/**
@@ -47,7 +56,7 @@ public class ResourceHelper
 		final String strDrawableId = id.toLowerCase();
 		final int intRealWidth = (int) (width * this.mfltDensity + 0.5f);
 		final int intRealHeight = (int) (height * this.mfltDensity + 0.5f);
-		final int res = this.mContext.getResources().getIdentifier(strDrawableId, "drawable", "mpr.openGPX");
+		final int res = this.mContext.getResources().getIdentifier(strDrawableId, "drawable", mPackageName);
 		Drawable drawable = null;
 		if (res > 0)
 		{
