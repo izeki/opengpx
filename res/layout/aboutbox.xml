@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<ImageView 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:src="@drawable/logo" android:layout_gravity="center"/>
+	
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/app_name" 
+        android:textStyle="bold" android:textSize="18sp"/>
+    <TextView android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/AboutWebLink" android:gravity="center" android:text="http://opengpx.sf.net" android:autoLink="web"></TextView><TextView
+        android:id="@+id/AboutBoxNameVersion"
+       	android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" />
+    <TextView
+        android:layout_width="fill_parent"
+       	android:layout_height="wrap_content"
+       	android:padding="4dip"
+        android:gravity="center"
+        android:text="@string/about_comments" />
+<ScrollView android:layout_height="wrap_content" android:layout_width="fill_parent"><LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center" android:text="@string/about_credits_groundspeak" android:id="@+id/AboutGroundspeak"></TextView><TextView android:layout_height="wrap_content" android:gravity="center" android:layout_width="fill_parent" android:text="@string/about_credits_osmdroid" android:id="@+id/AboutOsmdroid"></TextView>
+<TextView android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center" android:text="@string/about_credits_cloudmade" android:id="@+id/AboutCloudMade"></TextView>
+<TextView android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center" android:id="@+id/AboutDb4o" android:text="@string/about_credits_db4o"></TextView>
+</LinearLayout>
+
+
+</ScrollView><LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:orientation="horizontal" android:gravity="center"><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Close" android:id="@+id/AboutCloseButton"></Button>
+</LinearLayout>
+
+
+</LinearLayout>

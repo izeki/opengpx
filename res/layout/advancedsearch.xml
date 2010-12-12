@@ -1,0 +1,562 @@
+
+
+<ScrollView android:id="@+id/AdvSchScrollView01"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<LinearLayout android:id="@+id/AdvSchLinearLayout01"
+		android:layout_height="fill_parent" android:layout_width="fill_parent"
+		android:orientation="vertical">
+		<TextView android:layout_height="wrap_content"
+			android:layout_width="fill_parent" android:gravity="center"
+			android:textColor="#000000" android:background="#c8c8c8"
+			android:textSize="12dp" android:text="Advanced Search"
+			android:layout_marginBottom="2dp"></TextView>
+
+		<LinearLayout android:id="@+id/AdvSchDiffTextLayout01"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:orientation="horizontal">
+			<LinearLayout android:id="@+id/AdvSchDiffTextLayout02"
+				android:layout_width="70dp" android:orientation="vertical"
+				android:layout_height="fill_parent">
+				<RelativeLayout android:layout_height="fill_parent"
+					android:layout_width="fill_parent" android:id="@+id/AdvSchDiffTextLayout03">
+					<TextView android:id="@+id/AdvSchDiffText"
+						android:layout_width="wrap_content" android:layout_height="wrap_content"
+						android:layout_centerVertical="true" android:text="Difficulty:"
+						android:layout_alignParentLeft="true"></TextView>
+				</RelativeLayout>
+			</LinearLayout>
+			<LinearLayout android:id="@+id/AdvSchDiffSpinnerLayout01"
+				android:layout_height="wrap_content" android:orientation="vertical"
+				android:layout_width="fill_parent">
+				<RelativeLayout android:layout_height="wrap_content"
+					android:layout_width="fill_parent" android:id="@+id/AdvSchDiffSpinnerLayout02">
+					<Spinner android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:entries="@array/diff_terr_list"
+						android:id="@+id/AdvSchDiffFromSpinner"
+						android:layout_centerInParent="false"
+						android:layout_centerVertical="true" android:layout_marginLeft="15dp"></Spinner>
+					<TextView android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:layout_margin="5dp"
+						android:text="To:" android:id="@+id/AdvSchDiffToText"
+						android:layout_centerInParent="false" android:layout_toRightOf="@+id/AdvSchDiffFromSpinner"
+						android:layout_centerVertical="true"></TextView>
+					<Spinner android:layout_width="wrap_content"
+						android:layout_centerVertical="true" android:layout_height="wrap_content"
+						android:entries="@array/diff_terr_list" android:id="@+id/AdvSchDiffToSpinner"
+						android:layout_alignParentRight="false" android:layout_toRightOf="@+id/AdvSchDiffToText"></Spinner>
+				</RelativeLayout>
+			</LinearLayout>
+		</LinearLayout>
+
+		<LinearLayout android:id="@+id/AdvSchTerrTextLayout01"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:orientation="horizontal">
+			<LinearLayout android:id="@+id/AdvSchTerrTextLayout02"
+				android:layout_width="70dp" android:orientation="vertical"
+				android:layout_height="fill_parent">
+				<RelativeLayout android:layout_height="fill_parent"
+					android:layout_width="fill_parent" android:id="@+id/AdvSchTerrTextLayout03">
+					<TextView android:id="@+id/AdvSchTerrText"
+						android:layout_width="wrap_content" android:layout_height="wrap_content"
+						android:layout_centerVertical="true" android:text="Terrain:"
+						android:layout_alignParentLeft="true"></TextView>
+				</RelativeLayout>
+			</LinearLayout>
+			<LinearLayout android:id="@+id/AdvSchTerrSpinnerLayout01"
+				android:layout_height="wrap_content" android:orientation="vertical"
+				android:layout_width="fill_parent">
+				<RelativeLayout android:layout_height="wrap_content"
+					android:layout_width="fill_parent" android:id="@+id/AdvSchTerrSpinnerLayout02">
+					<Spinner android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:entries="@array/diff_terr_list"
+						android:id="@+id/AdvSchTerrFromSpinner"
+						android:layout_centerInParent="false"
+						android:layout_centerVertical="true" android:layout_marginLeft="15dp"></Spinner>
+					<TextView android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:layout_margin="5dp"
+						android:text="To:" android:id="@+id/AdvSchTerrToText"
+						android:layout_centerInParent="false" android:layout_toRightOf="@+id/AdvSchTerrFromSpinner"
+						android:layout_centerVertical="true"></TextView>
+					<Spinner android:layout_width="wrap_content"
+						android:layout_centerVertical="true" android:layout_height="wrap_content"
+						android:entries="@array/diff_terr_list" android:id="@+id/AdvSchTerrToSpinner"
+						android:layout_alignParentRight="false" android:layout_toRightOf="@+id/AdvSchTerrToText"></Spinner>
+				</RelativeLayout>
+			</LinearLayout>
+		</LinearLayout>
+
+		<TextView android:layout_height="wrap_content"
+			android:layout_width="fill_parent" android:gravity="center"
+			android:textColor="#000000" android:background="#c8c8c8"
+			android:textSize="12dp" android:text="Container Size"
+			android:layout_marginBottom="2dp"></TextView>
+			
+		<LinearLayout android:id="@+id/AdvSchLinearLayout02"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:orientation="horizontal">
+			<LinearLayout android:id="@+id/AdvSchLinearLayout02"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:orientation="vertical">
+				<CheckBox android:id="@+id/AdvSchSizeLarge"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:text="Large"></CheckBox>
+				<CheckBox android:id="@+id/AdvSchSizeRegular"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:text="Regular"></CheckBox>
+				<CheckBox android:id="@+id/AdvSchSizeSmall"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:text="Small"></CheckBox>
+			</LinearLayout>
+			<LinearLayout android:id="@+id/AdvSchLinearLayout03"
+				android:layout_width="100dp" android:layout_height="wrap_content"
+				android:orientation="vertical">
+				<CheckBox android:id="@+id/AdvSchSizeMicro"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:text="Micro" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"></CheckBox>
+				<CheckBox android:id="@+id/AdvSchSizeOther"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:text="Other" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"></CheckBox>
+				<CheckBox android:id="@+id/AdvSchSizeVirtual"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:text="Virtual" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"></CheckBox>
+			</LinearLayout>
+			<LinearLayout android:id="@+id/AdvSchLinearLayout04"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:orientation="vertical">
+				<CheckBox android:id="@+id/AdvSchSizeNotChosen"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:text="Not Chosen"></CheckBox>
+				<CheckBox android:id="@+id/AdvSchSizeAll"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:text="All"></CheckBox>
+				<CheckBox android:id="@+id/AdvSchSizeNone"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:text="None"></CheckBox>
+			</LinearLayout>
+		</LinearLayout>
+
+		<TextView android:layout_height="wrap_content"
+			android:layout_width="fill_parent" android:gravity="center"
+			android:textColor="#000000" android:background="#c8c8c8"
+			android:textSize="12dp" android:text="Cache Type"
+			android:layout_marginBottom="2dp"></TextView>
+
+		<RelativeLayout android:id="@+id/AdvSchRelativeLayout03"
+			android:layout_width="wrap_content" android:layout_height="wrap_content">
+			<CheckBox android:id="@+id/AdvSchTypeTraditional"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_centerVertical="true"></CheckBox>
+			<ImageView android:layout_width="wrap_content" android:id="@+id/AdvSchImageViewTraditional"
+				android:layout_toRightOf="@+id/AdvSchTypeTraditional"
+				android:layout_height="wrap_content" android:src="@drawable/traditional"
+				android:layout_centerVertical="true"></ImageView>
+			<CheckBox android:id="@+id/AdvSchTypeMulti"
+				android:layout_width="wrap_content" android:layout_toRightOf="@+id/AdvSchImageViewTraditional"
+				android:layout_height="wrap_content" android:layout_centerVertical="true"
+				android:layout_marginLeft="10dp"></CheckBox>
+			<ImageView android:layout_width="wrap_content" android:id="@+id/AdvSchImageViewMulti"
+				android:layout_toRightOf="@+id/AdvSchTypeMulti"
+				android:layout_height="wrap_content" android:src="@drawable/multi"
+				android:layout_centerVertical="true"></ImageView>
+			<CheckBox android:id="@+id/AdvSchTypeCito"
+				android:layout_width="wrap_content" android:layout_centerVertical="true"
+				android:layout_toRightOf="@+id/AdvSchImageViewMulti"
+				android:layout_height="wrap_content" android:layout_marginLeft="10dp"></CheckBox>
+			<ImageView android:layout_width="wrap_content" android:id="@+id/AdvSchImageViewCito"
+				android:layout_centerVertical="true" android:layout_toRightOf="@+id/AdvSchTypeCito"
+				android:layout_height="wrap_content" android:src="@drawable/citoevent"></ImageView>
+			<CheckBox android:id="@+id/AdvSchTypeEarth"
+				android:layout_width="wrap_content" android:layout_centerVertical="true"
+				android:layout_toRightOf="@+id/AdvSchImageViewCito"
+				android:layout_height="wrap_content" android:layout_marginLeft="10dp"></CheckBox>
+			<ImageView android:layout_width="wrap_content" android:id="@+id/AdvSchImageViewEarth"
+				android:layout_centerVertical="true" android:layout_toRightOf="@+id/AdvSchTypeEarth"
+				android:layout_height="wrap_content" android:src="@drawable/earthcache"></ImageView>
+		</RelativeLayout>
+
+		<RelativeLayout android:id="@+id/AdvSchRelativeLayout04"
+			android:layout_width="wrap_content" android:layout_height="wrap_content">
+			<CheckBox android:id="@+id/AdvSchTypeEvent"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_centerVertical="true"></CheckBox>
+			<ImageView android:layout_width="wrap_content" android:id="@+id/AdvSchImageViewEvent"
+				android:layout_toRightOf="@+id/AdvSchTypeEvent"
+				android:layout_height="wrap_content" android:layout_centerVertical="true"
+				android:src="@drawable/event"></ImageView>
+			<CheckBox android:id="@+id/AdvSchTypeLetterbox"
+				android:layout_width="wrap_content" android:layout_toRightOf="@+id/AdvSchImageViewEvent"
+				android:layout_height="wrap_content" android:layout_centerVertical="true"
+				android:layout_marginLeft="10dp"></CheckBox>
+			<ImageView android:layout_width="wrap_content" android:id="@+id/AdvSchImageViewLetterbox"
+				android:layout_toRightOf="@+id/AdvSchTypeLetterbox"
+				android:layout_height="wrap_content" android:layout_centerVertical="true"
+				android:src="@drawable/letterbox"></ImageView>
+			<CheckBox android:id="@+id/AdvSchTypeLocationless"
+				android:layout_width="wrap_content" android:layout_centerVertical="true"
+				android:layout_toRightOf="@+id/AdvSchImageViewLetterbox"
+				android:layout_height="wrap_content" android:layout_marginLeft="10dp"></CheckBox>
+			<ImageView android:layout_width="wrap_content" android:id="@+id/AdvSchImageViewLocationless"
+				android:layout_centerVertical="true" android:layout_toRightOf="@+id/AdvSchTypeLocationless"
+				android:layout_height="wrap_content" android:src="@drawable/locationless"></ImageView>
+			<CheckBox android:id="@+id/AdvSchTypeWebcam"
+				android:layout_width="wrap_content" android:layout_centerVertical="true"
+				android:layout_toRightOf="@+id/AdvSchImageViewLocationless"
+				android:layout_height="wrap_content" android:layout_marginLeft="10dp"></CheckBox>
+			<ImageView android:layout_width="wrap_content" android:id="@+id/AdvSchImageViewWebcam"
+				android:layout_centerVertical="true" android:layout_toRightOf="@+id/AdvSchTypeWebcam"
+				android:layout_height="wrap_content" android:src="@drawable/webcam"></ImageView>
+		</RelativeLayout>
+
+		<RelativeLayout android:id="@+id/AdvSchRelativeLayout05"
+			android:layout_width="wrap_content" android:layout_height="wrap_content">
+			<CheckBox android:id="@+id/AdvSchTypeApe"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_centerVertical="true"></CheckBox>
+			<ImageView android:layout_width="wrap_content" android:id="@+id/AdvSchImageViewApe"
+				android:layout_toRightOf="@+id/AdvSchTypeApe"
+				android:layout_height="wrap_content" android:layout_centerVertical="true"
+				android:src="@drawable/projectape"></ImageView>
+			<CheckBox android:id="@+id/AdvSchTypeUnknown"
+				android:layout_width="wrap_content" android:layout_toRightOf="@+id/AdvSchImageViewApe"
+				android:layout_height="wrap_content" android:layout_centerVertical="true"
+				android:layout_marginLeft="10dp"></CheckBox>
+			<ImageView android:layout_width="wrap_content" android:id="@+id/AdvSchImageViewUnknown"
+				android:layout_toRightOf="@+id/AdvSchTypeUnknown"
+				android:layout_height="wrap_content" android:layout_centerVertical="true"
+				android:src="@drawable/unknown"></ImageView>
+			<CheckBox android:id="@+id/AdvSchTypeVirtual"
+				android:layout_width="wrap_content" android:layout_centerVertical="true"
+				android:layout_toRightOf="@+id/AdvSchImageViewUnknown"
+				android:layout_height="wrap_content" android:layout_marginLeft="10dp"></CheckBox>
+			<ImageView android:layout_width="wrap_content" android:id="@+id/AdvSchImageViewVirtual"
+				android:layout_centerVertical="true" android:layout_toRightOf="@+id/AdvSchTypeVirtual"
+				android:layout_height="wrap_content" android:src="@drawable/virtual"></ImageView>
+			<CheckBox android:id="@+id/AdvSchTypeWhereigo"
+				android:layout_width="wrap_content" android:layout_centerVertical="true"
+				android:layout_toRightOf="@+id/AdvSchImageViewVirtual"
+				android:layout_height="wrap_content" android:layout_marginLeft="10dp"></CheckBox>
+			<ImageView android:layout_width="wrap_content" android:id="@+id/AdvSchImageViewWhereigo"
+				android:layout_centerVertical="true" android:layout_toRightOf="@+id/AdvSchTypeWhereigo"
+				android:layout_height="wrap_content" android:src="@drawable/whereigo"></ImageView>
+		</RelativeLayout>
+
+		<RelativeLayout android:id="@+id/AdvSchRelativeLayout06"
+			android:layout_width="wrap_content" android:layout_height="wrap_content">
+			<CheckBox android:id="@+id/AdvSchTypeMegaevent"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_centerVertical="true"></CheckBox>
+			<ImageView android:layout_width="wrap_content" android:id="@+id/AdvSchImageViewMegaevent"
+				android:layout_toRightOf="@+id/AdvSchTypeMegaevent"
+				android:layout_height="wrap_content" android:layout_centerVertical="true"
+				android:src="@drawable/megaevent"></ImageView>
+			<CheckBox android:id="@+id/AdvSchTypeGpsame"
+				android:layout_width="wrap_content" android:layout_toRightOf="@+id/AdvSchImageViewMegaevent"
+				android:layout_height="wrap_content" android:layout_centerVertical="true"
+				android:layout_marginLeft="10dp"></CheckBox>
+			<ImageView android:layout_width="wrap_content" android:id="@+id/AdvSchImageViewGpsame"
+				android:layout_toRightOf="@+id/AdvSchTypeGpsame"
+				android:layout_height="wrap_content" android:layout_centerVertical="true"
+				android:src="@drawable/gpsame"></ImageView>
+			<CheckBox android:id="@+id/AdvSchTypeAll"
+				android:layout_width="wrap_content" android:layout_centerVertical="true"
+				android:layout_toRightOf="@+id/AdvSchImageViewGpsame"
+				android:layout_height="wrap_content" android:layout_marginLeft="10dp"></CheckBox>
+			<TextView android:layout_width="wrap_content"
+				android:layout_centerVertical="true" android:id="@+id/AdvSchTextViewTypeAll"
+				android:layout_toRightOf="@+id/AdvSchTypeAll"
+				android:layout_height="wrap_content" android:text="All"
+				android:layout_marginLeft="10dp"></TextView>
+			<CheckBox android:id="@+id/AdvSchTypeNone"
+				android:layout_width="wrap_content" android:layout_centerVertical="true"
+				android:layout_toRightOf="@+id/AdvSchTextViewTypeAll"
+				android:layout_height="wrap_content" android:layout_marginLeft="15dp"></CheckBox>
+			<TextView android:layout_width="wrap_content"
+				android:layout_centerVertical="true" android:id="@+id/AdvSchTextViewTypeNone"
+				android:layout_toRightOf="@+id/AdvSchTypeNone"
+				android:layout_height="wrap_content" android:text="None"></TextView>
+		</RelativeLayout>
+
+		<TextView android:layout_height="wrap_content"
+			android:layout_width="fill_parent" android:gravity="center"
+			android:textColor="#000000" android:background="#c8c8c8"
+			android:textSize="12dp" android:text="Misc"
+			android:layout_marginBottom="2dp"></TextView>
+
+
+		<LinearLayout android:id="@+id/AdvSchActiveLayout01"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:orientation="horizontal">
+			<LinearLayout android:id="@+id/AdvSchActiveTextLayout02"
+				android:layout_width="70dp" android:orientation="vertical"
+				android:layout_height="fill_parent">
+				<RelativeLayout android:layout_height="fill_parent"
+					android:layout_width="fill_parent" android:id="@+id/AdvSchActiveTextLayout03">
+					<TextView android:id="@+id/AdvSchActiveText"
+						android:layout_width="wrap_content" android:layout_height="wrap_content"
+						android:layout_centerVertical="true" android:text="Is Active:"
+						android:layout_alignParentLeft="true"></TextView>
+				</RelativeLayout>
+			</LinearLayout>
+			<LinearLayout android:id="@+id/AdvSchActiveButtonLayout01"
+				android:layout_height="wrap_content" android:orientation="vertical"
+				android:layout_width="fill_parent">
+				<RelativeLayout android:layout_height="wrap_content"
+					android:layout_width="fill_parent" android:id="@+id/AdvSchActiveButtonLayout02">
+					<RadioGroup android:id="@+id/AdvSchActiveRadioGroup"
+						android:layout_centerInParent="true" android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:orientation="horizontal">
+						<RadioButton android:text="Yes" android:id="@+id/AdvSchActiveYes"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
+						<RadioButton android:text="No" android:id="@+id/AdvSchActiveNo"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:layout_marginLeft="5dp" android:layout_marginRight="5dp"></RadioButton>
+						<RadioButton android:text="Either" android:id="@+id/AdvSchActiveEither"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:checked="true"></RadioButton>
+					</RadioGroup>
+				</RelativeLayout>
+			</LinearLayout>
+		</LinearLayout>
+
+		<LinearLayout android:id="@+id/AdvSchFoundLayout01"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:orientation="horizontal">
+			<LinearLayout android:id="@+id/AdvSchFoundTextLayout02"
+				android:layout_width="70dp" android:orientation="vertical"
+				android:layout_height="fill_parent">
+				<RelativeLayout android:layout_height="fill_parent"
+					android:layout_width="fill_parent" android:id="@+id/AdvSchFoundTextLayout03">
+					<TextView android:id="@+id/AdvSchFoundText"
+						android:layout_width="wrap_content" android:layout_height="wrap_content"
+						android:layout_centerVertical="true" android:text="I've Found:"
+						android:layout_alignParentLeft="true"></TextView>
+				</RelativeLayout>
+			</LinearLayout>
+			<LinearLayout android:id="@+id/AdvSchFoundButtonLayout01"
+				android:layout_height="wrap_content" android:orientation="vertical"
+				android:layout_width="fill_parent">
+				<RelativeLayout android:layout_height="wrap_content"
+					android:layout_width="fill_parent" android:id="@+id/AdvSchFoundButtonLayout02">
+					<RadioGroup android:id="@+id/AdvSchFoundRadioGroup"
+						android:layout_centerInParent="true" android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:orientation="horizontal">
+						<RadioButton android:text="Yes" android:id="@+id/AdvSchFoundYes"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
+						<RadioButton android:text="No" android:id="@+id/AdvSchFoundNo"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:layout_marginLeft="5dp" android:layout_marginRight="5dp"></RadioButton>
+						<RadioButton android:text="Either" android:id="@+id/AdvSchFoundEither"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:checked="true"></RadioButton>
+					</RadioGroup>
+				</RelativeLayout>
+			</LinearLayout>
+		</LinearLayout>
+
+		<LinearLayout android:id="@+id/AdvSchIgnoredLayout01"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:orientation="horizontal">
+			<LinearLayout android:id="@+id/AdvSchIgnoredTextLayout02"
+				android:layout_width="70dp" android:orientation="vertical"
+				android:layout_height="fill_parent">
+				<RelativeLayout android:layout_height="fill_parent"
+					android:layout_width="fill_parent" android:id="@+id/AdvSchFoundTextLayout03">
+					<TextView android:id="@+id/AdvSchIgnoredText"
+						android:layout_width="wrap_content" android:layout_height="wrap_content"
+						android:layout_centerVertical="true" android:text="Is Ignored:"
+						android:layout_alignParentLeft="true"></TextView>
+				</RelativeLayout>
+			</LinearLayout>
+			<LinearLayout android:id="@+id/AdvSchIgnoredButtonLayout01"
+				android:layout_height="wrap_content" android:orientation="vertical"
+				android:layout_width="fill_parent">
+				<RelativeLayout android:layout_height="wrap_content"
+					android:layout_width="fill_parent" android:id="@+id/AdvSchIgnoredButtonLayout02">
+					<RadioGroup android:id="@+id/AdvSchIgnoredRadioGroup"
+						android:layout_centerInParent="true" android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:orientation="horizontal">
+						<RadioButton android:text="Yes" android:id="@+id/AdvSchIgnoredYes"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
+						<RadioButton android:text="No" android:id="@+id/AdvSchIgnoredNo"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:layout_marginLeft="5dp" android:layout_marginRight="5dp"></RadioButton>
+						<RadioButton android:text="Either" android:id="@+id/AdvSchIgnoredEither"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:checked="true"></RadioButton>
+					</RadioGroup>
+				</RelativeLayout>
+			</LinearLayout>
+		</LinearLayout>
+
+		<LinearLayout android:id="@+id/AdvSchOwnedLayout01"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:orientation="horizontal">
+			<LinearLayout android:id="@+id/AdvSchOwnedTextLayout02"
+				android:layout_width="70dp" android:orientation="vertical"
+				android:layout_height="fill_parent">
+				<RelativeLayout android:layout_height="fill_parent"
+					android:layout_width="fill_parent" android:id="@+id/AdvSchFoundTextLayout03">
+					<TextView android:id="@+id/AdvSchOwnedText"
+						android:layout_width="wrap_content" android:layout_height="wrap_content"
+						android:layout_centerVertical="true" android:text="I Own:"
+						android:layout_alignParentLeft="true"></TextView>
+				</RelativeLayout>
+			</LinearLayout>
+			<LinearLayout android:id="@+id/AdvSchOwnedButtonLayout01"
+				android:layout_height="wrap_content" android:orientation="vertical"
+				android:layout_width="fill_parent">
+				<RelativeLayout android:layout_height="wrap_content"
+					android:layout_width="fill_parent" android:id="@+id/AdvSchOwnedButtonLayout02">
+					<RadioGroup android:id="@+id/AdvSchOwnedRadioGroup"
+						android:layout_centerInParent="true" android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:orientation="horizontal">
+						<RadioButton android:text="Yes" android:id="@+id/AdvSchOwnedYes"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
+						<RadioButton android:text="No" android:id="@+id/AdvSchOwnedNo"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:layout_marginLeft="5dp" android:layout_marginRight="5dp"></RadioButton>
+						<RadioButton android:text="Either" android:id="@+id/AdvSchOwnedEither"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:checked="true"></RadioButton>
+					</RadioGroup>
+				</RelativeLayout>
+			</LinearLayout>
+		</LinearLayout>
+
+
+		<LinearLayout android:id="@+id/AdvSchWptsLayout01"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:orientation="horizontal">
+			<LinearLayout android:id="@+id/AdvSchWptsTextLayout02"
+				android:layout_width="70dp" android:orientation="vertical"
+				android:layout_height="fill_parent">
+				<RelativeLayout android:layout_height="fill_parent"
+					android:layout_width="fill_parent" android:id="@+id/AdvSchFoundTextLayout03">
+					<TextView android:id="@+id/AdvSchWptsText"
+						android:layout_width="wrap_content" android:layout_height="wrap_content"
+						android:layout_centerVertical="true" android:text="My Wpts:"
+						android:layout_alignParentLeft="true"></TextView>
+				</RelativeLayout>
+			</LinearLayout>
+			<LinearLayout android:id="@+id/AdvSchWptsButtonLayout01"
+				android:layout_height="wrap_content" android:orientation="vertical"
+				android:layout_width="fill_parent">
+				<RelativeLayout android:layout_height="wrap_content"
+					android:layout_width="fill_parent" android:id="@+id/AdvSchWptsButtonLayout02">
+					<RadioGroup android:id="@+id/AdvSchWptsRadioGroup"
+						android:layout_centerInParent="true" android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:orientation="horizontal">
+						<RadioButton android:text="Yes" android:id="@+id/AdvSchWptsYes"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
+						<RadioButton android:text="No" android:id="@+id/AdvSchWptsNo"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:layout_marginLeft="5dp" android:layout_marginRight="5dp"></RadioButton>
+						<RadioButton android:text="Either" android:id="@+id/AdvSchWptsEither"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:checked="true"></RadioButton>
+					</RadioGroup>
+				</RelativeLayout>
+			</LinearLayout>
+		</LinearLayout>
+
+
+		<LinearLayout android:id="@+id/AdvSchAltCoordsLayout01"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:orientation="horizontal">
+			<LinearLayout android:id="@+id/AdvSchAltCoordsTextLayout02"
+				android:layout_width="70dp" android:orientation="vertical"
+				android:layout_height="fill_parent">
+				<RelativeLayout android:layout_height="fill_parent"
+					android:layout_width="fill_parent" android:id="@+id/AdvSchAltCoordsTextLayout03">
+					<TextView android:id="@+id/AdvSchAltCoordsText"
+						android:layout_width="wrap_content" android:layout_height="wrap_content"
+						android:layout_centerVertical="true" android:text="Alt Coords:"
+						android:layout_alignParentLeft="true"></TextView>
+				</RelativeLayout>
+			</LinearLayout>
+			<LinearLayout android:id="@+id/AdvSchAltCoordsButtonLayout01"
+				android:layout_height="wrap_content" android:orientation="vertical"
+				android:layout_width="fill_parent">
+				<RelativeLayout android:layout_height="wrap_content"
+					android:layout_width="fill_parent" android:id="@+id/AdvSchAltCoordsButtonLayout02">
+					<RadioGroup android:id="@+id/AdvSchAltCoordsRadioGroup"
+						android:layout_centerInParent="true" android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:orientation="horizontal">
+						<RadioButton android:text="Yes" android:id="@+id/AdvSchAltCoordsYes"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
+						<RadioButton android:text="No" android:id="@+id/AdvSchAltCoordsNo"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:layout_marginLeft="5dp" android:layout_marginRight="5dp"></RadioButton>
+						<RadioButton android:text="Either" android:id="@+id/AdvSchAltCoordsEither"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:checked="true"></RadioButton>
+					</RadioGroup>
+				</RelativeLayout>
+			</LinearLayout>
+		</LinearLayout>
+
+		<LinearLayout android:id="@+id/AdvSchHasTBLayout01"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:orientation="horizontal">
+			<LinearLayout android:id="@+id/AdvSchHasTBTextLayout02"
+				android:layout_width="70dp" android:orientation="vertical"
+				android:layout_height="fill_parent">
+				<RelativeLayout android:layout_height="fill_parent"
+					android:layout_width="fill_parent" android:id="@+id/AdvSchHasTBTextLayout03">
+					<TextView android:id="@+id/AdvSchHasTBText"
+						android:layout_width="wrap_content" android:layout_height="wrap_content"
+						android:layout_centerVertical="true" android:text="Has TBs:"
+						android:layout_alignParentLeft="true"></TextView>
+				</RelativeLayout>
+			</LinearLayout>
+			<LinearLayout android:id="@+id/AdvSchHasTBButtonLayout01"
+				android:layout_height="wrap_content" android:orientation="vertical"
+				android:layout_width="fill_parent">
+				<RelativeLayout android:layout_height="wrap_content"
+					android:layout_width="fill_parent" android:id="@+id/AdvSchHasTBButtonLayout02">
+					<RadioGroup android:id="@+id/AdvSchHasTBRadioGroup"
+						android:layout_centerInParent="true" android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:orientation="horizontal">
+						<RadioButton android:text="Yes" android:id="@+id/AdvSchHasTBYes"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
+						<RadioButton android:text="No" android:id="@+id/AdvSchHasTBNo"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:layout_marginLeft="5dp" android:layout_marginRight="5dp"></RadioButton>
+						<RadioButton android:text="Either" android:id="@+id/AdvSchHasTBEither"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:checked="true"></RadioButton>
+					</RadioGroup>
+				</RelativeLayout>
+			</LinearLayout>
+		</LinearLayout>
+
+		<TextView android:layout_height="wrap_content"
+			android:layout_width="fill_parent" android:gravity="center"
+			android:textColor="#000000" android:background="#c8c8c8"
+			android:textSize="12dp" android:text="Distance From Origin (Miles)"
+			android:layout_marginBottom="2dp"></TextView>
+
+		<RelativeLayout android:layout_height="wrap_content"
+			android:layout_width="fill_parent" android:id="@+id/AdvSchDistanceFromOriginLayout02">
+			<EditText android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_centerInParent="true"
+				android:text="30" android:id="@+id/AdvSchDistanceFromOrigin"
+				android:inputType="number" android:minWidth="100dp"></EditText>
+		</RelativeLayout>
+
+		<RelativeLayout android:layout_height="wrap_content"
+			android:layout_width="fill_parent" android:id="@+id/AdvSchDistanceFromOriginLayout02">
+			<LinearLayout android:id="@+id/AdvSchButtonsLayout0"
+				android:layout_centerInParent="true" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:orientation="horizontal"
+				android:layout_marginTop="20dp">
+				<Button android:text="Execute" android:id="@+id/AdvSchExecuteButton"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+				<Button android:text="Clear" android:id="@+id/AdvSchClearButton"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+			</LinearLayout>
+		</RelativeLayout>
+
+	</LinearLayout>
+</ScrollView>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_height="wrap_content" android:layout_margin="3dip" android:layout_width="fill_parent" android:gravity="center_horizontal"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/vote_average" android:layout_marginRight="3dip"></TextView>
+<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/VoteAverage" android:text="4.2" android:textColor="#ffffff" android:layout_marginRight="3dip"></TextView>
+<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="3dip" android:text="@string/vote_median"></TextView>
+<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/VoteMedian" android:text="4.5" android:textColor="#ffffff"></TextView>
+<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=")"></TextView>
+</LinearLayout><TableLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center_horizontal">
+<TableRow android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center_horizontal">
+  <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/stars1_0" android:layout_marginRight="5dip"></ImageView>
+  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Vote_1_0" android:text="0" android:textColor="#ffffff" android:tag="Vote_1_0"></TextView>
+</TableRow>
+<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_horizontal">
+  <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5dip" android:src="@drawable/stars1_5"></ImageView>
+  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Vote_1_5" android:text="0" android:textColor="#ffffff" android:tag="Vote_1_5"></TextView>
+</TableRow>
+<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_horizontal">
+  <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5dip" android:src="@drawable/stars2_0"></ImageView>
+  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Vote_2_0" android:text="0" android:textColor="#ffffff" android:tag="Vote_2_0"></TextView>
+</TableRow>
+<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_horizontal">
+  <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5dip" android:src="@drawable/stars2_5"></ImageView>
+  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Vote_2_5" android:text="0" android:textColor="#ffffff" android:tag="Vote_2_5"></TextView>
+</TableRow>
+<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_horizontal">
+  <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5dip" android:src="@drawable/stars3_0"></ImageView>
+  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Vote_3_0" android:text="0" android:textColor="#ffffff" android:tag="Vote_3_0"></TextView>
+</TableRow>
+<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_horizontal">
+  <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5dip" android:src="@drawable/stars3_5"></ImageView>
+  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Vote_3_5" android:text="0" android:textColor="#ffffff" android:tag="Vote_3_5"></TextView>
+</TableRow>
+<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_horizontal">
+  <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5dip" android:src="@drawable/stars4_0"></ImageView>
+  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Vote_4_0" android:text="0" android:textColor="#ffffff" android:tag="Vote_4_0"></TextView>
+</TableRow>
+<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_horizontal">
+  <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5dip" android:src="@drawable/stars4_5"></ImageView>
+  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Vote_4_5" android:text="0" android:textColor="#ffffff" android:tag="Vote_4_5"></TextView>
+</TableRow>
+<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_horizontal">
+  <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5dip" android:src="@drawable/stars5_0"></ImageView>
+  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Vote_5_0" android:text="0" android:textColor="#ffffff" android:tag="Vote_5_0"></TextView>
+</TableRow>
+<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_horizontal">
+  <TextView android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="right" android:text="@string/vote_total" android:paddingRight="3dip"></TextView>
+  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="#ffffff" android:tag="Vote_5_0" android:id="@+id/VoteCount"></TextView>
+
+</TableRow>
+</TableLayout>
+</LinearLayout>

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="300"
+   id="svg1"
+   inkscape:version="0.48.0 r9654"
+   sodipodi:docname="stars1_0.svg"
+   sodipodi:version="0.32"
+   width="1500"
+   version="1.1">
+  <sodipodi:namedview
+     bordercolor="#666666"
+     borderopacity="1.0"
+     id="base"
+     inkscape:cx="441.46815"
+     inkscape:cy="248.5855"
+     inkscape:guide-bbox="true"
+     inkscape:pageopacity="0.0000000"
+     inkscape:pageshadow="2"
+     inkscape:window-height="752"
+     inkscape:window-width="1280"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:zoom="0.99207596"
+     pagecolor="#ffffff"
+     showguides="false"
+     showgrid="true"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg1"
+     inkscape:snap-bbox="true"
+     inkscape:snap-global="true"
+     inkscape:snap-nodes="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid5595"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata4954">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title></dc:title>
+        <dc:description>This image was ispire by MDK10 star the word EStrella is spanish for star in case someone is wondering.</dc:description>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li />
+            <rdf:li>star</rdf:li>
+            <rdf:li>shape</rdf:li>
+            <rdf:li>geometry</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://www.openclipart.org">
+            <dc:title>sir (sergio i. rivera)</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>sir (sergio i. rivera)</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>sir (sergio i. rivera)</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:date />
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://web.resource.org/cc/PublicDomain" />
+        <dc:language>en</dc:language>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://web.resource.org/cc/PublicDomain">
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Reproduction" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Distribution" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3">
+    <linearGradient
+       id="linearGradient3821">
+      <stop
+         id="stop3823"
+         offset="0"
+         style="stop-color:#7bf041;stop-opacity:1;" />
+      <stop
+         id="stop3825"
+         offset="1"
+         style="stop-color:#6fd93a;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5599">
+      <stop
+         style="stop-color:#00ff00;stop-opacity:1;"
+         offset="0"
+         id="stop5601" />
+      <stop
+         id="stop5607"
+         offset="0.5"
+         style="stop-color:#f19300;stop-opacity:1;" />
+      <stop
+         style="stop-color:#ff0000;stop-opacity:1;"
+         offset="1"
+         id="stop5603" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient1545">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1.0000000;"
+         offset="0.0000000"
+         id="stop1546" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0.0000000;"
+         offset="1.0000000"
+         id="stop1547" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient1541">
+      <stop
+         style="stop-color:#000;stop-opacity:1;"
+         offset="0"
+         id="stop1542" />
+      <stop
+         style="stop-color:#fff;stop-opacity:1;"
+         offset="1"
+         id="stop1543" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5599"
+       id="linearGradient5605"
+       x1="0"
+       y1="223.02249"
+       x2="799.71075"
+       y2="223.02249"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="scale(0.98785717,1)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3821"
+       id="linearGradient3819"
+       x1="0"
+       y1="71.647186"
+       x2="154.30899"
+       y2="71.647186"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <path
+     d="m 152.30899,50.586717 -36.05646,34.89352 8.44755,54.585683 -46.737527,-24.19166 -46.15854,25.42011 7.17109,-54.792213 L 2,51.075387 53.169493,51.147187 76.476173,2 l 24.453397,48.515607 51.37942,0.0711 z"
+     id="path914"
+     sodipodi:nodetypes="ccccccccccc"
+     style="fill:url(#linearGradient3819);fill-opacity:1;fill-rule:evenodd;stroke:#c0c0c0;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="/Users/preisl/Downloads/stars1_0.png"
+     inkscape:export-xdpi="7.3220339"
+     inkscape:export-ydpi="7.3220339" />
+  <rect
+     style="fill:url(#linearGradient5605);fill-opacity:1;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none"
+     id="rect5597"
+     width="790"
+     height="128.29584"
+     x="0"
+     y="158.87457" />
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#c0c0c0;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     sodipodi:nodetypes="ccccccccccc"
+     id="path3805"
+     d="m 312.30899,50.586717 -36.05646,34.89352 8.44755,54.585683 -46.73753,-24.19166 -46.15854,25.42011 L 198.9751,86.502157 162,51.075387 213.16949,51.147187 236.47617,2 l 24.4534,48.515607 51.37942,0.0711 z"
+     inkscape:export-filename="/Users/preisl/Downloads/stars1_0.png"
+     inkscape:export-xdpi="7.3220339"
+     inkscape:export-ydpi="7.3220339" />
+  <path
+     d="m 472.30899,50.586717 -36.05646,34.89352 8.44755,54.585683 -46.73753,-24.19166 -46.15854,25.42011 L 358.9751,86.502157 322,51.075387 373.16949,51.147187 396.47617,2 l 24.4534,48.515607 51.37942,0.0711 z"
+     id="path3807"
+     sodipodi:nodetypes="ccccccccccc"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#c0c0c0;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="/Users/preisl/Downloads/stars1_0.png"
+     inkscape:export-xdpi="7.3220339"
+     inkscape:export-ydpi="7.3220339" />
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#c0c0c0;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     sodipodi:nodetypes="ccccccccccc"
+     id="path3809"
+     d="m 632.30899,50.586717 -36.05646,34.89352 8.44755,54.585683 -46.73753,-24.19166 -46.15854,25.42011 L 518.9751,86.502157 482,51.075387 533.16949,51.147187 556.47617,2 l 24.4534,48.515607 51.37942,0.0711 z"
+     inkscape:export-filename="/Users/preisl/Downloads/stars1_0.png"
+     inkscape:export-xdpi="7.3220339"
+     inkscape:export-ydpi="7.3220339" />
+  <path
+     d="m 792.30899,50.586717 -36.05646,34.89352 8.44755,54.585683 -46.73753,-24.19166 -46.15854,25.42011 L 678.9751,86.502157 642,51.075387 693.16949,51.147187 716.47617,2 l 24.4534,48.515607 51.37942,0.0711 z"
+     id="path3811"
+     sodipodi:nodetypes="ccccccccccc"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#c0c0c0;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="/Users/preisl/Downloads/stars1_0.png"
+     inkscape:export-xdpi="7.3220339"
+     inkscape:export-ydpi="7.3220339" />
+</svg>

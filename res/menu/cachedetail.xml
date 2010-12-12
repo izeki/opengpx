@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+<item android:title="@string/menu_show_hint" android:id="@+id/MenuShowHint" android:icon="@android:drawable/ic_menu_help"></item>
+<item android:title="@string/menu_show_spoiler" android:id="@+id/MenuShowSpoiler" android:icon="@android:drawable/ic_menu_gallery"></item>
+
+<item android:id="@+id/MenuShowAttributes" android:title="@string/menu_show_attributes" android:icon="@android:drawable/ic_menu_sort_alphabetically"></item>
+<item android:icon="@android:drawable/ic_menu_manage" android:title="@string/menu_tools" android:id="@+id/MenuTools"></item>
+
+<item android:id="@+id/MenuVotes" android:title="@string/menu_votes" android:icon="@android:drawable/ic_menu_recent_history"></item><item android:id="@+id/MenuShowInventory" android:title="@string/menu_show_inventory" android:icon="@android:drawable/ic_menu_agenda"></item><item android:id="@+id/MenuVariables" android:title="@string/menu_variables" android:icon="@android:drawable/ic_menu_directions">
+</item>
+
+</menu>

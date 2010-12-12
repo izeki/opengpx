@@ -1,0 +1,6 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"><item android:id="@+id/GoogleMapView" android:icon="@android:drawable/ic_menu_mapmode" android:title="@string/menu_google_map_mode"><menu><item android:id="@+id/GoogleMapToggleSatellite" android:title="@string/menu_google_toggle_satellite"></item>
+<item android:id="@+id/GoogleMapToggleTraffic" android:title="@string/menu_google_toggle_traffic"></item>
+<item android:id="@+id/GoogleMapToggleStreet" android:title="@string/menu_google_toggle_street"></item>
+</menu>
+</item>
+</menu>
