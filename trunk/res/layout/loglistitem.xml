@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TwoLineListItem 
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content" 
+	xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:id="@+id/LogItem" 
+	android:paddingTop="2dip" 
+	android:paddingBottom="2dip">
+	<ImageView 
+		android:id="@+id/LogIcon"
+		android:layout_width="16dp"
+		android:layout_height="16dp"
+		android:layout_marginLeft="3px" 
+		android:layout_marginRight="3px" 
+		android:layout_marginTop="5px"
+		android:src="@android:drawable/presence_offline" />
+	<TextView
+		android:id="@android:id/text1" android:textAppearance="?android:attr/textAppearanceMedium"
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content"
+		android:layout_toRightOf="@id/LogIcon" />
+	<TextView
+		android:id="@android:id/text2" android:textAppearance="?android:attr/textAppearanceSmall"
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content"
+		android:layout_below="@android:id/text1"
+		android:layout_toRightOf="@id/LogIcon" />
+</TwoLineListItem>

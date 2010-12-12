@@ -1,0 +1,78 @@
+<resources>
+    <string-array name="coordinate_format">
+        <item>D</item>
+        <item>DM</item>
+        <item>DMS</item>
+    </string-array>
+<string-array name="map_provider"><item>Google Maps</item><item>OpenStreetMap</item>
+
+</string-array>
+<string-array name="screen_orientation"><item>Unspecified</item>
+<item>Portrait</item>
+<item>Landscape</item>
+</string-array>
+<string-array name="diff_terr_list">
+	<item>1</item>
+	<item>1.5</item>
+	<item>2</item>
+	<item>2.5</item>
+	<item>3</item>
+	<item>3.5</item>
+	<item>4</item>
+	<item>4.5</item>
+	<item>5</item>
+</string-array>
+<string-array name="yes_no_either">
+<item>Yes</item>
+<item>No</item>
+<item>Either</item>
+</string-array>
+
+<string-array name="log_types">
+	<item>Found It</item>
+	<item>Didn’t Find It</item>
+	<item>Write Note</item>
+	<item>Attended</item>
+	<item>Webcam Photo Taken</item>
+	<item>Private Note</item>
+</string-array>
+
+
+
+<string-array name="coordinate_format_items"><item>D</item>
+<item>DM</item>
+<item>DMS</item>
+</string-array>
+<string-array name="coordinate_format_values"><item>D</item>
+<item>DM</item>
+<item>DMS</item>
+</string-array>
+<string-array name="screen_orientation_items"><item>Unspecified</item>
+<item>Portrait</item>
+<item>Landscape</item>
+</string-array>
+<string-array name="screen_orientation_values"><item>Unspecified</item>
+<item>Portrait</item>
+<item>Landscape</item></string-array>
+<string-array name="map_provider_values"><item>Google</item>
+<item>OpenStreetMap</item>
+</string-array>
+<string-array name="compass_provider_items"><item>CompassNavi</item>
+<item>Radar</item>
+
+</string-array>
+<string-array name="compass_provider_values"><item>CompassNavi</item>
+<item>Radar</item>
+
+</string-array>
+<string-array name="navigation_provider_items"><item>Google</item>
+</string-array>
+<string-array name="navigation_provider_values"><item>Google</item>
+</string-array>
+<string-array name="unit_system_items"><item>Metric</item>
+<item>Imperial</item>
+</string-array>
+<string-array name="unit_system_values"><item>Metric</item>
+<item>Imperial</item>
+</string-array>
+</resources>

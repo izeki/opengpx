@@ -1,0 +1,56 @@
+<LinearLayout 
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent" 
+	xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:orientation="vertical" android:padding="4sp">
+	<TextView 
+		android:layout_height="wrap_content" 
+		android:layout_width="fill_parent" 
+		android:gravity="center" 
+		android:text="Waypoint Detail" 
+		android:id="@+id/waypointName">
+	</TextView>
+	<ScrollView 
+		android:id="@+id/WaypointScrollView" 
+		android:layout_height="wrap_content" 
+		android:layout_width="wrap_content" 
+		android:fillViewport="true" 
+		android:layout_weight="1">
+		<LinearLayout 
+			android:orientation="vertical" 
+			android:layout_height="match_parent" 
+			android:layout_width="match_parent">
+			<TextView 
+				android:layout_height="wrap_content" 
+				android:layout_width="fill_parent" 
+				android:gravity="center" 
+				android:text="Detail" 
+				android:textColor="#000000" 
+				android:background="#c8c8c8" 
+				android:textSize="12px">
+			</TextView>
+			<TextView 
+				android:layout_height="fill_parent" 
+				android:layout_width="fill_parent" 
+				android:id="@+id/waypointDetail" 
+				android:text="Waypoint detail">
+			</TextView>
+			<TextView 
+				android:layout_height="wrap_content" 
+				android:layout_width="fill_parent" 
+				android:background="#c8c8c8" 
+				android:gravity="center" 
+				android:text="Relative Information" 
+				android:textSize="12px" 
+				android:textColor="#000000">
+			</TextView>
+			<TextView 
+				android:layout_height="wrap_content" 
+				android:text="Relative Information" 
+				android:id="@+id/waypointRelInfo" 
+				android:layout_width="fill_parent">
+			</TextView>
+		</LinearLayout>
+	</ScrollView>
+	
+</LinearLayout>

@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  
+  <item android:id="@+id/MenuShowKeyboard" android:icon="@android:drawable/ic_menu_search" android:title="@string/menu_show_keyboard"></item>
+  <item android:title="@string/menu_show_cache_map" android:icon="@android:drawable/ic_menu_mapmode" android:id="@+id/MenuCacheMap"></item>
+  <item android:title="@string/menu_sort" android:icon="@android:drawable/ic_menu_sort_by_size" android:id="@+id/MenuSortOrder">
+    <menu>
+      <item android:id="@+id/SortByName" android:title="@string/menu_sort_by_name"></item>
+      <item android:id="@+id/SortByDistance" android:title="@string/menu_sort_by_distance"></item>
+    </menu>
+  </item>
+  <item android:id="@+id/MenuDatabase" android:title="@string/menu_database" android:icon="@android:drawable/ic_menu_upload">
+    <menu>
+      <item android:title="@string/menu_database_select" android:id="@+id/MenuDatabaseSelect"></item><item android:title="@string/menu_database_info" android:id="@+id/MenuDatabaseInfo"></item>
+      <item android:id="@+id/MenuDatabaseClear" android:title="@string/menu_database_clear"></item>
+    <item android:id="@+id/MenuDatabaseUpdateVotes" android:title="@string/menu_database_update_votes"></item>
+</menu>
+  </item>
+  <item android:title="@string/menu_search_online" android:icon="@android:drawable/ic_menu_view" android:id="@+id/MenuSearchOnline"></item>
+  <item android:title="@string/menu_upload_field_notes" android:id="@+id/MenuUploadFieldNotes"></item>
+  <item android:title="@string/menu_show_info_file" android:icon="@android:drawable/ic_menu_view" android:id="@+id/MenuInfoFile"></item>
+  <item android:id="@+id/MenuPreferences" android:title="@string/menu_preferences" android:icon="@android:drawable/ic_menu_preferences"></item>
+  <item android:title="@string/menu_delete_field_notes" android:id="@+id/MenuDeleteFieldNotes"></item>
+  <item android:title="@string/menu_about" android:icon="@android:drawable/ic_menu_info_details" android:id="@+id/MenuAbout"></item>
+	<item android:id="@+id/MenuExit" android:title="@string/menu_exit"></item>
+
+</menu>
