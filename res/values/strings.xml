@@ -75,4 +75,9 @@
 <string name="vote_total">Total:</string>
 <string name="button_update">Update</string>
 <string name="menu_database_update_votes">Update Votes</string>
+<string name="welcome">Welcome</string>
+<string name="welcome_cache_db_empty">The cache database is empty. To fill it, you have two possibilities:</string>
+<string name="welcome_option_copy_files">1. Copy gpx files (geocaching files!) to the folder</string>
+<string name="welcome_option_bcaching">2. Enter your bcaching.com credentials in preferences (Menu / Preferences) and search online for caches</string>
+<string name="welcome_note_disable">Note: you can disable this dialog in preferences</string>
 </resources>

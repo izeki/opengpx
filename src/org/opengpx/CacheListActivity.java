@@ -232,18 +232,8 @@ public class CacheListActivity extends ListActivity
 		if (this.mCacheDatabase.size() == 0 && mPreferences.getShowEmptyDbHelp())
 		{
 			// Show some reminder on how to start
-			final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-			final String strMessage = String.format("Please start by copying gpx/loc files to '%s' or '%s'.", mPreferences.getDataFolder(), DOWNLOAD_FOLDER);
-			alertDialog.setTitle("Information");
-			alertDialog.setMessage(strMessage);
-			alertDialog.setButton("OK", new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int which)
-				{
-					return;
-				}
-			});
-			alertDialog.show();
+			final AlertDialog welcomeDialog = new WelcomeDialog(this).create();			
+			welcomeDialog.show();
 		}
 
 		// Show import results
