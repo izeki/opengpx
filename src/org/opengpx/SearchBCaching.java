@@ -54,6 +54,7 @@ public class SearchBCaching
 	public SearchBCaching()
 	{
 		// init(isTest);
+		init();
 	}
 
 	// private void init(boolean isTest)
