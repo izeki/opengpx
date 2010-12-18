@@ -555,10 +555,11 @@ public class CacheDetailActivity extends TabActivity
 							{
 								final String bcUsername = mPreferences.getBCachingUsername();
 								final String bcPassword = mPreferences.getBCachingPassword();
+								final boolean bcTestSite = mPreferences.getUseBCachingTestSite();
 
 								try
 								{
-									SearchBCaching search = new SearchBCaching(true);
+									SearchBCaching search = new SearchBCaching(bcTestSite);
 									search.setLoginInfo(bcUsername, bcPassword);
 									search.doSingleDetailQuery(mCache.code);
 									dismissProgressDialog();

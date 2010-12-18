@@ -27,6 +27,8 @@ import org.json.JSONObject;
 
 import com.bcaching.georg.Communication;
 import org.opengpx.Preferences;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SearchBCaching
 {
@@ -36,7 +38,7 @@ public class SearchBCaching
 	// private int												bcMaxCaches;
 	// private int												bcMaxDistance;
 	
-	// private static final String TAG = "SearchBCaching";
+	private static final Logger mLogger = LoggerFactory.getLogger(SearchBCaching.class);
 
 	public SearchBCaching(Preferences preferences) throws Exception
 	{
@@ -46,6 +48,8 @@ public class SearchBCaching
 		// bcMaxDistance = Integer.parseInt(settings.getString(OpenGPX.PREFS_KEY_BCACHING_MAX_DISTANCE, OpenGPX.PREFS_DEFAULT_BCACHING_MAX_DISTANCE));
 		final boolean bcTestSite = preferences.getUseBCachingTestSite();
 
+		mLogger.debug("test site: " + bcTestSite);
+		
 		init(bcTestSite);
 		setLoginInfo(bcUsername, bcPassword);
 	}
@@ -61,10 +65,12 @@ public class SearchBCaching
 
 		if (isTest)
 		{
+			mLogger.debug("using http://test.bcaching.com/api ...");
 			comm = new Communication("http://test.bcaching.com/api");
 		}
 		else
 		{
+			mLogger.debug("using http://www.bcaching.com/api ...");
 			comm = new Communication("http://www.bcaching.com/api");
 		}
 	}
