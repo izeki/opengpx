@@ -46,7 +46,7 @@ public class Preferences
 	private static final String	PREFS_KEY_BCACHING_PASSWORD = "BCachingPassword";
 	private static final String	PREFS_KEY_BCACHING_MAX_CACHES = "BCachingMaxCaches";
 	private static final String	PREFS_KEY_BCACHING_MAX_DISTANCE = "BCachingMaxDistance";
-	private static final String	PREFS_KEY_BCACHING_TEST_SITE = "BCachingTestSite";
+	// private static final String	PREFS_KEY_BCACHING_TEST_SITE = "BCachingTestSite";
 	private static final String	PREFS_KEY_SHOW_EMPTYDB_HELP = "ShowEmptyDBHelp";
 	private static final String PREFS_KEY_COMPASS_PROVIDER = "CompassProvider";
 	private static final String PREFS_KEY_NAVIGATION_PROVIDER = "NavigationProvider";
@@ -73,7 +73,7 @@ public class Preferences
 	private static final String  PREFS_DEFAULT_BCACHING_PASSWORD = "";
 	private static final int     PREFS_DEFAULT_BCACHING_MAX_CACHES = 50;
 	private static final int     PREFS_DEFAULT_BCACHING_MAX_DISTANCE = 10;
-	private static final boolean PREFS_DEFAULT_BCACHING_TEST_SITE = false;
+	// private static final boolean PREFS_DEFAULT_BCACHING_TEST_SITE = false;
 	private static final boolean PREFS_DEFAULT_SHOW_EMPTYDB_HELP = true;
 	private static final CompassProvider PREFS_DEFAULT_COMPASS_PROVIDER = CompassProvider.CompassNavi;
 	private static final NavigationProvider PREFS_DEFAULT_NAVIGATION_PROVIDER = NavigationProvider.Google;
@@ -316,10 +316,10 @@ public class Preferences
 	 * 
 	 * @return
 	 */
-	public Boolean getUseBCachingTestSite()
+	/* public Boolean getUseBCachingTestSite()
 	{
 		return this.mSharedPreferences.getBoolean(PREFS_KEY_BCACHING_TEST_SITE, PREFS_DEFAULT_BCACHING_TEST_SITE);
-	}
+	} */
 	
 	/**
 	 * 

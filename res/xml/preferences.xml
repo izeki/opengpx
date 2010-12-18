@@ -27,6 +27,6 @@
 <EditTextPreference android:key="BCachingPassword" android:password="true" android:title="Password"></EditTextPreference>
 <EditTextPreference android:key="BCachingMaxCaches" android:title="Max Caches"></EditTextPreference>
 <EditTextPreference android:summary="in miles" android:key="BCachingMaxDistance" android:title="Max distance"></EditTextPreference>
-<CheckBoxPreference android:title="Use test site" android:key="BCachingTestSite"></CheckBoxPreference>
+<!-- CheckBoxPreference android:title="Use test site" android:key="BCachingTestSite"></CheckBoxPreference -->
 </PreferenceCategory>
 </PreferenceScreen>

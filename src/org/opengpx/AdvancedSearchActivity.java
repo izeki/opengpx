@@ -509,7 +509,7 @@ public class AdvancedSearchActivity extends Activity
 		final String bcPassword = this.mPreferences.getBCachingPassword();
 		final int bcMaxCaches = this.mPreferences.getBCachingMaxCaches();
 		final int bcMaxDistance = this.mPreferences.getBCachingMaxDistance();
-		final boolean bcTestSite = this.mPreferences.getUseBCachingTestSite();
+		// final boolean bcTestSite = this.mPreferences.getUseBCachingTestSite();
 
 		final LocationInfo locationInfo = this.getLastKnownLocation();
 		Coordinates coordinates = new Coordinates(locationInfo.latitude, locationInfo.longitude);
@@ -527,7 +527,8 @@ public class AdvancedSearchActivity extends Activity
 				{
 					try
 					{
-						searchBCaching = new SearchBCaching(bcTestSite);
+						// searchBCaching = new SearchBCaching(bcTestSite);
+						searchBCaching = new SearchBCaching();
 						searchBCaching.setLoginInfo(bcUsername, bcPassword);
 						searchBCaching.doFindQuery(locationInfo, bcMaxDistance, bcMaxCaches, name, data);
 
