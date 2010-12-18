@@ -316,13 +316,14 @@ public class SearchListActivity extends ListActivity
 	{
 		final String bcUsername = this.mPreferences.getBCachingUsername();
 		final String bcPassword = this.mPreferences.getBCachingPassword();
-		final boolean bcTestSite = this.mPreferences.getUseBCachingTestSite();
+		// final boolean bcTestSite = this.mPreferences.getUseBCachingTestSite();
 
 		try
 		{
 			showSearchingDialog();
 			
-			SearchBCaching sbc = new SearchBCaching(bcTestSite);
+			// final SearchBCaching sbc = new SearchBCaching(bcTestSite);
+			final SearchBCaching sbc = new SearchBCaching();
 			sbc.setLoginInfo(bcUsername, bcPassword);
 			sbc.doSingleDetailQuery(cacheCode);
 			// searchBCaching.doSingleDetailQuery(cacheCode);
@@ -531,7 +532,7 @@ public class SearchListActivity extends ListActivity
 		final String bcPassword = this.mPreferences.getBCachingPassword();
 		final int bcMaxCaches = this.mPreferences.getBCachingMaxCaches();
 		final int bcMaxDistance = this.mPreferences.getBCachingMaxDistance();
-		final boolean bcTestSite = this.mPreferences.getUseBCachingTestSite();
+		// final boolean bcTestSite = this.mPreferences.getUseBCachingTestSite();
 		
 		final LocationInfo locationInfo = this.getLastKnownLocation();
 		Coordinates coordinates = new Coordinates(locationInfo.latitude, locationInfo.longitude);
@@ -551,7 +552,8 @@ public class SearchListActivity extends ListActivity
 					{
 						final long lngStartTime = Calendar.getInstance().getTimeInMillis();
 
-						searchBCaching = new SearchBCaching(bcTestSite);
+						// searchBCaching = new SearchBCaching(bcTestSite);
+						searchBCaching = new SearchBCaching();
 						searchBCaching.setLoginInfo(bcUsername, bcPassword);
 						searchBCaching.doFindQuery(locationInfo, bcMaxDistance, bcMaxCaches, name);
 
