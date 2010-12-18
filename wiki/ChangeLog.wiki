@@ -7,6 +7,7 @@ Next version (not released yet):
   * fixed parsing of opencaching.de gpx files
   * fixed bcaching.com detail download
   * removed bcaching.com test site in preferences
+  * added new welcome dialog
 
 Version *1.0.1* (8. December 2010)
 
