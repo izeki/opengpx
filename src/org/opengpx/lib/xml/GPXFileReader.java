@@ -19,6 +19,7 @@ import com.ximpleware.extended.NavExceptionHuge;
 import com.ximpleware.extended.VTDExceptionHuge;
 import com.ximpleware.extended.VTDGenHuge;
 import com.ximpleware.extended.VTDNavHuge;
+import com.ximpleware.extended.XMLBuffer;
 
 /**
  * 
@@ -73,6 +74,37 @@ public class GPXFileReader
 				e.printStackTrace();
 				return false;
 			}
+		}
+		return retVal;
+	}
+
+	/**
+	 * 
+	 * @param byteArray
+	 * @return
+	 */
+	public Boolean readByteArray(byte[] byteArray)
+	{
+		boolean retVal = false;
+	
+		long start = System.currentTimeMillis();
+
+		try
+		{
+			final VTDGenHuge vgh = new VTDGenHuge();
+			final XMLBuffer xmlBuffer = new XMLBuffer(byteArray);
+			vgh.setDoc(xmlBuffer);
+			vgh.parse(true);
+			mLogger.debug("Parsed in: " + Long.toString(System.currentTimeMillis() - start) + " msec");
+			final VTDNavHuge vn = vgh.getNav();
+			retVal = readData(vn);
+			mLogger.debug("Completed in: " + Long.toString(System.currentTimeMillis() - start) + " msec");
+		}
+		catch (Exception e)
+		{
+			mLogger.error(e.toString());
+			e.printStackTrace();
+			return false;
 		}
 		return retVal;
 	}
