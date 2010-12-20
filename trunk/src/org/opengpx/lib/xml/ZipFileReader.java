@@ -27,11 +27,10 @@ public class ZipFileReader
 	 * @param zipFileName
 	 */
 	@SuppressWarnings("unchecked")
-	public void read(String zipFileName)
+	public Boolean read(String zipFileName)
 	{
 		try 
 		{
-			final GPXFileReader gpxFileReader = new GPXFileReader();
 			final ZipFile zipFile = new ZipFile(zipFileName);
 		
 			for (Enumeration e = zipFile.entries(); e.hasMoreElements();) 
@@ -49,15 +48,26 @@ public class ZipFileReader
 				String s = new String();
 				while (inputStreamReader.read(buffer, 0, buffer.length) != -1) 
 				{
-					s += new String(buffer);
+					s = s.concat(new String(buffer));
 				}
 				
-				gpxFileReader.readByteArray(s.trim().getBytes());
+				if (zipEntry.getName().toLowerCase().endsWith("gpx"))
+				{
+					final GPXFileReader gpxFileReader = new GPXFileReader();
+					gpxFileReader.readByteArray(s.trim().getBytes());
+				} 
+				else if (zipEntry.getName().toLowerCase().endsWith("loc"))
+				{
+					final LOCFileReader locFileReader = new LOCFileReader();
+					locFileReader.readByteArray(s.trim().getBytes());
+				}
 			}
+			return true;
 		} 
-		catch (IOException e1) 
+		catch (IOException ioex) 
 		{
-			e1.printStackTrace();
+			ioex.printStackTrace();
+			return false;
 		}
 	}
 }
