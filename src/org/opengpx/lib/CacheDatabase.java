@@ -17,6 +17,7 @@ import org.opengpx.lib.geocache.GCVote;
 import org.opengpx.lib.geocache.Waypoint;
 import org.opengpx.lib.xml.GPXFileReader;
 import org.opengpx.lib.xml.LOCFileReader;
+import org.opengpx.lib.xml.ZipFileReader;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
@@ -389,6 +390,13 @@ public class CacheDatabase
 						final LOCFileReader locFileReader = new LOCFileReader();
 						blnSuccessful = locFileReader.read(strFullFilename);
 						blnFileRead = true;
+					}
+					else if (strFilename.toLowerCase().endsWith("zip") && !(strFilename.startsWith(".")))
+					{
+						strFullFilename = String.format("%s%s%s", folderName, File.separator, strFilename);
+						final ZipFileReader zipFileReader = new ZipFileReader();
+						blnSuccessful = zipFileReader.read(strFullFilename);
+						blnFileRead = true;						
 					}
 					if (blnFileRead)
 					{

@@ -115,7 +115,7 @@ public class GPXFileReader
 	 * @return
 	 * @throws VTDExceptionHuge
 	 */
-	public boolean readData(final VTDNavHuge vn) throws VTDExceptionHuge
+	private boolean readData(final VTDNavHuge vn) throws VTDExceptionHuge
 	{
 		final AutoPilotHuge apWpt = new AutoPilotHuge(vn);
 
