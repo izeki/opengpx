@@ -49,12 +49,12 @@ public class ZipFileReader
 					final byte[] buffer = new byte[(int) zipEntry.getSize()];
 					inputStream.read(buffer, 0, buffer.length);
 	
-					if (zipEntry.getName().toLowerCase().endsWith("gpx"))
+					if (zipEntryName.endsWith("gpx"))
 					{
 						final GPXFileReader gpxFileReader = new GPXFileReader();
 						gpxFileReader.readByteArray(buffer);
 					} 
-					else if (zipEntry.getName().toLowerCase().endsWith("loc"))
+					else if (zipEntryName.endsWith("loc"))
 					{
 						final LOCFileReader locFileReader = new LOCFileReader();
 						locFileReader.readByteArray(buffer);
