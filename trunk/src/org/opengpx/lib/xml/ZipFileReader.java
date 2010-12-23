@@ -1,5 +1,8 @@
 package org.opengpx.lib.xml;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
@@ -17,13 +20,17 @@ import org.slf4j.LoggerFactory;
 public class ZipFileReader 
 {
 
+	private String mBaseOutputFolder;
+	
 	private static final Logger mLogger = LoggerFactory.getLogger(ZipFileReader.class);
 
+	
 	/**
 	 * 
 	 */
-	public ZipFileReader()
-	{	
+	public ZipFileReader(String baseOutputFolder)
+	{
+		this.mBaseOutputFolder = baseOutputFolder;
 	}
 	
 	/**
@@ -41,24 +48,40 @@ public class ZipFileReader
 			{
 				final ZipEntry zipEntry = (ZipEntry) e.nextElement();
 				mLogger.debug("File name: " + zipEntry.getName() + "; size: " + zipEntry.getSize() + "; compressed size: " + zipEntry.getCompressedSize());
-				final InputStream inputStream = zipFile.getInputStream(zipEntry);
 
-				final String zipEntryName = zipEntry.getName().toLowerCase();
-				if (zipEntryName.endsWith("gpx") || zipEntryName.endsWith("loc"))
+				final String filename = this.getFilename(zipEntry.getName());
+
+				if (filename.endsWith("gpx") || filename.endsWith("loc"))
 				{
 					final byte[] buffer = new byte[(int) zipEntry.getSize()];
+					final InputStream inputStream = zipFile.getInputStream(zipEntry);
 					inputStream.read(buffer, 0, buffer.length);
-	
-					if (zipEntryName.endsWith("gpx"))
+					inputStream.close();
+
+					if (filename.endsWith("gpx"))
 					{
 						final GPXFileReader gpxFileReader = new GPXFileReader();
 						gpxFileReader.readByteArray(buffer);
 					} 
-					else if (zipEntryName.endsWith("loc"))
+					else if (filename.endsWith("loc"))
 					{
 						final LOCFileReader locFileReader = new LOCFileReader();
 						locFileReader.readByteArray(buffer);
 					}
+				} 
+				else if (filename.endsWith("txt"))
+				{
+					final InputStream inputStream = zipFile.getInputStream(zipEntry);
+					final String targetFilename = String.format("%s%s%s", this.mBaseOutputFolder, File.separator, filename);
+					this.saveInputStreamToFile(inputStream, targetFilename);
+					inputStream.close();
+				}
+				else if (filename.endsWith("jpg") || filename.endsWith("png"))
+				{
+					final InputStream inputStream = zipFile.getInputStream(zipEntry);
+					final String targetFilename = String.format("%s%s%s%s%s", this.mBaseOutputFolder, File.separator, "spoiler", File.separator, filename);
+					this.saveInputStreamToFile(inputStream, targetFilename);					
+					inputStream.close();
 				}
 			}
 			return true;
@@ -68,5 +91,44 @@ public class ZipFileReader
 			ioex.printStackTrace();
 			return false;
 		}
+	}
+	
+	/**
+	 * 
+	 * @param zipEntryName
+	 * @return
+	 */
+	private String getFilename(String zipEntryName)
+	{
+		final File file = new File(zipEntryName);
+		return file.getName().toLowerCase();
+	}
+	
+	/**
+	 * 
+	 * @param inputStream
+	 * @param targetFilename
+	 * @throws IOException
+	 */
+	private void saveInputStreamToFile(final InputStream inputStream, final String targetFilename) throws IOException
+	{
+		mLogger.debug(String.format("Saving inputStream to file %s ...", targetFilename));
+		
+	    try
+	    {
+			final File outputFile = new File(targetFilename);
+			final BufferedOutputStream outputStream  = new BufferedOutputStream(new FileOutputStream(outputFile), 2048);
+			byte[] buffer = new byte[32 * 1024];
+			int bytesRead = 0;
+			while ((bytesRead = inputStream.read(buffer)) != -1)
+			{
+				outputStream.write(buffer, 0, bytesRead);
+			}
+			outputStream.close();
+	    }
+	    catch (Exception e)
+	    {
+	      throw new IOException(e.toString());
+	    }
 	}
 }
