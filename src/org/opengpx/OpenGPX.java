@@ -56,26 +56,26 @@ public class OpenGPX extends Application
 	{
 		// Create data folder
 		final String strDataFolder = this.mPreferences.getDataFolder();
-		File fileDataPath = new File(strDataFolder);
+		final File fileDataPath = new File(strDataFolder);
 		if (!fileDataPath.exists())
 		{
-			Boolean blnDataPathCreated = fileDataPath.mkdirs();
+			final Boolean blnDataPathCreated = fileDataPath.mkdirs();
 			if (!blnDataPathCreated)
 			{
-				String strMessage = String.format("Unable to create folder '%s'.", strDataFolder);
+				final String strMessage = String.format("Unable to create folder '%s'.", strDataFolder);
 				Toast.makeText(this, strMessage, Toast.LENGTH_LONG).show();
 			}
 		}
 
 		// Create spoiler path
 		final String strSpoilerFolder = String.format("%s%sspoiler", strDataFolder, File.separator);
-		File fileSpoilerPath = new File(strSpoilerFolder);
+		final File fileSpoilerPath = new File(strSpoilerFolder);
 		if (!fileSpoilerPath.exists())
 		{
-			Boolean blnSpoilerPathCreated = fileSpoilerPath.mkdirs();
+			final Boolean blnSpoilerPathCreated = fileSpoilerPath.mkdirs();
 			if (!blnSpoilerPathCreated)
 			{
-				String strMessage = String.format("Unable to create folder '%s'.", strSpoilerFolder);
+				final String strMessage = String.format("Unable to create folder '%s'.", strSpoilerFolder);
 				Toast.makeText(this, strMessage, Toast.LENGTH_LONG).show();
 			}
 		}
@@ -106,6 +106,7 @@ public class OpenGPX extends Application
 
 		final String strDataPath = this.mPreferences.getDataFolder();
 		// Set database properties
+		this.mCacheDatabase.setBaseFolder(strDataPath);
 		this.mCacheDatabase.setDatabaseFolder(String.format("%s%sdatabase", strDataPath, File.separator));
 		this.mCacheDatabase.setBackupFolder(String.format("%s%sbackup", strDataPath, File.separator));
 		this.mCacheDatabase.setSortOrder(CacheDatabase.SORT_ORDER_NAME);

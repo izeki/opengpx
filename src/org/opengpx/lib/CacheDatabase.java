@@ -51,6 +51,7 @@ public class CacheDatabase
 	private boolean mblnDatabaseIsOpen = false;
 	private String mstrDatabaseFilename;
 
+	private String mBaseFolder;
 	private String mstrBackupFolder;
 	private String mstrDatabaseFolder;
 	private String mstrErrorMessage;
@@ -394,7 +395,7 @@ public class CacheDatabase
 					else if (strFilename.toLowerCase().endsWith("zip") && !(strFilename.startsWith(".")))
 					{
 						strFullFilename = String.format("%s%s%s", folderName, File.separator, strFilename);
-						final ZipFileReader zipFileReader = new ZipFileReader();
+						final ZipFileReader zipFileReader = new ZipFileReader(this.mBaseFolder);
 						blnSuccessful = zipFileReader.read(strFullFilename);
 						blnFileRead = true;						
 					}
@@ -1169,6 +1170,15 @@ public class CacheDatabase
 		this.mstrBackupFolder = path;
 	}
 
+	/**
+	 * 
+	 * @param path
+	 */
+	public void setBaseFolder(String path)
+	{
+		this.mBaseFolder = path;
+	}
+	
 	/**
 	 * 
 	 * @param path
