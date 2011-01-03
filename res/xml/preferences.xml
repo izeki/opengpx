@@ -7,27 +7,27 @@
 <EditTextPreference android:title="@string/pref_import_path_list" android:key="ImportPathList" android:summary="@string/pref_import_path_list_summary"></EditTextPreference><CheckBoxPreference android:summaryOff="Delete GPX files after importing" android:defaultValue="true" android:title="Backup GPX files" android:summaryOn="Backup gpx files to the ./backup folder" android:key="BackupGpxFiles"></CheckBoxPreference>
 
 </PreferenceCategory>
-<PreferenceCategory android:title="User interface"><ListPreference android:entryValues="@array/coordinate_format_values" android:title="Coordinate format" android:key="CoordinateFormat" android:entries="@array/coordinate_format_items" android:defaultValue="DM"></ListPreference>
+<PreferenceCategory android:title="User interface"><ListPreference android:entryValues="@array/coordinate_format_values" android:key="CoordinateFormat" android:entries="@array/coordinate_format_items" android:defaultValue="DM" android:title="@string/pref_coord_format" android:summary="@string/pref_coord_format_summary"></ListPreference>
 <EditTextPreference android:summary="Limits the number of shown caches" android:key="CacheLimit" android:title="Cache filter limit" android:defaultValue="100"></EditTextPreference>
-<ListPreference android:title="Screen orientation" android:key="ScreenOrientation" android:entryValues="@array/screen_orientation_values" android:entries="@array/screen_orientation_items" android:defaultValue="Unspecified"></ListPreference>
+<ListPreference android:key="ScreenOrientation" android:entryValues="@array/screen_orientation_values" android:entries="@array/screen_orientation_items" android:defaultValue="Unspecified" android:title="@string/pref_screen_orientation" android:summary="@string/pref_screen_orientation_summary"></ListPreference>
 <CheckBoxPreference android:title="Display Help" android:key="ShowEmptyDBHelp" android:defaultValue="true" android:summary="Display Help with empty database"></CheckBoxPreference>
 <ListPreference android:key="UnitSystem" android:title="Unit System" android:entryValues="@array/unit_system_values" android:entries="@array/unit_system_items" android:summary="Choose metric or imperial (requires restart)"></ListPreference>
 <CheckBoxPreference android:key="AutoUpdateVotes" android:title="Auto-update votes" android:summary="Update GCVotes when indexing caches"></CheckBoxPreference>
 </PreferenceCategory>
 <PreferenceCategory android:title="Maps">
-  <ListPreference android:entryValues="@array/map_provider_values" android:title="Map Provider" android:key="MapProvider" android:entries="@array/map_provider"></ListPreference>
-  <ListPreference android:key="osmRenderer" android:summary="Select OSM Renderer (most common used renderer is Mapnik)" android:title="OSM Map Renderer"></ListPreference>  
-<CheckBoxPreference android:key="osmUseMinimap" android:title="OSM Use Minimap" android:summary="Shows an overview map on the lower right corner"></CheckBoxPreference><ListPreference android:key="CompassProvider" android:title="Compass Provider" android:summary="Application used when clicking on a waypoint" android:entryValues="@array/compass_provider_values" android:entries="@array/compass_provider_items"></ListPreference>
-<ListPreference android:key="NavigationProvider" android:title="Navigation Provider" android:summary='Used when using "navigate" context menu on waypoint' android:entryValues="@array/navigation_provider_values" android:entries="@array/navigation_provider_items"></ListPreference>
-<CheckBoxPreference android:title="Keep screen on in map view" android:key="MapKeepScreenOn"></CheckBoxPreference>
+  <ListPreference android:entryValues="@array/map_provider_values" android:key="MapProvider" android:entries="@array/map_provider" android:title="@string/pref_map_provider" android:summary="@string/pref_map_provider_summary"></ListPreference>
+  <ListPreference android:key="osmRenderer" android:title="@string/pref_osm_renderer" android:summary="@string/pref_osm_renderer_summary"></ListPreference>  
+<CheckBoxPreference android:key="osmUseMinimap" android:title="OSM Use Minimap" android:summary="Shows an overview map on the lower right corner"></CheckBoxPreference><ListPreference android:key="CompassProvider" android:entryValues="@array/compass_provider_values" android:entries="@array/compass_provider_items" android:title="@string/pref_compass_provider" android:summary="@string/pref_compass_provider_summary"></ListPreference>
+<ListPreference android:key="NavigationProvider" android:entryValues="@array/navigation_provider_values" android:entries="@array/navigation_provider_items" android:title="@string/pref_navigation_provider" android:summary="@string/pref_navigation_provider_summary"></ListPreference>
+<CheckBoxPreference android:key="MapKeepScreenOn" android:title="@string/pref_keep_screen_on" android:summary="@string/pref_keep_screen_on_summary"></CheckBoxPreference>
 
 </PreferenceCategory>
   
-  <PreferenceCategory android:title="bcaching.com">
+  <PreferenceCategory android:title="bcaching.com integration">
   <EditTextPreference android:title="Username" android:key="BCachingUsername"></EditTextPreference>
 <EditTextPreference android:key="BCachingPassword" android:password="true" android:title="Password"></EditTextPreference>
-<EditTextPreference android:key="BCachingMaxCaches" android:title="Max Caches"></EditTextPreference>
-<EditTextPreference android:summary="in miles" android:key="BCachingMaxDistance" android:title="Max distance"></EditTextPreference>
+<EditTextPreference android:key="BCachingMaxCaches" android:title="@string/pref_bc_max_caches" android:summary="@string/pref_bc_max_caches_summary"></EditTextPreference>
+<EditTextPreference android:key="BCachingMaxDistance" android:title="@string/pref_bc_max_dist" android:summary="@string/pref_bc_max_dist_summary"></EditTextPreference>
 <!-- CheckBoxPreference android:title="Use test site" android:key="BCachingTestSite"></CheckBoxPreference -->
 </PreferenceCategory>
 </PreferenceScreen>
