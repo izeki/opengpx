@@ -81,7 +81,7 @@
 <string name="welcome_option_bcaching">2. Enter your bcaching.com credentials in preferences (Menu / Preferences) and search online for caches</string>
 <string name="welcome_note_disable">Note: you can disable this dialog in preferences</string>
 <string name="pref_import_path_list">Import path list</string>
-<string name="pref_import_path_list_summary">List of folders containing gpx,zip files</string>
+<string name="pref_import_path_list_summary">List of additional folders containing gpx,zip files</string>
 <string name="app_title">OpenGPX - You Are The Search Engine</string>
 <string name="pref_home_coords">Home coordinates</string>
 <string name="pref_home_coords_summary">Set or update your home coordinates</string>
@@ -89,4 +89,23 @@
 <string name="pref_set_home_coords_summary">Use this element to set your home coordintates from GPS</string>
 <string name="pref_data_path">Data folder</string>
 <string name="pref_data_path_summary">Folder containing gpx files, cache database and spoiler pics</string>
+<string name="pref_screen_orientation">Screen orientation</string>
+<string name="pref_screen_orientation_summary">Lock screen orientation to portrait or landscape</string>
+<string name="pref_coord_format">Coordinate format</string>
+<string name="pref_coord_format_summary">Set coordinate format to Decimal, DDD MM.MMM or DDD MM SS.SSS</string>
+<string name="pref_map_provider">Map Provider</string>
+<string name="pref_map_provider_summary">Choose Google or OpenStreetMap</string>
+<string name="pref_osm_renderer">OSM Map Renderer</string>
+<string name="pref_osm_renderer_summary">Select OSM Renderer (most common used renderer is Mapnik)</string>
+<string name="pref_keep_screen_on">Keep screen on in map view</string>
+<string name="pref_keep_screen_on_summary">Disables screen saver in map view</string>
+<string name="pref_compass_provider">Compass Provider</string>
+<string name="pref_compass_provider_summary">Used when using &quot;Compass&quot; context menu on waypoint</string>
+
+<string name="pref_navigation_provider">Navigation Provider</string>
+<string name="pref_navigation_provider_summary">Used when using &quot;Navigate&quot; context menu on waypoint</string>
+<string name="pref_bc_max_caches_summary">Number of caches as search result</string>
+<string name="pref_bc_max_caches">Max caches</string>
+<string name="pref_bc_max_dist">Max distance</string>
+<string name="pref_bc_max_dist_summary">Search within X miles around position</string>
 </resources>
