@@ -80,4 +80,13 @@
 <string name="welcome_option_copy_files">1. Copy gpx files (geocaching files!) to the folder</string>
 <string name="welcome_option_bcaching">2. Enter your bcaching.com credentials in preferences (Menu / Preferences) and search online for caches</string>
 <string name="welcome_note_disable">Note: you can disable this dialog in preferences</string>
+<string name="pref_import_path_list">Import path list</string>
+<string name="pref_import_path_list_summary">List of folders containing gpx,zip files</string>
+<string name="app_title">OpenGPX - You Are The Search Engine</string>
+<string name="pref_home_coords">Home coordinates</string>
+<string name="pref_home_coords_summary">Set or update your home coordinates</string>
+<string name="pref_set_home_coords">Set home coordinates</string>
+<string name="pref_set_home_coords_summary">Use this element to set your home coordintates from GPS</string>
+<string name="pref_data_path">Data folder</string>
+<string name="pref_data_path_summary">Folder containing gpx files, cache database and spoiler pics</string>
 </resources>

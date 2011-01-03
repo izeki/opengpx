@@ -55,6 +55,7 @@ public class Preferences
 	private static final String PREFS_KEY_UNIT_SYSTEM = "UnitSystem";
 	private static final String PREFS_KEY_AUTO_UPDATE_VOTES = "AutoUpdateVotes";
 	private static final String PREFS_KEY_BACKUP_GPX_FILES = "BackupGpxFiles";
+	private static final String PREFS_KEY_IMPORT_PATH_LIST = "ImportPathList";
 	
 	// Preferences default values
 	// private static final float   PREFS_DEFAULT_HOME_LATITUDE = 46.59327f;
@@ -82,6 +83,7 @@ public class Preferences
 	private static final UnitSystem PREFS_DEFAULT_UNIT_SYSTEM = UnitSystem.Metric;
 	private static final boolean PREFS_DEFAULT_AUTO_UPDATE_VOTES = false;
 	private static final boolean PREFS_DEFAULT_BACKUP_GPX_FILES = true;
+	private static final String PREFS_DEFAULT_IMPORT_PATH_LIST = "";
 
 	/**
 	 * 
@@ -388,5 +390,13 @@ public class Preferences
 		return this.mSharedPreferences.getBoolean(PREFS_KEY_BACKUP_GPX_FILES, PREFS_DEFAULT_BACKUP_GPX_FILES);	
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	public String[] getImportPathList()
+	{
+		return this.mSharedPreferences.getString(PREFS_KEY_IMPORT_PATH_LIST, PREFS_DEFAULT_IMPORT_PATH_LIST).split("\n");
+	}
 }
 

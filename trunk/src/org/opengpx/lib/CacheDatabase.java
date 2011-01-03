@@ -18,6 +18,8 @@ import org.opengpx.lib.geocache.Waypoint;
 import org.opengpx.lib.xml.GPXFileReader;
 import org.opengpx.lib.xml.LOCFileReader;
 import org.opengpx.lib.xml.ZipFileReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
@@ -74,6 +76,14 @@ public class CacheDatabase
 	
 	private AdvancedSearchData priorSearch = null;
 	
+	private static final Logger mLogger = LoggerFactory.getLogger(CacheDatabase.class);
+
+	
+	/**
+	 * 
+	 * @author Martin Preishuber
+	 *
+	 */
 	public class CacheNameComparator implements Comparator<CacheIndexItem>
 	{
 		public int compare(CacheIndexItem object1, CacheIndexItem object2)
@@ -81,7 +91,7 @@ public class CacheDatabase
 			return object1.name.compareTo(object2.name);
 		}
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -293,24 +303,18 @@ public class CacheDatabase
 		final Cache cacheDuplicate = getCacheFromSearch(cache.code);
 		if (cacheDuplicate != null)
 		{
-			// System.out.println("existing cache - short desc");
-			// System.out.println(cacheDuplicate.shortDescription);
 			searchCacheDB.delete(cacheDuplicate);
 		}
 		
 		// add cache to db4o database
-		// System.out.println("new cache - short desc");
-		// System.out.println(cache.shortDescription);
 		searchCacheDB.store(cache);
 
 		// Check, whether the cache index already exists
 		final CacheIndexItem existingCII = getSearchCacheIndexItem(cache.code);
 		if (existingCII != null)
 			searchCacheDB.delete(existingCII);
-		// cii = this.createCacheIndexItem(cache, gcvote);
 
 		// add cache information to cache index
-		// this.addOrUpdateCacheIndexItem(cii);
 		searchCacheDB.store(this.createCacheIndexItem(cache, gcvote));
 
 		// Commit changes
@@ -372,6 +376,8 @@ public class CacheDatabase
 			final File filePath = new File(folderName);
 			if (filePath.isDirectory())
 			{
+				mLogger.debug("Reading gpx/loc/zip files in folder " + folderName);
+				
 				final String[] arrFilenames = filePath.list();
 				for (String strFilename : arrFilenames)
 				{
@@ -421,6 +427,10 @@ public class CacheDatabase
 						}
 					}
 				}
+			}
+			else
+			{
+				mLogger.warn("Invalid import folder " + folderName);
 			}
 		}
 
@@ -476,16 +486,13 @@ public class CacheDatabase
 		if (cacheDuplicate != null)
 			this.mDB4ODatabase.delete(cacheDuplicate);
 		// add cache to db4o database
-		// this.addOrUpdateCache(cache);
 		this.mDB4ODatabase.store(cache);
 		
 		// Check, whether the cache index already exists
 		final CacheIndexItem existingCII = this.getCacheIndexItem(cache.code);
 		if (existingCII != null)
 			this.mDB4ODatabase.delete(existingCII);
-		// cii = this.createCacheIndexItem(cache);
 		// add cache information to cache index
-		// this.addOrUpdateCacheIndexItem(cii);
 		this.mDB4ODatabase.store(cii);
 
 		// Commit changes
@@ -601,8 +608,6 @@ public class CacheDatabase
 					}
 					this.mDB4ODatabase.store(cache);
 					this.mDB4ODatabase.commit();
-
-					// this.addOrUpdateCache(cache);
 				}				
 			}
 
@@ -1109,6 +1114,18 @@ public class CacheDatabase
 			this.malGpxFolders.add(folderName);
 	}
 
+	/**
+	 * 
+	 * @param folderList
+	 */
+	public void addSourceFolder(final String[] folderList)
+	{
+		for (String folderName : folderList)
+		{
+			this.addGpxFolder(folderName);
+		}
+	}
+	
 	/**
 	 * 
 	 */

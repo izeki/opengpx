@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
   <PreferenceCategory android:title="General">
-  <EditTextPreference android:title="Home coordinates" android:key="HomeCoordinates"></EditTextPreference>
-<Preference android:summary="Use this element to set your home coordintates from GPS" android:key="SetHomeCoordinates" android:title="Set home coordinates"></Preference>
-<EditTextPreference android:title="Data path" android:key="DataFolder" android:defaultValue="/sdcard/gpx"></EditTextPreference>
-<CheckBoxPreference android:summaryOff="Delete GPX files after importing" android:defaultValue="true" android:title="Backup GPX files" android:summaryOn="Backup gpx files to the ./backup folder" android:key="BackupGpxFiles"></CheckBoxPreference>
+  <EditTextPreference android:key="HomeCoordinates" android:title="@string/pref_home_coords" android:summary="@string/pref_home_coords_summary"></EditTextPreference>
+<Preference android:key="SetHomeCoordinates" android:title="@string/pref_set_home_coords" android:summary="@string/pref_set_home_coords_summary"></Preference>
+<EditTextPreference android:key="DataFolder" android:defaultValue="/sdcard/gpx" android:title="@string/pref_data_path" android:summary="@string/pref_data_path_summary"></EditTextPreference>
+<EditTextPreference android:title="@string/pref_import_path_list" android:key="ImportPathList" android:summary="@string/pref_import_path_list_summary"></EditTextPreference><CheckBoxPreference android:summaryOff="Delete GPX files after importing" android:defaultValue="true" android:title="Backup GPX files" android:summaryOn="Backup gpx files to the ./backup folder" android:key="BackupGpxFiles"></CheckBoxPreference>
+
 </PreferenceCategory>
 <PreferenceCategory android:title="User interface"><ListPreference android:entryValues="@array/coordinate_format_values" android:title="Coordinate format" android:key="CoordinateFormat" android:entries="@array/coordinate_format_items" android:defaultValue="DM"></ListPreference>
 <EditTextPreference android:summary="Limits the number of shown caches" android:key="CacheLimit" android:title="Cache filter limit" android:defaultValue="100"></EditTextPreference>
