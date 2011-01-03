@@ -65,8 +65,6 @@ public class CacheListActivity extends ListActivity
 
 	private GpsLocationListener	mLocationListener = null;
 
-	private static final String	DOWNLOAD_FOLDER = "/sdcard/download";
-
 	private static final Logger mLogger = LoggerFactory.getLogger(CacheListActivity.class);
 	
 	private static final int MENU_DELETE = Menu.FIRST;
@@ -79,7 +77,7 @@ public class CacheListActivity extends ListActivity
 	{
 		super.onCreate(savedInstanceState);
 		
-		setTitle("OpenGPX - You Are The Search Engine");
+		setTitle(R.string.app_title);
 		setContentView(R.layout.cachelist);
 
 		this.mLocationListener = new GpsLocationListener((LocationManager) getSystemService(Context.LOCATION_SERVICE));
@@ -162,7 +160,7 @@ public class CacheListActivity extends ListActivity
 
 			// Read gpx/loc files
 			mCacheDatabase.addGpxFolder(mPreferences.getDataFolder());
-			mCacheDatabase.addGpxFolder(DOWNLOAD_FOLDER);
+			mCacheDatabase.addSourceFolder(mPreferences.getImportPathList());
 
 			boolean updateGCVotes = mPreferences.getAutoUpdateVotes();
 			final ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
