@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout 
-	xmlns:android="http://schemas.android.com/apk/res/android" 
+	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" 
 	android:layout_height="fill_parent" 
 	android:id="@+id/CacheListLayout" 
@@ -12,8 +11,9 @@
   		android:layout_weight="1" 
   		android:id="@android:id/list" 
   		android:textFilterEnabled="true" 
-  		android:fastScrollEnabled="true">
-	</ListView>
+  		android:fastScrollEnabled="true"
+  		android:background="@drawable/listview_background"
+  		android:cacheColorHint="#00000000" />
 	<TextView 
 	    android:id="@+id/CacheStats"
 	    android:layout_width="fill_parent"
