@@ -8,6 +8,7 @@ Next version (not released yet):
   * fixed bcaching.com detail download
   * removed bcaching.com test site in preferences
   * added new welcome dialog
+  * added possibility to specify multiple import folders
 
 Version *1.0.1* (8. December 2010)
 
