@@ -68,7 +68,7 @@ public class SearchListAdapter extends CacheListAdapter
 			else
 			{
 				final Coordinates coordinates = new Coordinates(cacheIndexItem.latitude, cacheIndexItem.longitude);
-				final NavigationInfo navInfo = this.mReferenceCoordinates.NavigationInfoTo(coordinates);
+				final NavigationInfo navInfo = this.mReferenceCoordinates.getNavigationInfoTo(coordinates);
 	        	if (cacheIndexItem.vote > 0)
 		        	tvLine2.setText(String.format("Distance: %s [V:%.2f]", navInfo.toString(), cacheIndexItem.vote).replace(",", "."));
 	        	else

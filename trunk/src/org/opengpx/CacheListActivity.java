@@ -550,7 +550,7 @@ public class CacheListActivity extends ListActivity
 	 * @author Martin Preishuber
 	 * 
 	 */
-	class Db4oFilter implements FilenameFilter
+	static class Db4oFilter implements FilenameFilter
 	{
 		public boolean accept(File dir, String name)
 		{
@@ -569,12 +569,14 @@ public class CacheListActivity extends ListActivity
 		final String strDataPath = this.mPreferences.getDataFolder();
 		final String strDatabasePath = String.format("%s%sdatabase", strDataPath, File.separator);
 
-		File folder = new File(strDatabasePath);
+		final File folder = new File(strDatabasePath);
+		boolean result = true;
 		// this is just a precaution
-		if (!folder.exists()) folder.mkdirs();
+		if (!folder.exists())
+			result = folder.mkdirs();
 
 		final CharSequence[] items = folder.list(new Db4oFilter());
-		if (items == null)
+		if ((items == null) || (!result))
 		{
 			String strError = String.format("Unable to access folder '%s'.", strDatabasePath);
 			Toast.makeText(this, strError, Toast.LENGTH_LONG).show();

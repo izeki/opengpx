@@ -89,10 +89,13 @@ public class WaypointDetailDialog extends AlertDialog.Builder
 	            List<Address> addresses = geocoder.getFromLocation(this.mWaypoint.latitude, this.mWaypoint.longitude, 1);
 	            if (addresses.size() > 0) 
 	            {
+		            final StringBuilder addressesText = new StringBuilder();
 	                for (int i=0; i<addresses.get(0).getMaxAddressLineIndex(); i++)
 	                {
-	                   strAddresses += addresses.get(0).getAddressLine(i) + "\n";
+	                	addressesText.append(addresses.get(0).getAddressLine(i)).append("\n");
+	                	// strAddresses += addresses.get(0).getAddressLine(i) + "\n";
 	                }
+	                strAddresses = addressesText.toString();
 	            }
 	        }
 	        catch (IOException e) 
@@ -115,7 +118,7 @@ public class WaypointDetailDialog extends AlertDialog.Builder
 				if (!wp.name.equals(this.mWaypoint.name))
 				{
 					final Coordinates coordsTo = new Coordinates(wp.latitude, wp.longitude);
-					final NavigationInfo ni = coordsFrom.NavigationInfoTo(coordsTo, this.mUnitSystem);
+					final NavigationInfo ni = coordsFrom.getNavigationInfoTo(coordsTo, this.mUnitSystem);
 					sbRelativeInformation.append(String.format("%s [%s]: %s\n", wp.description, wp.name, ni.toString()));
 				}
 			}

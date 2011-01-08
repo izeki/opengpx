@@ -103,17 +103,20 @@ public class MorseCode {
 	 */
 	public String Encode(String plainText)
 	{
-		String strResult = "";
+		final StringBuilder result = new StringBuilder();
+		// String strResult = "";
         for (char c : plainText.toCharArray())
         {
-        	String strUpperCaseCharacter = Character.toString(c).toUpperCase(); 
+        	final String strUpperCaseCharacter = Character.toString(c).toUpperCase(); 
         	if (this.htMorseCodeCharacters.containsKey(strUpperCaseCharacter))
-        		strResult += this.htMorseCodeCharacters.get(strUpperCaseCharacter) + " ";
+        		result.append(this.htMorseCodeCharacters.get(strUpperCaseCharacter)).append(" ");
+        		// strResult += this.htMorseCodeCharacters.get(strUpperCaseCharacter) + " ";
         	else
-        		strResult += Character.toString(c);
+        		result.append(Character.toString(c));
+        		// strResult += Character.toString(c);
         }
-        	
-		return strResult;
+        
+		return result.toString();
 	}
 	
 	/**
@@ -123,30 +126,32 @@ public class MorseCode {
 	 */
 	public String Decode(String morseCode)
 	{
-		String[] arrSplitted = morseCode.split(" ");
+		final String[] arrSplitted = morseCode.split(" ");
 		
-		String strResult = "";
+		final StringBuilder result = new StringBuilder();
+		// String strResult = "";
 		for (String strMorseChar : arrSplitted)
 		{
 			if (this.htReverseLookupMap.containsKey(strMorseChar))
 			{
-				strResult += this.htReverseLookupMap.get(strMorseChar).toLowerCase();
+				result.append(this.htReverseLookupMap.get(strMorseChar).toLowerCase());
+				// strResult += this.htReverseLookupMap.get(strMorseChar).toLowerCase();
 			} 
 			else
 			{
 				if (strMorseChar.equals("/"))
-					strResult += " ";
+					result.append(" ");
+					// strResult += " ";
 			}
 		}
-		return strResult;
+		return result.toString();
 	}
-	
+
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	public static void main(String[] args) 
+	{
 	    String text = "hello world";
 	    MorseCode mc = new MorseCode();
 	    String enc = mc.Encode(text);

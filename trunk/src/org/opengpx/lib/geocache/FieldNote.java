@@ -12,8 +12,8 @@ public class FieldNote
 	public LogType	logType;
 	public String		logText;
 	
-	private static DateFormat ISODateFormat = new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ss'Z'");
-	
+	private static final String DATE_FORMAT_STRING = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+
 	public enum LogType
 	{
 		FOUND("Found it"),
@@ -43,8 +43,9 @@ public class FieldNote
 	
 	public String getDateAsISOString()
 	{
-		ISODateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+		final DateFormat iSODateFormat = new SimpleDateFormat (DATE_FORMAT_STRING);
+		iSODateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 		
-		return ISODateFormat.format(noteTime);
+		return iSODateFormat.format(noteTime);
 	}
 }

@@ -114,7 +114,7 @@ public class CommandActivity extends Activity
 	            	String strResult = "";
 	            	try
 	            	{
-	            		strResult = command.Execute();
+	            		strResult = command.execute();
 	            		strResult = strCommandText.concat("\n=\n").concat(strResult);
 	            	} 
 	            	catch (Exception e)

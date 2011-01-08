@@ -83,7 +83,7 @@ public class AddWaypointDialog extends Dialog {
 			String lat = AddWaypointDialog.this.wpLat.getText().toString();
 			String lng = AddWaypointDialog.this.wpLong.getText().toString();
 			Text input = new Text(lat + " " + lng);
-			ArrayList<Coordinates> coords = input.ExtractCoordinates();
+			ArrayList<Coordinates> coords = input.extractCoordinates();
 			if(coords.size() == 1)
 			{
 				Waypoint wp = new Waypoint();

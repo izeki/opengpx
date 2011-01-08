@@ -118,7 +118,7 @@ public class AdvancedSearchData
 
 	public boolean haveCacheTypeFilter()
 	{
-		if (cacheTypeBoxes.values().contains(new Boolean(true)))
+		if (cacheTypeBoxes.values().contains(Boolean.valueOf(true)))
 		{
 			return true;
 		}
@@ -145,7 +145,7 @@ public class AdvancedSearchData
 
 	public boolean haveContainerSizeFilter()
 	{
-		if (containerSizeBoxes.values().contains(new Boolean(true)))
+		if (containerSizeBoxes.values().contains(Boolean.valueOf(true)))
 		{
 			return true;
 		}

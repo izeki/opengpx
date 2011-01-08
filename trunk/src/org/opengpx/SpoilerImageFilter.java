@@ -19,7 +19,7 @@ public class SpoilerImageFilter
 	 * @author Martin Preishuber
 	 *
 	 */
-	class ImageFilter implements FilenameFilter 
+	static class ImageFilter implements FilenameFilter 
 	{
 	    public boolean accept(File dir, String name) 
 	    {

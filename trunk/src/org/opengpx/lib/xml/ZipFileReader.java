@@ -55,7 +55,7 @@ public class ZipFileReader
 				{
 					final byte[] buffer = new byte[(int) zipEntry.getSize()];
 					final InputStream inputStream = zipFile.getInputStream(zipEntry);
-					inputStream.read(buffer, 0, buffer.length);
+					final int bytesRead = inputStream.read(buffer, 0, buffer.length);
 					inputStream.close();
 
 					if (filename.endsWith("gpx"))

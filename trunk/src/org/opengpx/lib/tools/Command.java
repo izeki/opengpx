@@ -2,13 +2,13 @@ package org.opengpx.lib.tools;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Map;
 
 import org.opengpx.tools.Calculator;
 import org.opengpx.tools.Checksum;
 import org.opengpx.tools.GeocachingTool;
 import org.opengpx.tools.RomanNumeral;
 import org.opengpx.tools.Rot13;
-
 
 import org.opengpx.lib.Text;
 import org.opengpx.lib.UserDefinedVariables;
@@ -41,7 +41,7 @@ public class Command
 	 * 
 	 * @return
 	 */
-	public String Execute()
+	public String execute()
 	{
 		GeocachingTool geocachingTool = null;
 		
@@ -61,27 +61,27 @@ public class Command
 			geocachingTool = new RomanNumeral();
 			return geocachingTool.process(this.mText);
 		case CaesarEncrypt:
-            Text textCaesarEncrypt = new Text(ChiffreType.Caesar);
+            final Text textCaesarEncrypt = new Text(ChiffreType.Caesar);
             textCaesarEncrypt.setPlainText(this.mText);
             return textCaesarEncrypt.getEncodedText();
 		case CaesarDecrypt:
-            Text textCaesarDecrypt = new Text(ChiffreType.Caesar);
+            final Text textCaesarDecrypt = new Text(ChiffreType.Caesar);
             textCaesarDecrypt.setEncodedText(this.mText);
             return textCaesarDecrypt.getPlainText();
 		case MorseDecode:
-			MorseCode mcDecode = new MorseCode();
+			final MorseCode mcDecode = new MorseCode();
             return mcDecode.Decode(this.mText);
 		case MorseEncode:
-			MorseCode mcEncode = new MorseCode();
+			final MorseCode mcEncode = new MorseCode();
             return mcEncode.Encode(this.mText);
 		case Checksum:
 			geocachingTool = new Checksum();
 			return geocachingTool.process(this.mText);
 		case PrimeFactorisation:
-			ArrayList<Integer> arrPrimeFactors = PrimeFactorization.Calculate(Integer.parseInt(this.mText));
+			final ArrayList<Integer> arrPrimeFactors = PrimeFactorization.calculate(Integer.parseInt(this.mText));
             return arrPrimeFactors.toString();
 		case SumAscii:
-            Text textSumAscii = new Text();
+            final Text textSumAscii = new Text();
             textSumAscii.setPlainText(this.mText);
             return textSumAscii.getAsciiValue().toString();
 		case VanityNumbers:
@@ -97,23 +97,30 @@ public class Command
 	 */
 	private String TextToNumber()
 	{
-		Text text2Number = new Text();
+		final Text text2Number = new Text();
         text2Number.setPlainText(this.mText);
-        String strText2Num = text2Number.getNumericalValue().toString();
         
-        String strSubString = this.mText.substring(0, 1);
-        text2Number.setPlainText(strSubString);
-        strText2Num += "\n\n" + strSubString + "=" + text2Number.getNumericalValue().toString();
-        for (int i=1; i<this.mText.length(); i++)
+        StringBuilder text2Num = new StringBuilder(text2Number.getNumericalValue().toString());
+        // String strText2Num = text2Number.getNumericalValue().toString();
+        
+        if (this.mText.length() > 0)
         {
-            strSubString = this.mText.substring(i, i+1);
-            text2Number.setPlainText(strSubString);
-            if (text2Number.getNumericalValue() > 0)
-            {
-            	strText2Num += "," + strSubString + "=" + text2Number.getNumericalValue().toString();
-            }
+        	final String firstSubString = this.mText.substring(0, 1);
+        	text2Number.setPlainText(firstSubString);
+        	// strText2Num += "\n\n" + strSubString + "=" + text2Number.getNumericalValue().toString();
+        	text2Num.append("\n\n" + firstSubString + "=" + text2Number.getNumericalValue().toString());
+	        for (int i = 1; i < this.mText.length(); i++)
+	        {
+	            final String nextSubString = this.mText.substring(i, i+1);
+	            text2Number.setPlainText(nextSubString);
+	            if (text2Number.getNumericalValue() > 0)
+	            {
+	            	// strText2Num += "," + strSubString + "=" + text2Number.getNumericalValue().toString();
+	            	text2Num.append("," + nextSubString + "=" + text2Number.getNumericalValue().toString());
+	            }
+	        }
         }
-        return strText2Num;
+        return text2Num.toString();
 	}
 
     /**
@@ -122,7 +129,7 @@ public class Command
      */
     private String getVanityNumbers()
     {
-    	Hashtable<String, String> htVanityNumbers = new Hashtable<String, String>();
+    	final Hashtable<String, String> htVanityNumbers = new Hashtable<String, String>();
     	htVanityNumbers.put("ABC", "2");
     	htVanityNumbers.put("DEF", "3");
     	htVanityNumbers.put("GHI", "4");
@@ -132,13 +139,20 @@ public class Command
     	htVanityNumbers.put("TUV", "8");
     	htVanityNumbers.put("WXYZ", "9");
 
-        String strResult = "";
+    	StringBuilder result = new StringBuilder();
+        // String strResult = "";
         for (char c : this.mText.toUpperCase().toCharArray())
-        	for (String key : htVanityNumbers.keySet())
-        		if (key.contains(Character.toString(c)))
-        			strResult += htVanityNumbers.get(key);
+        {
+			for (Map.Entry<String, String> entry : htVanityNumbers.entrySet())
+        	// for (String key : htVanityNumbers.keySet())
+        	{
+        		if (entry.getKey().contains(Character.toString(c)))
+        			result.append(entry.getValue());
+        			// strResult += htVanityNumbers.get(key);
+        	}
+        }
         
-        return strResult;
+        return result.toString();
     }
 
     /**
@@ -181,29 +195,29 @@ public class Command
 		System.out.println(udv.get("e"));
 		System.out.println(udv.parseExpression("e"));
 	    Command cmd = new Command(CommandType.Calculate, "a*b+c-1", udv);
-	    System.out.println("Calculate: " + cmd.Execute());
+	    System.out.println("Calculate: " + cmd.execute());
 	    cmd = new Command(CommandType.Calculate, "lcm(3528,3780)", udv);
-	    System.out.println("Calculate LCM: " + cmd.Execute());
+	    System.out.println("Calculate LCM: " + cmd.execute());
 	    cmd = new Command(CommandType.Calculate, "gcd(3528,3780)", udv);
-	    System.out.println("Calculate GCD: " + cmd.Execute());
+	    System.out.println("Calculate GCD: " + cmd.execute());
 	    cmd = new Command(CommandType.Calculate, "sin(pi)", udv);
-	    System.out.println(cmd.Execute());
+	    System.out.println(cmd.execute());
 	    cmd = new Command(CommandType.CaesarEncrypt, "Hello World", udv);
-	    System.out.println( cmd.Execute());
+	    System.out.println( cmd.execute());
 	    cmd = new Command(CommandType.CaesarDecrypt, "Khoor Zruog", udv);
-	    System.out.println( cmd.Execute());
+	    System.out.println( cmd.execute());
 	    cmd = new Command(CommandType.RomanNumbers, "MMIX", udv);
-	    System.out.println( cmd.Execute());
+	    System.out.println( cmd.execute());
 	    cmd = new Command(CommandType.Text2Number, "Niki Lauda", udv);
-	    System.out.println("Text2Number: " + cmd.Execute());
+	    System.out.println("Text2Number: " + cmd.execute());
 	    cmd = new Command(CommandType.PrimeFactorisation, "6937", udv);
-	    System.out.println( cmd.Execute());
+	    System.out.println( cmd.execute());
 	    cmd = new Command(CommandType.SumAscii, "ABC", udv);
-	    System.out.println( cmd.Execute());
+	    System.out.println( cmd.execute());
 	    cmd = new Command(CommandType.VanityNumbers, "AbCdEf", udv);
-	    System.out.println( cmd.Execute());
+	    System.out.println( cmd.execute());
 	    cmd = new Command(CommandType.GroundspeakCode, "Gbyyrf Rirag. Xnssrr, Xhpura. Haq fcgre xbzzra qvr Jefgy.", udv);
-	    System.out.println( cmd.Execute());
+	    System.out.println( cmd.execute());
 	}
 
 }

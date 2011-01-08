@@ -43,13 +43,13 @@ public class TextViewerActivity extends Activity
      */
     private String LoadFileContent(String strFilename)
     {
-    	File file = new File(strFilename);
+    	final File file = new File(strFilename);
     	if (file.exists())
     	{
     		FileInputStream fis;
 			try {
 				fis = new FileInputStream(strFilename);
-	    		DataInputStream dis = new DataInputStream(fis);
+	    		final DataInputStream dis = new DataInputStream(fis);
 	    		String strData = "";
 	    		while (dis.available() != 0)
 	    		{
@@ -58,8 +58,9 @@ public class TextViewerActivity extends Activity
 	    		dis.close();
 	    		fis.close();
 	    		return strData;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
+			} 
+			catch (IOException e) 
+			{
 				return e.getStackTrace().toString();
 			}
     	} 

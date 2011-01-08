@@ -108,17 +108,21 @@ public class Text
      */
     private String ConvertGroundspeak(String text)
     {
-        String strResult = "";
+    	final StringBuilder result = new StringBuilder();
+        // String strResult = "";
         for (int intAsciiCode : text.toCharArray())
         {
             if (((intAsciiCode >= 65) && (intAsciiCode <= 77)) || ((intAsciiCode >= 97) && (intAsciiCode <= 109)))
-            	strResult += (char)(intAsciiCode + 13);
+            	result.append((char)(intAsciiCode + 13));
+            	// strResult += (char)(intAsciiCode + 13);
             else if (((intAsciiCode >= 78) && (intAsciiCode <= 90)) || ((intAsciiCode >= 110) && (intAsciiCode <= 122)))
-                strResult += (char)(intAsciiCode - 13);
+            	result.append((char)(intAsciiCode - 13));
+                // strResult += (char)(intAsciiCode - 13);
             else
-                strResult += (char)intAsciiCode;
+            	result.append((char)intAsciiCode);
+                // strResult += (char)intAsciiCode;
         }
-        return strResult;
+        return result.toString();
     }
     
     /**
@@ -129,7 +133,8 @@ public class Text
      */
     private String ConvertCaesar(String text, int shift)
     {
-        String strResult = "";
+    	final StringBuilder result = new StringBuilder();
+        // String strResult = "";
         int intShiftToZero = 0;
         
         for (int intAsciiCode : text.toCharArray())
@@ -149,9 +154,10 @@ public class Text
         		intAsciiCode = (intAsciiCode % 26) + intShiftToZero;
         	}
         	// Convert back to character
-            strResult += (char)intAsciiCode;
+        	result.append((char)intAsciiCode);
+            // strResult += (char)intAsciiCode;
         }
-        return strResult;
+        return result.toString();
     }
 
     /**
@@ -212,21 +218,21 @@ public class Text
      * Extracts geographical coordinates from the text by using regular expressions.
      * @return
      */
-    public ArrayList<Coordinates> ExtractCoordinates()
+    public ArrayList<Coordinates> extractCoordinates()
     {
     	String strText = this.mstrPlainText.toUpperCase();
         // remove some HTML tags
     	strText = strText.replace("<BR>", "");
     	strText = strText.replace("&DEG;", "");
     	
-    	ArrayList<Coordinates> coordinates = new ArrayList<Coordinates>();
+    	final ArrayList<Coordinates> coordinates = new ArrayList<Coordinates>();
     	
-        Pattern regex = Pattern.compile(Coordinates.coords_regexp, Pattern.DOTALL);
-        Matcher matcher = regex.matcher(strText);
+        final Pattern regex = Pattern.compile(Coordinates.coords_regexp, Pattern.DOTALL);
+        final Matcher matcher = regex.matcher(strText);
         while (matcher.find())
         {
-        	Coordinates coords = new Coordinates();
-        	coords.ParseFromText(matcher.group(0));
+        	final Coordinates coords = new Coordinates();
+        	coords.parseFromText(matcher.group(0));
         	coordinates.add(coords);
         }
     	
@@ -237,10 +243,10 @@ public class Text
      * 
      * @return
      */
-    public boolean ContainsHtmlTag()
+    public boolean containsHtmlTag()
     {
-        String[] arrTempTags = { "&gt;", "&lt;", "&nbsp;", "&amp;", "&deg;", "&quot;", "&apos;" };
-        String strLCaseText = this.mstrPlainText.toLowerCase();
+        final String[] arrTempTags = { "&gt;", "&lt;", "&nbsp;", "&amp;", "&deg;", "&quot;", "&apos;" };
+        final String strLCaseText = this.mstrPlainText.toLowerCase();
         boolean blnTagFound = false;
         for (String strTag : arrTempTags)
         {
@@ -286,7 +292,7 @@ public class Text
 	    
 	    Text coord_text = new Text();
 	    coord_text.setPlainText("Meter vor dem Beginn des Weges, ist ein ausgeschilderter Schotterparkplatz für ein paar Fahrzeuge. (Koordinaten N46° 45.093 E014° 16.200). DIE HEADERKOORDINATEN SIND FALSCH! DER GLETSCHERTOPF IST LIEGT N 46 38.044 E 14 14.079! PEILUNG DANN ERST VON DORT");
-	    ArrayList<Coordinates> coordinates = coord_text.ExtractCoordinates();
+	    ArrayList<Coordinates> coordinates = coord_text.extractCoordinates();
 	    System.out.println(coordinates);
 	    for (Coordinates coord : coordinates)
 	        System.out.println(coord);

@@ -192,7 +192,7 @@ public class Preferences
 	{
 		final String strCoordinates = this.mSharedPreferences.getString(PREFS_KEY_HOME_COORDINATES, PREFS_DEFAULT_HOME_COORDINATES);
 		Coordinates coordinates = new Coordinates();
-		coordinates.ParseFromText(strCoordinates);
+		coordinates.parseFromText(strCoordinates);
 		return coordinates;
 	}
 	

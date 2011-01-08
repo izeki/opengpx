@@ -25,7 +25,7 @@ public class SpoilerDownloader
 	 * @author Martin Preishuber
 	 *
 	 */
-	private class WebImage
+	static class WebImage
 	{
 		private String mstrName;
 		private String mstrURL;
