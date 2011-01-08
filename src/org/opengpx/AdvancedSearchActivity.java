@@ -1,6 +1,7 @@
 package org.opengpx;
 
 import java.util.Hashtable;
+import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -243,22 +244,25 @@ public class AdvancedSearchActivity extends Activity
 
 	private void setAllChecks(Hashtable<EnumInterface, CheckBox> checks)
 	{
-		for (Object key : checks.keySet())
+		for (Map.Entry<EnumInterface, CheckBox> entry : checks.entrySet())
+		// for (Object key : checks.keySet())
 		{
 			String keyStr = "";
-
+			final Object key = (Object) entry.getKey();
+			
 			if (key instanceof ContainerSize)
 			{
-				ContainerSize c = (ContainerSize) key;
+				final ContainerSize c = (ContainerSize) key;
 				keyStr = c.getTypeCode();
 			}
 			else if (key instanceof CacheType)
 			{
-				CacheType c = (CacheType) key;
+				final CacheType c = (CacheType) key;
 				keyStr = c.getTypeCode();
 			}
 
-			CheckBox box = checks.get(key);
+			// CheckBox box = checks.get(key);
+			final CheckBox box = entry.getValue();
 
 			if (!keyStr.equalsIgnoreCase("All") && !keyStr.equalsIgnoreCase("None"))
 			{

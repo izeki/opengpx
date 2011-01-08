@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.opengpx.CacheAttributeDialog;
@@ -67,6 +68,7 @@ import android.view.View.OnCreateContextMenuListener;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -529,7 +531,7 @@ public class CacheDetailActivity extends TabActivity
 		catch (IOException e1) 
 		{ }
 
-		final NavigationInfo ni = mHomeCoordinates.NavigationInfoTo(coordsHeaderWaypoint, this.mPreferences.getUnitSystem());
+		final NavigationInfo ni = mHomeCoordinates.getNavigationInfoTo(coordsHeaderWaypoint, this.mPreferences.getUnitSystem());
 		final String[] arrNavInfo = ni.toStringArray();
 		final String strDistance = String.format("Distance (home): %s (%s %s)", arrNavInfo[0], arrNavInfo[1], arrNavInfo[2]);
 		((TextView) this.findViewById(R.id.CacheDetailDistance)).setText(strDistance);
@@ -719,24 +721,29 @@ public class CacheDetailActivity extends TabActivity
 	 */
 	private void showInventory()
 	{
-		String strInventory = "";
+		// String strInventory = "";
+		final StringBuilder travelBugs = new StringBuilder();
 		if (this.mCache.getTravelBugs() != null)
 		{
 			for (TravelBug tb : this.mCache.getTravelBugs())
 			{
-				strInventory += tb.toString() + "\n";
+				travelBugs.append(tb.toString()).append("\n");
+				// strInventory += tb.toString() + "\n";
 			}
 			// Remove trailing newline
-			strInventory = strInventory.substring(0, strInventory.length() - 1);
+			travelBugs.delete(travelBugs.length() - 1, travelBugs.length());
+			// strInventory = strInventory.substring(0, strInventory.length() - 1);
 		}
 		else
 		{
-			strInventory = "Sorry, there are no coins / travelbugs in this cache.";
+			travelBugs.append("Sorry, there are no coins / travelbugs in this cache.");
+			// strInventory = "Sorry, there are no coins / travelbugs in this cache.";
 		}
 
 		AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 		alertDialog.setTitle("Inventory");
-		alertDialog.setMessage(strInventory);
+		// alertDialog.setMessage(strInventory);
+		alertDialog.setMessage(travelBugs);
 		alertDialog.setButton("OK", new DialogInterface.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog, int which)
@@ -770,21 +777,21 @@ public class CacheDetailActivity extends TabActivity
 
 		int intExtractedNum = 1;
 		// Extract waypoints from description & logs
-		Text txtShortDescription = new Text();
+		final Text txtShortDescription = new Text();
 		txtShortDescription.setPlainText(this.mCache.shortDescription);
 		txtShortDescription.setIsHtml(this.mCache.shortDescriptionIsHtml);
-		Text txtLongDescription = new Text();
+		final Text txtLongDescription = new Text();
 		txtLongDescription.setPlainText(this.mCache.longDescription);
 		txtLongDescription.setIsHtml(this.mCache.longDescriptionIsHtml);
 
-		ArrayList<Coordinates> alExtractedCoordinates = txtShortDescription.ExtractCoordinates();
-		alExtractedCoordinates.addAll(txtLongDescription.ExtractCoordinates());
+		final ArrayList<Coordinates> alExtractedCoordinates = txtShortDescription.extractCoordinates();
+		alExtractedCoordinates.addAll(txtLongDescription.extractCoordinates());
 		if (alExtractedCoordinates.size() > 0)
 		{
 			for (Coordinates coords : alExtractedCoordinates)
 			{
-				Waypoint wp = new Waypoint();
-				String strName = String.format("Description #%d", intExtractedNum);
+				final Waypoint wp = new Waypoint();
+				final String strName = String.format("Description #%d", intExtractedNum);
 				wp.name = strName;
 				wp.description = strName;
 				wp.setType(WaypointType.Extracted);
@@ -803,8 +810,8 @@ public class CacheDetailActivity extends TabActivity
 			{
 				if ((logEntry.latitude != 0) && (logEntry.longitude != 0))
 				{
-					Waypoint wp = new Waypoint();
-					String strName = String.format("Log entry (%s)", logEntry.finder);
+					final Waypoint wp = new Waypoint();
+					final String strName = String.format("Log entry (%s)", logEntry.finder);
 					wp.name = strName;
 					wp.description = strName;
 					wp.setType(WaypointType.Extracted);
@@ -814,11 +821,11 @@ public class CacheDetailActivity extends TabActivity
 					wp.longitude = logEntry.longitude;
 					this.mCache.addWaypoint(wp);
 				}
-				Text textLogEntry = new Text(logEntry.text);
-				for (Coordinates coords : textLogEntry.ExtractCoordinates())
+				final Text textLogEntry = new Text(logEntry.text);
+				for (Coordinates coords : textLogEntry.extractCoordinates())
 				{
-					Waypoint wp = new Waypoint();
-					String strName = String.format("Log entry (%s)", logEntry.finder);
+					final Waypoint wp = new Waypoint();
+					final String strName = String.format("Log entry (%s)", logEntry.finder);
 					wp.name = strName;
 					wp.description = strName;
 					wp.setType(WaypointType.Extracted);
@@ -829,7 +836,7 @@ public class CacheDetailActivity extends TabActivity
 				}
 			}
 		}
-		ListView lvWaypointList = (ListView) this.findViewById(R.id.WaypointList);
+		final ListView lvWaypointList = (ListView) this.findViewById(R.id.WaypointList);
 		lvWaypointList.setAdapter(new WaypointListAdapter(this, this.mCache.getWaypoints(), this.mCache.code, this.mCache.getCacheType(), coordinateFormat));
 
 		// This will make the listView create a ContextMenu when you long press it.
@@ -1142,25 +1149,32 @@ public class CacheDetailActivity extends TabActivity
 	 */
 	private void initializeLogList()
 	{
-		HashMap<String, Integer> hmLogStats = new HashMap<String, Integer>();
+		final HashMap<String, Integer> hmLogStats = new HashMap<String, Integer>();
 		for (LogEntry logEntry : this.mCache.getLogEntries())
 		{
-			String strLogType = logEntry.getType().toString();
+			final String strLogType = logEntry.getType().toString();
 			if (!hmLogStats.containsKey(strLogType)) hmLogStats.put(strLogType, 0);
 			hmLogStats.put(strLogType, hmLogStats.get(strLogType) + 1);
 		}
 
-		ListView lvLogList = (ListView) this.findViewById(R.id.LogList);
+		final ListView lvLogList = (ListView) this.findViewById(R.id.LogList);
 		lvLogList.setAdapter(new LogListAdapter(this, this.mCache.getLogEntries()));
 
-		TextView tvLogStats = (TextView) this.findViewById(R.id.CacheLogStats);
-		String strLogStats = "";
-		for (String strLogType : hmLogStats.keySet())
+		final TextView tvLogStats = (TextView) this.findViewById(R.id.CacheLogStats);
+		final StringBuilder logStats = new StringBuilder();
+		// String strLogStats = "";
+		
+		for (Map.Entry<String, Integer> entry : hmLogStats.entrySet())
+		// for (String strLogType : hmLogStats.keySet())
 		{
-			strLogStats += String.format("%s: %d, ", strLogType.replace("_", " "), hmLogStats.get(strLogType));
+			logStats.append(String.format("%s: %d, ", entry.getKey().replace("_", " "), entry.getValue()));
+			// logStats.append(String.format("%s: %d, ", strLogType.replace("_", " "), hmLogStats.get(strLogType)));
+			// strLogStats += String.format("%s: %d, ", strLogType.replace("_", " "), hmLogStats.get(strLogType));
 		}
-		if (strLogStats.length() > 0) strLogStats = strLogStats.substring(0, strLogStats.length() - 2);
-		tvLogStats.setText(strLogStats);
+		// if (strLogStats.length() > 0) strLogStats = strLogStats.substring(0, strLogStats.length() - 2);
+		// tvLogStats.setText(strLogStats);
+		if (logStats.length() > 0) logStats.delete(logStats.length() - 2, logStats.length());
+		tvLogStats.setText(logStats);
 	}
 
 	/**
@@ -1180,7 +1194,7 @@ public class CacheDetailActivity extends TabActivity
 			}
 			else
 			{
-				CacheDatabase db = CacheDatabase.getInstance();
+				final CacheDatabase db = CacheDatabase.getInstance();
 				db.addCache(CacheDetailActivity.this.mCache);
 				// CacheDetailActivity.this.initializeLogList();
 				CacheDetailActivity.this.initializeWaypointList();

@@ -1,11 +1,13 @@
 package org.opengpx.lib;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -84,8 +86,13 @@ public class CacheDatabase
 	 * @author Martin Preishuber
 	 *
 	 */
-	public class CacheNameComparator implements Comparator<CacheIndexItem>
+	static class CacheNameComparator implements Comparator<CacheIndexItem>, Serializable
 	{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 8534785080926464590L;
+
 		public int compare(CacheIndexItem object1, CacheIndexItem object2)
 		{
 			return object1.name.compareTo(object2.name);
@@ -321,15 +328,15 @@ public class CacheDatabase
 		if (commit) searchCacheDB.commit();
 	}
 	
-	public void clearSearchCacheData()
+	public boolean clearSearchCacheData()
 	{
 		// Clear DB4O Database by re-creating it
 		closeSearchDatabase();
 
-		String strDatabaseFilename = getSearchDBFileName();
-		new File(strDatabaseFilename).delete();
+		final String strDatabaseFilename = getSearchDBFileName();
+		final boolean result = new File(strDatabaseFilename).delete();
 
-		openSearchDatabase();
+		return (openSearchDatabase() && result);
 	}
 	
 	public void saveSearchCacheToDB(String cacheCode)
@@ -411,10 +418,13 @@ public class CacheDatabase
 						if (this.mstrBackupFolder.length() > 0)
 						{
 							final File file = new File(strFullFilename);
+							boolean fileResult = true;
 							if (backupGpxFiles)
-								file.renameTo(new File(this.mstrBackupFolder, file.getName()));
+								fileResult = file.renameTo(new File(this.mstrBackupFolder, file.getName()));
 							else
-								file.delete();
+								fileResult = file.delete();
+							if (!fileResult)
+								mLogger.warn("File operation on " + strFullFilename + " failed ...");
 						}
 						if (blnSuccessful)
 						{
@@ -596,13 +606,16 @@ public class CacheDatabase
 			}
 
 			// Add waypoints to caches
-			for (String strCacheCode : alCacheWaypointMapping.keySet())
+			for (Map.Entry<String, ArrayList<Waypoint>> entry : alCacheWaypointMapping.entrySet())
+			// for (String strCacheCode : alCacheWaypointMapping.keySet())
 			{
-				Cache cache = this.getCache(strCacheCode);
+				final String strCacheCode = entry.getKey();
+				final Cache cache = this.getCache(strCacheCode);
 				if (cache != null)
 				{
 					// for (String strWaypointFilename : alCacheWaypointMapping.get(strCacheCode))
-					for (Waypoint waypoint : alCacheWaypointMapping.get(strCacheCode))
+					// for (Waypoint waypoint : alCacheWaypointMapping.get(strCacheCode))
+					for (Waypoint waypoint : entry.getValue())
 					{
 						cache.addWaypoint(waypoint);
 					}
@@ -862,7 +875,7 @@ public class CacheDatabase
 		{
 			final CacheIndexItem cii = this.mhmCacheIndexItems.get(strCacheCode);
 			final Coordinates coordsCompare = new Coordinates(cii.latitude, cii.longitude);
-			final double dblDistance = coords.DistanceTo(coordsCompare);
+			final double dblDistance = coords.getDistanceTo(coordsCompare);
 			tmSortedItems.put(dblDistance, strCacheCode);	
 		}
 		
@@ -908,7 +921,7 @@ public class CacheDatabase
 		{
 			final CacheIndexItem cii = searchIndexItems.get(strCacheCode);
 			final Coordinates coordsCompare = new Coordinates(cii.latitude, cii.longitude);
-			final double dblDistance = coords.DistanceTo(coordsCompare);
+			final double dblDistance = coords.getDistanceTo(coordsCompare);
 			tmSortedItems.put(dblDistance, strCacheCode);	
 		}
 		
@@ -1069,13 +1082,16 @@ public class CacheDatabase
 		// System.out.println("Votes size: " + votes.size());
 		if (votes.size() > 0)
 		{
-			for (String cacheCode : votes.keySet())
+			for (Map.Entry<String, GCVote> entry : votes.entrySet())
+			// for (String cacheCode : votes.keySet())
 			{
+				final String cacheCode = entry.getKey();
 				final CacheIndexItem cii = this.getCacheIndexItem(cacheCode);
 				// System.out.println(cii.code);
 				if (cii != null)
 				{
-					final GCVote vote = votes.get(cacheCode);
+					// final GCVote vote = votes.get(cacheCode);
+					final GCVote vote = entry.getValue();
 	
 					// Update index item
 					cii.vote = vote.voteAverage;
@@ -1134,10 +1150,10 @@ public class CacheDatabase
 		// Clear DB4O Database by re-creating it
 		this.close();
 
-		String strDatabaseFilename = String.format("%s%s%s", this.mstrDatabaseFolder, File.separator, this.mstrDatabaseFilename);
-		new File(strDatabaseFilename).delete();
+		final String strDatabaseFilename = String.format("%s%s%s", this.mstrDatabaseFolder, File.separator, this.mstrDatabaseFilename);
+		final boolean result = new File(strDatabaseFilename).delete();
 
-		return this.openDatabase(this.mstrDatabaseFilename);
+		return (this.openDatabase(this.mstrDatabaseFilename) && result);
 	}
 	
 	/**
@@ -1210,11 +1226,13 @@ public class CacheDatabase
 	 * 
 	 * @param path
 	 */
-	private void checkOrCreateFolder(String path)
+	private boolean checkOrCreateFolder(String path)
 	{
 		final File folder = new File(path);
+		boolean result = true;
 		if (!folder.exists())
-			folder.mkdirs();
+			result = folder.mkdirs();
+		return result;
 	}
 	
 	/**

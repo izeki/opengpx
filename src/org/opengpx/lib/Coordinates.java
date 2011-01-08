@@ -112,22 +112,22 @@ public class Coordinates
      * @param latitude
      * @param longitude
      */
-    public void getDMS(DMS latitude, DMS longitude)
+    /* public void getDMS(DMS latitude, DMS longitude)
     {
     	latitude = this.mcoordLatitude.getDMS();
     	longitude = this.mcoordLongitude.getDMS();
-    }
+    } */
 
     /**
      * 
      * @param latitude
      * @param longitude
      */
-    public void getDM(DM latitude, DM longitude)
+    /* public void getDM(DM latitude, DM longitude)
     {
     	latitude = this.mcoordLatitude.getDM();
     	longitude = this.mcoordLongitude.getDM();
-    }
+    } */
 
     /**
      * 
@@ -180,7 +180,7 @@ public class Coordinates
      * @param text
      * @return
      */
-    public boolean ParseFromText(String text)
+    public boolean parseFromText(String text)
     {
         boolean blnResult = false;
         final Pattern regex = Pattern.compile(coords_regexp, Pattern.DOTALL);
@@ -204,9 +204,9 @@ public class Coordinates
      * @param coords
      * @return
      */
-    public double DistanceTo(final Coordinates coords)
+    public double getDistanceTo(final Coordinates coords)
     {
-    	return this.DistanceTo(coords, UnitSystem.Metric);
+    	return this.getDistanceTo(coords, UnitSystem.Metric);
     }
 
     /**
@@ -215,7 +215,7 @@ public class Coordinates
      * @param unitSystem
      * @return
      */
-    public double DistanceTo(final Coordinates coords, UnitSystem unitSystem)
+    public double getDistanceTo(final Coordinates coords, UnitSystem unitSystem)
     {
         final double lat1 = Math.toRadians(this.mcoordLatitude.getD());
         final double long1 = Math.toRadians(this.mcoordLongitude.getD());
@@ -239,7 +239,7 @@ public class Coordinates
      * @param coords
      * @return
      */
-    public double BearingTo(final Coordinates coords)
+    public double getBearingTo(final Coordinates coords)
     {
         final double lat1 = Math.toRadians(this.mcoordLatitude.getD());
         final double long1 = Math.toRadians(this.mcoordLongitude.getD());
@@ -260,7 +260,7 @@ public class Coordinates
      * @param bearing
      * @return
      */
-    public Direction DirectionForBearing(double bearing)
+    public Direction getDirectionForBearing(double bearing)
     {
         if ((bearing >= 337.5) || (bearing < 22.5))
             return Direction.N;
@@ -287,9 +287,9 @@ public class Coordinates
      * @param coords
      * @return
      */
-    public NavigationInfo NavigationInfoTo(Coordinates coords) 
+    public NavigationInfo getNavigationInfoTo(Coordinates coords) 
     {
-    	return this.NavigationInfoTo(coords, UnitSystem.Metric);
+    	return this.getNavigationInfoTo(coords, UnitSystem.Metric);
     }
 
     /**
@@ -298,12 +298,12 @@ public class Coordinates
      * @param unitSystem
      * @return
      */
-    public NavigationInfo NavigationInfoTo(Coordinates coords, UnitSystem unitSystem) 
+    public NavigationInfo getNavigationInfoTo(Coordinates coords, UnitSystem unitSystem) 
     {
     	final NavigationInfo navigationInfo = new NavigationInfo(unitSystem);
-    	navigationInfo.distance  = this.DistanceTo(coords, unitSystem);
-    	navigationInfo.bearing = this.BearingTo(coords);
-    	navigationInfo.direction = this.DirectionForBearing(navigationInfo.bearing);
+    	navigationInfo.distance  = this.getDistanceTo(coords, unitSystem);
+    	navigationInfo.bearing = this.getBearingTo(coords);
+    	navigationInfo.direction = this.getDirectionForBearing(navigationInfo.bearing);
         return navigationInfo;
     }
 
@@ -379,18 +379,18 @@ public class Coordinates
 	    coordsA.setDM(Hemisphere.N, 46, 35.595, Hemisphere.E, 14, 16.394);
 	    Coordinates coordsB = new Coordinates();
 	    coordsB.setDM(Hemisphere.N, 46, 35.664, Hemisphere.E, 14, 16.057);
-	    System.out.println(coordsA.DistanceTo(coordsB));
-		System.out.println(coordsA.BearingTo(coordsB));
+	    System.out.println(coordsA.getDistanceTo(coordsB));
+		System.out.println(coordsA.getBearingTo(coordsB));
 	    Coordinates coordsC = new Coordinates();
 	    coordsC.setDM(Hemisphere.N, 46, 35.664, Hemisphere.E, 14, 16.057);
 		System.out.println(coordsB.equals(coordsC));
-		NavigationInfo navigationInfo = coordsA.NavigationInfoTo(coordsB);
+		NavigationInfo navigationInfo = coordsA.getNavigationInfoTo(coordsB);
 		System.out.println(String.format("%.16f %.16f %s", navigationInfo.distance, navigationInfo.bearing, navigationInfo.direction));
 		String[] arrNavigationInfo = navigationInfo.toStringArray();
 		System.out.println(String.format("%s %s %s", arrNavigationInfo[0], arrNavigationInfo[1], arrNavigationInfo[2]));
 
 	    Coordinates coordsT = new Coordinates();
-	    System.out.println(coordsT.ParseFromText("N 46¡ 32.329 E 014¡ 30.535 "));
+	    System.out.println(coordsT.parseFromText("N 46¡ 32.329 E 014¡ 30.535 "));
 	    System.out.println(coordsT.toString(CoordinateFormat.DM));
 
 	    Coordinates coordsNaN = new Coordinates();

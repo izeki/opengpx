@@ -116,7 +116,7 @@ public class SearchBCaching
 		if (name != null) params.put("find", URLEncoder.encode(name));
 		if (data != null) addAdvancedSearchParams(data);
 
-		InputStream in = comm.SendRequest(params);
+		InputStream in = comm.sendRequest(params);
 		parseJsonSummaryData(in);
 		
 		cacheDatabase.readSearchIndex();
@@ -166,7 +166,7 @@ public class SearchBCaching
 		params.put("desc", "html");
 		params.put("fmt", "json");
 
-		InputStream in = comm.SendRequest(params);
+		InputStream in = comm.sendRequest(params);
 		parseJsonDetailData(in);
 		
 		cacheDatabase.readSearchIndex();
@@ -340,14 +340,14 @@ public class SearchBCaching
 					{
 						for (int l = 0; l < logList.length(); l++)
 						{
-							LogEntry log = new LogEntry();
+							final LogEntry log = new LogEntry();
 							c.addLogEntry(log);
 	
 							JSONObject jlog = logList.getJSONObject(l);
 							log.finder = jlog.getString("finder");
 							log.id = jlog.getString("id");
 							log.text = jlog.getString("text");
-							log.text.replaceAll("\r", "");
+							log.text = log.text.replaceAll("\r", "");
 							log.parseTypeString(jlog.getString("type"));
 							log.time = parseJsonDate(jlog.getString("date"));
 						}

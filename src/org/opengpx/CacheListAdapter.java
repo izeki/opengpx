@@ -127,7 +127,7 @@ public class CacheListAdapter extends ArrayAdapter<String> implements Filterable
 	        else
 	        {
 	        	final Coordinates coordinates = new Coordinates(cacheIndexItem.latitude, cacheIndexItem.longitude);
-	        	final NavigationInfo navInfo = this.mReferenceCoordinates.NavigationInfoTo(coordinates, this.mUnitSystem);
+	        	final NavigationInfo navInfo = this.mReferenceCoordinates.getNavigationInfoTo(coordinates, this.mUnitSystem);
 	        	if (cacheIndexItem.vote > 0)
 		        	tvLine2.setText(String.format("Distance: %s [V:%.2f]", navInfo.toString(), cacheIndexItem.vote).replace(",", "."));
 	        	else

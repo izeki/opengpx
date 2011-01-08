@@ -13,9 +13,9 @@ import org.slf4j.LoggerFactory;
  * @author Martin Preishuber
  *
  */
-public class ISODateTime {
-
-	private static DateFormat mdfISO8601Local = new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ss");
+public class ISODateTime 
+{
+	private static final String DATE_FORMAT_PATTERN = "yyyy-MM-dd'T'HH:mm:ss";
 	
 	private static final Logger mLogger = LoggerFactory.getLogger(ISODateTime.class);
 
@@ -29,7 +29,8 @@ public class ISODateTime {
 		Date dateTime = null;
 		try 
 		{
-			dateTime = mdfISO8601Local.parse(isoDateString);
+			final DateFormat iSO8601Local = new SimpleDateFormat (DATE_FORMAT_PATTERN);
+			dateTime = iSO8601Local.parse(isoDateString);
 		} 
 		catch (ParseException ex)
 		{

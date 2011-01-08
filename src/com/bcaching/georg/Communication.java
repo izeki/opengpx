@@ -39,7 +39,7 @@ public class Communication
 		{
 			// attempt to login at server
 			// failure will throw an exception
-			SendRequest("a=login");
+			sendRequest("a=login");
 		}
 	}
 
@@ -75,7 +75,7 @@ public class Communication
 		return sb.toString();
 	}
 
-	public InputStream SendRequest(Hashtable<String, String> params) throws Exception
+	public InputStream sendRequest(Hashtable<String, String> params) throws Exception
 	{
 
 		if (params == null || params.size() == 0) throw new IllegalArgumentException("params are required.");
@@ -92,10 +92,10 @@ public class Communication
 			sb.append(URLEncoder.encode(params.get(k)));
 		}
 
-		return SendRequest(sb.toString());
+		return sendRequest(sb.toString());
 	}
 
-	public InputStream SendRequest(String query) throws Exception
+	public InputStream sendRequest(String query) throws Exception
 	{
 		if (query == null || query.length() == 0) throw new IllegalArgumentException("query is required");
 

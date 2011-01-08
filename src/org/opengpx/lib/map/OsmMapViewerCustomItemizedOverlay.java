@@ -97,7 +97,7 @@ public class OsmMapViewerCustomItemizedOverlay extends OpenStreetMapViewOverlay
         pj.toMapPixels(this.mGeoPoint, curScreenCoords);
 
         mTempMatrix.set(c.getMatrix());
-        mTempMatrix.postTranslate(-this.mintMarkerWidth / 2 - 0.5f, -this.mintMarkerHeight / 2 - 0.5f);
+        mTempMatrix.postTranslate(-this.mintMarkerWidth / 2.0f - 0.5f, -this.mintMarkerHeight / 2.0f - 0.5f);
         // mTempMatrix.postScale(1/mtx[Matrix.MSCALE_X], 1/mtx[Matrix.MSCALE_Y]);
         mTempMatrix.postTranslate(curScreenCoords.x, curScreenCoords.y);
 

@@ -15,14 +15,14 @@ public class PrimeFactorization {
 	 * @param number
 	 * @return
 	 */
-	public static ArrayList<Integer> Calculate(Integer number)
+	public static ArrayList<Integer> calculate(Integer number)
 	{
-		ArrayList<Integer> arrPrimeNumbers = PrimeNumbers.Generate(number);
+		final ArrayList<Integer> arrPrimeNumbers = PrimeNumbers.generate(number);
 		int intPrimeNumberIndex = 0;
-		ArrayList<Integer> arrFactors = new ArrayList<Integer>();
+		final ArrayList<Integer> arrFactors = new ArrayList<Integer>();
 	    while (number > 1)
 	    {
-	    	Integer intPrimeNumber = arrPrimeNumbers.get(intPrimeNumberIndex);
+	    	final Integer intPrimeNumber = arrPrimeNumbers.get(intPrimeNumberIndex);
 	    	int intRemainder = (number % intPrimeNumber);
 	        while (intRemainder == 0)
 	        {
@@ -42,7 +42,7 @@ public class PrimeFactorization {
 	public static void main(String[] args) 
 	{
 		int intTestNumber = 17499;
-	    System.out.println(PrimeFactorization.Calculate(intTestNumber));
+	    System.out.println(PrimeFactorization.calculate(intTestNumber));
 	}
 
 }

@@ -271,7 +271,7 @@ public class OsmMapViewerActivity extends Activity
     	this.mScaleBarOverlay = new ScaleBarOverlay(this);
     	this.mOsmv.getOverlays().add(mScaleBarOverlay);
     	// Scale bar tries to draw as 1-inch, so to put it in the top center, set x offset to half screen width, minus half an inch.
-    	this.mScaleBarOverlay.setScaleBarOffset(mScaleBarOverlay.screenWidth/2 - mScaleBarOverlay.xdpi/2, top);
+    	this.mScaleBarOverlay.setScaleBarOffset(mScaleBarOverlay.screenWidth / 2.0f - mScaleBarOverlay.xdpi / 2.0f, top);
     	if (metric)
     		this.mScaleBarOverlay.setMetric();
     	else
