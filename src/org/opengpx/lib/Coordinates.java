@@ -327,8 +327,8 @@ public class Coordinates
      */
     public boolean equals(Coordinates coords)
     {
-    	final Double dblLatitude = this.round( this.mcoordLatitude.getD(), 5);
-    	final Double dblLongitude = this.round( this.mcoordLongitude.getD(), 5);
+    	final Double dblLatitude = this.round(this.mcoordLatitude.getD(), 5);
+    	final Double dblLongitude = this.round(this.mcoordLongitude.getD(), 5);
     	
     	final Double dblLatitudeCompare = this.round(coords.getLatitude().getD(), 5);
     	final Double dblLongitudeCompare = this.round(coords.getLongitude().getD(), 5);

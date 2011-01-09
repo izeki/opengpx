@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import org.opengpx.lib.tools.StackTraceUtil;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -31,7 +33,7 @@ public class TextViewerActivity extends Activity
         this.setTitle("OpenGPX - " + strFilename);
         
         TextView tvContent = (TextView) this.findViewById(R.id.TextViewerContent);
-        tvContent.setText(this.LoadFileContent(strFilename));
+        tvContent.setText(this.loadFileContent(strFilename));
         // TextView tvFooter = (TextView) this.findViewById(R.id.TextViewerFooter);
         // tvFooter.setText(strFilename);
     }
@@ -41,7 +43,7 @@ public class TextViewerActivity extends Activity
      * @param strFilename
      * @return
      */
-    private String LoadFileContent(String strFilename)
+    private String loadFileContent(String strFilename)
     {
     	final File file = new File(strFilename);
     	if (file.exists())
@@ -61,7 +63,7 @@ public class TextViewerActivity extends Activity
 			} 
 			catch (IOException e) 
 			{
-				return e.getStackTrace().toString();
+				return StackTraceUtil.getStackTrace(e);
 			}
     	} 
     	else 
