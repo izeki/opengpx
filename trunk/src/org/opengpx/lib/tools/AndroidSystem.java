@@ -9,6 +9,8 @@ import android.content.pm.ResolveInfo;
 
 public class AndroidSystem {
 
+	public static final String NEW_LINE = System.getProperty("line.separator");
+	
 	/**
 	 * 
 	 * @param context
