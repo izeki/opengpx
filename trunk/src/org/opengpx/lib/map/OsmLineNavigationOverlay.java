@@ -2,10 +2,10 @@ package org.opengpx.lib.map;
 
 import org.opengpx.R;
 
-import org.andnav.osm.util.GeoPoint;
-import org.andnav.osm.views.OpenStreetMapView;
-import org.andnav.osm.views.OpenStreetMapView.OpenStreetMapViewProjection;
-import org.andnav.osm.views.overlay.MyLocationOverlay;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
+import org.osmdroid.views.MapView.Projection;
+import org.osmdroid.views.overlay.MyLocationOverlay;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -51,7 +51,7 @@ public class OsmLineNavigationOverlay extends MyLocationOverlay
 	 * @param ctx
 	 * @param mapView
 	 */
-	public OsmLineNavigationOverlay(Context ctx, OpenStreetMapView mapView, GeoPoint target) 
+	public OsmLineNavigationOverlay(Context ctx, MapView mapView, GeoPoint target) 
 	{
 		super(ctx, mapView);
 	
@@ -77,7 +77,7 @@ public class OsmLineNavigationOverlay extends MyLocationOverlay
 	 * 
 	 */
     @Override
-    public void onDraw(final Canvas c, final OpenStreetMapView osmv) 
+    public void onDraw(final Canvas c, final MapView osmv) 
     {
     	super.onDraw(c, osmv);
 
@@ -88,7 +88,8 @@ public class OsmLineNavigationOverlay extends MyLocationOverlay
         if (location != null) 
         {
         	geoPointCurrent = new GeoPoint(location);
-            final OpenStreetMapViewProjection pj = osmv.getProjection();
+            // final OpenStreetMapViewProjection pj = osmv.getProjection();
+            final Projection pj = osmv.getProjection();
             // get point for current coordinates
             pj.toMapPixels(geoPointCurrent, this.mMapCoords);
             // get point for target point

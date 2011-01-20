@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import org.opengpx.MapOverlayItem;
 import org.opengpx.R;
 
-import org.andnav.osm.DefaultResourceProxyImpl;
-import org.andnav.osm.ResourceProxy;
+import org.osmdroid.DefaultResourceProxyImpl;
+import org.osmdroid.ResourceProxy;
 // import org.andnav.osm.ResourceProxyImpl;
-import org.andnav.osm.util.GeoPoint;
-import org.andnav.osm.views.OpenStreetMapView;
-import org.andnav.osm.views.OpenStreetMapViewController;
-import org.andnav.osm.views.overlay.MyLocationOverlay;
-import org.andnav.osm.views.overlay.ScaleBarOverlay;
-import org.andnav.osm.views.util.IOpenStreetMapRendererInfo;
-import org.andnav.osm.views.util.OpenStreetMapRendererFactory;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
+import org.osmdroid.views.MapController;
+import org.osmdroid.views.overlay.MyLocationOverlay;
+import org.osmdroid.views.overlay.ScaleBarOverlay;
+import org.osmdroid.views.util.IOpenStreetMapRendererInfo;
+import org.osmdroid.views.util.OpenStreetMapRendererFactory;
 
 import org.opengpx.OsmPreferenceActivity;
 import org.opengpx.Preferences;
@@ -45,8 +45,8 @@ public class OsmMapViewerActivity extends Activity
 
 	private static final int DEFAULT_ZOOM_LEVEL = 16;
 
-	private OpenStreetMapView mOsmv, mOsmvMinimap;
-	private OpenStreetMapViewController mOsmvController;
+	private MapView mOsmv, mOsmvMinimap;
+	private MapController mOsmvController;
 	private MyLocationOverlay mMyLocationOverlay = null;
 	private ScaleBarOverlay mScaleBarOverlay;
 
@@ -77,7 +77,7 @@ public class OsmMapViewerActivity extends Activity
 		final String strRenderer = this.mSharedPreferences.getString(PREFS_KEY_OSM_RENDERER, PREFS_DEFAULT_OSM_RENDERER);
 
 		final IOpenStreetMapRendererInfo osmri = this.getOsmRenderer(strRenderer);
-        this.mOsmv = new OpenStreetMapView(this, osmri);     
+        this.mOsmv = new MapView(this, osmri);     
         this.mOsmvController = this.mOsmv.getController();
         rl.addView(this.mOsmv, new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 
@@ -243,7 +243,7 @@ public class OsmMapViewerActivity extends Activity
 	private void addMinimap(RelativeLayout rl)
 	{
 		/* Create another OpenStreetMapView, that will act as the MiniMap for the 'MainMap'. They will share the TileProvider. */
-		mOsmvMinimap = new OpenStreetMapView(this, OpenStreetMapRendererFactory.CLOUDMADESTANDARDTILES, this.mOsmv);
+		mOsmvMinimap = new MapView(this, OpenStreetMapRendererFactory.CLOUDMADESTANDARDTILES, this.mOsmv);
 		final int aZoomDiff = 3; // Use OpenStreetMapViewConstants.NOT_SET to disable autozooming of this minimap
 
 		// mOsmvMinimap.setBackgroundResource(R.drawable.black_border);
