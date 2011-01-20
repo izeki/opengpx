@@ -40,9 +40,13 @@ public class PrimeNumbers {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
-	    int intTestNumber = 497;
-	    System.out.println(PrimeNumbers.generate(intTestNumber));
+	public static void main(String[] args) 
+	{
+	    final int intTestNumber = 100000;
+	    final ArrayList<Integer> primes = PrimeNumbers.generate(intTestNumber);
+	    
+	    System.out.println(primes.size());
+	    System.out.println(primes.get(3611)); // This one is step XX of DropQuest2011 ;-)
 	}
 
 }

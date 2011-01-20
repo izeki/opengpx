@@ -7,6 +7,6 @@
 	<classpathentry kind="lib" path="lib/slf4j-android-1.5.8.jar"/>
 	<classpathentry kind="lib" path="lib/db4o-7.12.156.14667-core-java5.jar"/>
 	<classpathentry kind="lib" path="lib/vtd-xml-2.9.jar"/>
-	<classpathentry kind="lib" path="lib/osmdroid-android-1.10.jar"/>
+	<classpathentry kind="lib" path="lib/osmdroid-android-3.0.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
