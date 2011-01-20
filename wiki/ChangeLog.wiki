@@ -10,6 +10,7 @@ Next version (not released yet):
   * added new welcome dialog
   * added possibility to specify multiple import folders
   * added logo to cache list background
+  * osmdroid updated to latest version
 
 Version *1.0.1* (8. December 2010)
 
