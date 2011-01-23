@@ -1,10 +1,10 @@
 package org.opengpx.lib.map;
 
-import org.andnav.osm.ResourceProxy;
-import org.andnav.osm.util.GeoPoint;
-import org.andnav.osm.views.OpenStreetMapView;
-import org.andnav.osm.views.OpenStreetMapView.OpenStreetMapViewProjection;
-import org.andnav.osm.views.overlay.OpenStreetMapViewOverlay;
+import org.osmdroid.ResourceProxy;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
+import org.osmdroid.views.MapView.Projection;
+import org.osmdroid.views.overlay.ItemizedOverlay;
 
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -14,7 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 
 /** An itemized Overlay where the items have custom graphics */
-public class OsmMapViewerCustomItemizedOverlay extends OpenStreetMapViewOverlay 
+public class OsmMapViewerCustomItemizedOverlay extends ItemizedOverlay 
 {
     
     // ===========================================================
@@ -84,15 +84,15 @@ public class OsmMapViewerCustomItemizedOverlay extends OpenStreetMapViewOverlay
     // ===========================================================
 
     @Override
-    protected void onDrawFinished(Canvas c, OpenStreetMapView osmv) 
+    protected void onDrawFinished(Canvas c, MapView osmv) 
     {
         return;
     }
 
     @Override
-    public void onDraw(final Canvas c, final OpenStreetMapView mapView) 
+    public void onDraw(final Canvas c, final MapView mapView) 
     {
-        final OpenStreetMapViewProjection pj = mapView.getProjection();
+        final Projection pj = mapView.getProjection();
         final Point curScreenCoords = new Point();
         pj.toMapPixels(this.mGeoPoint, curScreenCoords);
 
@@ -110,9 +110,9 @@ public class OsmMapViewerCustomItemizedOverlay extends OpenStreetMapViewOverlay
     @Override
     public boolean onSingleTapUp(
     		final MotionEvent event, 
-            final OpenStreetMapView mapView) 
+            final MapView mapView) 
     {
-        final OpenStreetMapViewProjection pj = mapView.getProjection();
+        final Projection pj = mapView.getProjection();
         final int eventX = (int) event.getX();
         final int eventY = (int) event.getY();
 

@@ -1,7 +1,7 @@
 package org.opengpx;
 
-import org.andnav.osm.views.util.IOpenStreetMapRendererInfo;
-import org.andnav.osm.views.util.OpenStreetMapRendererFactory;
+import org.osmdroid.tileprovider.tilesource.ITileSource;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 
 import android.content.Context;
 import android.location.Location;
@@ -61,9 +61,9 @@ public class OpenGpxPreferenceActivity extends PreferenceActivity
 		});
 
 		// Set OSM renderer list
-		CharSequence[] csRenderers = new CharSequence[OpenStreetMapRendererFactory.getRenderers().length];
+		final CharSequence[] csRenderers = new CharSequence[TileSourceFactory.getTileSources().size()];
 		int i = 0;
-		for(IOpenStreetMapRendererInfo renderer : OpenStreetMapRendererFactory.getRenderers()) 
+		for(ITileSource renderer : TileSourceFactory.getTileSources()) 
 		{
 			csRenderers[i++] = renderer.name();
 		}
