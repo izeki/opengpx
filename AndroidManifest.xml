@@ -38,15 +38,6 @@
       </intent-filter>
 </activity -->
 <activity android:name="org.opengpx.lib.map.OsmMapViewerActivity"></activity>
-<!-- service android:name="org.andnav.osm.services.OpenStreetMapTileProviderService"
-                 android:process=":remote"
-                 android:label="OpenStreetMapTileProviderService">
-            <intent-filter>
-                <action android:name="org.andnav.osm.services.IOpenStreetMapTileProviderService" />
-              </intent-filter>
-        </service -->
-
-
 <activity android:name="org.opengpx.OsmPreferenceActivity"></activity>
 <activity android:name="org.opengpx.OpenGpxPreferenceActivity"></activity>
 <meta-data android:name="CLOUDMADE_KEY" android:value="e9454efcb05b46b5a89b1fcce0c352d4" />

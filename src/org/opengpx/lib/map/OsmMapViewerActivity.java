@@ -7,14 +7,13 @@ import org.opengpx.R;
 
 import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.ResourceProxy;
-// import org.andnav.osm.ResourceProxyImpl;
+import org.osmdroid.tileprovider.tilesource.ITileSource;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.overlay.MyLocationOverlay;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
-import org.osmdroid.views.util.IOpenStreetMapRendererInfo;
-import org.osmdroid.views.util.OpenStreetMapRendererFactory;
 
 import org.opengpx.OsmPreferenceActivity;
 import org.opengpx.Preferences;
@@ -59,7 +58,8 @@ public class OsmMapViewerActivity extends Activity
 	private static final String PREFS_KEY_OSM_RENDERER = "osmRenderer";
 
 	// Some default values
-	private static final String PREFS_DEFAULT_OSM_RENDERER = OpenStreetMapRendererFactory.MAPNIK.name();
+	private static final String PREFS_DEFAULT_OSM_RENDERER = TileSourceFactory.MAPNIK.name();
+	
 
 	/**
 	 * 
@@ -76,8 +76,8 @@ public class OsmMapViewerActivity extends Activity
         this.mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		final String strRenderer = this.mSharedPreferences.getString(PREFS_KEY_OSM_RENDERER, PREFS_DEFAULT_OSM_RENDERER);
 
-		final IOpenStreetMapRendererInfo osmri = this.getOsmRenderer(strRenderer);
-        this.mOsmv = new MapView(this, osmri);     
+		final ITileSource osmri = this.getOsmRenderer(strRenderer);
+        this.mOsmv = new MapView(this, osmri);
         this.mOsmvController = this.mOsmv.getController();
         rl.addView(this.mOsmv, new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 
@@ -152,14 +152,14 @@ public class OsmMapViewerActivity extends Activity
 	 * @param name
 	 * @return
 	 */
-	private IOpenStreetMapRendererInfo getOsmRenderer(String name)
+	private ITileSource getOsmRenderer(String name)
 	{
-		IOpenStreetMapRendererInfo osmri;
+		ITileSource osmri;
 		try {
-			osmri = OpenStreetMapRendererFactory.getRenderer(name);
+			osmri = TileSourceFactory.getTileSource(name);
 		} catch (IllegalArgumentException iae)
 		{
-			osmri = OpenStreetMapRendererFactory.getRenderers()[0];
+			osmri = TileSourceFactory.getTileSources().get(0);
 			// Toast.makeText(this, "Using default renderer: " + osmri.name(), Toast.LENGTH_SHORT).show();
 		}
 		return osmri;
@@ -177,11 +177,11 @@ public class OsmMapViewerActivity extends Activity
 		this.mMyLocationOverlay.enableMyLocation();		
 		this.mMyLocationOverlay.followLocation(true);
 
-		final String strCurrentRenderer = this.mOsmv.getRenderer().name();
+		final String strCurrentRenderer = this.mOsmv.getTileProvider().getTileSource().name();
 		final String strRendererPrefs = this.mSharedPreferences.getString(PREFS_KEY_OSM_RENDERER, PREFS_DEFAULT_OSM_RENDERER);
 		if (!strCurrentRenderer.equals(strRendererPrefs))
 		{
-			final IOpenStreetMapRendererInfo osmri = this.getOsmRenderer(strRendererPrefs);
+			final ITileSource osmri = this.getOsmRenderer(strRendererPrefs);
 			this.mOsmv.setRenderer(osmri);
 			Toast.makeText(this, "Map Renderer changed to: " + osmri.name(), Toast.LENGTH_SHORT).show();
 		}
@@ -227,8 +227,10 @@ public class OsmMapViewerActivity extends Activity
 			}
         });
 
-        zoomControls.setOnZoomOutClickListener(new OnClickListener(){
-			public void onClick(View v) {
+        zoomControls.setOnZoomOutClickListener(new OnClickListener()
+        {
+			public void onClick(View v) 
+			{
 				mOsmvController.zoomOut();
 			}
         });
@@ -243,13 +245,14 @@ public class OsmMapViewerActivity extends Activity
 	private void addMinimap(RelativeLayout rl)
 	{
 		/* Create another OpenStreetMapView, that will act as the MiniMap for the 'MainMap'. They will share the TileProvider. */
-		mOsmvMinimap = new MapView(this, OpenStreetMapRendererFactory.CLOUDMADESTANDARDTILES, this.mOsmv);
+		mOsmvMinimap = new MapView(this, TileSourceFactory.CLOUDMADESTANDARDTILES, this.mOsmv);
 		final int aZoomDiff = 3; // Use OpenStreetMapViewConstants.NOT_SET to disable autozooming of this minimap
 
 		// mOsmvMinimap.setBackgroundResource(R.drawable.black_border);
 		// mOsmvMinimap.setPadding(1, 1, 1, 1);
 		// mOsmvMinimap.setBackgroundColor(Color.BLACK);
-		this.mOsmv.setMiniMap(mOsmvMinimap, aZoomDiff);
+		// FIXME
+		// this.mOsmv.setMiniMap(mOsmvMinimap, aZoomDiff);
 
 		final float scale = this.getResources().getDisplayMetrics().density;
 		final int intLayoutWidthHeight = (int) (90.0 * scale + 0.5f);

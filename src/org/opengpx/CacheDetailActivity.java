@@ -68,7 +68,6 @@ import android.view.View.OnCreateContextMenuListener;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -99,8 +98,8 @@ public class CacheDetailActivity extends TabActivity
 	private static final int		MENU_NAVIGATE				= MENU_MAP + 1;
 	private static final int		MENU_DELETE					= MENU_NAVIGATE + 1;
 
-	public static final String	ANDNAV2_VIEW_ACTION	= "org.andnav2.intent.ACTION_VIEW";
-	public static final String	ANDNAV2_NAV_ACTION	= "org.andnav2.intent.ACTION_NAV_TO";
+	// public static final String	ANDNAV2_VIEW_ACTION	= "org.andnav2.intent.ACTION_VIEW";
+	// public static final String	ANDNAV2_NAV_ACTION	= "org.andnav2.intent.ACTION_NAV_TO";
 
 	/**
 	 * 
