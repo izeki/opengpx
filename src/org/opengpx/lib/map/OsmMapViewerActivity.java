@@ -12,7 +12,10 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.MapController;
+import org.osmdroid.views.overlay.ItemizedOverlay;
+import org.osmdroid.views.overlay.MinimapOverlay;
 import org.osmdroid.views.overlay.MyLocationOverlay;
+import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
 
 import org.opengpx.OsmPreferenceActivity;
@@ -43,6 +46,7 @@ public class OsmMapViewerActivity extends Activity
 {
 
 	private static final int DEFAULT_ZOOM_LEVEL = 16;
+	private static final int TILE_SIZE_PIXELS = 256;
 
 	private MapView mOsmv, mOsmvMinimap;
 	private MapController mOsmvController;
@@ -76,9 +80,10 @@ public class OsmMapViewerActivity extends Activity
         this.mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		final String strRenderer = this.mSharedPreferences.getString(PREFS_KEY_OSM_RENDERER, PREFS_DEFAULT_OSM_RENDERER);
 
-		final ITileSource osmri = this.getOsmRenderer(strRenderer);
-        this.mOsmv = new MapView(this, osmri);
+        this.mOsmv = new MapView(this, TILE_SIZE_PIXELS);
         this.mOsmvController = this.mOsmv.getController();
+		final ITileSource tileSource = this.getTileSourceByName(strRenderer);
+        this.mOsmv.setTileSource(tileSource);
         rl.addView(this.mOsmv, new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 
         if (bunExtras.getString("title") != null)
@@ -152,7 +157,7 @@ public class OsmMapViewerActivity extends Activity
 	 * @param name
 	 * @return
 	 */
-	private ITileSource getOsmRenderer(String name)
+	private ITileSource getTileSourceByName(String name)
 	{
 		ITileSource osmri;
 		try {
@@ -181,9 +186,9 @@ public class OsmMapViewerActivity extends Activity
 		final String strRendererPrefs = this.mSharedPreferences.getString(PREFS_KEY_OSM_RENDERER, PREFS_DEFAULT_OSM_RENDERER);
 		if (!strCurrentRenderer.equals(strRendererPrefs))
 		{
-			final ITileSource osmri = this.getOsmRenderer(strRendererPrefs);
-			this.mOsmv.setRenderer(osmri);
-			Toast.makeText(this, "Map Renderer changed to: " + osmri.name(), Toast.LENGTH_SHORT).show();
+			final ITileSource tileSoure = this.getTileSourceByName(strRendererPrefs);
+			this.mOsmv.setTileSource(tileSoure);
+			Toast.makeText(this, "Map Renderer changed to: " + tileSoure.name(), Toast.LENGTH_SHORT).show();
 		}
 
 		// Set keep screen on property
@@ -245,24 +250,34 @@ public class OsmMapViewerActivity extends Activity
 	private void addMinimap(RelativeLayout rl)
 	{
 		/* Create another OpenStreetMapView, that will act as the MiniMap for the 'MainMap'. They will share the TileProvider. */
-		mOsmvMinimap = new MapView(this, TileSourceFactory.CLOUDMADESTANDARDTILES, this.mOsmv);
-		final int aZoomDiff = 3; // Use OpenStreetMapViewConstants.NOT_SET to disable autozooming of this minimap
+		// mOsmvMinimap = new MapView(this, TileSourceFactory.CLOUDMADESTANDARDTILES, this.mOsmv);
+		
+		// this.mOsmvMinimap = new MapView(this, TILE_SIZE_PIXELS);
+		// this.mOsmvMinimap.setTileSource(this.mOsmv.getTileProvider().getTileSource());
+
+		final MinimapOverlay minimap = new MinimapOverlay(this, this.mOsmv.getTileRequestCompleteHandler());
+		minimap.setTileSource(this.mOsmv.getTileProvider().getTileSource());
+		
+		// final int aZoomDiff = 3; // Use OpenStreetMapViewConstants.NOT_SET to disable autozooming of this minimap
 
 		// mOsmvMinimap.setBackgroundResource(R.drawable.black_border);
 		// mOsmvMinimap.setPadding(1, 1, 1, 1);
 		// mOsmvMinimap.setBackgroundColor(Color.BLACK);
-		// FIXME
-		// this.mOsmv.setMiniMap(mOsmvMinimap, aZoomDiff);
+
+		this.mOsmv.getOverlays().add(minimap);
+		
+		/* this.mOsmv.setMiniMap(mOsmvMinimap, aZoomDiff);
 
 		final float scale = this.getResources().getDisplayMetrics().density;
-		final int intLayoutWidthHeight = (int) (90.0 * scale + 0.5f);
+		final int intLayoutWidthHeight = (int) (90.0 * scale + 0.5f); */
 		
 		/* Create RelativeLayout.LayoutParams that position the MiniMap on the top-right corner of the RelativeLayout. */
-		final RelativeLayout.LayoutParams minimapParams = new RelativeLayout.LayoutParams(intLayoutWidthHeight, intLayoutWidthHeight);
+		
+		/* final RelativeLayout.LayoutParams minimapParams = new RelativeLayout.LayoutParams(intLayoutWidthHeight, intLayoutWidthHeight);
 		minimapParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 		minimapParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		minimapParams.setMargins(5,5,5,5);
-		rl.addView(mOsmvMinimap, minimapParams);
+		rl.addView(mOsmvMinimap, minimapParams); */
 	}
 
 	/**
@@ -296,7 +311,26 @@ public class OsmMapViewerActivity extends Activity
 			final Drawable drawable = mapOverlayItem.getDrawable(resourceHelper);
 			final String strSnippet = mapOverlayItem.getSnippet();
 
-			OsmMapViewerCustomItemizedOverlay mOverlayItem = 
+			final ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
+			items.add(new OverlayItem(strSnippet, strSnippet, geoPoint));
+
+			final ItemizedOverlay mOverlayItem = 
+				new ItemizedOverlay<OverlayItem>(this, items, 
+						 new ItemizedOverlay.OnItemGestureListener<OverlayItem>() {
+                            public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
+                                    Toast.makeText( OsmMapViewerActivity.this, item.getSnippet(), Toast.LENGTH_LONG).show();
+                                    return true; // We 'handled' this event.
+                            }
+
+							public boolean onItemLongPress(int arg0,
+									OverlayItem arg1) {
+								// TODO Auto-generated method stub
+								return false;
+							}
+						},
+						resourceProxy);
+
+			/* OsmMapViewerCustomItemizedOverlay mOverlayItem = 
 				new OsmMapViewerCustomItemizedOverlay(
 						geoPoint,  
 						drawable,
@@ -308,7 +342,7 @@ public class OsmMapViewerActivity extends Activity
 							}
 						},
 						resourceProxy);
-
+*/
 	        this.mOsmv.getOverlays().add(mOverlayItem);
 		}		
 	}
