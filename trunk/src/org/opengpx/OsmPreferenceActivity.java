@@ -1,7 +1,7 @@
 package org.opengpx;
 
-import org.andnav.osm.views.util.IOpenStreetMapRendererInfo;
-import org.andnav.osm.views.util.OpenStreetMapRendererFactory;
+import org.osmdroid.tileprovider.tilesource.ITileSource;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 
 import org.opengpx.R;
 import android.os.Bundle;
@@ -26,9 +26,9 @@ public class OsmPreferenceActivity extends PreferenceActivity
 		addPreferencesFromResource(R.xml.osm_preferences);
 		
 		// Set OSM renderer list
-		CharSequence[] csRenderers = new CharSequence[OpenStreetMapRendererFactory.getRenderers().length];
+		CharSequence[] csRenderers = new CharSequence[TileSourceFactory.getTileSources().size()];
 		int i = 0;
-		for(IOpenStreetMapRendererInfo renderer : OpenStreetMapRendererFactory.getRenderers()) 
+		for(ITileSource renderer : TileSourceFactory.getTileSources()) 
 		{
 			csRenderers[i++] = renderer.name();
 		}
