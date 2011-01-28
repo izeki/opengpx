@@ -71,4 +71,12 @@
 <string-array name="unit_system_values"><item>Metric</item>
 <item>Imperial</item>
 </string-array>
+<string-array name="waypoint_action_items"><item>Internal Map</item><item>Compass</item>
+
+<item>Navigation</item>
+</string-array>
+<string-array name="waypoint_action_values"><item>InternalMap</item><item>Compass</item>
+
+<item>Navigation</item>
+</string-array>
 </resources>

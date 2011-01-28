@@ -113,8 +113,8 @@ public class CacheDetailActivity extends TabActivity
 		cacheDatabase = CacheDatabase.getInstance();
 
 		// Get cache from cache database
-		Bundle bunExtras = this.getIntent().getExtras();
-		String strCacheCode = (String) bunExtras.get("cachecode");
+		final Bundle bunExtras = this.getIntent().getExtras();
+		final String strCacheCode = (String) bunExtras.get("cachecode");
 		this.isSaved = bunExtras.getBoolean("isCacheSaved");
 
 		this.mPreferences = new Preferences(this);
@@ -326,7 +326,7 @@ public class CacheDetailActivity extends TabActivity
 	private void showBCachingError()
 	{
 		// Show a dialog to let the user know something died....
-		AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+		final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 		alertDialog.setTitle("Error");
 		alertDialog.setMessage("BCaching.com query failed.\n\nPlease check your login information.\n\nIf the error persists please email a log to the developers.");
 		alertDialog.setButton("OK", new DialogInterface.OnClickListener()
@@ -347,7 +347,7 @@ public class CacheDetailActivity extends TabActivity
 
 	public void showNewDetailView(boolean isCacheSaved)
 	{
-		Intent intent = new Intent(this, CacheDetailActivity.class);
+		final Intent intent = new Intent(this, CacheDetailActivity.class);
 		intent.putExtra("cachecode", mCache.code);
 		intent.putExtra("isSearchResult", true);
 		intent.putExtra("isCacheSaved", isCacheSaved);
@@ -434,8 +434,8 @@ public class CacheDetailActivity extends TabActivity
      */
 	private void addWaypoint()
 	{
-		Waypoint wpHeader = this.mCache.getHeaderWaypoint();
-		AddWaypointDialog dialog = new AddWaypointDialog(this, new OnWaypointAddedListener(), wpHeader);
+		final Waypoint wpHeader = this.mCache.getHeaderWaypoint();
+		final AddWaypointDialog dialog = new AddWaypointDialog(this, new OnWaypointAddedListener(), wpHeader);
 		dialog.show();
 	}
 
@@ -859,8 +859,18 @@ public class CacheDetailActivity extends TabActivity
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id)
 			{
 				final Waypoint wp = mCache.getWaypoints().get(position);
-
+				switch (mPreferences.getWaypointClickAction())
+				{
+				case InternalMap:
 					showWaypointOnOsm(wp);
+					break;
+				case Compass:
+					showWaypointOnCompass(wp);
+					break;
+				case Navigation:
+					navigateToWaypoint(wp);
+					break;
+				}
 			}
 		});
 	}
@@ -891,18 +901,10 @@ public class CacheDetailActivity extends TabActivity
 			mapViewer.startActivity();
 			return true;
 		case MENU_COMPASS:
-			final CompassProvider compassProvider = mPreferences.getCompassProvider();
-			if (compassProvider.equals(CompassProvider.CompassNavi))
-				showWaypointOnCompassNavi(wp);
-			else
-				showWaypointOnRadar(wp);
+			this.showWaypointOnCompass(wp);
 			return true;
 		case MENU_NAVIGATE:
-			final NavigationProvider navigationProvider = this.mPreferences.getNavigationProvider();
-			if (navigationProvider.equals(NavigationProvider.Google))
-				this.navigateToWaypointWithGoogleMaps(wp);
-			// else
-			//	this.navigateToWaypointWithAndNav2(wp);
+			this.navigateToWaypoint(wp);
 			return true;
 		case MENU_INFO:
 			final WaypointDetailDialog dialog = new WaypointDetailDialog(this, wp, this.mCache.getWaypoints(), this.mPreferences.getUnitSystem());
@@ -924,7 +926,6 @@ public class CacheDetailActivity extends TabActivity
 	 */
 	private void deleteWaypoint(int position)
 	{
-
 		final Waypoint wp = this.mCache.getWaypoints().get(position);
 
 		new AlertDialog.Builder(this).setTitle("Question").setMessage(String.format("Do you really want to delete the waypoint '%s'?", wp.name)).setIcon(
@@ -964,6 +965,33 @@ public class CacheDetailActivity extends TabActivity
 		}
 	}
 
+	/**
+	 * 
+	 * @param waypoint
+	 */
+	private void showWaypointOnCompass(final Waypoint waypoint)
+	{
+		final CompassProvider compassProvider = mPreferences.getCompassProvider();
+		if (compassProvider.equals(CompassProvider.CompassNavi))
+			showWaypointOnCompassNavi(waypoint);
+		else
+			showWaypointOnRadar(waypoint);	
+	}
+	
+	/**
+	 * 
+	 * @param waypoint
+	 */
+	private void navigateToWaypoint(final Waypoint waypoint)
+	{
+		final NavigationProvider navigationProvider = this.mPreferences.getNavigationProvider();
+		if (navigationProvider.equals(NavigationProvider.Google))
+			this.navigateToWaypointWithGoogleMaps(waypoint);
+		// else
+		//	this.navigateToWaypointWithAndNav2(waypoint);
+
+	}
+	
 	/**
 	 * 
 	 * @param waypoint
