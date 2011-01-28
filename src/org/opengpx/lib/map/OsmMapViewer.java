@@ -10,7 +10,7 @@ import android.widget.Toast;
 public class OsmMapViewer extends MapViewerBase implements MapViewer 
 {
 	// private static final String TAG = "OsmMapViewer";
-	MapOverlayItem moiTarget = null;
+	private MapOverlayItem moiTarget = null;
 	
 	public OsmMapViewer(Context context) 
 	{
@@ -52,6 +52,6 @@ public class OsmMapViewer extends MapViewerBase implements MapViewer
 	 */
 	public void setTarget(double latitude, double longitude, String name)
 	{
-		moiTarget = new MapOverlayItem(latitude, longitude, "Target", name);
+		this.moiTarget = new MapOverlayItem(latitude, longitude, "Target", name);
 	}
 }

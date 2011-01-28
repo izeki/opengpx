@@ -14,7 +14,7 @@ import org.opengpx.lib.CoordinateFormat;
 import org.opengpx.lib.Coordinates;
 import org.opengpx.lib.geocache.Waypoint;
 
-public class MapViewerBase
+class MapViewerBase
 {
 	// private static final String TAG = "com.opengpx.lib.map.MapViewerBase";
 	private static final int CACHE_IMAGE_WIDTH = 24;
@@ -32,7 +32,7 @@ public class MapViewerBase
 	/**
 	 * 
 	 */
-	public MapViewerBase(Context context)
+	protected MapViewerBase(Context context)
 	{
 		this.mContext = context;
 	}
