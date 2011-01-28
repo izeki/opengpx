@@ -11,6 +11,7 @@ Next version (not released yet):
   * added possibility to specify multiple import folders
   * added logo to cache list background
   * osmdroid updated to latest version
+  * added option to choose waypoint click action
 
 Version *1.0.1* (8. December 2010)
 
