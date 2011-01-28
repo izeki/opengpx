@@ -550,7 +550,7 @@ public class CacheListActivity extends ListActivity
 	 * @author Martin Preishuber
 	 * 
 	 */
-	static class Db4oFilter implements FilenameFilter
+	private static class Db4oFilter implements FilenameFilter
 	{
 		public boolean accept(File dir, String name)
 		{

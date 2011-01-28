@@ -48,7 +48,7 @@ public class OsmMapViewerActivity extends Activity
 	private static final int DEFAULT_ZOOM_LEVEL = 16;
 	private static final int TILE_SIZE_PIXELS = 256;
 
-	private MapView mOsmv, mOsmvMinimap;
+	private MapView mOsmv; //, mOsmvMinimap;
 	private MapController mOsmvController;
 	private MyLocationOverlay mMyLocationOverlay = null;
 	private ScaleBarOverlay mScaleBarOverlay;
@@ -249,35 +249,9 @@ public class OsmMapViewerActivity extends Activity
 	 */
 	private void addMinimap(RelativeLayout rl)
 	{
-		/* Create another OpenStreetMapView, that will act as the MiniMap for the 'MainMap'. They will share the TileProvider. */
-		// mOsmvMinimap = new MapView(this, TileSourceFactory.CLOUDMADESTANDARDTILES, this.mOsmv);
-		
-		// this.mOsmvMinimap = new MapView(this, TILE_SIZE_PIXELS);
-		// this.mOsmvMinimap.setTileSource(this.mOsmv.getTileProvider().getTileSource());
-
 		final MinimapOverlay minimap = new MinimapOverlay(this, this.mOsmv.getTileRequestCompleteHandler());
 		minimap.setTileSource(this.mOsmv.getTileProvider().getTileSource());
-		
-		// final int aZoomDiff = 3; // Use OpenStreetMapViewConstants.NOT_SET to disable autozooming of this minimap
-
-		// mOsmvMinimap.setBackgroundResource(R.drawable.black_border);
-		// mOsmvMinimap.setPadding(1, 1, 1, 1);
-		// mOsmvMinimap.setBackgroundColor(Color.BLACK);
-
-		this.mOsmv.getOverlays().add(minimap);
-		
-		/* this.mOsmv.setMiniMap(mOsmvMinimap, aZoomDiff);
-
-		final float scale = this.getResources().getDisplayMetrics().density;
-		final int intLayoutWidthHeight = (int) (90.0 * scale + 0.5f); */
-		
-		/* Create RelativeLayout.LayoutParams that position the MiniMap on the top-right corner of the RelativeLayout. */
-		
-		/* final RelativeLayout.LayoutParams minimapParams = new RelativeLayout.LayoutParams(intLayoutWidthHeight, intLayoutWidthHeight);
-		minimapParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-		minimapParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-		minimapParams.setMargins(5,5,5,5);
-		rl.addView(mOsmvMinimap, minimapParams); */
+		this.mOsmv.getOverlays().add(minimap);		
 	}
 
 	/**
@@ -305,46 +279,35 @@ public class OsmMapViewerActivity extends Activity
 		final ResourceHelper resourceHelper = new ResourceHelper(this);
 		final ResourceProxy resourceProxy = new DefaultResourceProxyImpl(this);
 		
+		final ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
 		for (MapOverlayItem mapOverlayItem : alMapOverlayItems)
 		{
 			final GeoPoint geoPoint = new GeoPoint(mapOverlayItem.getLatitudeE6(), mapOverlayItem.getLongitudeE6());
 			final Drawable drawable = mapOverlayItem.getDrawable(resourceHelper);
 			final String strSnippet = mapOverlayItem.getSnippet();
 
-			final ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
-			items.add(new OverlayItem(strSnippet, strSnippet, geoPoint));
-
-			final ItemizedOverlay mOverlayItem = 
-				new ItemizedOverlay<OverlayItem>(this, items, 
-						 new ItemizedOverlay.OnItemGestureListener<OverlayItem>() {
-                            public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
-                                    Toast.makeText( OsmMapViewerActivity.this, item.getSnippet(), Toast.LENGTH_LONG).show();
-                                    return true; // We 'handled' this event.
-                            }
-
-							public boolean onItemLongPress(int arg0,
-									OverlayItem arg1) {
-								// TODO Auto-generated method stub
-								return false;
-							}
-						},
-						resourceProxy);
-
-			/* OsmMapViewerCustomItemizedOverlay mOverlayItem = 
-				new OsmMapViewerCustomItemizedOverlay(
-						geoPoint,  
-						drawable,
-						new OsmMapViewerCustomItemizedOverlay.OnItemTapListener<Drawable>()
-						{
-							public boolean onItemTap(Drawable aItem) {
-								Toast.makeText(OsmMapViewerActivity.this, strSnippet, Toast.LENGTH_LONG).show();
-								return true;
-							}
-						},
-						resourceProxy);
-*/
-	        this.mOsmv.getOverlays().add(mOverlayItem);
+			final OverlayItem overlayItem = new OverlayItem(strSnippet, strSnippet, geoPoint);
+			overlayItem.setMarker(drawable);			
+			items.add(overlayItem);
 		}		
+		
+		final ItemizedOverlay<OverlayItem> mOverlayItem =
+			new ItemizedOverlay<OverlayItem>(this, items,
+					new ItemizedOverlay.OnItemGestureListener<OverlayItem>() 
+					{
+                        public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
+                                Toast.makeText( OsmMapViewerActivity.this, item.getSnippet(), Toast.LENGTH_LONG).show();
+                                return true; // We 'handled' this event.
+                        }
+
+						public boolean onItemLongPress(final int index, final OverlayItem item) {
+							// TODO Auto-generated method stub
+							return false;
+						}
+					},
+					resourceProxy);
+
+        this.mOsmv.getOverlays().add(mOverlayItem);
 	}
 	
     /**
