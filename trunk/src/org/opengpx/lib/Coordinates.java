@@ -336,13 +336,7 @@ public class Coordinates
     	final int intLatitudeEqual = dblLatitude.compareTo(dblLatitudeCompare);
     	final int intLongitudeEqual = dblLongitude.compareTo(dblLongitudeCompare);
 
-    	// int intLatitudeEqual = ((Double) this.getLatitude().getD()).compareTo((Double) coords.getLatitude().getD());
-    	// int intLongitudeEqual = ((Double) this.getLongitude().getD()).compareTo((Double) coords.getLongitude().getD());
-
     	return ((intLatitudeEqual == 0) && (intLongitudeEqual == 0));
-
-        // return ((this.round(this.getLatitude().getD(), 5) == this.round(coords.getLatitude().getD(), 5)) &&
-        // 		(this.round(this.getLongitude().getD(), 5) == this.round(coords.getLongitude().getD(), 5)));
     }
 
     /**
@@ -366,34 +360,35 @@ public class Coordinates
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-	    Coordinates coords = new Coordinates();
+	public static void main(String[] args) 
+	{
+
+		final Coordinates coords = new Coordinates();
 	    coords.setD(46.61123, 13.89985);
 	    System.out.println(coords);
 	    System.out.println(coords.toString(CoordinateFormat.DMS));
 	    // System.out.println(coords.DMS);
 	    System.out.println(coords.getLongitude());
 
-	    Coordinates coordsA = new Coordinates();
+	    final Coordinates coordsA = new Coordinates();
 	    coordsA.setDM(Hemisphere.N, 46, 35.595, Hemisphere.E, 14, 16.394);
-	    Coordinates coordsB = new Coordinates();
+	    final Coordinates coordsB = new Coordinates();
 	    coordsB.setDM(Hemisphere.N, 46, 35.664, Hemisphere.E, 14, 16.057);
 	    System.out.println(coordsA.getDistanceTo(coordsB));
 		System.out.println(coordsA.getBearingTo(coordsB));
-	    Coordinates coordsC = new Coordinates();
+	    final Coordinates coordsC = new Coordinates();
 	    coordsC.setDM(Hemisphere.N, 46, 35.664, Hemisphere.E, 14, 16.057);
 		System.out.println(coordsB.equals(coordsC));
-		NavigationInfo navigationInfo = coordsA.getNavigationInfoTo(coordsB);
+		final NavigationInfo navigationInfo = coordsA.getNavigationInfoTo(coordsB);
 		System.out.println(String.format("%.16f %.16f %s", navigationInfo.distance, navigationInfo.bearing, navigationInfo.direction));
 		String[] arrNavigationInfo = navigationInfo.toStringArray();
 		System.out.println(String.format("%s %s %s", arrNavigationInfo[0], arrNavigationInfo[1], arrNavigationInfo[2]));
 
-	    Coordinates coordsT = new Coordinates();
+	    final Coordinates coordsT = new Coordinates();
 	    System.out.println(coordsT.parseFromText("N 46¡ 32.329 E 014¡ 30.535 "));
 	    System.out.println(coordsT.toString(CoordinateFormat.DM));
 
-	    Coordinates coordsNaN = new Coordinates();
+	    final Coordinates coordsNaN = new Coordinates();
 	    coordsNaN.setLatitude(Double.NaN);
 	    coordsNaN.setLongitude(Double.NaN);
 	    System.out.println(coordsNaN.toString(CoordinateFormat.DM));

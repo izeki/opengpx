@@ -56,6 +56,7 @@ public class Preferences
 	private static final String PREFS_KEY_AUTO_UPDATE_VOTES = "AutoUpdateVotes";
 	private static final String PREFS_KEY_BACKUP_GPX_FILES = "BackupGpxFiles";
 	private static final String PREFS_KEY_IMPORT_PATH_LIST = "ImportPathList";
+	private static final String PREFS_KEY_WAYPOINT_ACTION = "WaypointAction";
 	
 	// Preferences default values
 	// private static final float   PREFS_DEFAULT_HOME_LATITUDE = 46.59327f;
@@ -84,6 +85,7 @@ public class Preferences
 	private static final boolean PREFS_DEFAULT_AUTO_UPDATE_VOTES = false;
 	private static final boolean PREFS_DEFAULT_BACKUP_GPX_FILES = true;
 	private static final String PREFS_DEFAULT_IMPORT_PATH_LIST = "";
+	private static final WaypointClickAction PREFS_DEFAULT_WAYPOINT_ACTION = WaypointClickAction.InternalMap;
 
 	/**
 	 * 
@@ -397,6 +399,16 @@ public class Preferences
 	public String[] getImportPathList()
 	{
 		return this.mSharedPreferences.getString(PREFS_KEY_IMPORT_PATH_LIST, PREFS_DEFAULT_IMPORT_PATH_LIST).split("\n");
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public WaypointClickAction getWaypointClickAction()
+	{
+		final String strWaypointClickAction = mSharedPreferences.getString(PREFS_KEY_WAYPOINT_ACTION, PREFS_DEFAULT_WAYPOINT_ACTION.toString());
+		return WaypointClickAction.valueOf(strWaypointClickAction);
 	}
 }
 

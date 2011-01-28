@@ -21,6 +21,7 @@
 <ListPreference android:key="NavigationProvider" android:entryValues="@array/navigation_provider_values" android:entries="@array/navigation_provider_items" android:title="@string/pref_navigation_provider" android:summary="@string/pref_navigation_provider_summary"></ListPreference>
 <CheckBoxPreference android:key="MapKeepScreenOn" android:title="@string/pref_keep_screen_on" android:summary="@string/pref_keep_screen_on_summary"></CheckBoxPreference>
 
+<ListPreference android:entryValues="@array/waypoint_action_values" android:entries="@array/waypoint_action_items" android:key="WaypointAction" android:summary="@string/pref_waypoint_action_desc" android:title="@string/pref_waypoint_action"></ListPreference>
 </PreferenceCategory>
   
   <PreferenceCategory android:title="bcaching.com integration">
