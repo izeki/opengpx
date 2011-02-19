@@ -129,10 +129,11 @@ public class CacheDetailActivity extends TabActivity
 			this.setTitle("OpenGPX - " + this.mCache.name);
 
 			this.mTabHost = getTabHost();
-			this.mTabHost.addTab(mTabHost.newTabSpec("tabDescription").setIndicator("Description", getResources().getDrawable(android.R.drawable.ic_menu_info_details)).setContent(R.id.CacheDescriptionLinearLayout));
+
+			this.mTabHost.addTab(mTabHost.newTabSpec("tabDescription").setIndicator("Description", getResources().getDrawable(android.R.drawable.ic_menu_info_details)).setContent(R.id.CacheDetailDescriptionScrollView));
 			this.mTabHost.addTab(mTabHost.newTabSpec("tabWaypoints").setIndicator("Waypoints", getResources().getDrawable(android.R.drawable.ic_menu_myplaces)).setContent(R.id.WaypointList));
 			this.mTabHost.addTab(mTabHost.newTabSpec("tabLogs").setIndicator("Logs", getResources().getDrawable(android.R.drawable.ic_menu_recent_history)).setContent(R.id.CacheDetailLogLayout));
-			this.mTabHost.addTab(mTabHost.newTabSpec("tabLogVisit").setIndicator("Log Visit", getResources().getDrawable(android.R.drawable.ic_menu_agenda)).setContent(R.id.LogVisitLayout));
+			this.mTabHost.addTab(mTabHost.newTabSpec("tabLogVisit").setIndicator("Log Visit", getResources().getDrawable(android.R.drawable.ic_menu_agenda)).setContent(R.id.CacheDetailLogVisitScrollView));
 
 			this.readCacheDescription();
 			this.initializeWaypointList();
@@ -1216,7 +1217,7 @@ public class CacheDetailActivity extends TabActivity
 			boolean added = CacheDetailActivity.this.mCache.addWaypoint(wp, true);
 			if (!added)
 			{
-				Toast failed = Toast.makeText(CacheDetailActivity.this.getApplicationContext(), R.string.wp_already_exists, Toast.LENGTH_LONG);
+				final Toast failed = Toast.makeText(CacheDetailActivity.this.getApplicationContext(), R.string.wp_already_exists, Toast.LENGTH_LONG);
 				failed.show();
 			}
 			else
