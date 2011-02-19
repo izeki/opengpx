@@ -104,7 +104,7 @@ public class Preferences
 	 */
 	private void putString(String key, String value)
 	{
-		Editor editor = this.mSharedPreferences.edit();
+		final Editor editor = this.mSharedPreferences.edit();
 		editor.putString(key, value);
 		editor.commit();				
 	}
@@ -116,7 +116,7 @@ public class Preferences
 	 */
 	private void putInt(String key, int value)
 	{
-		SharedPreferences.Editor editor = this.mSharedPreferences.edit();
+		final SharedPreferences.Editor editor = this.mSharedPreferences.edit();
 		editor.putInt(key, value);
 		editor.commit();
 	}
@@ -193,7 +193,7 @@ public class Preferences
 	public Coordinates getHomeCoordinates()
 	{
 		final String strCoordinates = this.mSharedPreferences.getString(PREFS_KEY_HOME_COORDINATES, PREFS_DEFAULT_HOME_COORDINATES);
-		Coordinates coordinates = new Coordinates();
+		final Coordinates coordinates = new Coordinates();
 		coordinates.parseFromText(strCoordinates);
 		return coordinates;
 	}
