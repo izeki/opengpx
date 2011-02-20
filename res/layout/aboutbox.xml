@@ -4,22 +4,10 @@
 	android:layout_height="fill_parent"
 	android:orientation="vertical"
 	xmlns:android="http://schemas.android.com/apk/res/android">
-	<ImageView 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:src="@drawable/logo" android:layout_gravity="center"/>
 	
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/app_name" 
-        android:textStyle="bold" android:textSize="18sp"/>
-    <TextView android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/AboutWebLink" android:gravity="center" android:text="http://opengpx.sf.net" android:autoLink="web"></TextView><TextView
-        android:id="@+id/AboutBoxNameVersion"
-       	android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center" />
+	
+    
+    <TextView android:text="@+id/TextView01" android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center" android:id="@+id/AboutBoxNameVersion"></TextView><TextView android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/AboutWebLink" android:gravity="center" android:autoLink="web" android:text="http://www.opengpx.org"></TextView>
     <TextView
         android:layout_width="fill_parent"
        	android:layout_height="wrap_content"
@@ -32,8 +20,10 @@
 </LinearLayout>
 
 
-</ScrollView><LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:orientation="horizontal" android:gravity="center"><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Close" android:id="@+id/AboutCloseButton"></Button>
-</LinearLayout>
+</ScrollView>
+<!--  LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:orientation="horizontal" android:gravity="center"><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Close" android:id="@+id/AboutCloseButton"></Button>
+</LinearLayout>  -->
+
 
 
 </LinearLayout>

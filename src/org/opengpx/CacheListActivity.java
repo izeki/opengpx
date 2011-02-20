@@ -37,6 +37,7 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.util.Linkify;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -658,10 +659,21 @@ public class CacheListActivity extends ListActivity
      */
 	private void showAboutDialog()
 	{
-		final Dialog dialog = new Dialog(this);
-		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-		dialog.setContentView(R.layout.aboutbox);
-		final TextView tvNameVersion = (TextView) dialog.findViewById(R.id.AboutBoxNameVersion);
+		
+		final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+
+		final LayoutInflater inflater = this.getLayoutInflater();
+		final View layout = inflater.inflate(R.layout.aboutbox, null);
+
+		dialog.setView(layout);
+		dialog.setTitle(R.string.app_name);
+		// final Dialog dialog = new Dialog(this);
+		// dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+		// dialog.setContentView(R.layout.aboutbox);
+		
+		
+		// final TextView tvNameVersion = (TextView) dialog.findViewById(R.id.AboutBoxNameVersion);
+		final TextView tvNameVersion = (TextView) layout.findViewById(R.id.AboutBoxNameVersion);
 		try
 		{
 			final PackageInfo pi = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -673,21 +685,34 @@ public class CacheListActivity extends ListActivity
 			mLogger.error("Can't find version name", e);
 			tvNameVersion.setText("Version unknown");
 		}
-		final TextView tvCreditsGroundspeak = (TextView) dialog.findViewById(R.id.AboutGroundspeak);
+		// final TextView tvCreditsGroundspeak = (TextView) dialog.findViewById(R.id.AboutGroundspeak);
+		final TextView tvCreditsGroundspeak = (TextView) layout.findViewById(R.id.AboutGroundspeak);
 		Linkify.addLinks(tvCreditsGroundspeak, Pattern.compile("Groundspeak"), "http://www.groundspeak.com/?ref=");
 		Linkify.addLinks(tvCreditsGroundspeak, Pattern.compile("Geocaching"), "http://www.geocaching.com/?ref=");
 		
-		final TextView tvCreditsOsmdroid = (TextView) dialog.findViewById(R.id.AboutOsmdroid);
+		// final TextView tvCreditsOsmdroid = (TextView) dialog.findViewById(R.id.AboutOsmdroid);
+		final TextView tvCreditsOsmdroid = (TextView) layout.findViewById(R.id.AboutOsmdroid);
 		Linkify.addLinks(tvCreditsOsmdroid, Pattern.compile("OpenStreetMap"), "http://wiki.openstreetmap.org/?ref=");
 		Linkify.addLinks(tvCreditsOsmdroid, Pattern.compile("osmdroid"), "http://code.google.com/p/osmdroid/?ref=");
 		
-		final TextView tvCreditsCloudMade = (TextView) dialog.findViewById(R.id.AboutCloudMade);
+		// final TextView tvCreditsCloudMade = (TextView) dialog.findViewById(R.id.AboutCloudMade);
+		final TextView tvCreditsCloudMade = (TextView) layout.findViewById(R.id.AboutCloudMade);
 		Linkify.addLinks(tvCreditsCloudMade, Pattern.compile("CloudMade"), "http://cloudmade.com/?ref=");
 
-		final TextView tvCreditsDb4o = (TextView) dialog.findViewById(R.id.AboutDb4o);
+		// final TextView tvCreditsDb4o = (TextView) dialog.findViewById(R.id.AboutDb4o);
+		final TextView tvCreditsDb4o = (TextView) layout.findViewById(R.id.AboutDb4o);
 		Linkify.addLinks(tvCreditsDb4o, Pattern.compile("db4objects"), "http://db4o.com/?ref=");
 
-		final Button btnCloseAboutBox = (Button) dialog.findViewById(R.id.AboutCloseButton);
+		dialog.setNeutralButton(R.string.button_ok, new DialogInterface.OnClickListener() 
+		{
+			public void onClick(DialogInterface dialog, int which) 
+			{
+				dialog.dismiss();
+			}
+		});
+		dialog.show();
+		
+		/* final Button btnCloseAboutBox = (Button) dialog.findViewById(R.id.AboutCloseButton);
 		btnCloseAboutBox.setOnClickListener(new OnClickListener()
 		{
 			public void onClick(View v)
@@ -695,8 +720,8 @@ public class CacheListActivity extends ListActivity
 				dialog.dismiss();
 			}
 
-		});
-		dialog.show();
+		}); */
+		// dialog.show();
 	}
 
 	/**
