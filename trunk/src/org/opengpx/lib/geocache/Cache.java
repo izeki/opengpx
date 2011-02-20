@@ -48,7 +48,8 @@ public class Cache
 	public Cache()
 	{
 		this.mContainerType = ContainerType.Unknown;
-		this.state = "";
+		this.country = "Unknown";
+		this.state = "Unknown";
 		this.mLogEntries = new ArrayList<LogEntry>();
 	}
 

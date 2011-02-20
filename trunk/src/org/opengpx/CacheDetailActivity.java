@@ -515,7 +515,7 @@ public class CacheDetailActivity extends TabActivity
 		
 		((TextView) this.findViewById(R.id.CacheDetailContainer)).setText(this.mCache.getContainerType().toString().replace("_", " "));
 
-    	DecimalFormat decFormat = (DecimalFormat) NumberFormat.getInstance(Locale.ENGLISH);
+    	final DecimalFormat decFormat = (DecimalFormat) NumberFormat.getInstance(Locale.ENGLISH);
     	decFormat.applyPattern("0.0");
 
 		final String strDifficulty = decFormat.format(this.mCache.difficulty).replace(".", "_");
@@ -740,7 +740,7 @@ public class CacheDetailActivity extends TabActivity
 			// strInventory = "Sorry, there are no coins / travelbugs in this cache.";
 		}
 
-		AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+		final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 		alertDialog.setTitle("Inventory");
 		// alertDialog.setMessage(strInventory);
 		alertDialog.setMessage(travelBugs);
@@ -955,7 +955,7 @@ public class CacheDetailActivity extends TabActivity
 	{
 		if (AndroidSystem.isIntentAvailable(this, "com.google.android.radar.SHOW_RADAR"))
 		{
-			Intent intRadar = new Intent("com.google.android.radar.SHOW_RADAR");
+			final Intent intRadar = new Intent("com.google.android.radar.SHOW_RADAR");
 			intRadar.putExtra("latitude", (float) waypoint.latitude);
 			intRadar.putExtra("longitude", (float) waypoint.longitude);
 			startActivity(intRadar);
@@ -1015,7 +1015,7 @@ public class CacheDetailActivity extends TabActivity
 	{
 		if (AndroidSystem.isIntentAvailable(this, "mpr.compassNavi.SHOW_NAVI"))
 		{
-			Intent intCompassNavi = new Intent("mpr.compassNavi.SHOW_NAVI");
+			final Intent intCompassNavi = new Intent("mpr.compassNavi.SHOW_NAVI");
 			intCompassNavi.putExtra("latitude", waypoint.latitude);
 			intCompassNavi.putExtra("longitude", waypoint.longitude);
 			intCompassNavi.putExtra("name", waypoint.getSnippet());
