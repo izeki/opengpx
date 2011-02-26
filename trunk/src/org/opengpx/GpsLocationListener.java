@@ -4,6 +4,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -17,13 +20,15 @@ import android.os.Bundle;
 public class GpsLocationListener implements LocationListener
 {
 	// these values should be way enough for our purpose
-	private static final long										GPS_UPDATE_TIME_MSEC	= 1000L;	// 1 sec.
-	private static final float									GPS_MIN_DISTANCE			= 0f; // 100 meters
+	private static final long									GPS_UPDATE_TIME_MSEC	= 1000L;	// 1 sec.
+	private static final float									GPS_MIN_DISTANCE		= 0f; // 100 meters
 
-	private LocationManager											locationManager;
-	private Location														gpsLocation;
-	private Location														networkLocation;
-	private boolean															isEnabled							= false;
+	private LocationManager										locationManager;
+	private Location											gpsLocation;
+	private Location											networkLocation;
+	private boolean												isEnabled				= false;
+
+	private static final Logger mLogger = LoggerFactory.getLogger(GpsLocationListener.class);
 
 	public GpsLocationListener(LocationManager locationManager)
 	{
@@ -44,8 +49,14 @@ public class GpsLocationListener implements LocationListener
 	{
 		if (!isEnabled)
 		{
-			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_UPDATE_TIME_MSEC, GPS_MIN_DISTANCE, this);
-			locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_UPDATE_TIME_MSEC, GPS_MIN_DISTANCE, this);
+			for (String provider : locationManager.getAllProviders())
+			{
+				mLogger.debug("Requesting location updates (provider: " + provider + ")");
+				locationManager.requestLocationUpdates(provider, GPS_UPDATE_TIME_MSEC, GPS_MIN_DISTANCE, this);
+			}
+
+			// locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_UPDATE_TIME_MSEC, GPS_MIN_DISTANCE, this);
+			// locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_UPDATE_TIME_MSEC, GPS_MIN_DISTANCE, this);
 			isEnabled = true;
 		}
 	}
