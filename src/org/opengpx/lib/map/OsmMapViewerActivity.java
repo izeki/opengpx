@@ -12,6 +12,7 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.MapController;
+import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.ItemizedOverlay;
 import org.osmdroid.views.overlay.MinimapOverlay;
 import org.osmdroid.views.overlay.MyLocationOverlay;
@@ -180,7 +181,7 @@ public class OsmMapViewerActivity extends Activity
 
 		this.mMyLocationOverlay.enableCompass();
 		this.mMyLocationOverlay.enableMyLocation();		
-		this.mMyLocationOverlay.followLocation(true);
+		this.mMyLocationOverlay.enableFollowLocation();
 
 		final String strCurrentRenderer = this.mOsmv.getTileProvider().getTileSource().name();
 		final String strRendererPrefs = this.mSharedPreferences.getString(PREFS_KEY_OSM_RENDERER, PREFS_DEFAULT_OSM_RENDERER);
@@ -292,8 +293,8 @@ public class OsmMapViewerActivity extends Activity
 		}		
 		
 		final ItemizedOverlay<OverlayItem> mOverlayItem =
-			new ItemizedOverlay<OverlayItem>(this, items,
-					new ItemizedOverlay.OnItemGestureListener<OverlayItem>() 
+			new ItemizedIconOverlay<OverlayItem>(items,
+					new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() 
 					{
                         public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
                                 Toast.makeText( OsmMapViewerActivity.this, item.getSnippet(), Toast.LENGTH_LONG).show();
