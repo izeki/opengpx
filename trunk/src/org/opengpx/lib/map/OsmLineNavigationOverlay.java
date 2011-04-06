@@ -77,9 +77,9 @@ public class OsmLineNavigationOverlay extends MyLocationOverlay
 	 * 
 	 */
     @Override
-    public void onDraw(final Canvas c, final MapView osmv) 
+    public void draw(final Canvas c, final MapView osmv, boolean shadow) 
     {
-    	super.onDraw(c, osmv);
+    	super.draw(c, osmv, shadow);
 
     	GeoPoint geoPointCurrent = null;
 
