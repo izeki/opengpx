@@ -106,13 +106,24 @@ public class MapOverlayItem implements Serializable
 		this.mintDrawableWidth = width;
 		this.mintDrawableHeight = height;		
 	}
-	
+
 	/**
 	 * 
 	 * @param resourceHelper
 	 * @return
 	 */
 	public Drawable getDrawable(ResourceHelper resourceHelper)
+	{
+		return this.getDrawable(resourceHelper, true);
+	}
+
+	/**
+	 * 
+	 * @param resourceHelper
+	 * @param scaleImage
+	 * @return
+	 */
+	public Drawable getDrawable(ResourceHelper resourceHelper, boolean scaleImage)
 	{
 		if (this.mstrDrawableId.length() > 0)
 			return resourceHelper.getDrawable(this.mstrDrawableId, this.mintDrawableWidth, this.mintDrawableHeight);

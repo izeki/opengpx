@@ -22,6 +22,8 @@ import org.osmdroid.views.overlay.ScaleBarOverlay;
 import org.opengpx.OsmPreferenceActivity;
 import org.opengpx.Preferences;
 import org.opengpx.lib.ResourceHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -65,6 +67,7 @@ public class OsmMapViewerActivity extends Activity
 	// Some default values
 	private static final String PREFS_DEFAULT_OSM_RENDERER = TileSourceFactory.MAPNIK.name();
 	
+	private static final Logger mLogger = LoggerFactory.getLogger(ResourceHelper.class);
 
 	/**
 	 * 
@@ -284,11 +287,12 @@ public class OsmMapViewerActivity extends Activity
 		for (MapOverlayItem mapOverlayItem : alMapOverlayItems)
 		{
 			final GeoPoint geoPoint = new GeoPoint(mapOverlayItem.getLatitudeE6(), mapOverlayItem.getLongitudeE6());
-			final Drawable drawable = mapOverlayItem.getDrawable(resourceHelper);
+			final Drawable drawable = mapOverlayItem.getDrawable(resourceHelper, false);
+			mLogger.debug("drawable size: width=" + drawable.getIntrinsicWidth() + " height=" + drawable.getIntrinsicHeight());
 			final String strSnippet = mapOverlayItem.getSnippet();
 
 			final OverlayItem overlayItem = new OverlayItem(strSnippet, strSnippet, geoPoint);
-			overlayItem.setMarker(drawable);			
+			overlayItem.setMarker(drawable);
 			items.add(overlayItem);
 		}		
 		
@@ -296,13 +300,14 @@ public class OsmMapViewerActivity extends Activity
 			new ItemizedIconOverlay<OverlayItem>(items,
 					new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() 
 					{
-                        public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
-                                Toast.makeText( OsmMapViewerActivity.this, item.getSnippet(), Toast.LENGTH_LONG).show();
-                                return true; // We 'handled' this event.
+                        public boolean onItemSingleTapUp(final int index, final OverlayItem item) 
+                        {
+                        	Toast.makeText( OsmMapViewerActivity.this, item.getSnippet(), Toast.LENGTH_LONG).show();
+                            return true; // We 'handled' this event.
                         }
 
-						public boolean onItemLongPress(final int index, final OverlayItem item) {
-							// TODO Auto-generated method stub
+						public boolean onItemLongPress(final int index, final OverlayItem item) 
+						{
 							return false;
 						}
 					},
