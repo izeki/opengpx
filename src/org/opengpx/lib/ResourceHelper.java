@@ -8,7 +8,9 @@ import org.slf4j.LoggerFactory;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Bitmap;
 import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 /**
@@ -45,17 +47,41 @@ public class ResourceHelper
 		} 
 		catch (NameNotFoundException e) { }
 	}
-	
+
+	/**
+	 * 
+	 * @param id
+	 * @param width
+	 * @param height
+	 * @return
+	 */
+	public Drawable getDrawable(String id, int width, int height)
+	{
+		return this.getDrawable(id, width, height, true);
+	}
+
 	/**
 	 * 
 	 * @param mapOverlayItem
 	 * @return
 	 */
-	public Drawable getDrawable(String id, int width, int height)
+	public Drawable getDrawable(String id, int width, int height, boolean scale)
 	{
 		final String strDrawableId = id.toLowerCase();
-		final int intRealWidth = (int) (width * this.mfltDensity + 0.5f);
-		final int intRealHeight = (int) (height * this.mfltDensity + 0.5f);
+		mLogger.debug("requested size: width=" + width + " height=" + height);
+		int intRealWidth;
+		int intRealHeight;
+		if (scale)
+		{
+			intRealWidth = (int) (width * this.mfltDensity + 0.5f);
+			intRealHeight = (int) (height * this.mfltDensity + 0.5f);
+		} 
+		else
+		{
+			intRealWidth = width;
+			intRealHeight = height;			
+		}
+		mLogger.debug("real size: with=" + intRealWidth + " height=" + intRealHeight);
 		final int res = this.mContext.getResources().getIdentifier(strDrawableId, "drawable", mPackageName);
 		Drawable drawable = null;
 		if (res > 0)
@@ -77,6 +103,13 @@ public class ResourceHelper
 
 		if (drawable != null)
 		{
+			if ((intRealWidth != drawable.getIntrinsicWidth()) || (intRealHeight != drawable.getIntrinsicHeight()))
+			{
+				// Rescale bitmap
+				final Bitmap bitmapOrg = ((BitmapDrawable) drawable).getBitmap();
+				final Bitmap bitmapNew = Bitmap.createScaledBitmap(bitmapOrg, intRealWidth, intRealHeight, true);
+				drawable = new BitmapDrawable(bitmapNew);
+			}
 			final Rect rect = new Rect(0, 0, intRealWidth, intRealHeight);
 			drawable.setBounds(rect);
 		}

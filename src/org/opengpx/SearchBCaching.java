@@ -23,18 +23,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-// import android.util.Log;
+// import org.slf4j.Logger;
+// import org.slf4j.LoggerFactory;
 
 import com.bcaching.georg.Communication;
 import org.opengpx.Preferences;
 
 public class SearchBCaching
 {
-	private Communication							comm;
+	private Communication				comm;
 	private Hashtable<String, String>	params	= new Hashtable<String, String>();
-	private CacheDatabase							cacheDatabase;
-	// private int												bcMaxCaches;
-	// private int												bcMaxDistance;
+	private CacheDatabase				cacheDatabase;
+	// private int						bcMaxCaches;
+	// private int						bcMaxDistance;
 	
 	// private static final Logger mLogger = LoggerFactory.getLogger(SearchBCaching.class);
 
@@ -79,7 +80,7 @@ public class SearchBCaching
 
 	public String sendFieldNote(FieldNote note) throws Exception
 	{
-		List<FieldNote> notes = new ArrayList<FieldNote>();
+		final List<FieldNote> notes = new ArrayList<FieldNote>();
 		notes.add(note);
 
 		return sendFieldNoteList(notes);
@@ -222,6 +223,8 @@ public class SearchBCaching
 				c.isBcachingSummary = true;
 
 				final JSONObject cache = data.getJSONObject(i);
+				// mLogger.debug(cache.toString());
+				
 				c.id = cache.getInt("id");
 				c.name = cache.getString("name");
 				c.code = cache.getString("wpt");
@@ -230,6 +233,7 @@ public class SearchBCaching
 				c.difficulty = cache.getDouble("diff");
 				c.terrain = cache.getDouble("terr");
 				c.isAvailable = cache.getBoolean("avail");
+				// mLogger.debug("isAvailable: " + cache.getBoolean("avail"));
 				c.placedBy = cache.getString("placedBy");
 
 				float gcvote = 0.0f;
