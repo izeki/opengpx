@@ -54,6 +54,7 @@ public class OsmMapViewerActivity extends Activity
 	private MapView mOsmv; //, mOsmvMinimap;
 	private MapController mOsmvController;
 	private MyLocationOverlay mMyLocationOverlay = null;
+	private MinimapOverlay mMiniMap = null;
 	private ScaleBarOverlay mScaleBarOverlay;
 
 	private int mintZoomLevel = DEFAULT_ZOOM_LEVEL;
@@ -164,12 +165,13 @@ public class OsmMapViewerActivity extends Activity
 	private ITileSource getTileSourceByName(String name)
 	{
 		ITileSource osmri;
-		try {
+		try 
+		{
 			osmri = TileSourceFactory.getTileSource(name);
-		} catch (IllegalArgumentException iae)
+		} 
+		catch (IllegalArgumentException iae)
 		{
 			osmri = TileSourceFactory.getTileSources().get(0);
-			// Toast.makeText(this, "Using default renderer: " + osmri.name(), Toast.LENGTH_SHORT).show();
 		}
 		return osmri;
 	}
@@ -192,7 +194,14 @@ public class OsmMapViewerActivity extends Activity
 		{
 			final ITileSource tileSoure = this.getTileSourceByName(strRendererPrefs);
 			this.mOsmv.setTileSource(tileSoure);
+		
+			if (this.mMiniMap != null)
+			{
+				this.mMiniMap.setTileSource(tileSoure);
+			}
+			
 			Toast.makeText(this, "Map Renderer changed to: " + tileSoure.name(), Toast.LENGTH_SHORT).show();
+		
 		}
 
 		// Set keep screen on property
@@ -253,9 +262,9 @@ public class OsmMapViewerActivity extends Activity
 	 */
 	private void addMinimap(RelativeLayout rl)
 	{
-		final MinimapOverlay minimap = new MinimapOverlay(this, this.mOsmv.getTileRequestCompleteHandler());
-		minimap.setTileSource(this.mOsmv.getTileProvider().getTileSource());
-		this.mOsmv.getOverlays().add(minimap);		
+		this.mMiniMap = new MinimapOverlay(this, this.mOsmv.getTileRequestCompleteHandler());
+		this.mMiniMap.setTileSource(this.mOsmv.getTileProvider().getTileSource());
+		this.mOsmv.getOverlays().add(this.mMiniMap);		
 	}
 
 	/**
@@ -322,7 +331,7 @@ public class OsmMapViewerActivity extends Activity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) 
     {
-        MenuInflater inflater = getMenuInflater();
+        final MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.osm_preferences, menu);
         return true;
     }
@@ -336,7 +345,7 @@ public class OsmMapViewerActivity extends Activity
     	switch (item.getItemId()) 
     	{
     		case R.id.OsmPreferences:
-    			Intent prefsActivity = new Intent(getBaseContext(), OsmPreferenceActivity.class);
+    			final Intent prefsActivity = new Intent(getBaseContext(), OsmPreferenceActivity.class);
     			startActivity(prefsActivity);
     			return true;
     	}
