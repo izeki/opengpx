@@ -11,6 +11,8 @@ import org.opengpx.R;
 import org.opengpx.lib.Coordinates;
 import org.opengpx.lib.NavigationInfo;
 import org.opengpx.lib.geocache.Waypoint;
+import org.opengpx.lib.map.GoogleElevation;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -78,6 +80,9 @@ public class WaypointDetailDialog extends AlertDialog.Builder
 		sbWaypointDetail.append(String.format("Type: %s", this.mWaypoint.getType().toString()));
 		sbWaypointDetail.append(String.format("\nSymbol: %s", this.mWaypoint.symbol));
 		if (this.mWaypoint.time != null) sbWaypointDetail.append(String.format("\nTime: %s", this.mWaypoint.time.toLocaleString()));
+		
+		GoogleElevation ge = new GoogleElevation();
+		ge.getElevation(this.mWaypoint.latitude, this.mWaypoint.longitude);
 
 		// Add address to waypoint details
 		final ConnectivityManager cm = (ConnectivityManager) this.mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
