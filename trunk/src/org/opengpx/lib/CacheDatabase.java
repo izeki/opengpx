@@ -893,7 +893,6 @@ public class CacheDatabase
 		return alCacheCodes;
 	}
 	
-	
 	private ArrayList<String> getSearchCacheCodesSortedByName()
 	{
 		TreeSet<CacheIndexItem> sortedCacheList = new TreeSet<CacheIndexItem>(new CacheNameComparator());
@@ -947,11 +946,11 @@ public class CacheDatabase
 	public Cache getCache(String cacheCode)
 	{
 		if (this.mDB4ODatabase != null)
-		{		
-			Query queryCache = this.mDB4ODatabase.query();
+		{
+			final Query queryCache = this.mDB4ODatabase.query();
 			queryCache.constrain(Cache.class);
 			queryCache.descend("code").constrain(cacheCode);
-			ObjectSet<?> result = queryCache.execute();
+			final ObjectSet<?> result = queryCache.execute();
 			if (result.size() >= 1)
 				return (Cache) result.next();
 			else
@@ -1183,6 +1182,12 @@ public class CacheDatabase
 	{
 		return this.mCacheIndexItems.get(cacheCode);
 	} */
+	
+	public void updateWaypoint(Waypoint wp)
+	{
+		this.mDB4ODatabase.store(wp);
+		this.mDB4ODatabase.commit();
+	}
 	
 	/**
 	 * 

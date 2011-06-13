@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import org.opengpx.OpenGpxPreferenceActivity;
 import org.opengpx.Preferences;
+import org.opengpx.lib.map.GoogleElevation;
 import org.opengpx.lib.map.GoogleMapViewer;
 import org.opengpx.lib.map.MapViewer;
 import org.opengpx.lib.map.OsmMapViewer;
@@ -20,7 +21,9 @@ import org.opengpx.lib.CacheDatabase;
 import org.opengpx.lib.CacheIndexItem;
 import org.opengpx.lib.CoordinateFormat;
 import org.opengpx.lib.Coordinates;
+import org.opengpx.lib.geocache.Cache;
 import org.opengpx.lib.geocache.GCVote;
+import org.opengpx.lib.geocache.Waypoint;
 import org.opengpx.lib.ImportResult;
 import org.opengpx.lib.xml.GCVoteReader;
 import android.app.AlertDialog;
@@ -167,6 +170,7 @@ public class CacheListActivity extends ListActivity
 			mImportResult = mCacheDatabase.readXmlFiles(mPreferences.getBackupGpxFiles());
 			mCacheDatabase.readCacheIndex();
 
+			// Update GCvotes
 			if ((mImportResult.successful > 0) && (updateGCVotes))
 			{
 				mLogger.debug("Updating votes ...");
@@ -176,6 +180,35 @@ public class CacheListActivity extends ListActivity
 				final HashMap<String, GCVote> gcVotes = gcvr.getVotes(alCacheCodes);
 				// Add votes to database
 				mCacheDatabase.addCacheVotes(gcVotes);
+			}
+			
+			// Update waypoint elevation
+			boolean updateElevation = (cm.getActiveNetworkInfo() != null);
+			if ((mImportResult.successful > 0) && (updateElevation))
+			{
+				mLogger.debug("Updating waypoint elevation ...");
+				final ArrayList<String> alCacheCodes = mCacheDatabase.getCacheCodes();
+				for (String cacheCode : alCacheCodes)
+				{
+					final Cache cache = mCacheDatabase.getCache(cacheCode);
+					final GoogleElevation elevation = new GoogleElevation();
+					for (Waypoint wp : cache.getWaypoints())
+					{
+						if (wp.elevation == Integer.MIN_VALUE)
+						{
+							elevation.addSearchLocation(wp.latitude, wp.longitude);
+						}
+					}
+					for (Waypoint wp : cache.getWaypoints())
+					{
+						final Double elev = elevation.getElevation(wp.latitude, wp.longitude);
+						if (!Double.isNaN(elev))
+						{
+							wp.elevation = (int) Math.round(elev);
+							mCacheDatabase.updateWaypoint(wp);
+						}						
+					}
+				}
 			}
 			
 			mlngLoadingTime = Calendar.getInstance().getTimeInMillis() - lngStartTime;

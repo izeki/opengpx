@@ -73,20 +73,13 @@ public class WaypointListAdapter extends ArrayAdapter<Waypoint>
 
         final Waypoint wp = this.mWaypoints.get(position);
         final TextView tvLine1 = waypointListViewHolder.twoLineListItem.getText1();
-        /* String strCacheName = wp.description;
-        if (wp.name.equals(mCacheCode))
-        {
-        	if (mCacheType.equals(CacheType.Traditional))
-        		strCacheName = "Cache";
-        	else
-        		strCacheName = "Header Coordinates";
-        } 
-        tvLine1.setText(String.format("%s [%s]", strCacheName, wp.symbol)); */
         tvLine1.setText(wp.getSnippet()); 
         final TextView tvLine2 = waypointListViewHolder.twoLineListItem.getText2();
-        final Coordinates coords = new Coordinates();
-        coords.setD(wp.latitude, wp.longitude);
-        tvLine2.setText(coords.toString(this.mCoordinateFormat));
+        final Coordinates coords = new Coordinates(wp.latitude, wp.longitude);
+        if (wp.elevation != Integer.MIN_VALUE)
+            tvLine2.setText(String.format("%s %sm", coords.toString(this.mCoordinateFormat), wp.elevation));
+        else
+        	tvLine2.setText(coords.toString(this.mCoordinateFormat));
         
         final String strWpSymbolFileName = String.format("waypoint_%s.jpg", wp.getType().toString().toLowerCase());
         try 
