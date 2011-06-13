@@ -491,9 +491,14 @@ public class CacheDetailActivity extends TabActivity
 			strCountryState = String.format("%s", this.mCache.country);
 		
 		final Waypoint wpCache = this.mCache.getHeaderWaypoint();
-		final Coordinates coordsHeaderWaypoint = new Coordinates();
-		coordsHeaderWaypoint.setD(wpCache.latitude, wpCache.longitude);
-		final String strLinkCountryCoordsPlaced = String.format("%s\n%s", strCountryState, coordsHeaderWaypoint.toString(coordinateFormat));
+		final Coordinates coordsHeaderWaypoint = new Coordinates(wpCache.latitude, wpCache.longitude);
+		String strLinkCountryCoordsPlaced;
+		if (wpCache.elevation != Integer.MIN_VALUE)
+			strLinkCountryCoordsPlaced = String.format("%s\n%s %sm", strCountryState, coordsHeaderWaypoint.toString(coordinateFormat), wpCache.elevation);
+		else
+			strLinkCountryCoordsPlaced = String.format("%s\n%s", strCountryState, coordsHeaderWaypoint.toString(coordinateFormat));
+		
+		// final String strLinkCountryCoordsPlaced = String.format("%s\n%s", strCountryState, coordsHeaderWaypoint.toString(coordinateFormat));
 		((TextView) this.findViewById(R.id.CacheDetailLinkCountryCoords)).setText(strLinkCountryCoordsPlaced);
 
 		final DateFormat df = DateFormat.getDateInstance();

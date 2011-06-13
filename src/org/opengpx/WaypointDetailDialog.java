@@ -11,7 +11,6 @@ import org.opengpx.R;
 import org.opengpx.lib.Coordinates;
 import org.opengpx.lib.NavigationInfo;
 import org.opengpx.lib.geocache.Waypoint;
-import org.opengpx.lib.map.GoogleElevation;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -29,7 +28,6 @@ import android.widget.TextView;
  * @author Martin Preishuber
  *
  */
-// public class WaypointDetailDialog extends Dialog
 public class WaypointDetailDialog extends AlertDialog.Builder
 {
 	private Waypoint mWaypoint;
@@ -78,11 +76,10 @@ public class WaypointDetailDialog extends AlertDialog.Builder
 		if (this.mWaypoint.comment.length() > 0)
 			sbWaypointDetail.append(String.format("Comment: %s\n", this.mWaypoint.comment));			
 		sbWaypointDetail.append(String.format("Type: %s", this.mWaypoint.getType().toString()));
+		if (this.mWaypoint.elevation != Integer.MIN_VALUE)
+			sbWaypointDetail.append(String.format("\nElevation: %dm", this.mWaypoint.elevation));
 		sbWaypointDetail.append(String.format("\nSymbol: %s", this.mWaypoint.symbol));
 		if (this.mWaypoint.time != null) sbWaypointDetail.append(String.format("\nTime: %s", this.mWaypoint.time.toLocaleString()));
-		
-		GoogleElevation ge = new GoogleElevation();
-		ge.getElevation(this.mWaypoint.latitude, this.mWaypoint.longitude);
 
 		// Add address to waypoint details
 		final ConnectivityManager cm = (ConnectivityManager) this.mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -106,7 +103,6 @@ public class WaypointDetailDialog extends AlertDialog.Builder
 	        catch (IOException e) 
 	        {
 	        	strAddresses = "Error retrieving adress.";
-	        	// e.printStackTrace();
 	        }
 		}
         sbWaypointDetail.append(String.format("\nAddress: %s", strAddresses));

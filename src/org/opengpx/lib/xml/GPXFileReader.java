@@ -87,7 +87,7 @@ public class GPXFileReader
 	{
 		boolean retVal = false;
 	
-		long start = System.currentTimeMillis();
+		final long start = System.currentTimeMillis();
 
 		try
 		{
@@ -247,10 +247,11 @@ public class GPXFileReader
 			if ((idx = vn.getAttrVal("id")) != -1)
 			{
 				final String strId = vn.toNormalizedString(vn.getAttrVal("id"));
-				try {
+				try 
+				{
 					currentCache.id = Integer.parseInt(strId);
-		        } catch (NumberFormatException ex) {
-		        }						
+		        } 
+				catch (NumberFormatException ex) { }						
 			}
 			
 			if ((idx = vn.getAttrVal("archived")) != -1)

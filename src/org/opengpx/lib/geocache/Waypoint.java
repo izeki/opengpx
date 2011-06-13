@@ -3,8 +3,6 @@ package org.opengpx.lib.geocache;
 import java.util.Calendar;
 import java.util.Date;
 
-// import android.util.Log;
-
 /**
  * 
  * @author Martin Preishuber
@@ -27,8 +25,6 @@ public class Waypoint
 	private WaypointType mWaypointType = WaypointType.Unknown;
 	// private String mstrURL = "";
 	// private String mstrURLName = "";
-
-	// private static final String TAG = "mpr.openGPX.lib.Waypoint";
 
 	/**
 	 * 
