@@ -5,6 +5,7 @@ import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ import org.opengpx.lib.map.GoogleElevation;
 import org.opengpx.lib.map.GoogleMapViewer;
 import org.opengpx.lib.map.MapViewer;
 import org.opengpx.lib.map.OsmMapViewer;
+import org.opengpx.lib.map.GoogleElevation.GoogleLocation;
 
 import org.opengpx.lib.CacheDatabase;
 import org.opengpx.lib.CacheIndexItem;
@@ -191,22 +193,31 @@ public class CacheListActivity extends ListActivity
 				for (String cacheCode : alCacheCodes)
 				{
 					final Cache cache = mCacheDatabase.getCache(cacheCode);
-					final GoogleElevation elevation = new GoogleElevation();
-					for (Waypoint wp : cache.getWaypoints())
+					final ArrayList<GoogleLocation> locations = new ArrayList<GoogleLocation>();
+					for (final Waypoint wp : cache.getWaypoints())
 					{
 						if (wp.elevation == Integer.MIN_VALUE)
-						{
-							elevation.addSearchLocation(wp.latitude, wp.longitude);
-						}
+							locations.add(new GoogleLocation(wp.latitude, wp.longitude));
 					}
-					for (Waypoint wp : cache.getWaypoints())
+					if (locations.size() > 0)
 					{
-						final Double elev = elevation.getElevation(wp.latitude, wp.longitude);
-						if (!Double.isNaN(elev))
+						final GoogleElevation googleElevation = new GoogleElevation(true);
+						final Hashtable<GoogleLocation, Double> locationElevation = googleElevation.getElevation(locations);  
+						for (final Waypoint wp : cache.getWaypoints())
 						{
-							wp.elevation = (int) Math.round(elev);
-							mCacheDatabase.updateWaypoint(wp);
-						}						
+							for (final GoogleLocation location : locationElevation.keySet())
+							{
+								if (location.equals(wp.latitude, wp.longitude))
+								{
+									final Double elev = locationElevation.get(location);
+									if (!Double.isNaN(elev))
+									{
+										wp.elevation = (int) Math.round(elev);
+										mCacheDatabase.updateWaypoint(wp);
+									}
+								}
+							}
+						}
 					}
 				}
 			}

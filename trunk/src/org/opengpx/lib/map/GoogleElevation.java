@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import org.json.JSONArray;
@@ -26,28 +27,27 @@ public class GoogleElevation
 {
 	private static String URL = "http://maps.google.com/maps/api/elevation";
 	private static final Logger mLogger = LoggerFactory.getLogger(GoogleElevation.class);
-	private Hashtable<Location, Double> mElevationMap;
-	private Boolean mChanged;
+	private Boolean mSensor = false;
 	
 	/**
 	 * 
 	 * @author Martin Preishuber
 	 *
 	 */
-	private class Location
+	public static class GoogleLocation
 	{
-		Double lat;
-		Double lng;
+		private Double mLatitude;
+		private Double mLongitude;
 		
 		/**
 		 * 
 		 * @param latitude
 		 * @param longitude
 		 */
-		public Location(Double latitude, Double longitude)
+		public GoogleLocation(Double latitude, Double longitude)
 		{
-			this.lat = latitude;
-			this.lng = longitude;
+			this.mLatitude = latitude;
+			this.mLongitude = longitude;
 		}
 		
 		/**
@@ -55,9 +55,20 @@ public class GoogleElevation
 		 * @param location
 		 * @return
 		 */
-		public Boolean equals(Location location)
+		public Boolean equals(GoogleLocation location)
 		{
-			return (this.lng.equals(location.lng) && this.lat.equals(location.lat));
+			return (this.mLongitude.equals(location.mLongitude) && this.mLatitude.equals(location.mLatitude));
+		}
+		
+		/**
+		 * 
+		 * @param latitude
+		 * @param longitude
+		 * @return
+		 */
+		public Boolean equals(Double latitude, Double longitude)
+		{
+			return (this.mLongitude.equals(longitude) && this.mLatitude.equals(latitude));			
 		}
 		
 		/**
@@ -65,19 +76,18 @@ public class GoogleElevation
 		 */
 		public String toString()
 		{
-			return "Latitude: " + lat.toString() + " Longitude: " + lng.toString();
+			return "Latitude: " + mLatitude.toString() + " Longitude: " + mLongitude.toString();
 		}
 	}
 
 	/**
 	 * 
 	 */
-	public GoogleElevation()
-	{		
-		this.mElevationMap = new Hashtable<Location, Double>();
-		this.mChanged = false;
+	public GoogleElevation(Boolean sensor)
+	{
+		this.mSensor = sensor;
 	}
-	
+
 	/**
 	 * 
 	 * @param url
@@ -105,9 +115,8 @@ public class GoogleElevation
 	{
 		try 
 		{
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			// conn.addRequestProperty("Accept-encoding", "gzip");
-			int responseCode = conn.getResponseCode();
+			final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			final int responseCode = conn.getResponseCode();
 			mLogger.debug(Integer.toString(responseCode) + " - " + conn.getResponseMessage());
 			if (responseCode == 200) // 200 = OK 
 				return conn.getInputStream();
@@ -122,36 +131,25 @@ public class GoogleElevation
 	
 	/**
 	 * 
-	 * @param latitude
-	 * @param longitude
 	 */
-	public void addSearchLocation(Double latitude, Double longitude)
-	{
-		final Location loc = new Location(latitude, longitude);
-		this.mElevationMap.put(loc, Double.NaN);
-		this.mChanged = true;
-	}
-	
-	/**
-	 * 
-	 */
-	private void updateElevationMap()
+	public Hashtable<GoogleLocation, Double> getElevation(ArrayList<GoogleLocation> locations)
 	{
 		final StringBuilder urlList = new StringBuilder();
-		for (Location loc : this.mElevationMap.keySet())
+		final Hashtable<GoogleLocation, Double> locationElevation = new Hashtable<GoogleLocation, Double>();
+
+		for (GoogleLocation loc : locations)
 		{
-			final String strLatitude = loc.lat.toString().replace(",", ".");
-			final String strLongitude = loc.lng.toString().replace(",", ".");
+			final String strLatitude = loc.mLatitude.toString().replace(",", ".");
+			final String strLongitude = loc.mLongitude.toString().replace(",", ".");
 			if (urlList.length() > 0) urlList.append("|");
 			urlList.append(strLatitude).append(",").append(strLongitude);
 		}
-		
-		final String strUrl = URL + "/json?locations=" + urlList.toString() + "&sensor=false";
+
+		final String strUrl = URL + "/json?locations=" + urlList.toString() + "&sensor=" + this.mSensor.toString();
 		mLogger.debug("Url: " + strUrl);
 		final URL url = this.getUrl(strUrl);		
 		InputStream inputStream = null;
-		if (url != null)
-			inputStream = this.getInputStream(url);
+		if (url != null) inputStream = this.getInputStream(url);
 		
 		if (inputStream != null)
 		{
@@ -185,15 +183,8 @@ public class GoogleElevation
 		                final JSONObject result = results.getJSONObject(i);
 		                final Double elevation = result.getDouble("elevation");
 		                final JSONObject jsonLocation = result.getJSONObject("location");
-		                final Location location = new Location(jsonLocation.getDouble("lat"), jsonLocation.getDouble("lng"));
-		                
-		                for (Location loc : mElevationMap.keySet())
-		                {
-		                	if (loc.equals(location))
-		                	{
-		                		mElevationMap.put(loc, elevation);
-		                	}
-		                }
+		                final GoogleLocation location = new GoogleLocation(jsonLocation.getDouble("lat"), jsonLocation.getDouble("lng"));
+		                locationElevation.put(location, elevation);
 		                mLogger.debug(String.format("%s %s", location.toString(), elevation.toString()));
 		            }
 				}
@@ -202,7 +193,9 @@ public class GoogleElevation
 			{
 				e.printStackTrace();
 			}
-		}		
+		}
+		
+		return locationElevation;
 	}
 	
 	/**
@@ -213,22 +206,13 @@ public class GoogleElevation
 	 */
 	public Double getElevation(Double latitude, Double longitude)
 	{
-		Double elevation = Double.NaN;
-		
-		if (this.mChanged)
-		{
-			this.updateElevationMap();
-			this.mChanged = false;
-		}
-		
-		final Location location = new Location(latitude, longitude);
-		for (Location loc : this.mElevationMap.keySet())
-		{
-			if (location.equals(loc))
-				elevation = this.mElevationMap.get(loc);
-		}
-
-		return elevation;
+		final ArrayList<GoogleLocation> locations = new ArrayList<GoogleLocation>();
+		locations.add(new GoogleLocation(latitude, longitude));
+		final Hashtable<GoogleLocation, Double> result = this.getElevation(locations);
+		if (result.size() == 1)
+			return result.get(result.keys().nextElement());
+		else
+			return Double.NaN;
 	}
 	
 	/**
