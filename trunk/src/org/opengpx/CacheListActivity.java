@@ -186,6 +186,7 @@ public class CacheListActivity extends ListActivity
 			
 			// Update waypoint elevation
 			boolean updateElevation = (cm.getActiveNetworkInfo() != null);
+			updateElevation = false; // not allowed here due to Google License restriction
 			if ((mImportResult.successful > 0) && (updateElevation))
 			{
 				mLogger.debug("Updating waypoint elevation ...");
