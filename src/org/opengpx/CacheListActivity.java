@@ -82,9 +82,16 @@ public class CacheListActivity extends ListActivity
 		setTitle(R.string.app_title);
 		setContentView(R.layout.cachelist);
 
-		this.mLocationListener = new GpsLocationListener((LocationManager) getSystemService(Context.LOCATION_SERVICE));
+		// mLogger.debug("onCreate");
+		
 		this.mPreferences = new Preferences(this);
 
+		// Handle zip and/or gpx files
+		final FileSystemIntegration fsi = FileSystemIntegration.getInstance();
+		fsi.handleIntent(getIntent(), this.mPreferences);
+
+		this.mLocationListener = new GpsLocationListener((LocationManager) getSystemService(Context.LOCATION_SERVICE));
+		
 		this.setRequestedOrientation(this.mPreferences.getScreenOrientation());
 
 		this.mCacheDatabase = CacheDatabase.getInstance();
@@ -107,6 +114,8 @@ public class CacheListActivity extends ListActivity
 	protected void onResume()
 	{
 		super.onResume();
+		
+		// mLogger.debug("onResume");
 		
 		mLocationListener.enableListener();
 

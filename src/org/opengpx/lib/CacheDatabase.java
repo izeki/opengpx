@@ -381,7 +381,7 @@ public class CacheDatabase
 		for (String folderName : this.malGpxFolders)
 		{			
 			final File filePath = new File(folderName);
-			if (filePath.isDirectory())
+			if (filePath.isDirectory() && (folderName.length() > 0))
 			{
 				mLogger.debug("Reading gpx/loc/zip files in folder " + folderName);
 				
@@ -440,7 +440,8 @@ public class CacheDatabase
 			}
 			else
 			{
-				mLogger.warn("Invalid import folder " + folderName);
+				if (folderName.length() > 0)
+					mLogger.warn("Invalid import folder " + folderName);
 			}
 		}
 
