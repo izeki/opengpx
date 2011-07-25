@@ -37,14 +37,13 @@ public class ZipFileReader
 	 * 
 	 * @param zipFileName
 	 */
-	@SuppressWarnings("unchecked")
 	public Boolean read(String zipFileName)
 	{
 		try 
 		{
 			final ZipFile zipFile = new ZipFile(zipFileName);
 		
-			for (Enumeration e = zipFile.entries(); e.hasMoreElements();) 
+			for (Enumeration<? extends ZipEntry> e = zipFile.entries(); e.hasMoreElements();) 
 			{
 				final ZipEntry zipEntry = (ZipEntry) e.nextElement();
 				mLogger.debug("File name: " + zipEntry.getName() + "; size: " + zipEntry.getSize() + "; compressed size: " + zipEntry.getCompressedSize());
@@ -55,7 +54,7 @@ public class ZipFileReader
 				{
 					final byte[] buffer = new byte[(int) zipEntry.getSize()];
 					final InputStream inputStream = zipFile.getInputStream(zipEntry);
-					final int bytesRead = inputStream.read(buffer, 0, buffer.length);
+					inputStream.read(buffer, 0, buffer.length);
 					inputStream.close();
 
 					if (filename.endsWith("gpx"))

@@ -96,7 +96,8 @@ public class CacheDetailActivity extends TabActivity
 	private static final int		MENU_COMPASS		= MENU_INFO + 1;
 	private static final int		MENU_MAP						= MENU_COMPASS + 1;
 	private static final int		MENU_NAVIGATE				= MENU_MAP + 1;
-	private static final int		MENU_DELETE					= MENU_NAVIGATE + 1;
+	private static final int		MENU_GEO			= MENU_NAVIGATE + 1;
+	private static final int		MENU_DELETE					= MENU_GEO + 1;
 
 	// public static final String	ANDNAV2_VIEW_ACTION	= "org.andnav2.intent.ACTION_VIEW";
 	// public static final String	ANDNAV2_NAV_ACTION	= "org.andnav2.intent.ACTION_NAV_TO";
@@ -855,6 +856,7 @@ public class CacheDetailActivity extends TabActivity
 				// menu.add(0, MENU_RADAR, Menu.NONE, "Radar View");
 				menu.add(0, MENU_MAP, Menu.NONE, "Map View");
 				menu.add(0, MENU_NAVIGATE, Menu.NONE, "Navigate");
+				menu.add(0, MENU_GEO, Menu.NONE, "Geo");
 				menu.add(0, MENU_DELETE, Menu.NONE, "Delete");
 			}
 		});
@@ -909,6 +911,9 @@ public class CacheDetailActivity extends TabActivity
 		case MENU_COMPASS:
 			this.showWaypointOnCompass(wp);
 			return true;
+		case MENU_GEO:
+			this.showWaypointOnGeo(wp);
+			break;
 		case MENU_NAVIGATE:
 			this.navigateToWaypoint(wp);
 			return true;
@@ -982,6 +987,17 @@ public class CacheDetailActivity extends TabActivity
 			showWaypointOnCompassNavi(waypoint);
 		else
 			showWaypointOnRadar(waypoint);	
+	}
+	
+	private void showWaypointOnGeo(final Waypoint waypoint)
+	{
+		final String destinationLatitude = ((Double) waypoint.latitude).toString().replace(",", ".");
+		final String destinationLongitude = ((Double) waypoint.longitude).toString().replace(",", ".");
+		
+		final String actionView = "geo:" + destinationLatitude + "," + destinationLongitude;
+        final Intent geoIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(actionView));
+		startActivity(geoIntent);
+
 	}
 	
 	/**
