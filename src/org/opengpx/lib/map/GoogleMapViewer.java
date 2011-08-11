@@ -27,7 +27,7 @@ public class GoogleMapViewer extends MapViewerBase implements MapViewer
 	{
 		if (this.mMapOverlayItems.size() > 0)
 		{
-			Intent intGoogleMap = new Intent(this.mContext, GoogleMapViewerActivity.class);
+			final Intent intGoogleMap = new Intent(this.mContext, GoogleMapViewerActivity.class);
 
 			intGoogleMap.putExtra("map_items", this.mMapOverlayItems);
 			intGoogleMap.putExtra("map_center", this.mOverlayItemCenter);
@@ -38,7 +38,7 @@ public class GoogleMapViewer extends MapViewerBase implements MapViewer
 		}
 		else
 		{
-			Toast.makeText(this.mContext, "No caches available.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this.mContext, "No items available.", Toast.LENGTH_SHORT).show();
 		}
 	}
 }

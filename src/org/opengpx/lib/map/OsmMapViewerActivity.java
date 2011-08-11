@@ -22,12 +22,14 @@ import org.osmdroid.views.overlay.ScaleBarOverlay;
 import org.opengpx.OsmPreferenceActivity;
 import org.opengpx.Preferences;
 import org.opengpx.lib.ResourceHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+// import org.slf4j.Logger;
+// import org.slf4j.LoggerFactory;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -51,13 +53,18 @@ public class OsmMapViewerActivity extends Activity
 	private static final int DEFAULT_ZOOM_LEVEL = 16;
 	private static final int TILE_SIZE_PIXELS = 256;
 
-	private MapView mOsmv; //, mOsmvMinimap;
+	private MapView mOsmv;
 	private MapController mOsmvController;
 	private MyLocationOverlay mMyLocationOverlay = null;
 	private MinimapOverlay mMiniMap = null;
 	private ScaleBarOverlay mScaleBarOverlay;
 
 	private int mintZoomLevel = DEFAULT_ZOOM_LEVEL;
+	private ITileSource mTileSource;
+	private Boolean mUseMetric;
+	private GeoPoint mGeoPointCenter;
+	private GeoPoint mGeoPointTarget = null;
+	private ArrayList<MapOverlayItem> mMapOverlayItems;
 
 	private SharedPreferences mSharedPreferences;
 	private Preferences mPreferences;
@@ -68,60 +75,95 @@ public class OsmMapViewerActivity extends Activity
 	// Some default values
 	private static final String PREFS_DEFAULT_OSM_RENDERER = TileSourceFactory.MAPNIK.name();
 	
-	private static final Logger mLogger = LoggerFactory.getLogger(ResourceHelper.class);
+	// private static final Logger mLogger = LoggerFactory.getLogger(ResourceHelper.class);
 
 	/**
 	 * 
 	 */
+	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
         super.onCreate(savedInstanceState);
         
-        final RelativeLayout rl = new RelativeLayout(this);        
-        final Bundle bunExtras = this.getIntent().getExtras();
-        
         // Load preferences
         this.mPreferences = new Preferences(this);
         this.mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-		final String strRenderer = this.mSharedPreferences.getString(PREFS_KEY_OSM_RENDERER, PREFS_DEFAULT_OSM_RENDERER);
+
+        final String strRenderer = this.mSharedPreferences.getString(PREFS_KEY_OSM_RENDERER, PREFS_DEFAULT_OSM_RENDERER);
+		this.mTileSource = this.getTileSourceByName(strRenderer);
+
+		// Read bundle extras
+        final Bundle bunExtras = this.getIntent().getExtras();
+
+        String title;
+        if (bunExtras.getString("title") != null)
+        	title = "OpenGPX - " + bunExtras.getString("title");
+        else
+        	title = "OpenGPX - Map Viewer";
+        setTitle (title);
+
+        
+        if (bunExtras.getInt("zoom_level") != 0)
+        	this.mintZoomLevel = bunExtras.getInt("zoom_level");
+
+        final MapOverlayItem mapOverlayItemCenter = (MapOverlayItem) bunExtras.get("map_center");
+        this.mGeoPointCenter = new GeoPoint(mapOverlayItemCenter.getLatitudeE6(), mapOverlayItemCenter.getLongitudeE6());
+        
+        this.mMapOverlayItems = (ArrayList<MapOverlayItem>) bunExtras.get("map_items");
+
+        this.mUseMetric = bunExtras.getBoolean("metric");
+        
+        if (bunExtras.get("target") != null)
+        {
+            final MapOverlayItem mapOverlayItemTarget = (MapOverlayItem) bunExtras.get("target");
+        	this.mGeoPointTarget = new GeoPoint(mapOverlayItemTarget.getLatitudeE6(), mapOverlayItemTarget.getLongitudeE6());
+        }
+
+        this.initializeUI();
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public void onConfigurationChanged(Configuration newConfig)
+	{
+	    super.onConfigurationChanged(newConfig);
+
+	    this.initializeUI();
+	}
+	
+	/**
+	 * 
+	 */
+	private void initializeUI()
+	{
+        final RelativeLayout rl = new RelativeLayout(this);        
 
         this.mOsmv = new MapView(this, TILE_SIZE_PIXELS);
         this.mOsmvController = this.mOsmv.getController();
-		final ITileSource tileSource = this.getTileSourceByName(strRenderer);
-        this.mOsmv.setTileSource(tileSource);
+        this.mOsmv.setTileSource(this.mTileSource);
         rl.addView(this.mOsmv, new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
-
-        if (bunExtras.getString("title") != null)
-        	setTitle ("OpenGPX - " + bunExtras.getString("title"));
-        else
-        	setTitle ("OpenGPX - Map Viewer");
-        if (bunExtras.getInt("zoom_level") != 0)
-        	this.mintZoomLevel = bunExtras.getInt("zoom_level");
 
         // Set zoom level
         this.mOsmvController.setZoom(this.mintZoomLevel);
         // Enable multi touch
         this.mOsmv.setMultiTouchControls(true);
 
-        final MapOverlayItem mapOverlayItemCenter = (MapOverlayItem) bunExtras.get("map_center");
-        @SuppressWarnings("unchecked")
-        final ArrayList<MapOverlayItem> alMapOverlayItems = (ArrayList<MapOverlayItem>) bunExtras.get("map_items");
-        MapOverlayItem mapOverlayItemTarget = null;
-
         // Set map center
-        final GeoPoint gpCenter = new GeoPoint(mapOverlayItemCenter.getLatitudeE6(), mapOverlayItemCenter.getLongitudeE6());
-        this.mOsmvController.setCenter(gpCenter);
+        this.mOsmvController.setCenter(this.mGeoPointCenter);
         // this.mOsmvController.animateTo(gpCenter);
                 
         // Add overlay items (caches and waypoints)
-        this.addOverlayItems(alMapOverlayItems);
+        this.addOverlayItems();
         
         int scaleBarTop = 10;
-        if (bunExtras.get("target") != null)
+        if (this.mGeoPointTarget  != null)
         {
-        	mapOverlayItemTarget = (MapOverlayItem) bunExtras.get("target");
-        	final GeoPoint gpTarget = new GeoPoint(mapOverlayItemTarget.getLatitudeE6(), mapOverlayItemTarget.getLongitudeE6());
-    		final OsmLineNavigationOverlay lno = new OsmLineNavigationOverlay(this, this.mOsmv, gpTarget);
+        	// Lock screen to Portrait in Line Navigation Module
+    		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+    		final OsmLineNavigationOverlay lno = new OsmLineNavigationOverlay(this, this.mOsmv, this.mGeoPointTarget);
     		this.mMyLocationOverlay = lno;
     		scaleBarTop += lno.getNavbarHeight();
         }
@@ -130,8 +172,7 @@ public class OsmMapViewerActivity extends Activity
     		this.mMyLocationOverlay = new MyLocationOverlay(this, this.mOsmv);
         }
 
-		this.addScaleBarOverlay(scaleBarTop, bunExtras.getBoolean("metric"));
-
+		this.addScaleBarOverlay(scaleBarTop, this.mUseMetric);
 		this.mOsmv.getOverlays().add(this.mMyLocationOverlay);
 		
 		this.mMyLocationOverlay.runOnFirstFix(new Runnable() 
@@ -156,7 +197,7 @@ public class OsmMapViewerActivity extends Activity
 		
 		this.setContentView(rl);
 	}
-
+	
 	/**
 	 * 
 	 * @param name
@@ -201,7 +242,6 @@ public class OsmMapViewerActivity extends Activity
 			}
 			
 			Toast.makeText(this, "Map Renderer changed to: " + tileSoure.name(), Toast.LENGTH_SHORT).show();
-		
 		}
 
 		// Set keep screen on property
@@ -287,17 +327,17 @@ public class OsmMapViewerActivity extends Activity
 	 * 
 	 * @param alMapOverlayItems
 	 */
-	private void addOverlayItems(ArrayList<MapOverlayItem> alMapOverlayItems)
+	private void addOverlayItems()
 	{
 		final ResourceHelper resourceHelper = new ResourceHelper(this);
 		final ResourceProxy resourceProxy = new DefaultResourceProxyImpl(this);
 		
 		final ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
-		for (MapOverlayItem mapOverlayItem : alMapOverlayItems)
+		for (MapOverlayItem mapOverlayItem : this.mMapOverlayItems)
 		{
 			final GeoPoint geoPoint = new GeoPoint(mapOverlayItem.getLatitudeE6(), mapOverlayItem.getLongitudeE6());
 			final Drawable drawable = mapOverlayItem.getDrawable(resourceHelper, false);
-			mLogger.debug("drawable size: width=" + drawable.getIntrinsicWidth() + " height=" + drawable.getIntrinsicHeight());
+			// mLogger.debug("drawable size: width=" + drawable.getIntrinsicWidth() + " height=" + drawable.getIntrinsicHeight());
 			final String strSnippet = mapOverlayItem.getSnippet();
 
 			final OverlayItem overlayItem = new OverlayItem(strSnippet, strSnippet, geoPoint);
