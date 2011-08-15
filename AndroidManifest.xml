@@ -55,7 +55,7 @@
 
 
 
-<activity android:name="org.opengpx.lib.map.OsmMapViewerActivity" android:configChanges="keyboardHidden|orientation"></activity>
+<activity android:name="org.opengpx.lib.map.OsmMapViewerActivity"></activity>
 <activity android:name="org.opengpx.OsmPreferenceActivity"></activity>
 <activity android:name="org.opengpx.OpenGpxPreferenceActivity"></activity>
 <meta-data android:name="CLOUDMADE_KEY" android:value="e9454efcb05b46b5a89b1fcce0c352d4" />

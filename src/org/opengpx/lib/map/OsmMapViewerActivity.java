@@ -22,14 +22,11 @@ import org.osmdroid.views.overlay.ScaleBarOverlay;
 import org.opengpx.OsmPreferenceActivity;
 import org.opengpx.Preferences;
 import org.opengpx.lib.ResourceHelper;
-// import org.slf4j.Logger;
-// import org.slf4j.LoggerFactory;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -125,13 +122,13 @@ public class OsmMapViewerActivity extends Activity
 	/**
 	 * 
 	 */
-	@Override
+	/* @Override
 	public void onConfigurationChanged(Configuration newConfig)
 	{
 	    super.onConfigurationChanged(newConfig);
 
 	    this.initializeUI();
-	}
+	} */
 	
 	/**
 	 * 
@@ -153,7 +150,7 @@ public class OsmMapViewerActivity extends Activity
         // Set map center
         this.mOsmvController.setCenter(this.mGeoPointCenter);
         // this.mOsmvController.animateTo(gpCenter);
-                
+
         // Add overlay items (caches and waypoints)
         this.addOverlayItems();
         
