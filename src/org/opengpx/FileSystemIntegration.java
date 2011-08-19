@@ -41,7 +41,7 @@ public class FileSystemIntegration
 		if (uri != null)
 		{
 			final String type = intent.getType();
-			if (type.equals("application/zip") || type.equals("application/gpx"))
+			if (type.equals("application/zip") || type.equals("text/plain") || type.equals("application/octet-stream"))
 			{
 				// Handle zip/gpx file
 				final File sourceFile = new File(uri.getPath());
@@ -77,6 +77,12 @@ public class FileSystemIntegration
 		}
 	}
 	
+	/**
+	 * 
+	 * @param sourceFile
+	 * @param destFile
+	 * @throws IOException
+	 */
 	private void copyFile(File sourceFile, File destFile) throws IOException 
 	{
 		if(!destFile.exists()) 
