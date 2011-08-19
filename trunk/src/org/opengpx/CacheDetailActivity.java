@@ -475,7 +475,7 @@ public class CacheDetailActivity extends TabActivity
         }
 		final String strName = String.format("%s (%s%s)", this.mCache.name, this.mCache.code, strExtraNameTag);
 		tvName.setText(strName);
-		Linkify.addLinks(tvName, Pattern.compile("[GO]C\\w+"), "http://coord.info/");
+		Linkify.addLinks(tvName, Pattern.compile("[GO]C\\d\\w+"), "http://coord.info/");
 
 		final String strCacheType = this.mCache.getCacheType().toString();
 		try 
@@ -514,6 +514,9 @@ public class CacheDetailActivity extends TabActivity
 		{
 			String strPatternPlacedBy = this.mCache.placedBy;
 			strPatternPlacedBy = strPatternPlacedBy.replace("+", "\\+");
+			strPatternPlacedBy = strPatternPlacedBy.replace("[", "\\[");
+			strPatternPlacedBy = strPatternPlacedBy.replace("]", "\\]");
+
 			final Pattern patOwner = Pattern.compile(strPatternPlacedBy);
 			final String strOwnerUrl = "http://www.geocaching.com/profile/?id=" + Integer.toString(this.mCache.ownerId) + "&name=";
 			Linkify.addLinks(tvPlacedBy, patOwner, strOwnerUrl);
