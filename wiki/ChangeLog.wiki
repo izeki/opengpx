@@ -13,6 +13,8 @@ Next version (not released yet):
   * osmdroid updated to latest version
   * added option to choose waypoint click action
   * added possibility to read gpx/loc/png/jpg files from zip files
+  * re-write of preferences
+  * added zip- and gpx-file association with opengpx
 
 Version *1.0.1* (8. December 2010)
 
