@@ -1128,7 +1128,6 @@ public class CacheDetailActivity extends TabActivity
 		{
 			final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 			dialog.setTitle("Variables");
-			// dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 			final LayoutInflater inflater = this.getLayoutInflater();
 			final View layout = inflater.inflate(R.layout.variables, null);
 
