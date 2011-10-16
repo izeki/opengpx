@@ -14,12 +14,11 @@ import org.opengpx.lib.tools.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.ximpleware.extended.AutoPilotHuge;
-import com.ximpleware.extended.NavExceptionHuge;
-import com.ximpleware.extended.VTDExceptionHuge;
-import com.ximpleware.extended.VTDGenHuge;
-import com.ximpleware.extended.VTDNavHuge;
-import com.ximpleware.extended.XMLBuffer;
+import com.ximpleware.AutoPilot;
+import com.ximpleware.NavException;
+import com.ximpleware.VTDException;
+import com.ximpleware.VTDGen;
+import com.ximpleware.VTDNav;
 
 /**
  * 
@@ -58,12 +57,13 @@ public class GPXFileReader
 		{
 			try
 			{
-				final VTDGenHuge vgh = new VTDGenHuge();
+				final VTDGen vgh = new VTDGen();
 
-				if (vgh.parseFile(fileName, true, VTDGenHuge.MEM_MAPPED))
+				// vgh.parseZIPFile(arg0, arg1, arg2)
+				if (vgh.parseFile(fileName, true))
 				{
 					mLogger.debug("Parsed in: " + Long.toString(System.currentTimeMillis() - start) + " msec");
-					final VTDNavHuge vn = vgh.getNav();
+					final VTDNav vn = vgh.getNav();
 					retVal = readData(vn);
 					mLogger.debug("Completed in: " + Long.toString(System.currentTimeMillis() - start) + " msec");
 				}
@@ -91,12 +91,11 @@ public class GPXFileReader
 
 		try
 		{
-			final VTDGenHuge vgh = new VTDGenHuge();
-			final XMLBuffer xmlBuffer = new XMLBuffer(byteArray);
-			vgh.setDoc(xmlBuffer);
+			final VTDGen vgh = new VTDGen();
+			vgh.setDoc(byteArray);
 			vgh.parse(true);
 			mLogger.debug("Parsed in: " + Long.toString(System.currentTimeMillis() - start) + " msec");
-			final VTDNavHuge vn = vgh.getNav();
+			final VTDNav vn = vgh.getNav();
 			retVal = readData(vn);
 			mLogger.debug("Completed in: " + Long.toString(System.currentTimeMillis() - start) + " msec");
 		}
@@ -115,9 +114,10 @@ public class GPXFileReader
 	 * @return
 	 * @throws VTDExceptionHuge
 	 */
-	private boolean readData(final VTDNavHuge vn) throws VTDExceptionHuge
+	// private boolean readData(final VTDNavHuge vn) throws VTDExceptionHuge
+	private boolean readData(final VTDNav vn) throws VTDException
 	{
-		final AutoPilotHuge apWpt = new AutoPilotHuge(vn);
+		final AutoPilot apWpt = new AutoPilot(vn);
 
 		apWpt.selectXPath("/gpx/wpt");
 
@@ -133,7 +133,7 @@ public class GPXFileReader
 			wpt.latitude = vn.parseDouble(vn.getAttrVal("lat"));
 			wpt.longitude = vn.parseDouble(vn.getAttrVal("lon"));
 			
-			vn.toElement(VTDNavHuge.FIRST_CHILD);
+			vn.toElement(VTDNav.FIRST_CHILD);
 			
 			do
 			{
@@ -198,7 +198,7 @@ public class GPXFileReader
 				else if (currentElementName.equalsIgnoreCase("extensions"))
 				{
 					vn.push();
-					vn.toElement(VTDNavHuge.FIRST_CHILD);
+					vn.toElement(VTDNav.FIRST_CHILD);
 					
 					final String elementName = vn.toNormalizedString(vn.getCurrentIndex()).replace("groundspeak:", "");
 					
@@ -210,7 +210,7 @@ public class GPXFileReader
 
 					vn.pop();
 				}
-			} while (vn.toElement(VTDNavHuge.NEXT_SIBLING));
+			} while (vn.toElement(VTDNav.NEXT_SIBLING));
 
 			if (foundCacheRecord)
 			{
@@ -234,7 +234,7 @@ public class GPXFileReader
 	 * 
 	 * @param vn
 	 */
-	private void readCache(final VTDNavHuge vn)
+	private void readCache(final VTDNav vn)
 	{
 		try
 		{
@@ -269,7 +269,7 @@ public class GPXFileReader
 				currentCache.parseOpencachingStatus(vn.toNormalizedString(idx));
 			}
 	
-			vn.toElement(VTDNavHuge.FIRST_CHILD);
+			vn.toElement(VTDNav.FIRST_CHILD);
 	
 			do
 			{
@@ -355,10 +355,10 @@ public class GPXFileReader
 				{
 					this.readTravelbugs(vn);
 				}
-			} while (vn.toElement(VTDNavHuge.NEXT_SIBLING));
+			} while (vn.toElement(VTDNav.NEXT_SIBLING));
 			
 		}
-		catch (NavExceptionHuge e) 
+		catch (NavException e) 
 		{
 			mLogger.error("Error reading cache information.");
 			e.printStackTrace();
@@ -369,12 +369,12 @@ public class GPXFileReader
 	 * 
 	 * @param vn
 	 */
-	private void readAttributes(final VTDNavHuge vn)
+	private void readAttributes(final VTDNav vn)
 	{
 		try
 		{
 			vn.push();
-			vn.toElement(VTDNavHuge.FIRST_CHILD);
+			vn.toElement(VTDNav.FIRST_CHILD);
 			
 			do
 			{
@@ -390,11 +390,11 @@ public class GPXFileReader
 
 					currentCache.addAttribute(attr);
 				}
-			} while (vn.toElement(VTDNavHuge.NEXT_SIBLING));
+			} while (vn.toElement(VTDNav.NEXT_SIBLING));
 
 			vn.pop();
 		}
-		catch (NavExceptionHuge e) 
+		catch (NavException e) 
 		{
 			mLogger.error("Error reading attribute information.");
 			e.printStackTrace();
@@ -405,12 +405,12 @@ public class GPXFileReader
 	 * 
 	 * @param vn
 	 */
-	private void readLogs(final VTDNavHuge vn)
+	private void readLogs(final VTDNav vn)
 	{
 		try 
 		{
 			vn.push();
-			vn.toElement(VTDNavHuge.FIRST_CHILD);
+			vn.toElement(VTDNav.FIRST_CHILD);
 			
 			do
 			{
@@ -423,7 +423,7 @@ public class GPXFileReader
 					final LogEntry logEntry = new LogEntry();
 					currentCache.addLogEntry(logEntry);
 	
-					vn.toElement(VTDNavHuge.FIRST_CHILD);
+					vn.toElement(VTDNav.FIRST_CHILD);
 					
 					do
 					{
@@ -453,15 +453,15 @@ public class GPXFileReader
 							logEntry.latitude = vn.parseDouble(vn.getAttrVal("lat"));
 							logEntry.longitude = vn.parseDouble(vn.getAttrVal("lon"));
 						}													
-					} while (vn.toElement(VTDNavHuge.NEXT_SIBLING));
+					} while (vn.toElement(VTDNav.NEXT_SIBLING));
 					
 					vn.pop();
 				}
-			} while (vn.toElement(VTDNavHuge.NEXT_SIBLING));
+			} while (vn.toElement(VTDNav.NEXT_SIBLING));
 	
 			vn.pop();
 		} 
-		catch (NavExceptionHuge e) 
+		catch (NavException e) 
 		{
 			mLogger.error("Error reading log information.");
 			e.printStackTrace();
@@ -472,12 +472,12 @@ public class GPXFileReader
 	 * 
 	 * @param vn
 	 */
-	private void readTravelbugs(final VTDNavHuge vn)
+	private void readTravelbugs(final VTDNav vn)
 	{
 		try 
 		{
 			vn.push();
-			vn.toElement(VTDNavHuge.FIRST_CHILD);
+			vn.toElement(VTDNav.FIRST_CHILD);
 
 			do
 			{
@@ -491,7 +491,7 @@ public class GPXFileReader
 					bug.reference = vn.toNormalizedString(vn.getAttrVal("ref"));
 
 					vn.push();
-					vn.toElement(VTDNavHuge.FIRST_CHILD);
+					vn.toElement(VTDNav.FIRST_CHILD);
 					
 					do
 					{
@@ -500,15 +500,15 @@ public class GPXFileReader
 						{
 							bug.name = vn.toNormalizedString(vn.getText());											
 						}
-					} while (vn.toElement(VTDNavHuge.NEXT_SIBLING));
+					} while (vn.toElement(VTDNav.NEXT_SIBLING));
 					
 					vn.pop();
 				}
-			} while (vn.toElement(VTDNavHuge.NEXT_SIBLING));
+			} while (vn.toElement(VTDNav.NEXT_SIBLING));
 	
 			vn.pop();
 		} 
-		catch (NavExceptionHuge e) 
+		catch (NavException e) 
 		{
 			mLogger.error("Error reading travelbug information.");
 			e.printStackTrace();

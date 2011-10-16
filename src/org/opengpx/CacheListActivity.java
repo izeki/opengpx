@@ -608,7 +608,10 @@ public class CacheListActivity extends ListActivity
 			final String strLowerCaseName = name.toLowerCase();
 			final Boolean blnHeaderCorrect = (!name.startsWith("."));
 			final Boolean blnExtensionCorrect = strLowerCaseName.endsWith(".db4o");
-			return (blnExtensionCorrect && blnHeaderCorrect);
+			
+			final Boolean isInternalDatabase = strLowerCaseName.startsWith("searchdatabase") || strLowerCaseName.startsWith("fieldnotedatabase");
+			
+			return (blnExtensionCorrect && blnHeaderCorrect && !isInternalDatabase);
 		}
 	}
 
