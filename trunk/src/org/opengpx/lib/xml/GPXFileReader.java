@@ -59,7 +59,6 @@ public class GPXFileReader
 			{
 				final VTDGen vgh = new VTDGen();
 
-				// vgh.parseZIPFile(arg0, arg1, arg2)
 				if (vgh.parseFile(fileName, true))
 				{
 					mLogger.debug("Parsed in: " + Long.toString(System.currentTimeMillis() - start) + " msec");
@@ -114,7 +113,6 @@ public class GPXFileReader
 	 * @return
 	 * @throws VTDExceptionHuge
 	 */
-	// private boolean readData(final VTDNavHuge vn) throws VTDExceptionHuge
 	private boolean readData(final VTDNav vn) throws VTDException
 	{
 		final AutoPilot apWpt = new AutoPilot(vn);
