@@ -1,6 +1,7 @@
 package org.opengpx.lib.xml;
 
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -52,10 +53,26 @@ public class ZipFileReader
 
 				if (filename.endsWith("gpx") || filename.endsWith("loc"))
 				{
-					final byte[] buffer = new byte[(int) zipEntry.getSize()];
-					final InputStream inputStream = zipFile.getInputStream(zipEntry);
-					inputStream.read(buffer, 0, buffer.length);
-					inputStream.close();
+					final ByteArrayOutputStream out = new ByteArrayOutputStream(); 
+		            final InputStream in = zipFile.getInputStream(zipEntry); 
+
+		            byte[] tempBuffer = new byte[1024];
+		            int read;
+		            while (-1 != (read = in.read(tempBuffer))) { 
+		                out.write(tempBuffer, 0, read); 
+		            } 
+		            in.close();
+		            
+		            final byte[] buffer = out.toByteArray();
+		            out.close();
+					
+					// final byte[] buffer = new byte[(int) zipEntry.getSize()];
+					// final InputStream inputStream = zipFile.getInputStream(zipEntry);
+					// inputStream.read(buffer, 0, buffer.length);
+					// inputStream.close();
+
+					// final InputStreamReader isr = new InputStreamReader(zipFile.getInputStream(zipEntry), "UTF-8");
+					// final BufferedReader br = new BufferedReader(isr);
 
 					if (filename.endsWith("gpx"))
 					{
