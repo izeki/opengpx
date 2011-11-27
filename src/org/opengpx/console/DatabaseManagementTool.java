@@ -83,7 +83,7 @@ public class DatabaseManagementTool
 	 */
 	public void showDatabaseInfo()
 	{
-		System.out.println(this.mCacheDatabase.getInformation());
+		System.out.println(this.mCacheDatabase.getInformation("Database", "Cache index size", "Cache database size", "Cache variables", "Cache votes", "Field notes"));
 	}
 
 	/**

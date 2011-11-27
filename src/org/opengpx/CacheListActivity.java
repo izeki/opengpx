@@ -35,6 +35,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
+import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
@@ -403,7 +404,9 @@ public class CacheListActivity extends ListActivity
 			this.clearDatabase();
 			return true;
 		case R.id.MenuDatabaseInfo:
-			Toast.makeText(this, this.mCacheDatabase.getInformation(), Toast.LENGTH_LONG).show();
+			final Resources res = this.getResources();
+			final String databaseInfo = this.mCacheDatabase.getInformation(res.getString(R.string.database), res.getString(R.string.cache_index_size), res.getString(R.string.cache_database_size), res.getString(R.string.cache_variables), res.getString(R.string.cache_votes), res.getString(R.string.field_notes));
+			Toast.makeText(this, databaseInfo, Toast.LENGTH_LONG).show();
 			return true;
 		case R.id.MenuDatabaseSelect:
 			this.showDatabaseSelectionDialog();
