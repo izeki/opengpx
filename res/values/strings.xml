@@ -6,7 +6,7 @@
 <string name="menu_sort_by_name">by Name</string>
 <string name="menu_sort_by_distance">by Distance</string>
 <string name="menu_show_info_file">Show Info File</string>
-<string name="menu_sort">Sort ...</string>
+<string name="menu_sort">Sort</string>
 <string name="menu_show_hint">Hint</string>
 <string name="menu_show_inventory">Inventory</string>
 <string name="menu_cache_detail_map">Map</string>
@@ -16,7 +16,7 @@
 <string name="menu_show_attributes">Attributes</string>
 <string name="menu_about">About</string>
 <string name="spinner_select_cmd_type">Select command type</string>
-<string name="menu_database">Database ...</string>
+<string name="menu_database">Database</string>
 <string name="menu_database_clear">Clear</string>
 <string name="menu_database_info">Information</string>
 <string name="about_comments">\nPaperless Geocaching application.\n(c) 2009-2011\nMartin Preishuber and Travis Tabbal</string>
@@ -110,5 +110,11 @@
 <string name="pref_waypoint_action">Waypoint action</string>
 <string name="pref_waypoint_action_desc">Action performed when clicking on a waypoint</string>
 <string name="unknown">Unknown</string>
-<string name="menu_field_notes">Field Notes ...</string>
+<string name="menu_field_notes">Field Notes</string>
+<string name="database">Database</string>
+<string name="cache_index_size">Cache index size</string>
+<string name="cache_database_size">Cache database size</string>
+<string name="cache_variables">Cache variables</string>
+<string name="cache_votes">Cache votes</string>
+<string name="field_notes">Field notes</string>
 </resources>
