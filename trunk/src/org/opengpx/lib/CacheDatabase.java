@@ -13,6 +13,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.opengpx.R;
 import org.opengpx.lib.geocache.Cache;
 import org.opengpx.lib.geocache.FieldNote;
 import org.opengpx.lib.geocache.GCVote;
@@ -707,8 +708,25 @@ public class CacheDatabase
 	{
 		if (this.mDB4ODatabase != null)
 		{
-			List<GCVote> votes = this.mDB4ODatabase.query(GCVote.class);
+			final List<GCVote> votes = this.mDB4ODatabase.query(GCVote.class);
 			return votes.size();
+		}
+		else
+		{
+			return -1;
+		}
+	}
+	
+	/**
+	 * get number of field notes in field note database
+	 * @return
+	 */
+	public int getFieldNoteDBSize()
+	{
+		if (this.fieldNoteDB != null)
+		{
+			final List<FieldNote> fieldNotes = this.fieldNoteDB.query(FieldNote.class);
+			return fieldNotes.size();
 		}
 		else
 		{
@@ -1248,11 +1266,12 @@ public class CacheDatabase
 	public String getInformation()
 	{
 		final StringBuilder sbInfo = new StringBuilder();
-		sbInfo.append(String.format("Database: %s", this.mstrDatabaseFilename));
-		sbInfo.append(String.format("\nCache index size: %d", this.indexSize()));
-		sbInfo.append(String.format("\nCache database size: %d", this.databaseSize()));
-		sbInfo.append(String.format("\nCache variables: %d", this.cacheVariableSize()));
-		sbInfo.append(String.format("\nCache votes: %d", this.voteSize()));
+		sbInfo.append(String.format("%s: %s\n", R.string.database, this.mstrDatabaseFilename));
+		sbInfo.append(String.format("%s: %d\n", R.string.cache_index_size, this.indexSize()));
+		sbInfo.append(String.format("%s: %d\n", R.string.cache_database_size, this.databaseSize()));
+		sbInfo.append(String.format("%s: %d\n", R.string.cache_variables, this.cacheVariableSize()));
+		sbInfo.append(String.format("%s: %d\n", R.string.cache_votes, this.voteSize()));
+		sbInfo.append(String.format("%s: %d", R.string.field_notes, this.getFieldNoteDBSize()));
 		return sbInfo.toString();
 	}
 
