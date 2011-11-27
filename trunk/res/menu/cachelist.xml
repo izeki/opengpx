@@ -16,11 +16,17 @@
 </menu>
   </item>
   <item android:title="@string/menu_search_online" android:icon="@android:drawable/ic_menu_view" android:id="@+id/MenuSearchOnline"></item>
-  <item android:title="@string/menu_upload_field_notes" android:id="@+id/MenuUploadFieldNotes"></item>
+  <item android:id="@+id/MenuFieldNotes" android:title="@string/menu_field_notes">
+      <menu>
+  		<item android:title="@string/menu_upload_field_notes" android:id="@+id/MenuUploadFieldNotes"></item>
+  		<item android:title="@string/menu_delete_field_notes" android:id="@+id/MenuDeleteFieldNotes"></item>
+      </menu>
+  </item>
   <item android:title="@string/menu_show_info_file" android:icon="@android:drawable/ic_menu_view" android:id="@+id/MenuInfoFile"></item>
   <item android:id="@+id/MenuPreferences" android:title="@string/menu_preferences" android:icon="@android:drawable/ic_menu_preferences"></item>
-  <item android:title="@string/menu_delete_field_notes" android:id="@+id/MenuDeleteFieldNotes"></item>
+  
   <item android:title="@string/menu_about" android:icon="@android:drawable/ic_menu_info_details" android:id="@+id/MenuAbout"></item>
 	<item android:id="@+id/MenuExit" android:title="@string/menu_exit"></item>
+	
 
 </menu>
