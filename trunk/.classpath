@@ -8,5 +8,5 @@
 	<classpathentry kind="lib" path="lib/osmdroid-android-3.0.5.jar"/>
 	<classpathentry kind="lib" path="lib/vtd-xml-2.10.jar"/>
 	<classpathentry kind="lib" path="lib/db4o-8.0.224.15975-core-java5.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

@@ -7,11 +7,12 @@ import java.util.TimeZone;
 
 public class FieldNote
 {
-	public String		gcId;
-	public Date			noteTime;
-	public LogType	logType;
-	public String		logText;
-	
+	public String gcId;
+	public String gcName;
+	public Date noteTime;
+	public LogType logType;
+	public String logText;
+
 	private static final String DATE_FORMAT_STRING = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 
 	public enum LogType
@@ -23,7 +24,7 @@ public class FieldNote
 		WEBCAM_TAKEN("Webcam photo taken"),
 		PRIVATE("Private note");
 
-		public String	text;
+		public String text;
 
 		LogType(String text)
 		{

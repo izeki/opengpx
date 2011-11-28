@@ -458,17 +458,21 @@ public class CacheListActivity extends ListActivity
 			this.sortCachesByName();
 			return true;
 		case R.id.MenuShowKeyboard:
-			InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+			final InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
 			imm.showSoftInput(this.getListView(), 0);
 			return true;
 		case R.id.MenuExit:
 			this.finish();
 			return true;
 		case R.id.MenuUploadFieldNotes:
-			uploadFieldNotes();
+			this.uploadFieldNotes();
 			return true;
 		case R.id.MenuDeleteFieldNotes:
 			mCacheDatabase.deleteFieldNotes(mCacheDatabase.getFieldNotes());
+			return true;
+		case R.id.MenuShowFieldNotes:
+			this.showFieldNotes();
+			return true;
 		}
 		return false;
 	}
@@ -566,6 +570,11 @@ public class CacheListActivity extends ListActivity
 		{
 			// Ignore "View not attached to window" errors here
 		}
+	}
+	
+	private void showFieldNotes()
+	{
+		Toast.makeText(this, "wip", Toast.LENGTH_LONG);
 	}
 	
 	private void searchOnline()
