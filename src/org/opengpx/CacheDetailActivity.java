@@ -160,8 +160,9 @@ public class CacheDetailActivity extends TabActivity
 
 		if (log != null)
 		{
-			FieldNote note = new FieldNote();
+			final FieldNote note = new FieldNote();
 			note.gcId = mCache.code;
+			note.gcName = mCache.name;
 			note.logText = text.getText().toString();
 			note.logType = log;
 			note.noteTime = new Date();

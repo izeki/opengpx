@@ -117,4 +117,5 @@
 <string name="cache_variables">Cache variables</string>
 <string name="cache_votes">Cache votes</string>
 <string name="field_notes">Field notes</string>
+<string name="menu_show_field_notes">Show</string>
 </resources>
