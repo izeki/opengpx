@@ -110,5 +110,5 @@
 <string name="pref_waypoint_action">Waypoint action</string>
 <string name="pref_waypoint_action_desc">Action performed when clicking on a waypoint</string>
 <string name="unknown">Unknown</string>
-<string name="menu_field_notes">Fieldnotes</string><string name="database">Datenbank</string><string name="cache_index_size">Cache-Index Grösse</string><string name="cache_database_size">Cache-Datenbank Grösse</string><string name="cache_variables">Cache-Variablen</string><string name="cache_votes">Cache Votes</string><string name="field_notes">Fieldnotes</string><string name="menu_show_field_notes">Anzeigen</string>
+<string name="menu_field_notes">Fieldnotes</string><string name="database">Datenbank</string><string name="cache_index_size">Cache-Index Grösse</string><string name="cache_database_size">Cache-Datenbank Grösse</string><string name="cache_variables">Cache-Variablen</string><string name="cache_votes">Cache Votes</string><string name="field_notes">Fieldnotes</string><string name="menu_show_field_notes">Anzeigen</string><string name="file_not_found">Datei wurde nicht gefunden.</string>
 </resources>
