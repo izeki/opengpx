@@ -1,13 +1,15 @@
 package org.opengpx;
 
-import java.io.DataInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import org.opengpx.lib.tools.StackTraceUtil;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -26,16 +28,13 @@ public class TextViewerActivity extends Activity
         
     	// this.setRequestedOrientation(this.mSettings.getInt(OpenGPX.PREFS_KEY_SCREEN_ORIENTATION, OpenGPX.PREFS_DEFAULT_SCREEN_ORIENTATION));
         
-        Bundle bunExtras = this.getIntent().getExtras();
-        String strFilename = (String) bunExtras.get("filename");
-        // File file = new File(strFilename);
+        final Bundle bunExtras = this.getIntent().getExtras();
+        final String strFilename = (String) bunExtras.get("filename");
         
         this.setTitle("OpenGPX - " + strFilename);
         
-        TextView tvContent = (TextView) this.findViewById(R.id.TextViewerContent);
+        final TextView tvContent = (TextView) this.findViewById(R.id.TextViewerContent);
         tvContent.setText(this.loadFileContent(strFilename));
-        // TextView tvFooter = (TextView) this.findViewById(R.id.TextViewerFooter);
-        // tvFooter.setText(strFilename);
     }
    
     /**
@@ -48,18 +47,25 @@ public class TextViewerActivity extends Activity
     	final File file = new File(strFilename);
     	if (file.exists())
     	{
-    		FileInputStream fis;
 			try {
-				fis = new FileInputStream(strFilename);
-	    		final DataInputStream dis = new DataInputStream(fis);
-	    		String strData = "";
-	    		while (dis.available() != 0)
+				
+				final FileInputStream fis = new FileInputStream(strFilename);
+				final InputStreamReader isr = new InputStreamReader(fis, "UTF8");
+				final BufferedReader in = new BufferedReader(isr);
+				
+				final StringBuilder text = new StringBuilder();
+				String strLine = "";
+	    		
+	    		while ((strLine = in.readLine()) != null) 
 	    		{
-	    			strData = strData.concat(dis.readLine()).concat("\n");
+	    			text.append(strLine.concat(System.getProperty("line.separator")));
 	    		}
-	    		dis.close();
+	    		
+	    		in.close();
+	    		isr.close();
 	    		fis.close();
-	    		return strData;
+	    		
+	    		return text.toString();
 			} 
 			catch (IOException e) 
 			{
@@ -68,7 +74,8 @@ public class TextViewerActivity extends Activity
     	} 
     	else 
     	{
-    		return "File not found.";
+    		final Resources res = this.getResources();
+    		return res.getString(R.string.file_not_found);
     	}
     }
 }

@@ -118,4 +118,5 @@
 <string name="cache_votes">Cache votes</string>
 <string name="field_notes">Field notes</string>
 <string name="menu_show_field_notes">Show</string>
+<string name="file_not_found">File not found.</string>
 </resources>
