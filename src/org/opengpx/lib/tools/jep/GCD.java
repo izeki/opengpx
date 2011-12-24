@@ -19,7 +19,7 @@ public class GCD extends PostfixMathCommand
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
-	public void run(Stack inStack) throws ParseException 
+	public void run(@SuppressWarnings("rawtypes") Stack inStack) throws ParseException 
 	{
 		// check the stack
 		checkStack(inStack);
