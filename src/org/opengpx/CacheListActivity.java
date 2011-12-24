@@ -67,6 +67,7 @@ public class CacheListActivity extends ListActivity
 	private ImportResult mImportResult;
 
 	private GpsLocationListener	mLocationListener = null;
+	private Resources mResources = null;
 
 	private static final Logger mLogger = LoggerFactory.getLogger(CacheListActivity.class);
 	
@@ -84,6 +85,7 @@ public class CacheListActivity extends ListActivity
 		setContentView(R.layout.cachelist);
 
 		// mLogger.debug("onCreate");
+		this.mResources = this.getResources();
 		
 		this.mPreferences = new Preferences(this);
 
@@ -155,7 +157,7 @@ public class CacheListActivity extends ListActivity
      */
 	private void loadCacheList()
 	{
-		mProgressDialog = ProgressDialog.show(this, "Indexing / reading caches", "Please wait - this may take a while ...", true, false);
+		mProgressDialog = ProgressDialog.show(this, this.mResources.getString(R.string.reading_caches), this.mResources.getString(R.string.please_wait), true, false);
 
 		Thread thread = new Thread(null, doBackgroundInitialization, "BgInit");
 		thread.start();
@@ -278,7 +280,7 @@ public class CacheListActivity extends ListActivity
 		}
 
 		final TextView tvStats = (TextView) this.findViewById(R.id.CacheStats);
-		tvStats.setText(String.format("Caches: %d (Time: %dms)", this.mCacheDatabase.indexSize(), mlngLoadingTime));
+		tvStats.setText(String.format("Caches: %d (%s: %dms)", this.mCacheDatabase.indexSize(), this.mResources.getString(R.string.time), mlngLoadingTime));
 		if (this.mCacheDatabase.size() == 0 && mPreferences.getShowEmptyDbHelp())
 		{
 			// Show some reminder on how to start
@@ -289,10 +291,11 @@ public class CacheListActivity extends ListActivity
 		// Show import results
 		if ((mImportResult.successful > 0) || (mImportResult.failed > 0))
 		{
-			StringBuilder sbResult = new StringBuilder();
-			sbResult.append("Indexing results\n");
-			if (mImportResult.successful > 0) sbResult.append(String.format("\nSuccessful: %d", mImportResult.successful));
-			if (mImportResult.failed > 0) sbResult.append(String.format("\nFailed: %d", mImportResult.successful));
+			final StringBuilder sbResult = new StringBuilder();
+			sbResult.append(this.mResources.getString(R.string.indexing_result));
+			sbResult.append("\n");
+			if (mImportResult.successful > 0) sbResult.append(String.format("\n%s: %d", this.mResources.getString(R.string.successful), mImportResult.successful));
+			if (mImportResult.failed > 0) sbResult.append(String.format("\n%s: %d", this.mResources.getString(R.string.failed), mImportResult.successful));
 			Toast.makeText(this, sbResult.toString(), Toast.LENGTH_LONG).show();
 		}
 	}
@@ -302,7 +305,7 @@ public class CacheListActivity extends ListActivity
      */
 	private void showDbOpenError()
 	{
-		AlertDialog errorDialog = new AlertDialog.Builder(this).create();
+		final AlertDialog errorDialog = new AlertDialog.Builder(this).create();
 		errorDialog.setTitle("Unable to open db4o database");
 		errorDialog.setMessage(this.mCacheDatabase.getErrorMessage());
 		errorDialog.setButton("OK", new DialogInterface.OnClickListener()
