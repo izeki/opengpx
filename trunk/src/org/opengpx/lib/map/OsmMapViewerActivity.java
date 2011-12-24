@@ -77,6 +77,7 @@ public class OsmMapViewerActivity extends Activity
 	/**
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
