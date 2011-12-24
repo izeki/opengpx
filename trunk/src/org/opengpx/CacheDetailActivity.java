@@ -47,6 +47,7 @@ import android.app.TabActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -85,19 +86,20 @@ import android.widget.AdapterView.OnItemClickListener;
  */
 public class CacheDetailActivity extends TabActivity
 {
-	private TabHost							mTabHost;
-	private Cache								mCache;
-	private Preferences		mPreferences;
-	private boolean							isSaved							= false;
+	private TabHost					mTabHost;
+	private Cache					mCache;
+	private Preferences				mPreferences;
+	private boolean					isSaved					= false;
 	private ProgressDialog			progressDialog;
-	private CacheDatabase				cacheDatabase;
+	private CacheDatabase			cacheDatabase;
+	private Resources				mResources;
 
-	private static final int		MENU_INFO						= Menu.FIRST;
-	private static final int		MENU_COMPASS		= MENU_INFO + 1;
-	private static final int		MENU_MAP						= MENU_COMPASS + 1;
-	private static final int		MENU_NAVIGATE				= MENU_MAP + 1;
-	private static final int		MENU_GEO			= MENU_NAVIGATE + 1;
-	private static final int		MENU_DELETE					= MENU_GEO + 1;
+	private static final int		MENU_INFO				= Menu.FIRST;
+	private static final int		MENU_COMPASS			= MENU_INFO + 1;
+	private static final int		MENU_MAP				= MENU_COMPASS + 1;
+	private static final int		MENU_NAVIGATE			= MENU_MAP + 1;
+	private static final int		MENU_GEO				= MENU_NAVIGATE + 1;
+	private static final int		MENU_DELETE				= MENU_GEO + 1;
 
 	// public static final String	ANDNAV2_VIEW_ACTION	= "org.andnav2.intent.ACTION_VIEW";
 	// public static final String	ANDNAV2_NAV_ACTION	= "org.andnav2.intent.ACTION_NAV_TO";
@@ -110,6 +112,8 @@ public class CacheDetailActivity extends TabActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.cachedetail);
+
+		this.mResources = this.getResources();
 
 		cacheDatabase = CacheDatabase.getInstance();
 
@@ -131,10 +135,10 @@ public class CacheDetailActivity extends TabActivity
 
 			this.mTabHost = getTabHost();
 
-			this.mTabHost.addTab(mTabHost.newTabSpec("tabDescription").setIndicator("Description", getResources().getDrawable(android.R.drawable.ic_menu_info_details)).setContent(R.id.CacheDetailDescriptionScrollView));
-			this.mTabHost.addTab(mTabHost.newTabSpec("tabWaypoints").setIndicator("Waypoints", getResources().getDrawable(android.R.drawable.ic_menu_myplaces)).setContent(R.id.WaypointList));
-			this.mTabHost.addTab(mTabHost.newTabSpec("tabLogs").setIndicator("Logs", getResources().getDrawable(android.R.drawable.ic_menu_recent_history)).setContent(R.id.CacheDetailLogLayout));
-			this.mTabHost.addTab(mTabHost.newTabSpec("tabLogVisit").setIndicator("Log Visit", getResources().getDrawable(android.R.drawable.ic_menu_agenda)).setContent(R.id.CacheDetailLogVisitScrollView));
+			this.mTabHost.addTab(mTabHost.newTabSpec("tabDescription").setIndicator(this.mResources.getString(R.string.cache_desc_description), this.mResources.getDrawable(android.R.drawable.ic_menu_info_details)).setContent(R.id.CacheDetailDescriptionScrollView));
+			this.mTabHost.addTab(mTabHost.newTabSpec("tabWaypoints").setIndicator(this.mResources.getString(R.string.cache_desc_waypoints), this.mResources.getDrawable(android.R.drawable.ic_menu_myplaces)).setContent(R.id.WaypointList));
+			this.mTabHost.addTab(mTabHost.newTabSpec("tabLogs").setIndicator(this.mResources.getString(R.string.cache_desc_logs), this.mResources.getDrawable(android.R.drawable.ic_menu_recent_history)).setContent(R.id.CacheDetailLogLayout));
+			this.mTabHost.addTab(mTabHost.newTabSpec("tabLogVisit").setIndicator(this.mResources.getString(R.string.cache_desc_log_visit), this.mResources.getDrawable(android.R.drawable.ic_menu_agenda)).setContent(R.id.CacheDetailLogVisitScrollView));
 
 			this.readCacheDescription();
 			this.initializeWaypointList();
@@ -624,7 +628,7 @@ public class CacheDetailActivity extends TabActivity
 			tvShortDescHeader.setBackgroundColor(0xFFc8c8c8);
 			tvShortDescHeader.setTextColor(0xFF000000);
 			tvShortDescHeader.setTextSize(10);
-			tvShortDescHeader.setText("Short Description");
+			tvShortDescHeader.setText(this.mResources.getString(R.string.cache_desc_short_description));
 			tvShortDescHeader.setGravity(Gravity.CENTER_HORIZONTAL);
 			llCacheDescription.addView(tvShortDescHeader);
 
@@ -654,7 +658,7 @@ public class CacheDetailActivity extends TabActivity
 		tvLongDescHeader.setBackgroundColor(0xFFc8c8c8);
 		tvLongDescHeader.setTextColor(0xFF000000);
 		tvLongDescHeader.setTextSize(10);
-		tvLongDescHeader.setText("Long Description");
+		tvLongDescHeader.setText(this.mResources.getString(R.string.cache_desc_long_description));
 		tvLongDescHeader.setGravity(Gravity.CENTER_HORIZONTAL);
 		llCacheDescription.addView(tvLongDescHeader);
 

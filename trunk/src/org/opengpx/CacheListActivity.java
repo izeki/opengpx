@@ -67,7 +67,7 @@ public class CacheListActivity extends ListActivity
 	private ImportResult mImportResult;
 
 	private GpsLocationListener	mLocationListener = null;
-	private Resources mResources = null;
+	private Resources mResources;
 
 	private static final Logger mLogger = LoggerFactory.getLogger(CacheListActivity.class);
 	
@@ -86,7 +86,6 @@ public class CacheListActivity extends ListActivity
 
 		// mLogger.debug("onCreate");
 		this.mResources = this.getResources();
-		
 		this.mPreferences = new Preferences(this);
 
 		// Handle zip and/or gpx files
@@ -157,7 +156,7 @@ public class CacheListActivity extends ListActivity
      */
 	private void loadCacheList()
 	{
-		mProgressDialog = ProgressDialog.show(this, this.mResources.getString(R.string.reading_caches), this.mResources.getString(R.string.please_wait), true, false);
+		mProgressDialog = ProgressDialog.show(this, this.mResources.getString(R.string.cache_list_reading_caches), this.mResources.getString(R.string.cache_list_please_wait), true, false);
 
 		Thread thread = new Thread(null, doBackgroundInitialization, "BgInit");
 		thread.start();
@@ -280,7 +279,7 @@ public class CacheListActivity extends ListActivity
 		}
 
 		final TextView tvStats = (TextView) this.findViewById(R.id.CacheStats);
-		tvStats.setText(String.format("Caches: %d (%s: %dms)", this.mCacheDatabase.indexSize(), this.mResources.getString(R.string.time), mlngLoadingTime));
+		tvStats.setText(String.format("Caches: %d (%s: %dms)", this.mCacheDatabase.indexSize(), this.mResources.getString(R.string.cache_list_time), mlngLoadingTime));
 		if (this.mCacheDatabase.size() == 0 && mPreferences.getShowEmptyDbHelp())
 		{
 			// Show some reminder on how to start
@@ -292,10 +291,10 @@ public class CacheListActivity extends ListActivity
 		if ((mImportResult.successful > 0) || (mImportResult.failed > 0))
 		{
 			final StringBuilder sbResult = new StringBuilder();
-			sbResult.append(this.mResources.getString(R.string.indexing_result));
+			sbResult.append(this.mResources.getString(R.string.cache_list_indexing_result));
 			sbResult.append("\n");
-			if (mImportResult.successful > 0) sbResult.append(String.format("\n%s: %d", this.mResources.getString(R.string.successful), mImportResult.successful));
-			if (mImportResult.failed > 0) sbResult.append(String.format("\n%s: %d", this.mResources.getString(R.string.failed), mImportResult.successful));
+			if (mImportResult.successful > 0) sbResult.append(String.format("\n%s: %d", this.mResources.getString(R.string.cache_list_successful), mImportResult.successful));
+			if (mImportResult.failed > 0) sbResult.append(String.format("\n%s: %d", this.mResources.getString(R.string.cache_list_failed), mImportResult.successful));
 			Toast.makeText(this, sbResult.toString(), Toast.LENGTH_LONG).show();
 		}
 	}

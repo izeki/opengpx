@@ -38,8 +38,8 @@
 <string name="save">Speichern</string>
 <string name="cancel">Abbrechen</string>
 <string name="name">Name:</string>
-<string name="failed_parsing_coords">Unable to parse coordinates</string>
-<string name="wp_already_exists">Waypoint already exists</string>
+<string name="failed_parsing_coords">Fehler beim Lesen der Koordinaten</string>
+<string name="wp_already_exists">Wegpunkt existiert bereits</string>
 <string name="btn_command_clear">Leeren</string>
 <string name="btn_command_execute">Ausführen</string>
 <string name="no_help_for_command_type">No help available for this command type …</string>
@@ -69,9 +69,9 @@
 <string name="button_ok">OK</string>
 <string name="title_votes">Votes</string>
 <string name="button_close">Schliessen</string>
-<string name="vote_average">Average:</string>
+<string name="vote_average">Durchschnitt:</string>
 <string name="vote_median">(Median</string>
-<string name="vote_total">Total:</string>
+<string name="vote_total">Gesamt:</string>
 <string name="button_update">Aktualisieren</string>
 <string name="menu_database_update_votes">Update Votes</string>
 <string name="welcome">Willkommen</string>
@@ -100,7 +100,6 @@
 <string name="pref_keep_screen_on_summary">Disables screen saver in map view</string>
 <string name="pref_compass_provider">Compass Provider</string>
 <string name="pref_compass_provider_summary">Used when using &quot;Compass&quot; context menu on waypoint</string>
-
 <string name="pref_navigation_provider">Navigation Provider</string>
 <string name="pref_navigation_provider_summary">Used when using &quot;Navigate&quot; context menu on waypoint</string>
 <string name="pref_bc_max_caches_summary">Number of caches as search result</string>
@@ -110,8 +109,20 @@
 <string name="pref_waypoint_action">Waypoint action</string>
 <string name="pref_waypoint_action_desc">Action performed when clicking on a waypoint</string>
 <string name="unknown">Unknown</string>
-<string name="menu_field_notes">Fieldnotes</string><string name="database">Datenbank</string><string name="cache_index_size">Cache-Index Grösse</string>
-<string name="cache_database_size">Cache-Datenbank Grösse</string><string name="cache_variables">Cache-Variablen</string><string name="cache_votes">Cache Votes</string>
-<string name="field_notes">Fieldnotes</string><string name="menu_show_field_notes">Anzeigen</string><string name="file_not_found">Datei wurde nicht gefunden.</string>
-<string name="reading_caches">Indiziere / Lese Caches</string><string name="please_wait">Bitte warten - das kann etwas dauern …</string><string name="time">Zeit</string><string name="indexing_result">Ergebnis der Indizierung</string><string name="successful">erfolgreich</string><string name="failed">fehlgeschlagen</string>
+<string name="menu_field_notes">Fieldnotes</string><string name="database">Datenbank</string>
+<string name="cache_index_size">Cache-Index Grösse</string>
+<string name="cache_database_size">Cache-Datenbank Grösse</string>
+<string name="cache_variables">Cache-Variablen</string>
+<string name="cache_votes">Cache Votes</string>
+<string name="field_notes">Fieldnotes</string><string name="menu_show_field_notes">Anzeigen</string>
+<string name="file_not_found">Datei wurde nicht gefunden.</string>
+<string name="cache_list_reading_caches">Indiziere / Lese Caches</string>
+<string name="cache_list_please_wait">Bitte warten - das kann etwas dauern …</string>
+<string name="cache_list_time">Zeit</string>
+<string name="cache_list_indexing_result">Ergebnis der Indizierung</string>
+<string name="cache_list_successful">erfolgreich</string>
+<string name="cache_list_failed">fehlgeschlagen</string>
+<string name="cache_desc_description">Beschreibung</string><string name="cache_desc_waypoints">Wegpunkte</string>
+<string name="cache_desc_logs">Log-Einträge</string>
+<string name="cache_desc_log_visit">Besuch eintragen</string><string name="cache_desc_short_description">Kurze Beschreibung</string><string name="cache_desc_long_description">Ausführliche Beschreibung</string>
 </resources>

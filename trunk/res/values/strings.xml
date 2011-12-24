@@ -119,10 +119,14 @@
 <string name="field_notes">Field notes</string>
 <string name="menu_show_field_notes">Show</string>
 <string name="file_not_found">File not found.</string>
-<string name="reading_caches">Indexing / reading caches</string>
-<string name="please_wait">Please wait - this may take a while …</string>
-<string name="time">Time</string>
-<string name="indexing_result">Indexing results</string>
-<string name="successful">successful</string>
-<string name="failed">failed</string>
+<string name="cache_list_reading_caches">Indexing / reading caches</string>
+<string name="cache_list_please_wait">Please wait - this may take a while …</string>
+<string name="cache_list_time">Time</string>
+<string name="cache_list_indexing_result">Indexing results</string>
+<string name="cache_list_successful">successful</string>
+<string name="cache_list_failed">failed</string>
+<string name="cache_desc_description">Description</string><string name="cache_desc_waypoints">Waypoints</string>
+<string name="cache_desc_logs">Logs</string>
+<string name="cache_desc_log_visit">Log Visit</string>
+<string name="cache_desc_short_description">Short description</string><string name="cache_desc_long_description">Long description</string>
 </resources>
