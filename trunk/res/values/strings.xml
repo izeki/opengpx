@@ -134,4 +134,8 @@
 <string name="cache_detail_size">Size:</string>
 <string name="cache_detail_difficulty">Diff.:</string>
 <string name="cache_detail_terrain">Terr.:</string>
+<string name="tools_command">Command:</string>
+<string name="tools_text">Text:</string>
+<string name="tools_text_hint">Enter text</string>
+<string name="tools_result">Result</string>
 </resources>

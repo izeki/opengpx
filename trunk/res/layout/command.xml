@@ -3,12 +3,14 @@
 	<LinearLayout 
 	    xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:layout_height="fill_parent" 
-	    android:layout_width="fill_parent" android:orientation="vertical" android:padding="2px">
+	    android:layout_width="fill_parent" 
+	    android:orientation="vertical" 
+	    android:padding="2dip">
 	    <LinearLayout android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center_vertical">
 	        <TextView 
-	        	android:text="Command:" 
+	        	android:text="@string/tools_command" 
 	            android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-	        <Spinner 
+	        <Spinner
 		        android:id="@+id/CommandType"
 		        android:layout_height="wrap_content" 
 		        android:layout_width="fill_parent" 
@@ -16,45 +18,54 @@
 </LinearLayout>		        
 	    <LinearLayout android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="fill_parent">
 	        <TextView 
-	            android:text="Text:"
+	            android:text="@string/tools_text"
 	            android:layout_width="wrap_content" 
 	            android:layout_height="wrap_content"/>
 			<EditText
 				android:id="@+id/CommandEntry"
 		        android:layout_width="fill_parent"
 		   	    android:layout_height="wrap_content"
-		       	android:background="@android:drawable/editbox_background" android:hint="Enter text"/>
+		       	android:background="@android:drawable/editbox_background" 
+		       	android:hint="@string/tools_text_hint"/>
 	    </LinearLayout>
-	    <LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center">
-
+	    <LinearLayout 
+	        android:layout_height="wrap_content" 
+	        android:layout_width="fill_parent" 
+	        android:gravity="center">
     <Button
        	android:id="@+id/CalcButton"
        	android:layout_width="wrap_content"
-       	android:layout_height="wrap_content" android:text="@string/btn_command_execute" android:height="10px"/>
+       	android:layout_height="wrap_content" 
+       	android:text="@string/btn_command_execute" 
+       	android:height="10dip"/>
 	    
 	<Button 
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content" 
-		android:id="@+id/ClearButton" android:text="@string/btn_command_clear" android:height="10px"/>
+		android:id="@+id/ClearButton" 
+		android:text="@string/btn_command_clear" 
+		android:height="10dip"/>
 	<Button android:layout_width="wrap_content" 
 		android:layout_height="wrap_content" 
 		android:id="@+id/CommandHelpButton" 
-		android:drawableLeft="@android:drawable/ic_menu_help" android:height="10px"/>
+		android:drawableLeft="@android:drawable/ic_menu_help" 
+		android:height="10dip"/>
 </LinearLayout>
 	<TextView 
 		android:layout_height="wrap_content" 
 	   	android:id="@+id/CalcResultHeader" 
-	   	android:text="Result" 
+	   	android:text="@string/tools_result" 
 	   	android:layout_width="fill_parent" 
-	   	android:textSize="12px" 
+	   	android:textSize="12dip" 
 	    android:background="#c8c8c8" 
-	    android:textColor="#000000" android:gravity="center_horizontal" android:layout_below="@+id/CalcButton" android:layout_marginTop="3px"/>
+	    android:textColor="#000000" 
+	    android:gravity="center_horizontal" 
+	    android:layout_marginTop="3dip"/>
 	<ScrollView
 		android:layout_height="fill_parent" 
-	   	android:layout_width="fill_parent" 
-	   	android:layout_below="@+id/CalcResultHeader">
+	   	android:layout_width="fill_parent">
 		<TextView
-			android:layout_height="fill_parent" 
+			android:layout_height="wrap_content" 
 		   	android:id="@+id/CommandResult" 
 		   	android:layout_width="fill_parent" />
 	</ScrollView>
