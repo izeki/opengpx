@@ -46,4 +46,21 @@ public enum ContainerType
 			return containerType;
 		}
 	}
+
+	public String getIconFilename()
+	{
+		switch (this)
+		{
+		case Micro:
+			return "micro.png";
+		case Small:
+			return "small.png";
+		case Regular:
+			return "regular.png";
+		case Large:
+			return "large.png";
+		default:
+			return "other.png";
+		}
+	}
 }

@@ -30,17 +30,22 @@
 						android:layout_width="fill_parent" android:layout_height="fill_parent"
 						android:textAppearance="?android:attr/textAppearanceSmall"
 						android:paddingTop="4dp" />
-					<LinearLayout android:id="@+id/CacheDescriptionDetail"
+					<LinearLayout android:id="@+id/CacheDescriptionContainerWithIcon"
 						android:orientation="horizontal" 
 						android:layout_width="fill_parent"
 						android:layout_height="fill_parent">
 						<TextView android:id="@+id/CacheDetailContainerLabel"
 							android:layout_width="wrap_content" android:layout_height="wrap_content"
 							android:textAppearance="?android:attr/textAppearanceSmall"
-							android:text="@string/cache_detail_size" />
+							android:text="@string/cache_detail_size" android:drawablePadding="2dip"/>
 						<TextView android:id="@+id/CacheDetailContainer"
 							android:layout_width="wrap_content" android:layout_height="wrap_content"
 							android:textAppearance="?android:attr/textAppearanceSmall" android:paddingLeft="3dp" android:paddingRight="3dp"/>
+					</LinearLayout>
+					<LinearLayout android:id="@+id/CacheDescriptionDiffTerrain"
+						android:orientation="horizontal" 
+						android:layout_width="fill_parent"
+						android:layout_height="fill_parent">
 						<TextView android:id="@+id/CacheDetailDifficultyLabel"
 							android:layout_width="wrap_content" android:layout_height="wrap_content"
 							android:textAppearance="?android:attr/textAppearanceSmall"

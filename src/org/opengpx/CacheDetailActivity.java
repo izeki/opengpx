@@ -56,6 +56,7 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.util.Linkify;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -527,8 +528,17 @@ public class CacheDetailActivity extends TabActivity
 			Linkify.addLinks(tvPlacedBy, patOwner, strOwnerUrl);
 		}
 		
-		((TextView) this.findViewById(R.id.CacheDetailContainer)).setText(this.mCache.getContainerType().toString().replace("_", " "));
-
+		final String cacheSize = this.mCache.getContainerType().toString().replace("_", " ");
+		((TextView) this.findViewById(R.id.CacheDetailContainer)).setText("(" + cacheSize + ")");
+		try
+		{
+			final String strIconFilename = this.mCache.getContainerType().getIconFilename();
+			final Drawable sizeIcon = Drawable.createFromStream(this.getResources().getAssets().open(strIconFilename), cacheSize);
+			sizeIcon.setBounds(0, 0, 45, 12);
+			((TextView) this.findViewById(R.id.CacheDetailContainerLabel)).setCompoundDrawables(null, null, sizeIcon, null);
+		}
+		catch (IOException e2) { }
+		
     	final DecimalFormat decFormat = (DecimalFormat) NumberFormat.getInstance(Locale.ENGLISH);
     	decFormat.applyPattern("0.0");
 

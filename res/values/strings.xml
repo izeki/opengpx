@@ -132,8 +132,8 @@
 <string name="cache_detail_send_log">Send Log</string>
 <string name="cache_detail_save_log">Save Log</string>
 <string name="cache_detail_size">Size:</string>
-<string name="cache_detail_difficulty">Diff.:</string>
-<string name="cache_detail_terrain">Terr.:</string>
+<string name="cache_detail_difficulty">Difficulty:</string>
+<string name="cache_detail_terrain">Terrain:</string>
 <string name="tools_command">Command:</string>
 <string name="tools_text">Text:</string>
 <string name="tools_text_hint">Enter text</string>
