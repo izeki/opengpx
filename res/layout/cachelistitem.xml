@@ -9,8 +9,8 @@
 	android:paddingBottom="2dip">
 	<ImageView 
 		android:id="@+id/CacheIcon"
-		android:layout_width="32dp"
-		android:layout_height="32dp"
+		android:layout_width="32dip"
+		android:layout_height="32dip"
 		android:src="@android:drawable/presence_offline" />
 	<TextView
 		android:id="@android:id/text1" 

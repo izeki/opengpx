@@ -2,25 +2,25 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"  android:id="@+id/LinearLayout01" android:layout_height="wrap_content" android:orientation="vertical" android:layout_width="fill_parent">
 <LinearLayout android:id="@+id/LinearLayout03" android:layout_height="wrap_content" android:layout_width="fill_parent"><TextView android:id="@+id/TextView03" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@+id/WPName"></TextView>
-<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:text="@+id/EditWPName" android:id="@+id/EditWPName"></EditText>
+<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:text="@+id/EditWPName" android:id="@+id/EditWPName" android:inputType="text"></EditText>
 </LinearLayout><TableLayout android:layout_height="wrap_content" android:layout_width="wrap_content">
 <TableRow android:id="@+id/TableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content">
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Latitude:" android:gravity="right"></TextView>    
-    <EditText android:id="@+id/EditText01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="N"></EditText>
-    <EditText android:id="@+id/EditText02" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="46" android:gravity="right"></EditText>
+    <EditText android:id="@+id/EditText01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="N" android:inputType="textCapCharacters"></EditText>
+    <EditText android:id="@+id/EditText02" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="46" android:gravity="right" android:inputType="number"></EditText>
     <TextView android:id="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="°"></TextView>
-    <EditText android:id="@+id/EditText03" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="27"></EditText>
+    <EditText android:id="@+id/EditText03" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="27" android:inputType="number"></EditText>
     <TextView android:id="@+id/TextView02" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="."></TextView>
-    <EditText android:id="@+id/EditText04" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="123"></EditText>
+    <EditText android:id="@+id/EditText04" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="123" android:inputType="number"></EditText>
 </TableRow>
 <TableRow android:id="@+id/TableRow02" android:layout_width="wrap_content" android:layout_height="wrap_content">
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Longitude:" android:gravity="right"></TextView>
-    <EditText android:id="@+id/EditText11" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="E"></EditText>
-    <EditText android:id="@+id/EditText12" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="012" android:gravity="right"></EditText>
+    <EditText android:id="@+id/EditText11" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="E" android:inputType="textCapCharacters"></EditText>
+    <EditText android:id="@+id/EditText12" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="012" android:gravity="right" android:inputType="number"></EditText>
     <TextView android:id="@+id/TextView11" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="°"></TextView>
-    <EditText android:id="@+id/EditText13" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="27"></EditText>
+    <EditText android:id="@+id/EditText13" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="27" android:inputType="number"></EditText>
     <TextView android:id="@+id/TextView12" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="."></TextView>
-    <EditText android:id="@+id/EditText14" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="123"></EditText>
+    <EditText android:id="@+id/EditText14" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="123" android:inputType="number"></EditText>
 </TableRow>
 </TableLayout>
 <LinearLayout android:id="@+id/LinearLayout02" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_width="fill_parent" android:gravity="center"><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@+id/btn_ok" android:id="@+id/EditWPOKButton"></Button>

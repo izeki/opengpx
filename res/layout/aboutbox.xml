@@ -2,28 +2,56 @@
 <LinearLayout
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:orientation="vertical"
-	xmlns:android="http://schemas.android.com/apk/res/android">
-	
-	
-    
-    <TextView android:text="@+id/TextView01" android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center" android:id="@+id/AboutBoxNameVersion"></TextView><TextView android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/AboutWebLink" android:gravity="center" android:autoLink="web" android:text="http://www.opengpx.org"></TextView>
+	android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView 
+        android:text="@+id/TextView01" 
+        android:layout_height="wrap_content" 
+        android:layout_width="fill_parent" 
+        android:gravity="center" 
+        android:id="@+id/AboutBoxNameVersion"/>
+    <TextView 
+        android:layout_height="wrap_content" 
+        android:layout_width="fill_parent" 
+        android:id="@+id/AboutWebLink" 
+        android:gravity="center" 
+        android:autoLink="web" android:text="@string/homepage_url"/>
     <TextView
         android:layout_width="fill_parent"
        	android:layout_height="wrap_content"
        	android:padding="4dip"
         android:gravity="center"
         android:text="@string/about_comments" />
-<ScrollView android:layout_height="wrap_content" android:layout_width="fill_parent"><LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center" android:text="@string/about_credits_groundspeak" android:id="@+id/AboutGroundspeak"></TextView><TextView android:layout_height="wrap_content" android:gravity="center" android:layout_width="fill_parent" android:text="@string/about_credits_osmdroid" android:id="@+id/AboutOsmdroid"></TextView>
-<TextView android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center" android:text="@string/about_credits_cloudmade" android:id="@+id/AboutCloudMade"></TextView>
-<TextView android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center" android:id="@+id/AboutDb4o" android:text="@string/about_credits_db4o"></TextView>
-</LinearLayout>
-
-
-</ScrollView>
-<!--  LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:orientation="horizontal" android:gravity="center"><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Close" android:id="@+id/AboutCloseButton"></Button>
-</LinearLayout>  -->
-
-
-
+	<ScrollView 
+	    android:layout_height="wrap_content" 
+	    android:layout_width="fill_parent">
+	    <LinearLayout 
+	        android:layout_width="wrap_content" 
+	        android:layout_height="wrap_content" 
+	        android:orientation="vertical">
+	        <TextView 
+	            android:layout_width="wrap_content" 
+	            android:layout_height="wrap_content" 
+	            android:gravity="center" 
+	            android:text="@string/about_credits_groundspeak" 
+	            android:id="@+id/AboutGroundspeak"/>
+	        <TextView 
+	            android:layout_height="wrap_content" 
+	            android:gravity="center" 
+	            android:layout_width="fill_parent" 
+	            android:text="@string/about_credits_osmdroid" 
+	            android:id="@+id/AboutOsmdroid"/>
+			<TextView 
+			    android:layout_height="wrap_content" 
+			    android:layout_width="fill_parent" 
+			    android:gravity="center" 
+			    android:text="@string/about_credits_cloudmade" 
+			    android:id="@+id/AboutCloudMade"/>
+			<TextView 
+			    android:layout_height="wrap_content" 
+			    android:layout_width="fill_parent" 
+			    android:gravity="center" 
+			    android:id="@+id/AboutDb4o" 
+			    android:text="@string/about_credits_db4o"/>
+		</LinearLayout>
+	</ScrollView>
 </LinearLayout>
