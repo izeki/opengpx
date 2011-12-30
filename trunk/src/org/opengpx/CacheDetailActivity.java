@@ -70,7 +70,6 @@ import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -486,7 +485,8 @@ public class CacheDetailActivity extends TabActivity
 		try 
 		{
 			final Drawable drawable = Drawable.createFromStream(this.getResources().getAssets().open(strCacheType.toLowerCase() + ".gif"), strCacheType);
-			((ImageView) this.findViewById(R.id.CacheTypeImage)).setImageDrawable(drawable);
+			drawable.setBounds(0, 0, 32, 32);
+			tvName.setCompoundDrawables(drawable, null, null, null);
 		} 
 		catch (IOException e1) { }
 		
@@ -537,10 +537,12 @@ public class CacheDetailActivity extends TabActivity
 
 		try 
 		{
-			final Drawable draDifficulaty = Drawable.createFromStream(this.getResources().getAssets().open("stars" + strDifficulty + ".png"), strDifficulty);
-			((ImageView) this.findViewById(R.id.CacheDetailDifficulty)).setImageDrawable(draDifficulaty);
+			final Drawable draDifficulty = Drawable.createFromStream(this.getResources().getAssets().open("stars" + strDifficulty + ".png"), strDifficulty);
+			draDifficulty.setBounds(0, 0, 65, 14);
+			((TextView) this.findViewById(R.id.CacheDetailDifficultyLabel)).setCompoundDrawables(null, null, draDifficulty, null);
 			final Drawable draTerrain = Drawable.createFromStream(this.getResources().getAssets().open("stars" + strTerrain + ".png"), strTerrain);
-			((ImageView) this.findViewById(R.id.CacheDetailTerrain)).setImageDrawable(draTerrain);
+			draTerrain.setBounds(0, 0, 65, 14);
+			((TextView) this.findViewById(R.id.CacheDetailTerrainLabel)).setCompoundDrawables(null, null, draTerrain, null);
 		} 
 		catch (IOException e1) 
 		{ }

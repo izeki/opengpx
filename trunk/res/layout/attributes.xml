@@ -7,13 +7,12 @@
     <ScrollView 
     	android:layout_width="fill_parent" android:layout_height="wrap_content">
     	<LinearLayout 
-    		android:layout_height="fill_parent" 
+    		android:layout_height="wrap_content" 
     		android:layout_width="fill_parent" 
-    		android:orientation="vertical" android:id="@+id/LinearLayoutAttributes" android:paddingLeft="10px" android:paddingRight="10px">
-    		
-		
-
-</LinearLayout>
+    		android:orientation="vertical" 
+    		android:id="@+id/LinearLayoutAttributes" 
+    		android:paddingLeft="10dip" 
+    		android:paddingRight="10dip">
+		</LinearLayout>
 	</ScrollView>
-	
 </LinearLayout>
