@@ -124,5 +124,5 @@
 <string name="cache_list_failed">fehlgeschlagen</string>
 <string name="cache_desc_description">Beschreibung</string><string name="cache_desc_waypoints">Wegpunkte</string>
 <string name="cache_desc_logs">Log-Einträge</string>
-<string name="cache_desc_log_visit">Besuch eintragen</string><string name="cache_desc_short_description">Kurze Beschreibung</string><string name="cache_desc_long_description">Ausführliche Beschreibung</string>
+<string name="cache_desc_log_visit">Besuch eintragen</string><string name="cache_desc_short_description">Kurze Beschreibung</string><string name="cache_desc_long_description">Ausführliche Beschreibung</string><string name="cache_detail_send_log">Log senden</string><string name="cache_detail_save_log">Log speichern</string><string name="cache_detail_size">Grösse:</string><string name="cache_detail_difficulty">Schw.:</string><string name="cache_detail_terrain">Gelände:</string>
 </resources>

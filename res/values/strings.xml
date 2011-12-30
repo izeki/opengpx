@@ -129,4 +129,9 @@
 <string name="cache_desc_logs">Logs</string>
 <string name="cache_desc_log_visit">Log Visit</string>
 <string name="cache_desc_short_description">Short description</string><string name="cache_desc_long_description">Long description</string>
+<string name="cache_detail_send_log">Send Log</string>
+<string name="cache_detail_save_log">Save Log</string>
+<string name="cache_detail_size">Size:</string>
+<string name="cache_detail_difficulty">Diff.:</string>
+<string name="cache_detail_terrain">Terr.:</string>
 </resources>
