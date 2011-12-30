@@ -141,4 +141,6 @@
 <string name="cache_desc_placed_by">Placed by</string>
 <string name="cache_desc_distance_home">Distance (home)</string>
 <string name="homepage_url">http://www.opengpx.org</string>
+<string name="wp_detail_detail">Detail</string>
+<string name="wp_detail_relative_info">Information relative to other waypoints</string>
 </resources>

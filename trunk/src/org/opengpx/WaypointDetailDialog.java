@@ -60,6 +60,7 @@ public class WaypointDetailDialog extends AlertDialog.Builder
 	private void initialize()
 	{
 		this.setTitle(this.mWaypoint.name);
+		this.setIcon(android.R.drawable.ic_dialog_info);
 		
 		final LayoutInflater inflater = LayoutInflater.from(this.mContext);
 		final View layout = inflater.inflate(R.layout.waypointdetail, null);
