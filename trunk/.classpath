@@ -5,8 +5,8 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="lib" path="lib/jep-2.4.1.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-android-1.5.8.jar"/>
-	<classpathentry kind="lib" path="lib/osmdroid-android-3.0.5.jar"/>
 	<classpathentry kind="lib" path="lib/vtd-xml-2.10.jar"/>
 	<classpathentry kind="lib" path="lib/db4o-8.0.224.15975-core-java5.jar"/>
+	<classpathentry kind="lib" path="lib/osmdroid-android-3.0.6.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
