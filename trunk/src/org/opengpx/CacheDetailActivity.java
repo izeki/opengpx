@@ -56,7 +56,6 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.util.Linkify;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -485,7 +484,7 @@ public class CacheDetailActivity extends TabActivity
 		final String strCacheType = this.mCache.getCacheType().toString();
 		try 
 		{
-			final Drawable drawable = Drawable.createFromStream(this.getResources().getAssets().open(strCacheType.toLowerCase() + ".gif"), strCacheType);
+			final Drawable drawable = Drawable.createFromStream(this.mResources.getAssets().open(strCacheType.toLowerCase() + ".gif"), strCacheType);
 			drawable.setBounds(0, 0, 32, 32);
 			tvName.setCompoundDrawables(drawable, null, null, null);
 		} 
@@ -514,7 +513,7 @@ public class CacheDetailActivity extends TabActivity
 		final TextView tvPlacedBy = ((TextView) this.findViewById(R.id.CacheDetailPlacedBy));
 		final GregorianCalendar cal = new GregorianCalendar(1990, 1, 1);
 		if (this.mCache.getHeaderWaypoint().time.before(cal.getTime())) strPlacedAt = "Unknown";
-		final String strPlacedBy = String.format("Placed by: %s (%s)", this.mCache.placedBy, strPlacedAt);
+		final String strPlacedBy = String.format("%s: %s (%s)", this.mResources.getString(R.string.cache_desc_placed_by), this.mCache.placedBy, strPlacedAt);
 		tvPlacedBy.setText(strPlacedBy);
 		if (this.mCache.ownerId != 0)
 		{
@@ -533,7 +532,7 @@ public class CacheDetailActivity extends TabActivity
 		try
 		{
 			final String strIconFilename = this.mCache.getContainerType().getIconFilename();
-			final Drawable sizeIcon = Drawable.createFromStream(this.getResources().getAssets().open(strIconFilename), cacheSize);
+			final Drawable sizeIcon = Drawable.createFromStream(this.mResources.getAssets().open(strIconFilename), cacheSize);
 			sizeIcon.setBounds(0, 0, 45, 12);
 			((TextView) this.findViewById(R.id.CacheDetailContainerLabel)).setCompoundDrawables(null, null, sizeIcon, null);
 		}
@@ -547,10 +546,10 @@ public class CacheDetailActivity extends TabActivity
 
 		try 
 		{
-			final Drawable draDifficulty = Drawable.createFromStream(this.getResources().getAssets().open("stars" + strDifficulty + ".png"), strDifficulty);
+			final Drawable draDifficulty = Drawable.createFromStream(this.mResources.getAssets().open("stars" + strDifficulty + ".png"), strDifficulty);
 			draDifficulty.setBounds(0, 0, 65, 14);
 			((TextView) this.findViewById(R.id.CacheDetailDifficultyLabel)).setCompoundDrawables(null, null, draDifficulty, null);
-			final Drawable draTerrain = Drawable.createFromStream(this.getResources().getAssets().open("stars" + strTerrain + ".png"), strTerrain);
+			final Drawable draTerrain = Drawable.createFromStream(this.mResources.getAssets().open("stars" + strTerrain + ".png"), strTerrain);
 			draTerrain.setBounds(0, 0, 65, 14);
 			((TextView) this.findViewById(R.id.CacheDetailTerrainLabel)).setCompoundDrawables(null, null, draTerrain, null);
 		} 
@@ -559,7 +558,7 @@ public class CacheDetailActivity extends TabActivity
 
 		final NavigationInfo ni = mHomeCoordinates.getNavigationInfoTo(coordsHeaderWaypoint, this.mPreferences.getUnitSystem());
 		final String[] arrNavInfo = ni.toStringArray();
-		final String strDistance = String.format("Distance (home): %s (%s %s)", arrNavInfo[0], arrNavInfo[1], arrNavInfo[2]);
+		final String strDistance = String.format("%s: %s (%s %s)", this.mResources.getString(R.string.cache_desc_distance_home), arrNavInfo[0], arrNavInfo[1], arrNavInfo[2]);
 		((TextView) this.findViewById(R.id.CacheDetailDistance)).setText(strDistance);
 
 		final LinearLayout llCacheDescription = (LinearLayout) this.findViewById(R.id.CacheDescriptionLinearLayout);

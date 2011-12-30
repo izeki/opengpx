@@ -138,4 +138,6 @@
 <string name="tools_text">Text:</string>
 <string name="tools_text_hint">Enter text</string>
 <string name="tools_result">Result</string>
+<string name="cache_desc_placed_by">Placed by</string>
+<string name="cache_desc_distance_home">Distance (home)</string>
 </resources>
