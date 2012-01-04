@@ -4,6 +4,8 @@ Version *1.2.0* (not released yet):
 
  * performance improvments in XML reader
  * improvments to zip file reading
+ * fixed gpx file handler (if path contains multiple dots)
+ * german translation added (wip)
 
 Version *1.1.0* (15. October 2011):
 
