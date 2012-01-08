@@ -6,6 +6,7 @@ import java.util.Date;
 import org.opengpx.lib.geocache.Attribute;
 import org.opengpx.lib.geocache.Cache;
 import org.opengpx.lib.CacheDatabase;
+import org.opengpx.lib.geocache.CacheType;
 import org.opengpx.lib.geocache.LogEntry;
 import org.opengpx.lib.geocache.TravelBug;
 import org.opengpx.lib.geocache.Waypoint;
@@ -291,7 +292,15 @@ public class GPXFileReader
 				}
 				else if (currentElementName.equalsIgnoreCase("type"))
 				{
-					currentCache.parseCacheTypeString(vn.toNormalizedString(vn.getText()));
+					if (vn.getAttrVal("id") != -1)
+					{
+						// gpx version 1.0.2
+						currentCache.setType(CacheType.getById(vn.parseInt(vn.getAttrVal("id"))));
+					}
+					else
+					{
+						currentCache.parseCacheTypeString(vn.toNormalizedString(vn.getText()));						
+					}
 				}
 				else if (currentElementName.equalsIgnoreCase("container"))
 				{
