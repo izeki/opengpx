@@ -138,8 +138,8 @@ public class CacheDetailActivity extends TabActivity
 
 			this.mTabHost.addTab(mTabHost.newTabSpec("tabDescription").setIndicator(this.mResources.getString(R.string.cache_desc_description), this.mResources.getDrawable(android.R.drawable.ic_menu_info_details)).setContent(R.id.CacheDetailDescriptionScrollView));
 			this.mTabHost.addTab(mTabHost.newTabSpec("tabWaypoints").setIndicator(this.mResources.getString(R.string.cache_desc_waypoints), this.mResources.getDrawable(android.R.drawable.ic_menu_myplaces)).setContent(R.id.WaypointList));
-			this.mTabHost.addTab(mTabHost.newTabSpec("tabPersonalNotes").setIndicator(this.mResources.getString(R.string.cache_desc_personal_notes), this.mResources.getDrawable(android.R.drawable.ic_menu_edit)).setContent(R.id.PersonalNoteLayout));
 			this.mTabHost.addTab(mTabHost.newTabSpec("tabLogs").setIndicator(this.mResources.getString(R.string.cache_desc_logs), this.mResources.getDrawable(android.R.drawable.ic_menu_recent_history)).setContent(R.id.CacheDetailLogLayout));
+			this.mTabHost.addTab(mTabHost.newTabSpec("tabPersonalNotes").setIndicator(this.mResources.getString(R.string.cache_desc_personal_notes), this.mResources.getDrawable(android.R.drawable.ic_menu_edit)).setContent(R.id.PersonalNoteLayout));
 			this.mTabHost.addTab(mTabHost.newTabSpec("tabLogVisit").setIndicator(this.mResources.getString(R.string.cache_desc_log_visit), this.mResources.getDrawable(android.R.drawable.ic_menu_agenda)).setContent(R.id.LogVisitLayout));
 
 			this.readCacheDescription();
