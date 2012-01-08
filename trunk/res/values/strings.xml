@@ -143,4 +143,7 @@
 <string name="homepage_url">http://www.opengpx.org</string>
 <string name="wp_detail_detail">Detail</string>
 <string name="wp_detail_relative_info">Information relative to other waypoints</string>
+<string name="cache_desc_personal_notes">Notes</string>
+<string name="personal_notes">Personal notes</string>
+<string name="personal_notes_saved">Personal notes saved to database</string>
 </resources>

@@ -406,8 +406,7 @@ public class CacheListActivity extends ListActivity
 			this.clearDatabase();
 			return true;
 		case R.id.MenuDatabaseInfo:
-			final Resources res = this.getResources();
-			final String databaseInfo = this.mCacheDatabase.getInformation(res.getString(R.string.database), res.getString(R.string.cache_index_size), res.getString(R.string.cache_database_size), res.getString(R.string.cache_variables), res.getString(R.string.cache_votes), res.getString(R.string.field_notes));
+			final String databaseInfo = this.mCacheDatabase.getInformation(this.mResources.getString(R.string.database), this.mResources.getString(R.string.cache_index_size), this.mResources.getString(R.string.cache_database_size), this.mResources.getString(R.string.cache_variables), this.mResources.getString(R.string.cache_votes), this.mResources.getString(R.string.field_notes), this.mResources.getString(R.string.personal_notes));
 			Toast.makeText(this, databaseInfo, Toast.LENGTH_LONG).show();
 			return true;
 		case R.id.MenuDatabaseSelect:

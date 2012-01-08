@@ -64,7 +64,17 @@
 			</ScrollView>
 			<ListView android:layout_width="fill_parent"
 				android:layout_height="fill_parent" android:id="@+id/WaypointList" />
-			<LinearLayout android:layout_width="fill_parent"
+			<ScrollView android:layout_width="fill_parent"
+				android:layout_height="fill_parent" android:id="@+id/CachePersonalNoteScrollView">
+				<LinearLayout android:layout_width="fill_parent"
+					android:layout_height="wrap_content" 
+					android:orientation="vertical"
+					android:id="@+id/PersonalNoteLayout">
+					<EditText android:id="@+id/PersonalNoteText"
+						android:layout_width="fill_parent" android:layout_height="wrap_content" android:inputType="textMultiLine"/>
+				</LinearLayout>
+			</ScrollView>
+						<LinearLayout android:layout_width="fill_parent"
 				android:layout_height="fill_parent" android:orientation="vertical"
 				android:id="@+id/CacheDetailLogLayout">
 				<ListView android:layout_width="fill_parent"
@@ -100,6 +110,6 @@
 					</LinearLayout>
 				</LinearLayout>
 			</ScrollView>
-		</FrameLayout>
+					</FrameLayout>
 	</LinearLayout>
 </TabHost>
