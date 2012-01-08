@@ -9,7 +9,7 @@
   * change textview for info.txt to edittext
   * make text viewer / editor a window
   * handle encrypted logs (e.g. muri quelle)
-  * <strike>add notes to caches</strike>
+  * <strike>add notes to caches</strike> (done)
   * improve cache details for LOC files (Waypoint type)
   * Filter out finds
   * Mark caches found
@@ -34,7 +34,7 @@
   * Open / import GPX files directly from websites
   * <strike>Better support for higher resolutions (icon size, font size)</strike> (done)
   * <strike>Use Google Maps as default map provider</strike> (done)
-  * import caches from zip files
+  * <strike>import caches from zip files</strike> (done)
   * <strike>use cache icons in maps</strike> (done)
 
 == Internal changes ==
