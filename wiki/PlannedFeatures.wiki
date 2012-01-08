@@ -9,7 +9,7 @@
   * change textview for info.txt to edittext
   * make text viewer / editor a window
   * handle encrypted logs (e.g. muri quelle)
-  * add notes to caches
+  * <strike>add notes to caches</strike>
   * improve cache details for LOC files (Waypoint type)
   * Filter out finds
   * Mark caches found
