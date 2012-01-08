@@ -64,16 +64,13 @@
 			</ScrollView>
 			<ListView android:layout_width="fill_parent"
 				android:layout_height="fill_parent" android:id="@+id/WaypointList" />
-			<ScrollView android:layout_width="fill_parent"
-				android:layout_height="fill_parent" android:id="@+id/CachePersonalNoteScrollView">
 				<LinearLayout android:layout_width="fill_parent"
-					android:layout_height="wrap_content" 
+					android:layout_height="fill_parent" 
 					android:orientation="vertical"
-					android:id="@+id/PersonalNoteLayout">
+					android:id="@+id/PersonalNoteLayout" android:layout_margin="1dip">
 					<EditText android:id="@+id/PersonalNoteText"
-						android:layout_width="fill_parent" android:layout_height="wrap_content" android:inputType="textMultiLine"/>
+						android:layout_width="fill_parent" android:layout_height="fill_parent" android:inputType="textMultiLine" android:layout_margin="3dp" android:gravity="top|left" android:scrollbarAlwaysDrawHorizontalTrack="true" android:scrollbars="horizontal"/>
 				</LinearLayout>
-			</ScrollView>
 						<LinearLayout android:layout_width="fill_parent"
 				android:layout_height="fill_parent" android:orientation="vertical"
 				android:id="@+id/CacheDetailLogLayout">
@@ -85,20 +82,18 @@
 					android:background="#c8c8c8" 
 					android:textColor="#000000" />
 			</LinearLayout>
-			<ScrollView android:layout_width="fill_parent"
-				android:layout_height="fill_parent" android:id="@+id/CacheDetailLogVisitScrollView">
 				<LinearLayout android:layout_width="fill_parent"
-					android:layout_height="wrap_content" 
+					android:layout_height="fill_parent" 
 					android:orientation="vertical"
 					android:id="@+id/LogVisitLayout">
 					<Spinner android:id="@+id/CacheLogVisitType"
 						android:entries="@array/log_types" android:layout_width="fill_parent"
 						android:layout_height="wrap_content" />
 					<EditText android:id="@+id/CacheLogVisitText"
-						android:layout_width="fill_parent" android:layout_height="wrap_content" android:inputType="textMultiLine"/>
+						android:layout_width="fill_parent" android:layout_height="wrap_content" android:inputType="textMultiLine" android:layout_margin="3dp" android:scrollbars="horizontal" android:gravity="top|left"/>
 					<LinearLayout android:layout_width="fill_parent"
-						android:layout_height="fill_parent" android:orientation="horizontal"
-						android:id="@+id/LogVisitButtonLayout" android:padding="3dp" android:gravity="center">
+						android:layout_height="wrap_content" android:orientation="horizontal"
+						android:id="@+id/LogVisitButtonLayout" android:padding="3dp" android:gravity="center_horizontal">
 						<Button android:id="@+id/CacheLogVisit"
 							android:layout_width="wrap_content" 
 							android:layout_height="wrap_content"
@@ -109,7 +104,6 @@
 							android:text="@string/cache_detail_save_log"/>
 					</LinearLayout>
 				</LinearLayout>
-			</ScrollView>
 					</FrameLayout>
 	</LinearLayout>
 </TabHost>

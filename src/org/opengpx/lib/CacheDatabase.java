@@ -533,21 +533,32 @@ public class CacheDatabase
 	 * 
 	 * @param cacheCode
 	 */
-	public void deleteCache(String cacheCode)
+	public void deleteCache(final String cacheCode)
 	{
 		// Delete cache
-		Cache cache = this.getCache(cacheCode);
+		final Cache cache = this.getCache(cacheCode);
 		if (cache != null)
 			this.mDB4ODatabase.delete(cache);
 
 		// Delete cache index items
-		CacheIndexItem cii = this.getCacheIndexItem(cacheCode);
+		final CacheIndexItem cii = this.getCacheIndexItem(cacheCode);
 		if (cii != null)
 			this.mDB4ODatabase.delete(cii);
 		
 		// Remove item from HashMap
 		this.mhmCacheIndexItems.remove(cacheCode);
-		
+
+		// Delete personal note
+		final Query queryPersonalNote = this.mDB4ODatabase.query();
+		queryPersonalNote.constrain(PersonalNote.class);
+		queryPersonalNote.descend("code").constrain(cacheCode);
+		final ObjectSet<?> result = queryPersonalNote.execute();
+		if (result.size() >= 1)
+		{
+			PersonalNote personalNote = (PersonalNote) result.next();
+			this.mDB4ODatabase.delete(personalNote);
+		}
+
 		// Commit changes
 		this.mDB4ODatabase.commit();
 	}
