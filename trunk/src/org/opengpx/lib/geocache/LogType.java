@@ -8,7 +8,7 @@ package org.opengpx.lib.geocache;
 public enum LogType 
 { 
 	Unknown, 
-	Found_it, 
+	Found_it,
 	Enable_Listing, 
 	Temporarily_Disable_Listing, 
 	Write_note, 

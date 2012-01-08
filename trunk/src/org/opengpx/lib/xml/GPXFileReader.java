@@ -9,6 +9,7 @@ import org.opengpx.lib.CacheDatabase;
 import org.opengpx.lib.geocache.CacheType;
 import org.opengpx.lib.geocache.ContainerType;
 import org.opengpx.lib.geocache.LogEntry;
+import org.opengpx.lib.geocache.PersonalNote;
 import org.opengpx.lib.geocache.TravelBug;
 import org.opengpx.lib.geocache.Waypoint;
 import org.opengpx.lib.tools.ISODateTime;
@@ -358,6 +359,18 @@ public class GPXFileReader
 				else if ((currentElementName.equalsIgnoreCase("encoded_hints") || currentElementName.equalsIgnoreCase("hints")) && vn.getText() != -1)
 				{
 					currentCache.hint = currentCache.hint.concat(vn.toNormalizedString(vn.getText()));
+				}
+				else if ((currentElementName.equalsIgnoreCase("personal_note")) && vn.getText() != -1)
+				{
+					if (currentCache.code.length() > 0)
+					{
+						mLogger.debug("Adding personal note for cache: " + currentCache.code);
+
+						final PersonalNote personalNote = new PersonalNote();
+						personalNote.code = currentCache.code;
+						personalNote.text = vn.toNormalizedString(vn.getText());
+						cacheDatabase.storePersonalNote(personalNote, false);
+					}
 				}
 				else if (currentElementName.equalsIgnoreCase("logs"))
 				{
