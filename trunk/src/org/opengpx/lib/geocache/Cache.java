@@ -71,7 +71,7 @@ public class Cache
 	{
     	this.mCacheType = CacheType.parseString(type);		
 	}
-
+	
 	/**
 	 * 
 	 * @param type

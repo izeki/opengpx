@@ -7,23 +7,49 @@ package org.opengpx.lib.geocache;
  */
 public enum CacheType
 { 
-	Unknown, 
-	Traditional, 
-	Multi, 
-	ProjectAPE, 
-	Mystery, 
-	Letterbox, 
-	Whereigo, 
-	Event,
-	MegaEvent, 
-	CITOEvent, 
-	Earthcache, 
-	GPSAME, 
-	Virtual,
-	Webcam,
-	Locationless,
-	TenYearsEvent;
+	Unknown (-1),
+	Traditional (2), 
+	Multi (3), 
+	ProjectAPE (9), 
+	Mystery (8), 
+	Letterbox (5), 
+	Whereigo (1858), 
+	Event (6),
+	MegaEvent (453), 
+	CITOEvent (13), 
+	Earthcache (137), 
+	GPSAME (1304),
+	Virtual (4),
+	Webcam (11),
+	Locationless (12),
+	TenYearsEvent (3653),
+	GeocacheCourses (605),
+	GroundSpeakHQ (3773),
+	GroundSpeakLostAndFound (3774),
+	GroundSpeakBlockParty (4738);
+
+	private Integer mId;
 	
+	CacheType(Integer id) 
+	{
+        this.mId = id;
+    }
+	
+	public Integer id() { return this.mId; }
+
+	public static CacheType getById(Integer id)
+	{
+		CacheType result = CacheType.Unknown;
+		
+		System.out.println("read cache type by id");
+		
+		for (CacheType cacheType : CacheType.values())
+		{
+			if (cacheType.id() == id) result = cacheType;
+		}
+
+		return result;
+	}
 	/**
 	 * 
 	 * @param string
@@ -67,7 +93,9 @@ public enum CacheType
 				}
 			}
 			if (!blnCacheTypeFound)
+			{
 				System.out.println("Handle cache type: " + string);
+			}
 			return cacheType;
 		}
 	}
