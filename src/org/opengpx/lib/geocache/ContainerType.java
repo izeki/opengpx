@@ -7,14 +7,48 @@ package org.opengpx.lib.geocache;
  */
 public enum ContainerType
 { 
-	Other, 
-	Micro, 
-	Small, 
-	Regular, 
-	Large, 
-	Virtual, 
-	Not_chosen, 
-	Unknown;
+	Other (6), 
+	Micro (2), 
+	Small (8), 
+	Regular (3), 
+	Large (4), 
+	Virtual (5), 
+	Not_chosen (1), 
+	Unknown (-1);
+
+	private Integer mId;
+	
+	/**
+	 * 
+	 * @param id
+	 */
+	ContainerType(Integer id)
+	{
+		this.mId = id;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Integer id() { return this.mId; }
+
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public static ContainerType getById(Integer id)
+	{
+		ContainerType result = ContainerType.Unknown;
+		
+		for (ContainerType containerType : ContainerType.values())
+		{
+			if (containerType.id().equals(id)) result = containerType;
+		}
+
+		return result;
+	}
 
 	/**
 	 * 

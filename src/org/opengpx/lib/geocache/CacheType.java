@@ -30,26 +30,38 @@ public enum CacheType
 
 	private Integer mId;
 	
+	/**
+	 * 
+	 * @param id
+	 */
 	CacheType(Integer id) 
 	{
         this.mId = id;
     }
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Integer id() { return this.mId; }
 
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public static CacheType getById(Integer id)
 	{
 		CacheType result = CacheType.Unknown;
-		
-		System.out.println("read cache type by id");
-		
+
 		for (CacheType cacheType : CacheType.values())
 		{
-			if (cacheType.id() == id) result = cacheType;
+			if (cacheType.id().equals(id)) result = cacheType;
 		}
 
 		return result;
 	}
+
 	/**
 	 * 
 	 * @param string

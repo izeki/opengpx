@@ -7,6 +7,7 @@ import org.opengpx.lib.geocache.Attribute;
 import org.opengpx.lib.geocache.Cache;
 import org.opengpx.lib.CacheDatabase;
 import org.opengpx.lib.geocache.CacheType;
+import org.opengpx.lib.geocache.ContainerType;
 import org.opengpx.lib.geocache.LogEntry;
 import org.opengpx.lib.geocache.TravelBug;
 import org.opengpx.lib.geocache.Waypoint;
@@ -299,12 +300,20 @@ public class GPXFileReader
 					}
 					else
 					{
+						// gpx version 1.0 and 1.0.1
 						currentCache.parseCacheTypeString(vn.toNormalizedString(vn.getText()));						
 					}
 				}
 				else if (currentElementName.equalsIgnoreCase("container"))
 				{
-					currentCache.parseContainerTypeString(vn.toNormalizedString(vn.getText()));
+					if (vn.getAttrVal("id") != -1)
+					{
+						currentCache.setContainerType(ContainerType.getById(vn.parseInt(vn.getAttrVal("id"))));
+					}
+					else
+					{
+						currentCache.parseContainerTypeString(vn.toNormalizedString(vn.getText()));
+					}
 				}
 				else if (currentElementName.equalsIgnoreCase("difficulty"))
 				{
