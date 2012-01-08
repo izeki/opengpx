@@ -31,6 +31,7 @@ import org.opengpx.lib.Coordinates;
 import org.opengpx.lib.geocache.FieldNote;
 import org.opengpx.lib.geocache.GCVote;
 import org.opengpx.lib.geocache.LogEntry;
+import org.opengpx.lib.geocache.PersonalNote;
 import org.opengpx.lib.NavigationInfo;
 import org.opengpx.lib.Text;
 import org.opengpx.lib.geocache.TravelBug;
@@ -63,6 +64,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.View.OnCreateContextMenuListener;
@@ -90,7 +92,7 @@ public class CacheDetailActivity extends TabActivity
 	private Preferences				mPreferences;
 	private boolean					isSaved					= false;
 	private ProgressDialog			progressDialog;
-	private CacheDatabase			cacheDatabase;
+	private CacheDatabase			mCacheDatabase;
 	private Resources				mResources;
 
 	private static final int		MENU_INFO				= Menu.FIRST;
@@ -114,7 +116,7 @@ public class CacheDetailActivity extends TabActivity
 
 		this.mResources = this.getResources();
 
-		cacheDatabase = CacheDatabase.getInstance();
+		this.mCacheDatabase = CacheDatabase.getInstance();
 
 		// Get cache from cache database
 		final Bundle bunExtras = this.getIntent().getExtras();
@@ -136,11 +138,13 @@ public class CacheDetailActivity extends TabActivity
 
 			this.mTabHost.addTab(mTabHost.newTabSpec("tabDescription").setIndicator(this.mResources.getString(R.string.cache_desc_description), this.mResources.getDrawable(android.R.drawable.ic_menu_info_details)).setContent(R.id.CacheDetailDescriptionScrollView));
 			this.mTabHost.addTab(mTabHost.newTabSpec("tabWaypoints").setIndicator(this.mResources.getString(R.string.cache_desc_waypoints), this.mResources.getDrawable(android.R.drawable.ic_menu_myplaces)).setContent(R.id.WaypointList));
+			this.mTabHost.addTab(mTabHost.newTabSpec("tabPersonalNotes").setIndicator(this.mResources.getString(R.string.cache_desc_personal_notes), this.mResources.getDrawable(android.R.drawable.ic_menu_edit)).setContent(R.id.CachePersonalNoteScrollView));
 			this.mTabHost.addTab(mTabHost.newTabSpec("tabLogs").setIndicator(this.mResources.getString(R.string.cache_desc_logs), this.mResources.getDrawable(android.R.drawable.ic_menu_recent_history)).setContent(R.id.CacheDetailLogLayout));
 			this.mTabHost.addTab(mTabHost.newTabSpec("tabLogVisit").setIndicator(this.mResources.getString(R.string.cache_desc_log_visit), this.mResources.getDrawable(android.R.drawable.ic_menu_agenda)).setContent(R.id.CacheDetailLogVisitScrollView));
 
 			this.readCacheDescription();
 			this.initializeWaypointList();
+			this.initializePersonalNotes();
 			this.initializeLogList();
 			this.initializeLogVisit();
 
@@ -273,7 +277,7 @@ public class CacheDetailActivity extends TabActivity
 				
 				if (note != null)
 				{
-					cacheDatabase.addFieldNote(note);
+					mCacheDatabase.addFieldNote(note);
 					Toast.makeText(context, "Field Note Saved To Database.", Toast.LENGTH_LONG).show();
 				}
 				else
@@ -1183,7 +1187,7 @@ public class CacheDetailActivity extends TabActivity
 	 */
 	private void showVotes()
 	{
-		GCVote votes = this.cacheDatabase.getVote(this.mCache.code);
+		GCVote votes = this.mCacheDatabase.getVote(this.mCache.code);
 		if (votes == null)
 		{
 			// Update votes if network connection is available
@@ -1193,10 +1197,10 @@ public class CacheDetailActivity extends TabActivity
 				final GCVoteReader gcVoteReader = new GCVoteReader();
 				final HashMap<String, GCVote> gcVotes = gcVoteReader.getVotes(this.mCache.code);
 				// Add votes to database
-				this.cacheDatabase.addCacheVotes(gcVotes);
+				this.mCacheDatabase.addCacheVotes(gcVotes);
 
 				// Re-read votes from database
-				votes = this.cacheDatabase.getVote(this.mCache.code);
+				votes = this.mCacheDatabase.getVote(this.mCache.code);
 			}
 		}
 
@@ -1246,6 +1250,32 @@ public class CacheDetailActivity extends TabActivity
 
 	/**
 	 * 
+	 */
+	private void initializePersonalNotes()
+	{
+		final Context context = this;
+
+		final EditText personalNoteText = (EditText) this.findViewById(R.id.PersonalNoteText);
+		final PersonalNote note = this.mCacheDatabase.getPersonalNote(this.mCache.code);
+		personalNoteText.setText(note.text);
+
+		personalNoteText.setOnFocusChangeListener(new OnFocusChangeListener()
+		{
+			public void onFocusChange(View v, boolean hasFocus) 
+			{
+				final String noteText = personalNoteText.getText().toString();
+				if (!noteText.equals(note.text))
+				{
+					note.text = noteText;
+					mCacheDatabase.storePersonalNote(note, true);
+					Toast.makeText(context, mResources.getString(R.string.personal_notes_saved), Toast.LENGTH_LONG).show();
+				}
+			}
+		});		
+	}
+
+	/**
+	 * 
 	 * @author Martin Preishuber
 	 * 
 	 */
@@ -1253,7 +1283,7 @@ public class CacheDetailActivity extends TabActivity
 	{
 		public void ready(Waypoint wp)
 		{
-			boolean added = CacheDetailActivity.this.mCache.addWaypoint(wp, true);
+			final boolean added = CacheDetailActivity.this.mCache.addWaypoint(wp, true);
 			if (!added)
 			{
 				final Toast failed = Toast.makeText(CacheDetailActivity.this.getApplicationContext(), R.string.wp_already_exists, Toast.LENGTH_LONG);
@@ -1263,7 +1293,6 @@ public class CacheDetailActivity extends TabActivity
 			{
 				final CacheDatabase db = CacheDatabase.getInstance();
 				db.addCache(CacheDetailActivity.this.mCache);
-				// CacheDetailActivity.this.initializeLogList();
 				CacheDetailActivity.this.initializeWaypointList();
 			}
 		}

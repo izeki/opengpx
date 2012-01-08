@@ -16,6 +16,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.opengpx.lib.geocache.Cache;
 import org.opengpx.lib.geocache.FieldNote;
 import org.opengpx.lib.geocache.GCVote;
+import org.opengpx.lib.geocache.PersonalNote;
 import org.opengpx.lib.geocache.Waypoint;
 import org.opengpx.lib.xml.GPXFileReader;
 import org.opengpx.lib.xml.LOCFileReader;
@@ -509,7 +510,20 @@ public class CacheDatabase
 		// Commit changes
 		if (commit) this.mDB4ODatabase.commit();
 	}
-	
+
+	public void storePersonalNote(PersonalNote note, boolean commit)
+	{
+		// Check whether the cache has already been imported
+		// final PersonalNote noteDuplicate = this.getPersonalNote(note.code);
+		// if (noteDuplicate != null)
+		//	this.mDB4ODatabase.delete(noteDuplicate);
+		// add cache to db4o database
+		this.mDB4ODatabase.store(note);
+
+		// Commit changes
+		if (commit) this.mDB4ODatabase.commit();
+	}
+
 	public void commit()
 	{
 		this.mDB4ODatabase.commit();
@@ -699,6 +713,23 @@ public class CacheDatabase
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	public int personalNoteSize()
+	{
+		if (this.mDB4ODatabase != null)
+		{
+			List<PersonalNote> personalNotes = this.mDB4ODatabase.query(PersonalNote.class);
+			return personalNotes.size();
+		}
+		else
+		{
+			return -1;
+		}
+	}
+	
 	/**
 	 * 
 	 * @return
@@ -976,6 +1007,31 @@ public class CacheDatabase
 		}
 		else
 			return null;
+	}
+
+	public PersonalNote getPersonalNote(String cacheCode)
+	{
+		if (this.mDB4ODatabase != null)
+		{
+			final Query queryPersonalNote = this.mDB4ODatabase.query();
+			queryPersonalNote.constrain(PersonalNote.class);
+			queryPersonalNote.descend("code").constrain(cacheCode);
+			final ObjectSet<?> result = queryPersonalNote.execute();
+			if (result.size() >= 1)
+			{
+				return (PersonalNote) result.next();
+			}
+			else
+			{
+				PersonalNote note = new PersonalNote();
+				note.code = cacheCode;
+				return note;
+			}
+		}
+		else
+		{
+			return null;
+		}
 	}
 	
 	public Cache getCacheFromSearch(String cacheCode)
@@ -1262,15 +1318,18 @@ public class CacheDatabase
 	 * 
 	 * @return
 	 */
-	public String getInformation(String name, String index, String database, String variables, String votes, String fieldnotes)
+	public String getInformation(final String name, final String index, final String database, final String variables, final String votes, final String fieldnotes, final String personalNotes)
 	{
 		final StringBuilder sbInfo = new StringBuilder();
+		
 		sbInfo.append(String.format("%s: %s\n", name, this.mstrDatabaseFilename));
 		sbInfo.append(String.format("%s: %d\n", index, this.indexSize()));
 		sbInfo.append(String.format("%s: %d\n", database, this.databaseSize()));
 		sbInfo.append(String.format("%s: %d\n", variables, this.cacheVariableSize()));
 		sbInfo.append(String.format("%s: %d\n", votes, this.voteSize()));
-		sbInfo.append(String.format("%s: %d", fieldnotes, this.getFieldNoteDBSize()));
+		sbInfo.append(String.format("%s: %d\n", fieldnotes, this.getFieldNoteDBSize()));
+		sbInfo.append(String.format("%s: %d", personalNotes, this.personalNoteSize()));
+		
 		return sbInfo.toString();
 	}
 
