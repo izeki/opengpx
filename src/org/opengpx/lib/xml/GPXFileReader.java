@@ -286,7 +286,7 @@ public class GPXFileReader
 					currentCache.owner = vn.toNormalizedString(vn.getText());
 					if (vn.getAttrVal("id") != -1) 
 					{
-						currentCache.ownerId = vn.parseInt(vn.getAttrVal("id"));
+						currentCache.ownerId = vn.toNormalizedString(vn.getAttrVal("id")).trim();
 					}
 				}
 				else if (currentElementName.equalsIgnoreCase("type"))
@@ -486,7 +486,16 @@ public class GPXFileReader
 					final TravelBug bug = new TravelBug();
 					currentCache.addTravelBug(bug);
 
-					bug.reference = vn.toNormalizedString(vn.getAttrVal("ref"));
+					if (vn.getAttrVal("ref") != -1)
+					{
+						// gpx version 1.0 and 1.0.1
+						bug.reference = vn.toNormalizedString(vn.getAttrVal("ref"));
+					}
+					else
+					{
+						// gpx version 1.0.2
+						bug.reference = vn.toNormalizedString(vn.getAttrVal("id"));
+					}
 
 					vn.push();
 					vn.toElement(VTDNav.FIRST_CHILD);

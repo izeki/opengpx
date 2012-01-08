@@ -19,7 +19,7 @@ public class Cache
 	public String name;
 	public String placedBy;
 	public String owner;
-	public int ownerId = 0;
+	public String ownerId;
 	public Double difficulty;
 	public Double terrain;
 	public String country;
