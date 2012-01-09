@@ -13,6 +13,7 @@ public class CacheIndexItem
 	public String name;
 	public Double difficulty;
 	public Double terrain;
+	public Integer favoritePoints = -1;
 	public float vote = 0.0f;
 	public Double latitude;
 	public Double longitude;

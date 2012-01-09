@@ -36,7 +36,6 @@ public class CacheListAdapter extends ArrayAdapter<String> implements Filterable
 	protected HashMap<String, Drawable> mhmIcons;
 	protected Coordinates mReferenceCoordinates;
 	protected UnitSystem mUnitSystem;
-	// protected ArrayList<String> mItems;
 
 	/**
 	 * 
@@ -54,7 +53,6 @@ public class CacheListAdapter extends ArrayAdapter<String> implements Filterable
         
         for (String cacheCode : items)
         	this.add(cacheCode);
-        // this.mItems = items;
     }
 
 	/**
@@ -119,10 +117,13 @@ public class CacheListAdapter extends ArrayAdapter<String> implements Filterable
 	        final TextView tvLine2 = cacheListViewHolder.twoLineListItem.getText2();
 	        if (this.mCacheDatabase.getSortOrder() == CacheDatabase.SORT_ORDER_NAME)
 	        {
+	        	String cacheDetailLine = String.format("%s [D/T: %s/%s]", cacheIndexItem.container.toString().replace("_", " "), cacheIndexItem.difficulty, cacheIndexItem.terrain);
+	        	if (cacheIndexItem.favoritePoints != null)
+	        		if (!cacheIndexItem.favoritePoints.equals(-1))
+	        			cacheDetailLine = cacheDetailLine.concat(String.format(" [F:%s]", cacheIndexItem.favoritePoints));
 	        	if (cacheIndexItem.vote > 0)
-	        		tvLine2.setText(String.format("%s [D/T: %s/%s] [V:%.2f]", cacheIndexItem.container.toString().replace("_", " "), cacheIndexItem.difficulty, cacheIndexItem.terrain, cacheIndexItem.vote).replace(",", "."));
-	        	else
-	        		tvLine2.setText(String.format("%s [D/T: %s/%s]", cacheIndexItem.container.toString().replace("_", " "), cacheIndexItem.difficulty, cacheIndexItem.terrain));
+	        		cacheDetailLine = cacheDetailLine.concat(String.format(" [V:%.2f]", cacheIndexItem.vote).replace(",", "."));
+	        	tvLine2.setText(cacheDetailLine);
 	        }
 	        else
 	        {

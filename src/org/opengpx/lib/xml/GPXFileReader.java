@@ -334,6 +334,10 @@ public class GPXFileReader
 					else							
 						currentCache.terrain = vn.parseDouble(vn.getText());
 				}
+				else if (currentElementName.equalsIgnoreCase("favorite_points"))
+				{
+					currentCache.favoritePoints = vn.parseInt(vn.getText());
+				}
 				else if (currentElementName.equalsIgnoreCase("country"))
 				{
 					currentCache.country = vn.toNormalizedString(vn.getText());
