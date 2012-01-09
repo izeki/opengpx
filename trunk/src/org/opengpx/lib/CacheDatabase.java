@@ -589,6 +589,7 @@ public class CacheDatabase
 		cii.name = cache.name;
 		cii.difficulty = cache.difficulty;
 		cii.terrain = cache.terrain;
+		cii.favoritePoints = cache.favoritePoints;
 		cii.latitude = headerWaypoint.latitude;
 		cii.longitude = headerWaypoint.longitude;
 		cii.isArchived = cache.isArchived;

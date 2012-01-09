@@ -481,7 +481,10 @@ public class CacheDetailActivity extends TabActivity
         	tvName.setPaintFlags(tvName.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
         	tvName.setTextColor(Color.WHITE);
         }
-		final String strName = String.format("%s (%s%s)", this.mCache.name, this.mCache.code, strExtraNameTag);
+		String strName = String.format("%s (%s%s)", this.mCache.name, this.mCache.code, strExtraNameTag);
+		if (this.mCache.favoritePoints != null)
+			if (!this.mCache.favoritePoints.equals(-1))
+				strName = strName.concat(" [+" + Integer.toString(this.mCache.favoritePoints) + "]");
 		tvName.setText(strName);
 		Linkify.addLinks(tvName, Pattern.compile("[GO]C\\d\\w+"), "http://coord.info/");
 

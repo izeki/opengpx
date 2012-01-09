@@ -22,6 +22,7 @@ public class Cache
 	public String ownerId;
 	public Double difficulty;
 	public Double terrain;
+	public Integer favoritePoints = -1;
 	public String country;
 	public String state;
 	public boolean shortDescriptionIsHtml;
