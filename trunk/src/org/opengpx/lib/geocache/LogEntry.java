@@ -46,6 +46,15 @@ public class LogEntry
 	
 	/**
 	 * 
+	 * @param logType
+	 */
+	public void setType(LogType logType)
+	{
+		this.mType = logType;
+	}
+	
+	/**
+	 * 
 	 */
 	@Override public String toString()
 	{

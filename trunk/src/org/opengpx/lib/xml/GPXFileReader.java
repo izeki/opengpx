@@ -9,6 +9,7 @@ import org.opengpx.lib.CacheDatabase;
 import org.opengpx.lib.geocache.CacheType;
 import org.opengpx.lib.geocache.ContainerType;
 import org.opengpx.lib.geocache.LogEntry;
+import org.opengpx.lib.geocache.LogType;
 import org.opengpx.lib.geocache.PersonalNote;
 import org.opengpx.lib.geocache.TravelBug;
 import org.opengpx.lib.geocache.Waypoint;
@@ -471,7 +472,16 @@ public class GPXFileReader
 						}
 						else if (subElementName.equalsIgnoreCase("type"))
 						{
-							logEntry.parseTypeString(vn.toNormalizedString(vn.getText()));
+							if (vn.getAttrVal("id") != -1)
+							{
+								// gpx version 1.0.2
+								logEntry.setType(LogType.getById(vn.parseInt(vn.getAttrVal("id"))));
+							}
+							else
+							{
+								// gpx version 1.0 and 1.0.1
+								logEntry.parseTypeString(vn.toNormalizedString(vn.getText()));
+							}
 						}
 						else if (subElementName.equalsIgnoreCase("finder") || subElementName.equalsIgnoreCase("geocacher"))
 						{
