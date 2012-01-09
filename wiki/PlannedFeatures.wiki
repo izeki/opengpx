@@ -2,7 +2,7 @@
 
 == ToDo ==
 
-*OpenGPX:* (last update: 8. December 2010)
+*OpenGPX:* (last update: 8. Januar 2012)
 
   * implement cache filter field (top of list)
   * add cache database stats (gc, opencaching caches)
