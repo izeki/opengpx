@@ -491,7 +491,8 @@ public class CacheDetailActivity extends TabActivity
 			if (!this.mCache.favoritePoints.equals(-1))
 				strName = strName.concat(" [+" + Integer.toString(this.mCache.favoritePoints) + "]");
 		tvName.setText(strName);
-		Linkify.addLinks(tvName, Pattern.compile("[GO]C\\d\\w+"), "http://coord.info/");
+		// Linkify.addLinks(tvName, Pattern.compile("[GO]C\\d\\w+"), "http://coord.info/");
+		Linkify.addLinks(tvName, Pattern.compile("[GO]C\\w+"), "http://coord.info/");
 
 		final String strCacheType = this.mCache.getCacheType().toString();
 		try 
