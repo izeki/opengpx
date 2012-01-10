@@ -81,6 +81,12 @@ public class CacheListAdapter extends ArrayAdapter<String> implements Filterable
         	textView.setPaintFlags(textView.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
         	textView.setTextColor(Color.WHITE);
         }
+
+        // Make member only caches bold
+        if (cacheIndexItem.isMemberOnly != null)
+        	if (cacheIndexItem.isMemberOnly)
+        		textView.setPaintFlags(textView.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+        
         textView.setText(String.format("%s (%s%s)", cacheIndexItem.name, cacheIndexItem.code, strExtraNameTag));
 	}
 	
@@ -118,11 +124,11 @@ public class CacheListAdapter extends ArrayAdapter<String> implements Filterable
 	        if (this.mCacheDatabase.getSortOrder() == CacheDatabase.SORT_ORDER_NAME)
 	        {
 	        	String cacheDetailLine = String.format("%s [D/T: %s/%s]", cacheIndexItem.container.toString().replace("_", " "), cacheIndexItem.difficulty, cacheIndexItem.terrain);
-	        	if (cacheIndexItem.favoritePoints != null)
-	        		if (!cacheIndexItem.favoritePoints.equals(-1))
-	        			cacheDetailLine = cacheDetailLine.concat(String.format(" [F:%s]", cacheIndexItem.favoritePoints));
 	        	if (cacheIndexItem.vote > 0)
 	        		cacheDetailLine = cacheDetailLine.concat(String.format(" [V:%.2f]", cacheIndexItem.vote).replace(",", "."));
+	        	if (cacheIndexItem.favoritePoints != null)
+	        		if (!cacheIndexItem.favoritePoints.equals(-1))
+	        			cacheDetailLine = cacheDetailLine.concat(String.format(" [+%s]", cacheIndexItem.favoritePoints));
 	        	tvLine2.setText(cacheDetailLine);
 	        }
 	        else
