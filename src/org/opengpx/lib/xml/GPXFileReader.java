@@ -265,6 +265,11 @@ public class GPXFileReader
 			{
 				currentCache.isAvailable = Boolean.parseBoolean(vn.toNormalizedString(idx));
 			}
+
+			if ((idx = vn.getAttrVal("memberonly")) != -1)
+			{
+				currentCache.isMemberOnly = Boolean.parseBoolean(vn.toNormalizedString(idx));
+			}
 			
 			if ((idx = vn.getAttrVal("status")) != -1)
 			{

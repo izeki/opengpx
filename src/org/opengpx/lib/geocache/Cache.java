@@ -16,6 +16,7 @@ public class Cache
 	public int id;
 	public boolean isAvailable;
 	public boolean isArchived;
+	public boolean isMemberOnly = false;
 	public String name;
 	public String placedBy;
 	public String owner;

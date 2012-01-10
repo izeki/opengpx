@@ -594,6 +594,7 @@ public class CacheDatabase
 		cii.longitude = headerWaypoint.longitude;
 		cii.isArchived = cache.isArchived;
 		cii.isAvailable = cache.isAvailable;
+		cii.isMemberOnly = cache.isMemberOnly;
 		cii.vote = gcvote;
 		return cii;
 	}

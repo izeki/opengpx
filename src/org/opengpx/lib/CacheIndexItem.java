@@ -19,4 +19,5 @@ public class CacheIndexItem
 	public Double longitude;
 	public Boolean isAvailable = true;
 	public Boolean isArchived = false;
+	public Boolean isMemberOnly = false;
 }

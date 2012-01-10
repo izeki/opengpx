@@ -481,6 +481,11 @@ public class CacheDetailActivity extends TabActivity
         	tvName.setPaintFlags(tvName.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
         	tvName.setTextColor(Color.WHITE);
         }
+        
+        // Make member only caches bold
+    	if (this.mCache.isMemberOnly)
+    		tvName.setPaintFlags(tvName.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+        
 		String strName = String.format("%s (%s%s)", this.mCache.name, this.mCache.code, strExtraNameTag);
 		if (this.mCache.favoritePoints != null)
 			if (!this.mCache.favoritePoints.equals(-1))
