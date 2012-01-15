@@ -278,7 +278,7 @@ public class CacheDetailActivity extends TabActivity
 				if (note != null)
 				{
 					mCacheDatabase.addFieldNote(note);
-					Toast.makeText(context, "Field Note Saved To Database.", Toast.LENGTH_LONG).show();
+					Toast.makeText(context, mResources.getText(R.string.field_note_saved), Toast.LENGTH_LONG).show();
 				}
 				else
 				{
@@ -469,32 +469,24 @@ public class CacheDetailActivity extends TabActivity
         {
         	tvName.setPaintFlags(tvName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         	textColor = Color.RED;
-        	// tvName.setTextColor(Color.RED);
         	strExtraNameTag = ", archived";
         }
         else if (!this.mCache.isAvailable)
         {
         	tvName.setPaintFlags(tvName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        	// tvName.setTextColor(Color.WHITE);
         	strExtraNameTag = ", disabled";
         }
         else
         {
         	tvName.setPaintFlags(tvName.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
-        	// tvName.setTextColor(Color.WHITE);
         }
         
         // Make member only caches bold
     	if (this.mCache.isMemberOnly)
     		tvName.setPaintFlags(tvName.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
         
-		String strName = String.format("%s%s ", this.mCache.name, strExtraNameTag);
-		// if (this.mCache.favoritePoints != null)
-		// 	if (!this.mCache.favoritePoints.equals(-1))
-		// 		strName = strName.concat(" [+" + Integer.toString(this.mCache.favoritePoints) + "]");
-		tvName.setText(strName);
+		tvName.setText(String.format("%s%s ", this.mCache.name, strExtraNameTag));
         tvName.setTextColor(textColor);
-		// Linkify.addLinks(tvName, Pattern.compile("[GO]C\\w+"), "http://coord.info/");
 
 		// Set cache Code text
 		final TextView cacheDetailCode = (TextView) this.findViewById(R.id.CacheDetailCacheCode);
@@ -538,7 +530,6 @@ public class CacheDetailActivity extends TabActivity
 		else
 			strLinkCountryCoordsPlaced = String.format("%s\n%s", strCountryState, coordsHeaderWaypoint.toString(coordinateFormat));
 		
-		// final String strLinkCountryCoordsPlaced = String.format("%s\n%s", strCountryState, coordsHeaderWaypoint.toString(coordinateFormat));
 		((TextView) this.findViewById(R.id.CacheDetailLinkCountryCoords)).setText(strLinkCountryCoordsPlaced);
 
 		final DateFormat df = DateFormat.getDateInstance();
@@ -766,7 +757,6 @@ public class CacheDetailActivity extends TabActivity
 	private void showHint()
 	{
 		final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-		// String strHintText = mCache.getHint().getPlainText().trim();
 		final String strHintText = mCache.hint.trim();
 		if (strHintText.length() > 0)
 		{
@@ -793,28 +783,23 @@ public class CacheDetailActivity extends TabActivity
 	 */
 	private void showInventory()
 	{
-		// String strInventory = "";
 		final StringBuilder travelBugs = new StringBuilder();
 		if (this.mCache.getTravelBugs() != null)
 		{
 			for (TravelBug tb : this.mCache.getTravelBugs())
 			{
 				travelBugs.append(tb.toString()).append("\n");
-				// strInventory += tb.toString() + "\n";
 			}
 			// Remove trailing newline
 			travelBugs.delete(travelBugs.length() - 1, travelBugs.length());
-			// strInventory = strInventory.substring(0, strInventory.length() - 1);
 		}
 		else
 		{
 			travelBugs.append("Sorry, there are no coins / travelbugs in this cache.");
-			// strInventory = "Sorry, there are no coins / travelbugs in this cache.";
 		}
 
 		final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 		alertDialog.setTitle("Inventory");
-		// alertDialog.setMessage(strInventory);
 		alertDialog.setMessage(travelBugs);
 		alertDialog.setButton("OK", new DialogInterface.OnClickListener()
 		{
@@ -919,7 +904,6 @@ public class CacheDetailActivity extends TabActivity
 				menu.setHeaderTitle("Waypoint Options");
 				menu.add(0, MENU_INFO, Menu.NONE, "Information");
 				menu.add(0, MENU_COMPASS, Menu.NONE, "Compass");
-				// menu.add(0, MENU_RADAR, Menu.NONE, "Radar View");
 				menu.add(0, MENU_MAP, Menu.NONE, "Map View");
 				menu.add(0, MENU_NAVIGATE, Menu.NONE, "Navigate");
 				menu.add(0, MENU_GEO, Menu.NONE, "Geo");

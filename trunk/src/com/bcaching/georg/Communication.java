@@ -148,7 +148,7 @@ public class Communication
 			p.append(",");
 			p.append(note.getDateAsISOString());
 			p.append(",");
-			p.append(note.logType.text);
+			p.append(note.logType.toString());
 			p.append(",\"");
 			p.append(note.logText);
 			p.append("\"\n");
