@@ -24,10 +24,14 @@ import org.opengpx.lib.CacheIndexItem;
 import org.opengpx.lib.CoordinateFormat;
 import org.opengpx.lib.Coordinates;
 import org.opengpx.lib.geocache.Cache;
+import org.opengpx.lib.geocache.FieldNote;
 import org.opengpx.lib.geocache.GCVote;
 import org.opengpx.lib.geocache.Waypoint;
 import org.opengpx.lib.ImportResult;
 import org.opengpx.lib.xml.GCVoteReader;
+
+import com.db4o.ObjectSet;
+
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
@@ -40,6 +44,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.text.util.Linkify;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -470,6 +475,7 @@ public class CacheListActivity extends ListActivity
 			return true;
 		case R.id.MenuDeleteFieldNotes:
 			mCacheDatabase.deleteFieldNotes(mCacheDatabase.getFieldNotes());
+			Toast.makeText(this, this.mResources.getString(R.string.field_notes_deleted), Toast.LENGTH_LONG).show();
 			return true;
 		case R.id.MenuShowFieldNotes:
 			this.showFieldNotes();
@@ -499,7 +505,7 @@ public class CacheListActivity extends ListActivity
 						{
 							public void run()
 							{
-								AlertDialog alertDialog = new AlertDialog.Builder(context).setTitle("Upload Result").create();
+								final AlertDialog alertDialog = new AlertDialog.Builder(context).setTitle("Upload Result").create();
 								final TextView view = new TextView(alertDialog.getContext());
 								view.setText(result);
 								alertDialog.setView(view);
@@ -520,7 +526,7 @@ public class CacheListActivity extends ListActivity
 						{
 							public void run()
 							{
-								AlertDialog alertDialog = new AlertDialog.Builder(context).setTitle("Upload Result").create();
+								final AlertDialog alertDialog = new AlertDialog.Builder(context).setTitle("Upload Result").create();
 								final TextView view = new TextView(alertDialog.getContext());
 								view.setText("Error Uploading Field Notes!");
 								alertDialog.setView(view);
@@ -573,9 +579,43 @@ public class CacheListActivity extends ListActivity
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	private void showFieldNotes()
 	{
-		Toast.makeText(this, "wip", Toast.LENGTH_LONG);
+		final Calendar cal = Calendar.getInstance();
+		cal.set(1990, Calendar.DECEMBER, 12, 0, 0, 0);
+		java.text.DateFormat df = DateFormat.getDateFormat(this);
+		java.text.DateFormat df2 = DateFormat.getTimeFormat(this);
+		
+		final ObjectSet<FieldNote> fieldNotes = this.mCacheDatabase.getFieldNotes(true);
+		StringBuilder history = new StringBuilder();
+		String lastDate = df.format(cal.getTime());
+
+		for (FieldNote fieldNote : fieldNotes)
+		{
+			String compareDate = df.format(fieldNote.noteTime);
+			if (!lastDate.equals(compareDate))
+			{
+				lastDate = compareDate;
+				history.append(compareDate + "\n");
+			}
+			history.append("\t" + df2.format(fieldNote.noteTime) + " " + fieldNote.logType.toString() + ": " + fieldNote.gcName + "\n");
+		}
+
+		final AlertDialog fieldNoteInfo = new AlertDialog.Builder(this).create();
+		fieldNoteInfo.setIcon(android.R.drawable.ic_dialog_info);
+		fieldNoteInfo.setTitle("Field Notes");
+		fieldNoteInfo.setMessage(history);
+		fieldNoteInfo.setButton("OK", new DialogInterface.OnClickListener()
+		{
+			public void onClick(DialogInterface dialog, int which)
+			{
+				return;
+			}
+		});
+		fieldNoteInfo.show();
 	}
 	
 	private void searchOnline()

@@ -220,15 +220,38 @@ public class CacheDatabase
 			fieldNoteDB.commit();
 		}
 	}
-	
+
+	/**
+	 * 
+	 * @return
+	 */
 	public ObjectSet<FieldNote> getFieldNotes()
 	{
+		return this.getFieldNotes(false);
+	}
+
+	/**
+	 * 
+	 * @param sortByDateReverse
+	 * @return
+	 */
+	public ObjectSet<FieldNote> getFieldNotes(boolean sortByDateReverse)
+	{
 		final Query q = fieldNoteDB.query();
+		
 		q.constrain(FieldNote.class);
+		if (sortByDateReverse)
+		{
+			q.descend("noteTime").orderDescending();
+		}
 		
 		return q.execute();
 	}
 	
+	/**
+	 * Delete all field notes
+	 * @param notes
+	 */
 	public void deleteFieldNotes(ObjectSet<FieldNote> notes)
 	{
 		for (FieldNote note : notes)

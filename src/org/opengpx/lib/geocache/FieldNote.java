@@ -15,6 +15,11 @@ public class FieldNote
 
 	private static final String DATE_FORMAT_STRING = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 
+	/**
+	 * 
+	 * @author preisl
+	 *
+	 */
 	public enum LogType
 	{
 		FOUND("Found it"),
@@ -24,11 +29,16 @@ public class FieldNote
 		WEBCAM_TAKEN("Webcam photo taken"),
 		PRIVATE("Private note");
 
-		public String text;
+		private String mText;
 
 		LogType(String text)
 		{
-			this.text = text;
+			this.mText = text;
+		}
+		
+		public String toString()
+		{
+			return this.mText;
 		}
 	}
 	
@@ -36,7 +46,7 @@ public class FieldNote
 	{
 		for (LogType l : LogType.values())
 		{
-			if (l.text.equalsIgnoreCase(type)) return l;
+			if (l.mText.equalsIgnoreCase(type)) return l;
 		}
 		
 		return null;
