@@ -464,36 +464,57 @@ public class CacheDetailActivity extends TabActivity
 		final TextView tvName = (TextView) this.findViewById(R.id.CacheDetailName);
 
         // Set text properties according to cache status
+		int textColor = Color.WHITE;
         if (this.mCache.isArchived)
         {
         	tvName.setPaintFlags(tvName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        	tvName.setTextColor(Color.RED);
+        	textColor = Color.RED;
+        	// tvName.setTextColor(Color.RED);
         	strExtraNameTag = ", archived";
         }
         else if (!this.mCache.isAvailable)
         {
         	tvName.setPaintFlags(tvName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        	tvName.setTextColor(Color.WHITE);
+        	// tvName.setTextColor(Color.WHITE);
         	strExtraNameTag = ", disabled";
         }
         else
         {
         	tvName.setPaintFlags(tvName.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
-        	tvName.setTextColor(Color.WHITE);
+        	// tvName.setTextColor(Color.WHITE);
         }
         
         // Make member only caches bold
     	if (this.mCache.isMemberOnly)
     		tvName.setPaintFlags(tvName.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
         
-		String strName = String.format("%s (%s%s)", this.mCache.name, this.mCache.code, strExtraNameTag);
-		if (this.mCache.favoritePoints != null)
-			if (!this.mCache.favoritePoints.equals(-1))
-				strName = strName.concat(" [+" + Integer.toString(this.mCache.favoritePoints) + "]");
+		String strName = String.format("%s%s ", this.mCache.name, strExtraNameTag);
+		// if (this.mCache.favoritePoints != null)
+		// 	if (!this.mCache.favoritePoints.equals(-1))
+		// 		strName = strName.concat(" [+" + Integer.toString(this.mCache.favoritePoints) + "]");
 		tvName.setText(strName);
-		// Linkify.addLinks(tvName, Pattern.compile("[GO]C\\d\\w+"), "http://coord.info/");
-		Linkify.addLinks(tvName, Pattern.compile("[GO]C\\w+"), "http://coord.info/");
+        tvName.setTextColor(textColor);
+		// Linkify.addLinks(tvName, Pattern.compile("[GO]C\\w+"), "http://coord.info/");
 
+		// Set cache Code text
+		final TextView cacheDetailCode = (TextView) this.findViewById(R.id.CacheDetailCacheCode);
+		cacheDetailCode.setText(String.format("(%s)", this.mCache.code));
+		cacheDetailCode.setPaintFlags(tvName.getPaintFlags());
+		cacheDetailCode.setTextColor(textColor);
+		Linkify.addLinks(cacheDetailCode, Pattern.compile("GC\\w+"), "http://coord.info/");
+
+		// Set favorite count
+		if (this.mCache.favoritePoints != null)
+		{
+			if (!this.mCache.favoritePoints.equals(-1))
+			{
+				final TextView cacheDetailFavoriteCount = (TextView) this.findViewById(R.id.CacheDetailFavoriteCount);
+				cacheDetailFavoriteCount.setText(" [+" + Integer.toString(this.mCache.favoritePoints) + "]");
+				cacheDetailFavoriteCount.setPaintFlags(tvName.getPaintFlags());
+				cacheDetailFavoriteCount.setTextColor(textColor);
+			}
+		}
+		
 		final String strCacheType = this.mCache.getCacheType().toString();
 		try 
 		{

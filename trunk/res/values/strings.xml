@@ -146,4 +146,6 @@
 <string name="cache_desc_personal_notes">Notes</string>
 <string name="personal_notes">Personal notes</string>
 <string name="personal_notes_saved">Personal notes saved to database</string>
+<string name="placeholder_text">Text</string>
+<string name="cache_icon">Cache Icon</string>
 </resources>
