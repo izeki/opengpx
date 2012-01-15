@@ -11,7 +11,7 @@
 		android:id="@+id/CacheIcon"
 		android:layout_width="32dip"
 		android:layout_height="32dip"
-		android:src="@android:drawable/presence_offline" />
+		android:src="@android:drawable/presence_offline" android:contentDescription="@string/cache_icon"/>
 	<TextView
 		android:id="@android:id/text1" 
 		android:textAppearance="?android:attr/textAppearanceMedium"

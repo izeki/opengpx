@@ -87,7 +87,13 @@ public class CacheListAdapter extends ArrayAdapter<String> implements Filterable
         	if (cacheIndexItem.isMemberOnly)
         		textView.setPaintFlags(textView.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
         
-        textView.setText(String.format("%s (%s%s)", cacheIndexItem.name, cacheIndexItem.code, strExtraNameTag));
+        // Add favorite points to cache name
+        String favPoints = "";
+    	if (cacheIndexItem.favoritePoints != null)
+    		if (!cacheIndexItem.favoritePoints.equals(-1))
+    			favPoints = String.format(" [+%s]", cacheIndexItem.favoritePoints);
+
+        textView.setText(String.format("%s (%s%s)%s", cacheIndexItem.name, cacheIndexItem.code, strExtraNameTag, favPoints));
 	}
 	
 	/**
@@ -126,9 +132,9 @@ public class CacheListAdapter extends ArrayAdapter<String> implements Filterable
 	        	String cacheDetailLine = String.format("%s [D/T: %s/%s]", cacheIndexItem.container.toString().replace("_", " "), cacheIndexItem.difficulty, cacheIndexItem.terrain);
 	        	if (cacheIndexItem.vote > 0)
 	        		cacheDetailLine = cacheDetailLine.concat(String.format(" [V:%.2f]", cacheIndexItem.vote).replace(",", "."));
-	        	if (cacheIndexItem.favoritePoints != null)
-	        		if (!cacheIndexItem.favoritePoints.equals(-1))
-	        			cacheDetailLine = cacheDetailLine.concat(String.format(" [+%s]", cacheIndexItem.favoritePoints));
+	        	// if (cacheIndexItem.favoritePoints != null)
+	        	// 	if (!cacheIndexItem.favoritePoints.equals(-1))
+	        	// 		cacheDetailLine = cacheDetailLine.concat(String.format(" [+%s]", cacheIndexItem.favoritePoints));
 	        	tvLine2.setText(cacheDetailLine);
 	        }
 	        else
