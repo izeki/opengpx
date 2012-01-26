@@ -540,29 +540,32 @@ public class CacheDetailActivity extends TabActivity
 		if (this.mCache.getHeaderWaypoint().time.before(cal.getTime())) strPlacedAt = "Unknown";
 		final String strPlacedBy = String.format("%s: %s (%s)", this.mResources.getString(R.string.cache_desc_placed_by), this.mCache.placedBy, strPlacedAt);
 		tvPlacedBy.setText(strPlacedBy);
-		if (this.mCache.ownerId.length() > 0)
+		if (this.mCache.ownerId != null)
 		{
-			String strPatternPlacedBy = this.mCache.placedBy;
-			strPatternPlacedBy = strPatternPlacedBy.replace("+", "\\+");
-			strPatternPlacedBy = strPatternPlacedBy.replace("[", "\\[");
-			strPatternPlacedBy = strPatternPlacedBy.replace("]", "\\]");
-
-			final Pattern patOwner = Pattern.compile(strPatternPlacedBy);
-			String strOwnerUrl;
-			try 
+			if (this.mCache.ownerId.length() > 0)
 			{
-				// Owner URL for numeric owner IDs (gpx file version 1.0 and 1.0.1)
-				Integer.parseInt(this.mCache.ownerId);
-				strOwnerUrl = "http://www.geocaching.com/profile/?id=" + this.mCache.ownerId + "&name=";
-			} 
-			catch (Exception ex)
-			{
-				// Owner URL for text owner IDs (gpx file version 1.02)				
-				strOwnerUrl = "http://coord.info/" + this.mCache.ownerId + "?name=";
+				String strPatternPlacedBy = this.mCache.placedBy;
+				strPatternPlacedBy = strPatternPlacedBy.replace("+", "\\+");
+				strPatternPlacedBy = strPatternPlacedBy.replace("[", "\\[");
+				strPatternPlacedBy = strPatternPlacedBy.replace("]", "\\]");
+	
+				final Pattern patOwner = Pattern.compile(strPatternPlacedBy);
+				String strOwnerUrl;
+				try 
+				{
+					// Owner URL for numeric owner IDs (gpx file version 1.0 and 1.0.1)
+					Integer.parseInt(this.mCache.ownerId);
+					strOwnerUrl = "http://www.geocaching.com/profile/?id=" + this.mCache.ownerId + "&name=";
+				} 
+				catch (Exception ex)
+				{
+					// Owner URL for text owner IDs (gpx file version 1.02)				
+					strOwnerUrl = "http://coord.info/" + this.mCache.ownerId + "?name=";
+				}
+	
+				// final String strOwnerUrl = "http://www.geocaching.com/profile/?id=" + this.mCache.ownerId + "&name=";
+				Linkify.addLinks(tvPlacedBy, patOwner, strOwnerUrl);
 			}
-
-			// final String strOwnerUrl = "http://www.geocaching.com/profile/?id=" + this.mCache.ownerId + "&name=";
-			Linkify.addLinks(tvPlacedBy, patOwner, strOwnerUrl);
 		}
 		
 		final String cacheSize = this.mCache.getContainerType().toString().replace("_", " ");
