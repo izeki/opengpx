@@ -315,10 +315,12 @@ public class GPXFileReader
 				{
 					if (vn.getAttrVal("id") != -1)
 					{
+						// gpx version 1.0.2
 						currentCache.setContainerType(ContainerType.getById(vn.parseInt(vn.getAttrVal("id"))));
 					}
 					else
 					{
+						// gpx version 1.0 and 1.0.1
 						currentCache.parseContainerTypeString(vn.toNormalizedString(vn.getText()));
 					}
 				}

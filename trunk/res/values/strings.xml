@@ -151,4 +151,6 @@
 <string name="waypoint_icon">waypoint icon</string>
 <string name="field_notes_deleted">Field notes deleted.</string>
 <string name="field_note_saved">Field note saved to database.</string>
+<string name="log_icon">Log icon</string>
+<string name="no_field_notes">No field notes available</string>
 </resources>
