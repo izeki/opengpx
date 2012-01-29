@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      android:installLocation="auto" package="org.opengpx" android:versionName="1.2.0" android:versionCode="216">
+      android:installLocation="auto" package="org.opengpx" android:versionName="1.2.0" android:versionCode="217">
     <uses-sdk android:minSdkVersion="4"/>
 <application 
  android:label="@string/app_name" 
@@ -47,6 +47,7 @@
 <activity android:name="org.opengpx.OsmPreferenceActivity"></activity>
 <activity android:name="org.opengpx.OpenGpxPreferenceActivity"></activity>
 <meta-data android:name="CLOUDMADE_KEY" android:value="e9454efcb05b46b5a89b1fcce0c352d4" />
+<activity android:name="FieldNoteHistoryActivity"></activity>
 </application>
 
 <uses-permission android:name="android.permission.INTERNET"></uses-permission>

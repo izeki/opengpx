@@ -378,7 +378,6 @@ public class CacheListActivity extends ListActivity
 			{
 				final String strFilterableName = mCacheDatabase.getFilterableName(strCacheCode);
 				mCacheDatabase.deleteCache(strCacheCode);
-				// mCacheListAdapter.removeListItem(strCacheCode);
 				mCacheListAdapter.remove(strFilterableName);
 			}
 		}).setNegativeButton("No", new DialogInterface.OnClickListener()
@@ -584,12 +583,22 @@ public class CacheListActivity extends ListActivity
 	 */
 	private void showFieldNotes()
 	{
-		final Calendar cal = Calendar.getInstance();
+		final ObjectSet<FieldNote> fieldNotes = this.mCacheDatabase.getFieldNotes(true);
+		if (fieldNotes.isEmpty())
+		{
+			Toast.makeText(this, R.string.no_field_notes, Toast.LENGTH_LONG).show();
+		}
+		else
+		{
+			final Intent intent = new Intent(this, FieldNoteHistoryActivity.class);
+			this.startActivity(intent);
+		}
+
+		/* final Calendar cal = Calendar.getInstance();
 		cal.set(1990, Calendar.DECEMBER, 12, 0, 0, 0);
 		java.text.DateFormat df = DateFormat.getDateFormat(this);
 		java.text.DateFormat df2 = DateFormat.getTimeFormat(this);
 		
-		final ObjectSet<FieldNote> fieldNotes = this.mCacheDatabase.getFieldNotes(true);
 		StringBuilder history = new StringBuilder();
 		String lastDate = df.format(cal.getTime());
 
@@ -616,6 +625,7 @@ public class CacheListActivity extends ListActivity
 			}
 		});
 		fieldNoteInfo.show();
+		*/
 	}
 	
 	private void searchOnline()
@@ -754,7 +764,7 @@ public class CacheListActivity extends ListActivity
 	public void onListItemClick(ListView parent, View v, int position, long id)
 	{
 		final String strCacheCode = this.mCacheDatabase.getCacheCodeFromFilterable(this.mCacheListAdapter.getItem(position));
-		Intent intent = new Intent(this, CacheDetailActivity.class);
+		final Intent intent = new Intent(this, CacheDetailActivity.class);
 		intent.putExtra("cachecode", strCacheCode);
 		intent.putExtra("isSearchResult", false);
 		this.startActivity(intent);
