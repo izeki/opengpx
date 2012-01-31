@@ -184,9 +184,26 @@ public class CacheDetailActivity extends TabActivity
 
 	protected void initializeLogVisit()
 	{
-		Button b = (Button) findViewById(R.id.CacheLogVisit);
+		// Show existing field note (if available)
+		FieldNote existingFieldNote = this.mCacheDatabase.getFieldNote(this.mCache.code);
+		if (existingFieldNote != null)
+		{				
+			final EditText text = (EditText) findViewById(R.id.CacheLogVisitText);
+			text.setText(existingFieldNote.logText);
+			
+			final Spinner type = (Spinner) findViewById(R.id.CacheLogVisitType);
+			
+			final String[] logTypes = this.getResources().getStringArray(R.array.log_types);
+			for (int i = 0; i < logTypes.length; i++)
+			{
+				if (logTypes[i].equalsIgnoreCase(existingFieldNote.logType.toString()))
+					type.setSelection(i);
+			}
+		}
+
 		final Context context = this;
 
+		Button b = (Button) findViewById(R.id.CacheLogVisit);
 		b.setOnClickListener(new OnClickListener()
 		{
 			public void onClick(View v)

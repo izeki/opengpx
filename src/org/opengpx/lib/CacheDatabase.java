@@ -210,17 +210,43 @@ public class CacheDatabase
 		}		
 	}
 
+	/**
+	 * 
+	 * @param note
+	 */
 	public void addFieldNote(FieldNote note)
 	{
-		final ObjectSet<FieldNote> duplicateNote = fieldNoteDB.queryByExample(note);
+		// final ObjectSet<FieldNote> duplicateNote = fieldNoteDB.queryByExample(note);
+		final FieldNote duplicateNote = this.getFieldNote(note.gcId);
+		if (duplicateNote != null)
+			fieldNoteDB.delete(duplicateNote);
 		
-		if (duplicateNote.size() == 0)
-		{
+		// if (duplicateNote.size() == 0)
+		// {
 			fieldNoteDB.store(note);
 			fieldNoteDB.commit();
-		}
+		// }
 	}
 
+	/**
+	 * 
+	 * @param cacheCode
+	 * @return
+	 */
+	public FieldNote getFieldNote(final String cacheCode)
+	{
+		final Query queryFieldNote = fieldNoteDB.query();
+		
+		queryFieldNote.constrain(FieldNote.class);
+		queryFieldNote.descend("gcId").constrain(cacheCode);
+		
+		final ObjectSet<FieldNote> result = queryFieldNote.execute();
+		if (result.size() >= 1)
+			return result.next();
+		else
+			return null;
+	}
+	
 	/**
 	 * 
 	 * @return
@@ -1035,9 +1061,9 @@ public class CacheDatabase
 			final Query queryCache = this.mDB4ODatabase.query();
 			queryCache.constrain(Cache.class);
 			queryCache.descend("code").constrain(cacheCode);
-			final ObjectSet<?> result = queryCache.execute();
+			final ObjectSet<Cache> result = queryCache.execute();
 			if (result.size() >= 1)
-				return (Cache) result.next();
+				return result.next();
 			else
 				return null;
 		}
@@ -1045,6 +1071,11 @@ public class CacheDatabase
 			return null;
 	}
 
+	/**
+	 * 
+	 * @param cacheCode
+	 * @return
+	 */
 	public PersonalNote getPersonalNote(String cacheCode)
 	{
 		if (this.mDB4ODatabase != null)
@@ -1052,10 +1083,10 @@ public class CacheDatabase
 			final Query queryPersonalNote = this.mDB4ODatabase.query();
 			queryPersonalNote.constrain(PersonalNote.class);
 			queryPersonalNote.descend("code").constrain(cacheCode);
-			final ObjectSet<?> result = queryPersonalNote.execute();
+			final ObjectSet<PersonalNote> result = queryPersonalNote.execute();
 			if (result.size() >= 1)
 			{
-				return (PersonalNote) result.next();
+				return result.next();
 			}
 			else
 			{
@@ -1070,6 +1101,11 @@ public class CacheDatabase
 		}
 	}
 	
+	/**
+	 * 
+	 * @param cacheCode
+	 * @return
+	 */
 	public Cache getCacheFromSearch(String cacheCode)
 	{
 		if (searchCacheDBIsOpen && searchCacheDB != null)
@@ -1077,9 +1113,9 @@ public class CacheDatabase
 			final Query queryCache = searchCacheDB.query();
 			queryCache.constrain(Cache.class);
 			queryCache.descend("code").constrain(cacheCode);
-			ObjectSet<?> result = queryCache.execute();
+			ObjectSet<Cache> result = queryCache.execute();
 			if (result.size() >= 1)
-				return (Cache) result.next();
+				return result.next();
 			else
 				return null;
 		}
