@@ -11,9 +11,9 @@
 		android:id="@+id/LogIcon"
 		android:layout_width="16dp"
 		android:layout_height="16dp"
-		android:layout_marginLeft="3px" 
-		android:layout_marginRight="3px" 
-		android:layout_marginTop="5px"
+		android:layout_marginLeft="3dp" 
+		android:layout_marginRight="3dp" 
+		android:layout_marginTop="5dp"
 		android:src="@android:drawable/presence_offline" />
 	<TextView
 		android:id="@android:id/text1" android:textAppearance="?android:attr/textAppearanceMedium"
