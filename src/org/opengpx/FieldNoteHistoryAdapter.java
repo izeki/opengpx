@@ -10,6 +10,7 @@ import com.db4o.ObjectSet;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
+// import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,6 +76,11 @@ public class FieldNoteHistoryAdapter extends ArrayAdapter<FieldNote>
 	        tvLine1.setText(fieldNote.gcName);
 	        final TextView tvLine2 = fieldNoteViewHolder.twoLineListItem.getText2();
 	        tvLine2.setText(fieldNote.noteTime.toString());
+	        
+			// java.text.DateFormat dateFormat = DateFormat.getDateFormat(this.getContext());
+			// java.text.DateFormat timeFormat = DateFormat.getTimeFormat(this.getContext());
+	        // tvLine2.setText(dateFormat.format(fieldNote.noteTime) + " " + timeFormat.format(fieldNote.noteTime));
+	        
         	fieldNoteViewHolder.icon.setImageDrawable(this.getIcon(parent, fieldNote.logType));
         }
 
@@ -98,8 +104,7 @@ public class FieldNoteHistoryAdapter extends ArrayAdapter<FieldNote>
 			Drawable drawable = null;
 	        try 
 	        {
-	        	// FIXME
-				drawable = Drawable.createFromStream(parent.getResources().getAssets().open("log_found_it.gif"), logType.toString());
+	        	drawable = Drawable.createFromStream(parent.getResources().getAssets().open(logType.getIconFilename()), logType.name());
 				this.mhmIcons.put(logType, drawable);
 			} 
 			catch (IOException e) 

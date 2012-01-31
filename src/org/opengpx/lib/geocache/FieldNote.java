@@ -3,6 +3,8 @@ package org.opengpx.lib.geocache;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TimeZone;
 
 /**
@@ -33,18 +35,38 @@ public class FieldNote
 		ATTENDED("Attended", "log_attended.gif"),
 		WEBCAM_TAKEN("Webcam photo taken", "log_webcam_photo_taken.gif"),
 		PRIVATE("Private note", "log_write_note.gif");
+	
+		/**
+		 * This map is a workardound for mIconFilename being null on Android
+		 */
+		private static final Map<LogType, String> logTypeFilenameMap = new HashMap<LogType, String>() 
+		{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -323641353621470338L;
 
-		private String mText = "";
-		private String mIconFilename = "";
-
+			{
+				put(LogType.FOUND, "log_found_it.gif");
+				put(LogType.NOT_FOUND, "log_didnt_find_it.gif");
+				put(LogType.WRITE_NOTE, "log_write_note.gif");
+				put(LogType.ATTENDED, "log_attended.gif");
+				put(LogType.WEBCAM_TAKEN, "log_webcam_photo_taken.gif");
+				put(LogType.PRIVATE, "log_write_note.gif");
+			}
+		};
+		
+		private final String mText;
+		private final String mIconFilename;
+		
 		/**
 		 * 
 		 * @param text
 		 */
-		LogType(String text, String iconFilename)
+		private LogType(String text, String iconFilename)
 		{
-			this.mText = text;
-			this.mIconFilename = iconFilename;
+			mText = text;
+			mIconFilename = iconFilename;
 		}
 
 		/**
@@ -52,7 +74,7 @@ public class FieldNote
 		 */
 		public String toString()
 		{
-			return this.mText;
+			return mText;
 		}
 
 		/**
@@ -61,8 +83,12 @@ public class FieldNote
 		 */
 		public String getIconFilename()
 		{
-			return this.mIconFilename;
-		}		
+			// Note: this.mIconFilename is null on Android
+			// return this.mIconFilename;
+			
+			// This is the workaround
+			return logTypeFilenameMap.get(this);
+		}
 	}
 	
 	/**
@@ -72,9 +98,9 @@ public class FieldNote
 	 */
 	public static LogType getLogTypeFromString(String type)
 	{
-		for (LogType l : LogType.values())
+		for (LogType lt : LogType.values())
 		{
-			if (l.mText.equalsIgnoreCase(type)) return l;
+			if (lt.mText.equalsIgnoreCase(type)) return lt;
 		}
 		
 		return null;

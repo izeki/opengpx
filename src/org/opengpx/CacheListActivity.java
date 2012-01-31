@@ -44,7 +44,6 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.text.util.Linkify;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -593,41 +592,11 @@ public class CacheListActivity extends ListActivity
 			final Intent intent = new Intent(this, FieldNoteHistoryActivity.class);
 			this.startActivity(intent);
 		}
-
-		/* final Calendar cal = Calendar.getInstance();
-		cal.set(1990, Calendar.DECEMBER, 12, 0, 0, 0);
-		java.text.DateFormat df = DateFormat.getDateFormat(this);
-		java.text.DateFormat df2 = DateFormat.getTimeFormat(this);
-		
-		StringBuilder history = new StringBuilder();
-		String lastDate = df.format(cal.getTime());
-
-		for (FieldNote fieldNote : fieldNotes)
-		{
-			String compareDate = df.format(fieldNote.noteTime);
-			if (!lastDate.equals(compareDate))
-			{
-				lastDate = compareDate;
-				history.append(compareDate + "\n");
-			}
-			history.append("\t" + df2.format(fieldNote.noteTime) + " " + fieldNote.logType.toString() + ": " + fieldNote.gcName + "\n");
-		}
-
-		final AlertDialog fieldNoteInfo = new AlertDialog.Builder(this).create();
-		fieldNoteInfo.setIcon(android.R.drawable.ic_dialog_info);
-		fieldNoteInfo.setTitle("Field Notes");
-		fieldNoteInfo.setMessage(history);
-		fieldNoteInfo.setButton("OK", new DialogInterface.OnClickListener()
-		{
-			public void onClick(DialogInterface dialog, int which)
-			{
-				return;
-			}
-		});
-		fieldNoteInfo.show();
-		*/
 	}
 	
+	/**
+	 * 
+	 */
 	private void searchOnline()
 	{
 		Intent intent = new Intent(this, SearchListActivity.class);
@@ -826,18 +795,7 @@ public class CacheListActivity extends ListActivity
 				dialog.dismiss();
 			}
 		});
-		dialog.show();
-		
-		/* final Button btnCloseAboutBox = (Button) dialog.findViewById(R.id.AboutCloseButton);
-		btnCloseAboutBox.setOnClickListener(new OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				dialog.dismiss();
-			}
-
-		}); */
-		// dialog.show();
+		dialog.show();		
 	}
 
 	/**

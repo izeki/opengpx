@@ -9,20 +9,23 @@
 	android:paddingBottom="2dip">
 	<ImageView 
 		android:id="@+id/FieldNoteIcon"
-		android:layout_width="32dip"
-		android:layout_height="32dip"
+		android:layout_width="16dip"
+		android:layout_height="16dip"
+		android:layout_marginLeft="3dp" 
+		android:layout_marginRight="3dp" 
+		android:layout_marginTop="5dp"
 		android:src="@android:drawable/presence_offline" android:contentDescription="@string/log_icon"/>
 	<TextView
 		android:id="@android:id/text1" 
 		android:textAppearance="?android:attr/textAppearanceMedium"
 		android:layout_width="fill_parent" 
 		android:layout_height="wrap_content"
-		android:layout_toRightOf="@id/CacheIcon" />
+		android:layout_toRightOf="@id/FieldNoteIcon" />
 	<TextView
 		android:id="@android:id/text2" 
 		android:textAppearance="?android:attr/textAppearanceSmall"
 		android:layout_width="fill_parent" 
 		android:layout_height="wrap_content"
 		android:layout_below="@android:id/text1"
-		android:layout_toRightOf="@id/CacheIcon" />
+		android:layout_toRightOf="@id/FieldNoteIcon" />
 </TwoLineListItem>
