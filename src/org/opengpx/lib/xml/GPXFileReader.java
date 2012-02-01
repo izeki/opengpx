@@ -249,6 +249,7 @@ public class GPXFileReader
 			if ((idx = vn.getAttrVal("id")) != -1)
 			{
 				final String strId = vn.toNormalizedString(vn.getAttrVal("id"));
+				// FIXME: convert to String
 				try 
 				{
 					currentCache.id = Integer.parseInt(strId);
@@ -358,13 +359,13 @@ public class GPXFileReader
 				}
 				else if (currentElementName.equalsIgnoreCase("short_description") || currentElementName.equalsIgnoreCase("summary"))
 				{
-					if (vn.getAttrVal("html") != -1) currentCache.shortDescriptionIsHtml = true;
+					if (vn.getAttrVal("html") != -1) currentCache.shortDescriptionIsHtml = Boolean.parseBoolean(vn.toNormalizedString(vn.getAttrVal("html")));
 					final int i = vn.getText();
 					if (i != -1) currentCache.shortDescription = currentCache.shortDescription.concat(vn.toNormalizedString(i));
 				}
 				else if (currentElementName.equalsIgnoreCase("long_description") || currentElementName.equalsIgnoreCase("description"))
 				{
-					if (vn.getAttrVal("html") != -1) currentCache.longDescriptionIsHtml = true;
+					if (vn.getAttrVal("html") != -1) currentCache.longDescriptionIsHtml = Boolean.parseBoolean(vn.toNormalizedString(vn.getAttrVal("html")));;
 					final int i = vn.getText();
 					if (i != -1) currentCache.longDescription = currentCache.longDescription.concat(vn.toNormalizedString(i));
 				}
@@ -497,6 +498,10 @@ public class GPXFileReader
 						else if (subElementName.equalsIgnoreCase("text") && vn.getText() != -1)
 						{
 							logEntry.text = vn.toNormalizedString(vn.getText());
+							if (vn.getAttrVal("encoded") != -1)
+							{
+								logEntry.isTextEncoded = Boolean.parseBoolean(vn.toNormalizedString(vn.getAttrVal("encoded")));
+							}
 						}
 						else if (subElementName.equalsIgnoreCase("log_wpt"))
 						{
