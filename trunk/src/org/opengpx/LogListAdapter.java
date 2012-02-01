@@ -7,6 +7,8 @@ import java.util.HashMap;
 
 import org.opengpx.lib.geocache.LogEntry;
 import org.opengpx.lib.geocache.LogType;
+import org.opengpx.tools.Rot13;
+
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -65,15 +67,30 @@ class LogListAdapter extends ArrayAdapter<LogEntry>
 			logListViewHolder = (LogListViewHolder) convertView.getTag();
 		}
 
-        LogEntry logEntry = this.mLogEntries.get(position);
+        final LogEntry logEntry = this.mLogEntries.get(position);
 
-        TextView tvLine1 = logListViewHolder.twoLineListItem.getText1();
-        DateFormat df = DateFormat.getDateInstance();
-		String strLogDate = df.format(logEntry.time);
-        String strLogHeader = String.format("%s (%s)", logEntry.finder, strLogDate); 
+        final TextView tvLine1 = logListViewHolder.twoLineListItem.getText1();
+        final DateFormat df = DateFormat.getDateInstance();
+		final String strLogDate = df.format(logEntry.time);
+        final String strLogHeader = String.format("%s (%s)", logEntry.finder, strLogDate); 
         tvLine1.setText(strLogHeader);
-        TextView tvLine2 = logListViewHolder.twoLineListItem.getText2();
-        tvLine2.setText(logEntry.text);
+        final TextView tvLine2 = logListViewHolder.twoLineListItem.getText2();
+        if (logEntry.isTextEncoded != null)
+        {
+            if (logEntry.isTextEncoded)
+            {
+            	final Rot13 rot13chiffre = new Rot13();
+            	tvLine2.setText(rot13chiffre.process(logEntry.text));
+            }
+            else
+            {
+            	tvLine2.setText(logEntry.text);
+            }
+        }
+        else
+        {
+        	tvLine2.setText(logEntry.text);
+        }
 
         logListViewHolder.icon.setImageDrawable(this.getIcon(parent, logEntry.getType()));            	
 

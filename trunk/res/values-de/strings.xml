@@ -153,5 +153,5 @@
 <string name="no_field_notes">Keine Fieldnotes vorhanden</string>
 <string name="no_caches_available">Es sind keine Caches vorhanden</string>
 <string name="question">Frage</string>
-<string name="delete_cache_question">Willst du den Cache \'%s\' wirklich löschen?</string><string name="yes">Ja</string><string name="no">Nein</string><string name="cache_options">Cache Optionen</string><string name="delete_cache">Cache löschen</string><string name="clear_database_question">Willst Du wirklich alles Caches in der Datenbank löschen?</string>
+<string name="delete_cache_question">Willst du den Cache \'%s\' wirklich löschen?</string><string name="yes">Ja</string><string name="no">Nein</string><string name="cache_options">Cache Optionen</string><string name="delete_cache">Cache löschen</string><string name="clear_database_question">Willst Du wirklich alles Caches in der Datenbank löschen?</string><string name="log_decrypted">Log (entschlüsselt)</string>
 </resources>
