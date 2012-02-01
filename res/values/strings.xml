@@ -153,4 +153,12 @@
 <string name="field_note_saved">Field note saved to database.</string>
 <string name="log_icon">Log icon</string>
 <string name="no_field_notes">No field notes available</string>
+<string name="no_caches_available">No caches available</string>
+<string name="question">Question</string>
+<string name="delete_cache_question">Do you really want to delete the cache \'%s\'?</string>
+<string name="yes">Yes</string>
+<string name="no">No</string>
+<string name="cache_options">Cache Options</string>
+<string name="delete_cache">Delete cache</string>
+<string name="clear_database_question">Do you really want to clear the cache database?</string>
 </resources>
