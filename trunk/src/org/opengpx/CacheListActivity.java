@@ -340,8 +340,8 @@ public class CacheListActivity extends ListActivity
 	{
 		super.onCreateContextMenu(menu, v, menuInfo);
 
-		menu.setHeaderTitle("Cache Options");
-		menu.add(0, MENU_DELETE, Menu.NONE, "Delete cache");
+		menu.setHeaderTitle(R.string.cache_options);
+		menu.add(0, MENU_DELETE, Menu.NONE, R.string.delete_cache);
 	}
 
 	/**
@@ -370,8 +370,9 @@ public class CacheListActivity extends ListActivity
 	{
 		final CacheIndexItem cii = this.mCacheDatabase.getCacheIndexItem(strCacheCode);
 
-		new AlertDialog.Builder(this).setTitle("Question").setMessage(String.format("Do you really want to delete the cache '%s'?", cii.name)).setIcon(
-				android.R.drawable.ic_dialog_alert).setPositiveButton("Yes", new DialogInterface.OnClickListener()
+		final String deleteQuestion = this.mResources.getString(R.string.delete_cache_question);
+		new AlertDialog.Builder(this).setTitle(R.string.question).setMessage(String.format(deleteQuestion, cii.name)).setIcon(
+				android.R.drawable.ic_dialog_alert).setPositiveButton(R.string.yes, new DialogInterface.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog, int whichButton)
 			{
@@ -379,7 +380,7 @@ public class CacheListActivity extends ListActivity
 				mCacheDatabase.deleteCache(strCacheCode);
 				mCacheListAdapter.remove(strFilterableName);
 			}
-		}).setNegativeButton("No", new DialogInterface.OnClickListener()
+		}).setNegativeButton(R.string.no, new DialogInterface.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog, int whichButton)
 			{
@@ -451,7 +452,7 @@ public class CacheListActivity extends ListActivity
 			}
 			else
 			{
-				Toast.makeText(this, "No caches available.", Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, R.string.no_caches_available, Toast.LENGTH_SHORT).show();
 			}
 			
 			return true;
@@ -608,8 +609,8 @@ public class CacheListActivity extends ListActivity
      */
 	private void clearDatabase()
 	{
-		new AlertDialog.Builder(this).setTitle("Question").setMessage("Do you really want to clear the cache database?").setIcon(android.R.drawable.ic_dialog_info).setPositiveButton(
-				"Yes", new DialogInterface.OnClickListener()
+		new AlertDialog.Builder(this).setTitle(R.string.question).setMessage(R.string.clear_database_question).setIcon(android.R.drawable.ic_dialog_info).setPositiveButton(
+				R.string.yes, new DialogInterface.OnClickListener()
 				{
 					public void onClick(DialogInterface dialog, int whichButton)
 					{
@@ -620,7 +621,7 @@ public class CacheListActivity extends ListActivity
 						// Make sure that cache list is cleared as well
 						loadCacheList();
 					}
-				}).setNegativeButton("No", new DialogInterface.OnClickListener()
+				}).setNegativeButton(R.string.no, new DialogInterface.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog, int whichButton)
 			{
