@@ -1277,20 +1277,39 @@ public class CacheDetailActivity extends TabActivity
 
 		final ListView lvLogList = (ListView) this.findViewById(R.id.LogList);
 		lvLogList.setAdapter(new LogListAdapter(this, this.mCache.getLogEntries()));
+		final Context context = this;
+		lvLogList.setOnItemClickListener(new OnItemClickListener()
+		{
+			public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+			{
+				final LogEntry logEntry = mCache.getLogEntries().get(position);
+				if (logEntry.isTextEncoded != null)
+				{
+					if (logEntry.isTextEncoded)
+					{
+						final AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+						alertDialog.setTitle(R.string.log_decrypted);
+						alertDialog.setMessage(logEntry.text);
+						alertDialog.setButton("OK", new DialogInterface.OnClickListener()
+						{
+							public void onClick(DialogInterface dialog, int which)
+							{
+								return;
+							}
+						});
+						alertDialog.show();
+					}
+				}
+			}
+		});
 
 		final TextView tvLogStats = (TextView) this.findViewById(R.id.CacheLogStats);
 		final StringBuilder logStats = new StringBuilder();
-		// String strLogStats = "";
 		
 		for (Map.Entry<String, Integer> entry : hmLogStats.entrySet())
-		// for (String strLogType : hmLogStats.keySet())
 		{
 			logStats.append(String.format("%s: %d, ", entry.getKey().replace("_", " "), entry.getValue()));
-			// logStats.append(String.format("%s: %d, ", strLogType.replace("_", " "), hmLogStats.get(strLogType)));
-			// strLogStats += String.format("%s: %d, ", strLogType.replace("_", " "), hmLogStats.get(strLogType));
 		}
-		// if (strLogStats.length() > 0) strLogStats = strLogStats.substring(0, strLogStats.length() - 2);
-		// tvLogStats.setText(strLogStats);
 		if (logStats.length() > 0) logStats.delete(logStats.length() - 2, logStats.length());
 		tvLogStats.setText(logStats);
 	}
