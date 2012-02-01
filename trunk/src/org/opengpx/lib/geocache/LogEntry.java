@@ -14,6 +14,7 @@ public class LogEntry
 	public Date time = null;
 	public String finder;
 	public String text = "";
+	public Boolean isTextEncoded = false;
 	public double latitude;
 	public double longitude;
 
