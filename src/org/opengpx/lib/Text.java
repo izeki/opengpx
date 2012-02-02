@@ -14,7 +14,7 @@ import org.opengpx.lib.tools.ChiffreType;
 public class Text
 {
 	private String mstrPlainText = "";
-	private ChiffreType mChiffreType = ChiffreType.Groundspeak;
+	private ChiffreType mChiffreType = ChiffreType.Rot13;
 	private boolean mblnIsHtml = false;
 
 	/**
@@ -81,10 +81,10 @@ public class Text
 	 */
     public void setEncodedText(String text)
     {
-        if (this.mChiffreType == ChiffreType.Groundspeak)
-        	this.mstrPlainText = this.ConvertGroundspeak(text);
+        if (this.mChiffreType == ChiffreType.Rot13)
+        	this.mstrPlainText = this.convertRot13(text);
         else if (this.mChiffreType == ChiffreType.Caesar)
-        	this.mstrPlainText = this.ConvertCaesar(text, -3);
+        	this.mstrPlainText = this.convertCaesar(text, -3);
     }
 
     /**
@@ -93,10 +93,10 @@ public class Text
      */
     public String getEncodedText()
     {
-        if (this.mChiffreType == ChiffreType.Groundspeak)
-            return this.ConvertGroundspeak(this.mstrPlainText);
+        if (this.mChiffreType == ChiffreType.Rot13)
+            return this.convertRot13(this.mstrPlainText);
         else if (this.mChiffreType == ChiffreType.Caesar)
-            return this.ConvertCaesar(this.mstrPlainText, 3);
+            return this.convertCaesar(this.mstrPlainText, 3);
         else
         	return ""; // dummy return code
     }
@@ -106,22 +106,26 @@ public class Text
      * @param text
      * @return
      */
-    private String ConvertGroundspeak(String text)
+    private String convertRot13(final String text)
     {
     	final StringBuilder result = new StringBuilder();
-        // String strResult = "";
+    	Boolean convert = true; // Do not convert characters in between []
+
         for (int intAsciiCode : text.toCharArray())
         {
-            if (((intAsciiCode >= 65) && (intAsciiCode <= 77)) || ((intAsciiCode >= 97) && (intAsciiCode <= 109)))
+        	if (intAsciiCode == 91) // [
+        		convert = false;
+        	else if (intAsciiCode == 93) // ]
+        		convert = true;
+        	
+        	if (convert && (((intAsciiCode >= 65) && (intAsciiCode <= 77)) || ((intAsciiCode >= 97) && (intAsciiCode <= 109))))
             	result.append((char)(intAsciiCode + 13));
-            	// strResult += (char)(intAsciiCode + 13);
-            else if (((intAsciiCode >= 78) && (intAsciiCode <= 90)) || ((intAsciiCode >= 110) && (intAsciiCode <= 122)))
+            else if (convert && (((intAsciiCode >= 78) && (intAsciiCode <= 90)) || ((intAsciiCode >= 110) && (intAsciiCode <= 122))))
             	result.append((char)(intAsciiCode - 13));
-                // strResult += (char)(intAsciiCode - 13);
             else
             	result.append((char)intAsciiCode);
-                // strResult += (char)intAsciiCode;
         }
+        
         return result.toString();
     }
     
@@ -131,10 +135,9 @@ public class Text
      * @param shift
      * @return
      */
-    private String ConvertCaesar(String text, int shift)
+    private String convertCaesar(String text, int shift)
     {
     	final StringBuilder result = new StringBuilder();
-        // String strResult = "";
         int intShiftToZero = 0;
         
         for (int intAsciiCode : text.toCharArray())
@@ -155,7 +158,6 @@ public class Text
         	}
         	// Convert back to character
         	result.append((char)intAsciiCode);
-            // strResult += (char)intAsciiCode;
         }
         return result.toString();
     }

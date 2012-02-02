@@ -52,7 +52,7 @@ public class Command
 			if (geocachingTool.isSupportingVariables())
 				geocachingTool.setVariables(this.mVariables);
 			return geocachingTool.process(this.mText);
-		case GroundspeakCode:
+		case Rot13:
 			geocachingTool = new Rot13();
 			return geocachingTool.process(this.mText);
 		case Text2Number:
@@ -169,7 +169,7 @@ public class Command
     	case RomanNumbers : return "Roman numbers";
     	case CaesarEncrypt : return "Caesar (encrypt)";
     	case CaesarDecrypt : return "Caesar (decrypt)";
-    	case GroundspeakCode : return "Groundspeak code";
+    	case Rot13 : return "Rot13";
     	case MorseEncode : return "Morse (encode)";
     	case MorseDecode : return "Morse (decode)";
     	case Checksum : return "Checksum";
@@ -216,7 +216,7 @@ public class Command
 	    System.out.println( cmd.execute());
 	    cmd = new Command(CommandType.VanityNumbers, "AbCdEf", udv);
 	    System.out.println( cmd.execute());
-	    cmd = new Command(CommandType.GroundspeakCode, "Gbyyrf Rirag. Xnssrr, Xhpura. Haq fcgre xbzzra qvr Jefgy.", udv);
+	    cmd = new Command(CommandType.Rot13, "Gbyyrf Rirag. Xnssrr, Xhpura. Haq fcgre xbzzra qvr Jefgy.", udv);
 	    System.out.println( cmd.execute());
 	}
 
