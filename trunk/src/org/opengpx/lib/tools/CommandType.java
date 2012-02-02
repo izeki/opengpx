@@ -12,7 +12,7 @@ public enum CommandType
 	RomanNumbers, 
 	CaesarEncrypt, 
 	CaesarDecrypt, 
-	GroundspeakCode, 
+	Rot13, 
 	MorseEncode, 
 	MorseDecode, 
 	Checksum, 

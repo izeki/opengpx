@@ -37,7 +37,7 @@ public class Rot13 implements GeocachingTool
 	 */
 	public String process(String input) 
 	{
-		Text textGroundspeakCode = new Text(ChiffreType.Groundspeak);
+		final Text textGroundspeakCode = new Text(ChiffreType.Rot13);
 		textGroundspeakCode.setPlainText(input);
 		return textGroundspeakCode.getEncodedText();
 	}

@@ -45,10 +45,10 @@ public class CommandActivity extends Activity
         setContentView(R.layout.command);
 
         this.setTitle("OpenGPX - Toolbox");
-        Bundle bunExtras = this.getIntent().getExtras();
-        String strVariableId = (String) bunExtras.get("varid");
+        final Bundle bunExtras = this.getIntent().getExtras();
+        final String strVariableId = (String) bunExtras.get("varid");
 
-        Preferences preferences = new Preferences(this);
+        final Preferences preferences = new Preferences(this);
     	this.setRequestedOrientation(preferences.getScreenOrientation());
 
         this.mCacheDatabase = CacheDatabase.getInstance();
@@ -100,8 +100,8 @@ public class CommandActivity extends Activity
             public void onClick(View v) 
             {
                 // Perform action on click
-            	CommandType commandType = CommandType.values()[mSpinnerCommandTypes.getSelectedItemPosition()];
-            	String strCommandText = mCommandText.getText().toString().trim();
+            	final CommandType commandType = CommandType.values()[mSpinnerCommandTypes.getSelectedItemPosition()];
+            	final String strCommandText = mCommandText.getText().toString().trim();
             	if (strCommandText.length() == 0)
             	{
             		Toast enterText = Toast.makeText(mCommandText.getContext(), R.string.no_text_entered, Toast.LENGTH_LONG);
@@ -110,7 +110,7 @@ public class CommandActivity extends Activity
             	else 
             	{
             		
-	            	Command command = new Command(commandType, strCommandText, mVariables);
+	            	final Command command = new Command(commandType, strCommandText, mVariables);
 	            	String strResult = "";
 	            	try
 	            	{

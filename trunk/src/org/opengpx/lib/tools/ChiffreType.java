@@ -6,6 +6,6 @@ package org.opengpx.lib.tools;
  *
  */
 public enum ChiffreType { 
-	Groundspeak, 
+	Rot13, 
 	Caesar 
 }
