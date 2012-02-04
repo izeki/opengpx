@@ -162,4 +162,5 @@
 <string name="delete_cache">Delete cache</string>
 <string name="clear_database_question">Do you really want to clear the cache database?</string>
 <string name="log_decrypted">Log (decrypted)</string>
+<string name="waypoint">Waypoint</string>
 </resources>
