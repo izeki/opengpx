@@ -5,11 +5,14 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.opengpx.lib.CoordinateFormat;
+import org.opengpx.lib.Coordinates;
 import org.opengpx.lib.geocache.LogEntry;
 import org.opengpx.lib.geocache.LogType;
 import org.opengpx.tools.Rot13;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,23 +29,27 @@ import android.widget.TwoLineListItem;
  */
 class LogListAdapter extends ArrayAdapter<LogEntry>
 {
-	Activity mContext;
-	ArrayList<LogEntry> mLogEntries;
+	final Activity mContext;
+	final ArrayList<LogEntry> mLogEntries;
 	LayoutInflater mLayoutInflater;
 	HashMap<LogType, Drawable> mhmIcons = new HashMap<LogType, Drawable>();
-	
+	final CoordinateFormat mCoordinateFormat;
+	final Resources mResources;
+
 	/**
 	 * 
 	 * @param context
 	 * @param logs
 	 */
-	public LogListAdapter(Activity context, ArrayList<LogEntry> logEntries) 
+	public LogListAdapter(Activity context, ArrayList<LogEntry> logEntries, CoordinateFormat coordinateFormat, Resources resources) 
 	{
          super(context, R.layout.loglistitem, logEntries);
 
          this.mContext = context;
          this.mLogEntries = logEntries;
          this.mLayoutInflater = this.mContext.getLayoutInflater();
+         this.mCoordinateFormat = coordinateFormat;
+         this.mResources = resources;
     }
 
 	/**
@@ -75,22 +82,23 @@ class LogListAdapter extends ArrayAdapter<LogEntry>
         final String strLogHeader = String.format("%s (%s)", logEntry.finder, strLogDate); 
         tvLine1.setText(strLogHeader);
         final TextView tvLine2 = logListViewHolder.twoLineListItem.getText2();
+        String logText = logEntry.text;
         if (logEntry.isTextEncoded != null)
         {
             if (logEntry.isTextEncoded)
             {
             	final Rot13 rot13chiffre = new Rot13();
-            	tvLine2.setText(rot13chiffre.process(logEntry.text));
-            }
-            else
-            {
-            	tvLine2.setText(logEntry.text);
+            	logText = rot13chiffre.process(logEntry.text);
             }
         }
-        else
+
+        if ((!Double.isNaN(logEntry.latitude)) && (!Double.isNaN(logEntry.longitude)) && 
+        	(logEntry.latitude != 0) && (logEntry.longitude != 0))
         {
-        	tvLine2.setText(logEntry.text);
+        	final Coordinates logCoordinates = new Coordinates(logEntry.latitude, logEntry.longitude);
+        	logText += "\n" + this.mResources.getString(R.string.waypoint) + ": " + logCoordinates.toString(this.mCoordinateFormat);
         }
+    	tvLine2.setText(logText);
 
         logListViewHolder.icon.setImageDrawable(this.getIcon(parent, logEntry.getType()));            	
 

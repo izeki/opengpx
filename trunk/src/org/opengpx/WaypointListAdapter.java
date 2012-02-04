@@ -36,7 +36,7 @@ public class WaypointListAdapter extends ArrayAdapter<Waypoint>
 	 * @param context
 	 * @param waypoints
 	 */
-	WaypointListAdapter(Activity context, ArrayList<Waypoint> waypoints, String cacheCode, CacheType cacheType, CoordinateFormat coordinateFormat) 
+	WaypointListAdapter(Activity context, ArrayList<Waypoint> waypoints, final String cacheCode, final CacheType cacheType, final CoordinateFormat coordinateFormat) 
 	{
 		super(context, R.layout.waypointitem, waypoints);  
 

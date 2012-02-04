@@ -1276,7 +1276,7 @@ public class CacheDetailActivity extends TabActivity
 		}
 
 		final ListView lvLogList = (ListView) this.findViewById(R.id.LogList);
-		lvLogList.setAdapter(new LogListAdapter(this, this.mCache.getLogEntries()));
+		lvLogList.setAdapter(new LogListAdapter(this, this.mCache.getLogEntries(), this.mPreferences.getCoordinateFormat(), this.mResources));
 		final Context context = this;
 		lvLogList.setOnItemClickListener(new OnItemClickListener()
 		{
