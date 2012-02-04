@@ -19,7 +19,7 @@
 <string name="menu_database">Datenbank</string>
 <string name="menu_database_clear">Leeren</string>
 <string name="menu_database_info">Information</string>
-<string name="about_comments">\nPapierlose Geocaching–Anwendung.\n© 2009 – 2011\nMartin Preishuber und Travis Tabbal</string>
+<string name="about_comments">\nPapierlose Geocaching–Anwendung.\n© 2009 – 2012\nMartin Preishuber und Travis Tabbal</string>
 <string name="menu_show_cache_map">Karte</string>
 <string name="menu_google_map_mode">Modus umschalten</string>
 <string name="menu_google_toggle_satellite">Satellitenansicht</string>

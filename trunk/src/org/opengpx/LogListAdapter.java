@@ -96,7 +96,7 @@ class LogListAdapter extends ArrayAdapter<LogEntry>
         	(logEntry.latitude != 0) && (logEntry.longitude != 0))
         {
         	final Coordinates logCoordinates = new Coordinates(logEntry.latitude, logEntry.longitude);
-        	logText += "\n" + this.mResources.getString(R.string.waypoint) + ": " + logCoordinates.toString(this.mCoordinateFormat);
+        	logText += "\n\n" + this.mResources.getString(R.string.waypoint) + ": " + logCoordinates.toString(this.mCoordinateFormat);
         }
     	tvLine2.setText(logText);
 
