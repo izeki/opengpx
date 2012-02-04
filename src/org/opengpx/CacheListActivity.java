@@ -753,12 +753,7 @@ public class CacheListActivity extends ListActivity
 
 		dialog.setView(layout);
 		dialog.setTitle(R.string.app_name);
-		// final Dialog dialog = new Dialog(this);
-		// dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-		// dialog.setContentView(R.layout.aboutbox);
 		
-		
-		// final TextView tvNameVersion = (TextView) dialog.findViewById(R.id.AboutBoxNameVersion);
 		final TextView tvNameVersion = (TextView) layout.findViewById(R.id.AboutBoxNameVersion);
 		try
 		{
@@ -771,7 +766,6 @@ public class CacheListActivity extends ListActivity
 			mLogger.error("Can't find version name", e);
 			tvNameVersion.setText("Version unknown");
 		}
-		// final TextView tvCreditsGroundspeak = (TextView) dialog.findViewById(R.id.AboutGroundspeak);
 		final TextView tvCreditsGroundspeak = (TextView) layout.findViewById(R.id.AboutGroundspeak);
 		Linkify.addLinks(tvCreditsGroundspeak, Pattern.compile("Groundspeak"), "http://www.groundspeak.com/?ref=");
 		Linkify.addLinks(tvCreditsGroundspeak, Pattern.compile("Geocaching"), "http://www.geocaching.com/?ref=");
