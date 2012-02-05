@@ -29,6 +29,17 @@ public class Coordinate
 	
 	/**
 	 * 
+	 * @param type
+	 * @param coordinate
+	 */
+	public Coordinate(CoordinateType type, double coordinate)
+	{
+		this.mdblValue = coordinate;
+		this.mCoordinateType = type;
+	}
+
+	/**
+	 * 
 	 * @param value
 	 */
 	public void setD(double value)

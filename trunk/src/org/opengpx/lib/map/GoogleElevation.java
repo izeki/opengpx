@@ -222,6 +222,7 @@ public class GoogleElevation
 	 */
 	public Double getElevation(Coordinates coords)
 	{
-		return this.getElevation(coords.getLatitude().getD(), coords.getLongitude().getD());
+		// return this.getElevation(coords.getLatitude().getD(), coords.getLongitude().getD());
+		return this.getElevation(coords.getLatitude(), coords.getLongitude());
 	}
 }

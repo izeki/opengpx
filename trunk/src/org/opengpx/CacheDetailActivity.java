@@ -874,8 +874,10 @@ public class CacheDetailActivity extends TabActivity
 				wp.setType(WaypointType.Extracted);
 				wp.symbol = "Extracted";
 				// wp.setCoordinates(coords);
-				wp.latitude = coords.getLatitude().getD();
-				wp.longitude = coords.getLongitude().getD();
+				// wp.latitude = coords.getLatitude().getD();
+				// wp.longitude = coords.getLongitude().getD();
+				wp.latitude = coords.getLatitude();
+				wp.longitude = coords.getLongitude();
 				this.mCache.addWaypoint(wp);
 				intExtractedNum++;
 			}
@@ -907,8 +909,10 @@ public class CacheDetailActivity extends TabActivity
 					wp.description = strName;
 					wp.setType(WaypointType.Extracted);
 					wp.symbol = "Extracted";
-					wp.latitude = coords.getLatitude().getD();
-					wp.longitude = coords.getLongitude().getD();
+					// wp.latitude = coords.getLatitude().getD();
+					// wp.longitude = coords.getLongitude().getD();
+					wp.latitude = coords.getLatitude();
+					wp.longitude = coords.getLongitude();
 					this.mCache.addWaypoint(wp);
 				}
 			}

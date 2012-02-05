@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.opengpx.lib.CoordinateFormat;
+import org.opengpx.lib.CoordinateType;
 import org.opengpx.lib.Coordinates;
 import org.opengpx.lib.Text;
 import org.opengpx.lib.geocache.Waypoint;
@@ -16,6 +17,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * 
+ * @author Martin Preishuber
+ *
+ */
 public class AddWaypointDialog extends Dialog {
 	
 	private ReadyListener readyListener;
@@ -25,7 +31,12 @@ public class AddWaypointDialog extends Dialog {
 	private Context mContext;
 	private Coordinates mReferenceCoordinates;
 	
-	// public AddWaypointDialog(Context context, ReadyListener readyListener, SharedPreferences mSettings) 
+	/**
+	 * 
+	 * @param context
+	 * @param readyListener
+	 * @param headerWaypoint
+	 */
 	public AddWaypointDialog(Context context, ReadyListener readyListener, Waypoint headerWaypoint) 
 	{
 		super(context);
@@ -54,8 +65,8 @@ public class AddWaypointDialog extends Dialog {
 		wpLat = (EditText)findViewById(R.id.EditLatitude);
 		wpLong = (EditText)findViewById(R.id.EditLongtitude);
 
-		wpLat.setText(this.mReferenceCoordinates.getLatitude().toString(CoordinateFormat.DM));
-		wpLong.setText(this.mReferenceCoordinates.getLongitude().toString(CoordinateFormat.DM));
+		wpLat.setText(Coordinates.convert(this.mReferenceCoordinates.getLatitude(), CoordinateType.Latitude, CoordinateFormat.DM));
+		wpLong.setText(Coordinates.convert(this.mReferenceCoordinates.getLongitude(), CoordinateType.Longitude, CoordinateFormat.DM));
 	}
 	
 	/**
@@ -65,7 +76,8 @@ public class AddWaypointDialog extends Dialog {
 	 */
 	private class CancelListener implements android.view.View.OnClickListener {
 
-		public void onClick(View v) {
+		public void onClick(View v) 
+		{
 			AddWaypointDialog.this.dismiss();		
 		}
 	}
@@ -79,16 +91,16 @@ public class AddWaypointDialog extends Dialog {
 
 		public void onClick(View v) 
 		{
-			String name = AddWaypointDialog.this.wpName.getText().toString();
-			String lat = AddWaypointDialog.this.wpLat.getText().toString();
-			String lng = AddWaypointDialog.this.wpLong.getText().toString();
-			Text input = new Text(lat + " " + lng);
-			ArrayList<Coordinates> coords = input.extractCoordinates();
+			final String name = AddWaypointDialog.this.wpName.getText().toString();
+			final String lat = AddWaypointDialog.this.wpLat.getText().toString();
+			final String lng = AddWaypointDialog.this.wpLong.getText().toString();
+			final Text input = new Text(lat + " " + lng);
+			final ArrayList<Coordinates> coords = input.extractCoordinates();
 			if(coords.size() == 1)
 			{
 				Waypoint wp = new Waypoint();
-				wp.latitude = coords.get(0).getLatitude().getD();
-				wp.longitude = coords.get(0).getLongitude().getD();
+				wp.latitude = coords.get(0).getLatitude();
+				wp.longitude = coords.get(0).getLongitude();
 				wp.name = name;
 				wp.description = name;
 				wp.symbol = "User";
@@ -99,8 +111,7 @@ public class AddWaypointDialog extends Dialog {
 			}
 			else
 			{
-				Toast failed = Toast.makeText(mContext,R.string.failed_parsing_coords,Toast.LENGTH_LONG);
-				failed.show();
+				Toast.makeText(mContext,R.string.failed_parsing_coords,Toast.LENGTH_LONG).show();
 			}
 		}
 	}
@@ -114,5 +125,4 @@ public class AddWaypointDialog extends Dialog {
 	{
 		public void ready(Waypoint wp);			
 	}
-
 }
