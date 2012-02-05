@@ -11,9 +11,10 @@ import org.opengpx.lib.UnitSystem;
  * @author Martin Preishuber
  *
  */
-public class Coordinates 
+public class Coordinates
 {
 	private static final int earth_radius = 6371; // km
+	private static final double metric_to_miles_factor = 1.609344;
 	
 	public final static String coords_regexp = "([NnSs]) ?(\\d{1,2}).{0,1} ?(\\d{1,2}\\.\\d{1,4}).?\\s{0,25}([EeWw]) ?(\\d{1,3}).{0,1} ?(\\d{1,2}\\.\\d{1,4})"; 
 
@@ -42,6 +43,19 @@ public class Coordinates
 		this.mcoordLongitude.setD(longitude);
 	}
 
+	/**
+	 * 
+	 * @param coordinate
+	 * @param coordinateType
+	 * @param coordinateFormat
+	 * @return
+	 */
+	public static String convert(double coordinate, CoordinateType coordinateType, CoordinateFormat coordinateFormat)
+	{
+		final Coordinate coord = new Coordinate(coordinateType, coordinate);
+		return coord.toString(coordinateFormat);
+	}
+	
 	/**
 	 * 
 	 * @param latitude
@@ -143,10 +157,14 @@ public class Coordinates
     /**
      * 
      */
-    public Coordinate getLatitude()
+    public double getLatitude()
+    {
+    	return this.mcoordLatitude.getD();
+    }
+    /* public Coordinate getLatitude()
     {
     	return this.mcoordLatitude;
-    }
+    } */
     
     /**
      * 
@@ -156,14 +174,18 @@ public class Coordinates
     {
     	this.mcoordLatitude.setD(value);
     }
-    
+
     /**
      * 
      * @return
      */
-    public Coordinate getLongitude()
+    /* public Coordinate getLongitude()
     {
     	return this.mcoordLongitude;
+    } */
+    public double getLongitude()
+    {
+    	return this.mcoordLongitude.getD();
     }
 
     /**
@@ -219,8 +241,8 @@ public class Coordinates
     {
         final double lat1 = Math.toRadians(this.mcoordLatitude.getD());
         final double long1 = Math.toRadians(this.mcoordLongitude.getD());
-        final double lat2 = Math.toRadians(coords.getLatitude().getD());
-        final double long2 = Math.toRadians(coords.getLongitude().getD());
+        final double lat2 = Math.toRadians(coords.getLatitude());
+        final double long2 = Math.toRadians(coords.getLongitude());
         final double delta_lat = lat2 - lat1;
         final double delta_long = long2 - long1;
         
@@ -231,7 +253,7 @@ public class Coordinates
         if (unitSystem.equals(UnitSystem.Metric))
         	return d; // km
         else
-        	return (d / 1.609344); // miles
+        	return (d / metric_to_miles_factor);
     }
 
     /**
@@ -243,8 +265,8 @@ public class Coordinates
     {
         final double lat1 = Math.toRadians(this.mcoordLatitude.getD());
         final double long1 = Math.toRadians(this.mcoordLongitude.getD());
-        final double lat2 = Math.toRadians(coords.getLatitude().getD());
-        final double long2 = Math.toRadians(coords.getLongitude().getD());
+        final double lat2 = Math.toRadians(coords.getLatitude());
+        final double long2 = Math.toRadians(coords.getLongitude());
         final double delta_long = long2 - long1;
         
         final double a = Math.sin(delta_long) * Math.cos(lat2);
@@ -330,8 +352,8 @@ public class Coordinates
     	final Double dblLatitude = this.round(this.mcoordLatitude.getD(), 5);
     	final Double dblLongitude = this.round(this.mcoordLongitude.getD(), 5);
     	
-    	final Double dblLatitudeCompare = this.round(coords.getLatitude().getD(), 5);
-    	final Double dblLongitudeCompare = this.round(coords.getLongitude().getD(), 5);
+    	final Double dblLatitudeCompare = this.round(coords.getLatitude(), 5);
+    	final Double dblLongitudeCompare = this.round(coords.getLongitude(), 5);
     	
     	final int intLatitudeEqual = dblLatitude.compareTo(dblLatitudeCompare);
     	final int intLongitudeEqual = dblLongitude.compareTo(dblLongitudeCompare);
@@ -352,7 +374,8 @@ public class Coordinates
     /**
      * 
      */
-	@Override public String toString()
+	@Override 
+	public String toString()
 	{
 		return this.toString(CoordinateFormat.D);
 	}

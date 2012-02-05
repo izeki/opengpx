@@ -584,8 +584,10 @@ public class AdvancedSearchActivity extends Activity
 		else
 		{
 			Coordinates homeCoordinates = this.mPreferences.getHomeCoordinates();
-			locationInfo.latitude = homeCoordinates.getLatitude().getD();
-			locationInfo.longitude = homeCoordinates.getLongitude().getD();
+			// locationInfo.latitude = homeCoordinates.getLatitude().getD();
+			// locationInfo.longitude = homeCoordinates.getLongitude().getD();
+			locationInfo.latitude = homeCoordinates.getLatitude();
+			locationInfo.longitude = homeCoordinates.getLongitude();
 			locationInfo.provider = "Home";
 		}
 
