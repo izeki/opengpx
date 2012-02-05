@@ -16,7 +16,7 @@
   * <strike>associate gpx/loc files with opengpx</strike> (done)
   * <strike>add</strike> / edit <strike>user-defined waypoints</strike> (use variables in coordinates?) (partly done)
   * multi-language support (multiple strings.xml)
-  * use geopoints for distance / bearing calculation?
+  * use Location class for distance / bearing calculation
   * <strike>implement "follow me" on google maps (center to current position), show my position</strike> (done)
   * update cache stats when filtering / sorting / changing DB
   * <strike>add gcvotes (store separate from caches for performance reasons)</strike> (done)
