@@ -11,7 +11,6 @@ import java.util.Date;
 public class Waypoint 
 {
 
-	// private Coordinates mCoordinates = new Coordinates();
 	public double latitude;
 	public double longitude;
 	public Date time;
@@ -21,7 +20,7 @@ public class Waypoint
 	public String source = "";
 	public int elevation = Integer.MIN_VALUE;
 	public String comment = "";
-	
+
 	private WaypointType mWaypointType = WaypointType.Unknown;
 	// private String mstrURL = "";
 	// private String mstrURLName = "";
@@ -52,7 +51,7 @@ public class Waypoint
 		 * so make sure that the parsing functionality does work with both variants
 		 */
 		
-		String[] arrSplitted = strText.split("\\|");
+		final String[] arrSplitted = strText.split("\\|");
 		if (arrSplitted[0].toLowerCase().equals("geocache"))
 		{
 			this.mWaypointType = WaypointType.Cache;
