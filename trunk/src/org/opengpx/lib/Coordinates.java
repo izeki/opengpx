@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 
 import org.opengpx.lib.UnitSystem;
 
+import android.location.Location;
+
 /**
  * 
  * @author Martin Preishuber
@@ -13,7 +15,7 @@ import org.opengpx.lib.UnitSystem;
  */
 public class Coordinates
 {
-	private static final int earth_radius = 6371; // km
+	// private static final int earth_radius = 6371; // km
 	private static final double metric_to_miles_factor = 1.609344;
 	
 	public final static String coords_regexp = "([NnSs]) ?(\\d{1,2}).{0,1} ?(\\d{1,2}\\.\\d{1,4}).?\\s{0,25}([EeWw]) ?(\\d{1,3}).{0,1} ?(\\d{1,2}\\.\\d{1,4})"; 
@@ -161,10 +163,6 @@ public class Coordinates
     {
     	return this.mcoordLatitude.getD();
     }
-    /* public Coordinate getLatitude()
-    {
-    	return this.mcoordLatitude;
-    } */
     
     /**
      * 
@@ -179,10 +177,6 @@ public class Coordinates
      * 
      * @return
      */
-    /* public Coordinate getLongitude()
-    {
-    	return this.mcoordLongitude;
-    } */
     public double getLongitude()
     {
     	return this.mcoordLongitude.getD();
@@ -206,16 +200,30 @@ public class Coordinates
     {
         boolean blnResult = false;
         final Pattern regex = Pattern.compile(coords_regexp, Pattern.DOTALL);
-        final Matcher matcher = regex.matcher(text);
+        final Matcher matcher = regex.matcher(text.toUpperCase());
         if (matcher.find())
         {
-        	final Hemisphere latHemisphere = Hemisphere.valueOf(matcher.group(1));
+        	// final Hemisphere latHemisphere = Hemisphere.valueOf(matcher.group(1));
             final int latDegrees = Integer.parseInt(matcher.group(2));
             final double latMinutes = Double.parseDouble(matcher.group(3));
-            final Hemisphere longHemisphere = Hemisphere.valueOf(matcher.group(4));
+            
+            // final Hemisphere longHemisphere = Hemisphere.valueOf(matcher.group(4));
             final int longDegrees = Integer.parseInt(matcher.group(5));
             final double longMinutes = Double.parseDouble(matcher.group(6));
-            this.setDM(latHemisphere, latDegrees, latMinutes, longHemisphere, longDegrees, longMinutes);
+                        
+            // this.setDM(latHemisphere, latDegrees, latMinutes, longHemisphere, longDegrees, longMinutes);
+            
+            // System.out.println(String.format("%.8f %.8f", this.getLatitude(), latitude));
+            // System.out.println(String.format("%.8f %.8f", this.getLongitude(), longitude));
+
+            double latitude = latDegrees + latMinutes / 60;
+            if (matcher.group(1).equals("S")) latitude *= -1;
+            double longitude = longDegrees + longMinutes / 60;
+            if (matcher.group(4).equals("W")) longitude *= -1;
+            
+            this.mcoordLatitude.setD(latitude);
+            this.mcoordLongitude.setD(longitude);
+            
             blnResult = true;
         }
         return blnResult;
@@ -237,8 +245,9 @@ public class Coordinates
      * @param unitSystem
      * @return
      */
-    public double getDistanceTo(final Coordinates coords, UnitSystem unitSystem)
+    public double getDistanceTo(final Coordinates coords, final UnitSystem unitSystem)
     {
+    	/*
         final double lat1 = Math.toRadians(this.mcoordLatitude.getD());
         final double long1 = Math.toRadians(this.mcoordLongitude.getD());
         final double lat2 = Math.toRadians(coords.getLatitude());
@@ -248,12 +257,20 @@ public class Coordinates
         
         final double a = Math.pow(Math.sin(delta_lat / 2), 2) + Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(delta_long / 2), 2);
         final double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        final double d = (earth_radius * c);
-        
+        final double distance = (earth_radius * c);
+		*/
+
+        float[] results = new float[1];
+        Location.distanceBetween(this.getLatitude(), this.getLongitude(), coords.getLatitude(), coords.getLongitude(), results);
+        final double distance = results[0] / 1000;
+
+        // System.out.println("initial bearing: " + Double.toString(results[1]));
+        // System.out.println("final bearing: " + Double.toString(results[2]));
+
         if (unitSystem.equals(UnitSystem.Metric))
-        	return d; // km
+        	return distance; // km
         else
-        	return (d / metric_to_miles_factor);
+        	return (distance / metric_to_miles_factor);
     }
 
     /**
@@ -263,6 +280,7 @@ public class Coordinates
      */
     public double getBearingTo(final Coordinates coords)
     {
+    	/*
         final double lat1 = Math.toRadians(this.mcoordLatitude.getD());
         final double long1 = Math.toRadians(this.mcoordLongitude.getD());
         final double lat2 = Math.toRadians(coords.getLatitude());
@@ -272,7 +290,28 @@ public class Coordinates
         final double a = Math.sin(delta_long) * Math.cos(lat2);
         final double b = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(delta_long);
         final double bearing = Math.toDegrees(Math.atan2(a, b));
+        */
+
+    	/*
+        final Location start = new Location("opengpx");
+        start.setLatitude(this.getLatitude());
+        start.setLongitude(this.getLongitude());
+        final Location end = new Location("opengpx");
+        end.setLatitude(coords.getLatitude());
+        end.setLongitude(coords.getLongitude());        
+        final double bearing = start.bearingTo(end);
+		*/
+
+        float[] results = new float[2];
+        Location.distanceBetween(this.getLatitude(), this.getLongitude(), coords.getLatitude(), coords.getLongitude(), results);
+        final float bearing = results[1];
+    	
         final double bearing_normalized = (bearing + 360) % 360;
+
+        // System.out.println("bearing_normalized: " + Double.toString(bearing_normalized));
+        // System.out.println("bearing: " + Double.toString(bearing));        
+        
+        // testLocation();
         
         return bearing_normalized;
     }
@@ -378,6 +417,39 @@ public class Coordinates
 	public String toString()
 	{
 		return this.toString(CoordinateFormat.D);
+	}
+
+	/**
+	 * 
+	 */
+	public static void testLocation()
+	{
+        Location l = new Location("opengpx");
+        final Coordinates c1 = new Coordinates();
+        
+        c1.parseFromText("N 46¡ 35.596 E 014¡ 16.394");
+        System.out.println("lat: " + Double.toString(c1.getLatitude()));
+        System.out.println("long: " + Double.toString(c1.getLongitude()));
+        l.setLatitude(c1.getLatitude());
+        l.setLongitude(c1.getLongitude());
+        System.out.println(Location.convert(l.getLatitude(), Location.FORMAT_DEGREES));
+        System.out.println(Location.convert(l.getLongitude(), Location.FORMAT_DEGREES));
+        System.out.println(Location.convert(l.getLatitude(), Location.FORMAT_MINUTES));
+        System.out.println(Location.convert(l.getLongitude(), Location.FORMAT_MINUTES));
+        System.out.println(Location.convert(l.getLatitude(), Location.FORMAT_SECONDS));
+        System.out.println(Location.convert(l.getLongitude(), Location.FORMAT_SECONDS));
+        
+        c1.parseFromText("S 16¡ 26.313 W 039¡ 03.844");
+        System.out.println("lat: " + Double.toString(c1.getLatitude()));
+        System.out.println("long: " + Double.toString(c1.getLongitude()));
+        l.setLatitude(c1.getLatitude());
+        l.setLongitude(c1.getLongitude());
+        System.out.println(Location.convert(l.getLatitude(), Location.FORMAT_DEGREES));
+        System.out.println(Location.convert(l.getLongitude(), Location.FORMAT_DEGREES));
+        System.out.println(Location.convert(l.getLatitude(), Location.FORMAT_MINUTES));
+        System.out.println(Location.convert(l.getLongitude(), Location.FORMAT_MINUTES));
+        System.out.println(Location.convert(l.getLatitude(), Location.FORMAT_SECONDS));
+        System.out.println(Location.convert(l.getLongitude(), Location.FORMAT_SECONDS));
 	}
 
 	/**

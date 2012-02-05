@@ -99,7 +99,7 @@ public class Coordinate
         dm.minutes = (dblAbsValue - (dm.degrees * 3600)) / 60;
         return dm;
 	}
-	
+
 	/**
 	 * 
 	 * @param dms
