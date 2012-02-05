@@ -5,6 +5,7 @@ Version *1.2.0* (not released yet):
  * performance improvments in XML reader
  * improvments to zip file reading
  * fixed gpx file handler (if path contains multiple dots)
+ * added loc file handler
  * german translation added (wip)
  * added support for gpx 1.0.2 features (wip)
  * added personal notes
