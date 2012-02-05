@@ -43,7 +43,7 @@ public class FileSystemIntegration
 			final String type = intent.getType();
 			if (type.equals("application/zip") || type.equals("text/plain") || type.equals("application/octet-stream"))
 			{
-				// Handle zip/gpx file
+				// Handle zip/gpx/loc file
 				final File sourceFile = new File(uri.getPath());
 				if (sourceFile.exists())
 				{
@@ -64,7 +64,7 @@ public class FileSystemIntegration
 						final File targetFile = new File(targetFolder.getPath() + System.getProperty("file.separator") + sourceFile.getName());
 						try 
 						{
-							mLogger.debug("Copy gpx/zip file " + sourceFile.getPath() + " to " + targetFile.getPath());
+							mLogger.debug("Copy gpx/loc/zip file " + sourceFile.getPath() + " to " + targetFile.getPath());
 							this.copyFile(sourceFile, targetFile);
 						} 
 						catch (IOException e) 
@@ -85,7 +85,7 @@ public class FileSystemIntegration
 	 */
 	private void copyFile(File sourceFile, File destFile) throws IOException 
 	{
-		if(!destFile.exists()) 
+		if (!destFile.exists()) 
 		{
 			destFile.createNewFile();
 		}
@@ -100,11 +100,11 @@ public class FileSystemIntegration
 		}
 		finally 
 		{
-			if(source != null) 
+			if (source != null) 
 			{
 				source.close();
 			}
-			if(destination != null) 
+			if (destination != null) 
 			{
 				destination.close();
 			}
