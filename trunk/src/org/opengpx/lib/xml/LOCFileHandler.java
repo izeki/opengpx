@@ -6,7 +6,9 @@ import java.util.Stack;
 import org.opengpx.lib.geocache.Cache;
 import org.opengpx.lib.CacheDatabase;
 import org.opengpx.lib.geocache.CacheType;
+import org.opengpx.lib.geocache.ContainerType;
 import org.opengpx.lib.geocache.Waypoint;
+import org.opengpx.lib.geocache.WaypointType;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -56,7 +58,7 @@ public class LOCFileHandler extends DefaultHandler
     {
     	super.startElement(uri, localName, qName, attributes);
     	
-    	String strElementName = localName;
+    	final String strElementName = localName;
 		this.mElementStack.push(strElementName);
 		if (strElementName.equals("loc"))
 		{
@@ -78,6 +80,8 @@ public class LOCFileHandler extends DefaultHandler
 			// Add a new waypoint
 			this.mCurrentWaypoint = new Waypoint();
 			this.mCurrentWaypoint.time = Calendar.getInstance().getTime();
+			this.mCurrentWaypoint.setType(WaypointType.Unknown);
+			this.mCurrentWaypoint.symbol = "Waypoint";
 			this.mCurrentCache.addWaypoint(this.mCurrentWaypoint);
 		}
 		else if (strElementName.equals("name"))
@@ -89,7 +93,6 @@ public class LOCFileHandler extends DefaultHandler
 		{
 			this.mCurrentWaypoint.latitude = Double.parseDouble(attributes.getValue("lat"));
 			this.mCurrentWaypoint.longitude = Double.parseDouble(attributes.getValue("lon"));
-			// this.mCurrentWaypoint.getCoordinates().setD(dblLatitude, dblLongitude);
 		}
     }
     
@@ -101,13 +104,12 @@ public class LOCFileHandler extends DefaultHandler
     { 
     	super.endElement(uri, localName, qName);
     	
-		String strElementName = this.mElementStack.pop();
-		String strNodeValue = builder.toString().trim();
-		
-		// if (strNodeValue.length() > 0)
+		final String strElementName = this.mElementStack.pop();
+		final String strNodeValue = builder.toString().trim();
+
 		if (this.mElementStack.size() > 0)
 		{
-			String strParentNode = this.mElementStack.peek();
+			final String strParentNode = this.mElementStack.peek();
 			if (strParentNode.equals("loc"))
 			{
 				if (strElementName.equals("waypoint"))
@@ -123,6 +125,15 @@ public class LOCFileHandler extends DefaultHandler
 					this.mCurrentCache.name = strNodeValue;
 				else if (strElementName.equals("type"))
 					this.mCurrentWaypoint.parseTypeString(strNodeValue);
+				else if (strElementName.equals("difficulty"))
+					this.mCurrentCache.difficulty = Double.parseDouble(strNodeValue);
+				else if (strElementName.equals("terrain"))
+					this.mCurrentCache.terrain = Double.parseDouble(strNodeValue);
+				else if (strElementName.equals("container"))
+				{
+					final int container = Integer.parseInt(strNodeValue);
+					this.mCurrentCache.setContainerType(ContainerType.getById(container));
+				}
 			}
 		}
 		
