@@ -2,13 +2,13 @@
 
 == ToDo ==
 
-*OpenGPX:* (last update: 8. Januar 2012)
+*OpenGPX:* (last update: 5. Feb. 2012)
 
   * implement cache filter field (top of list)
   * add cache database stats (gc, opencaching caches)
   * change textview for info.txt to edittext
   * make text viewer / editor a window
-  * handle encrypted logs (e.g. muri quelle)
+  * <strike>handle encrypted logs (e.g. muri quelle)</strike> (done)
   * <strike>add notes to caches</strike> (done)
   * improve cache details for LOC files (Waypoint type)
   * Filter out finds
