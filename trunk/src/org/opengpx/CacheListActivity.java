@@ -92,7 +92,7 @@ public class CacheListActivity extends ListActivity
 		this.mResources = this.getResources();
 		this.mPreferences = new Preferences(this);
 
-		// Handle zip and/or gpx files
+		// Handle zip and/or gpx/loc files
 		final FileSystemIntegration fsi = FileSystemIntegration.getInstance();
 		fsi.handleIntent(getIntent(), this.mPreferences);
 
