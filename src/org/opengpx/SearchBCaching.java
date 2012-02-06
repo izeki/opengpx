@@ -188,8 +188,8 @@ public class SearchBCaching
 
 	public void parseJsonSummaryData(InputStream in) throws IOException, JSONException
 	{
-		BufferedReader rd = new BufferedReader(new InputStreamReader(in, Charset.forName("UTF-8")), 1024);
-		StringBuilder lvResult = new StringBuilder();
+		final BufferedReader rd = new BufferedReader(new InputStreamReader(in, Charset.forName("UTF-8")), 1024);
+		final StringBuilder lvResult = new StringBuilder();
 		String line;
 
 		while ((line = rd.readLine()) != null)
@@ -225,7 +225,7 @@ public class SearchBCaching
 				final JSONObject cache = data.getJSONObject(i);
 				// mLogger.debug(cache.toString());
 				
-				c.id = cache.getInt("id");
+				// c.id1 = cache.getString("id");
 				c.name = cache.getString("name");
 				c.code = cache.getString("wpt");
 				c.parseCacheTypeString(cache.getString("type"));
@@ -310,7 +310,7 @@ public class SearchBCaching
 
 					wpt.parseTypeString("geocache");
 
-					c.id = cache.getInt("id");
+					// c.id1 = cache.getString("id");
 					c.name = cache.getString("name");
 					c.code = cache.getString("wpt");
 					c.parseCacheTypeString(cache.getString("type"));
