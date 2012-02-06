@@ -13,7 +13,7 @@ public class Cache
 {
 	// Note: these are public for performance reasons
 	public String code;
-	public int id;
+	// public String id1;
 	public boolean isAvailable;
 	public boolean isArchived;
 	public boolean isMemberOnly = false;

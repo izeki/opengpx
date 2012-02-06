@@ -246,16 +246,17 @@ public class GPXFileReader
 			
 			// currentCache.id = vn.parseInt(vn.getAttrVal("id"));
 			// Note: some generated gpx files don't contain cache IDs ...
-			if ((idx = vn.getAttrVal("id")) != -1)
+			/* if ((idx = vn.getAttrVal("id")) != -1)
 			{
-				final String strId = vn.toNormalizedString(vn.getAttrVal("id"));
+				currentCache.id = vn.toNormalizedString(vn.getAttrVal("id"));
+				// final String strId = vn.toNormalizedString(vn.getAttrVal("id"));
 				// FIXME: convert to String
 				try 
 				{
-					currentCache.id = Integer.parseInt(strId);
+					// currentCache.id = Integer.parseInt(strId);
 		        } 
 				catch (NumberFormatException ex) { }						
-			}
+			} */
 			
 			if ((idx = vn.getAttrVal("archived")) != -1)
 			{

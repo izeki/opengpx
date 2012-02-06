@@ -37,7 +37,7 @@ public class FieldNote
 		PRIVATE("Private note", "log_write_note.gif");
 	
 		/**
-		 * This map is a workardound for mIconFilename being null on Android
+		 * This map is a workaround for mIconFilename being null on Android
 		 */
 		private static final Map<LogType, String> logTypeFilenameMap = new HashMap<LogType, String>() 
 		{
