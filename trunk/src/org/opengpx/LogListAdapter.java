@@ -14,6 +14,7 @@ import org.opengpx.tools.Rot13;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -96,9 +97,9 @@ class LogListAdapter extends ArrayAdapter<LogEntry>
         	(logEntry.latitude != 0) && (logEntry.longitude != 0))
         {
         	final Coordinates logCoordinates = new Coordinates(logEntry.latitude, logEntry.longitude);
-        	logText += "\n\n" + this.mResources.getString(R.string.waypoint) + ": " + logCoordinates.toString(this.mCoordinateFormat);
+        	logText += "\n<b>" + this.mResources.getString(R.string.waypoint) + "</b>: " + logCoordinates.toString(this.mCoordinateFormat);
         }
-    	tvLine2.setText(logText);
+    	tvLine2.setText(Html.fromHtml(logText));
 
         logListViewHolder.icon.setImageDrawable(this.getIcon(parent, logEntry.getType()));            	
 

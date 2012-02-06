@@ -74,11 +74,20 @@ public class TravelBug
 	{
 		this.reference = reference;
 	} */
+
+	public String toHtmlString()
+	{
+		if (this.reference.length() > 0)
+			return String.format("%s [<a href=\"http://coord.info/%s\">%s</a>]", this.name, this.reference, this.reference);
+		else
+			return this.name;
+	}	
 	
 	/**
 	 * 
 	 */
-	@Override public String toString()
+	@Override 
+	public String toString()
 	{
 		if (this.reference.length() > 0)
 			return String.format("%s [%s]", this.name, this.reference);

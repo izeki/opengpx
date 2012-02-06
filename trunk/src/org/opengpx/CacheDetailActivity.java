@@ -56,6 +56,8 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.view.ContextMenu;
 import android.view.Gravity;
@@ -780,13 +782,13 @@ public class CacheDetailActivity extends TabActivity
 		final String strHintText = mCache.hint.trim();
 		if (strHintText.length() > 0)
 		{
-			alertDialog.setTitle("Hint");
+			alertDialog.setTitle(R.string.hint);
 			alertDialog.setMessage(strHintText);
 		}
 		else
 		{
-			alertDialog.setTitle("Information");
-			alertDialog.setMessage("Sorry, no hint available.");
+			alertDialog.setTitle(R.string.information);
+			alertDialog.setMessage(this.mResources.getString(R.string.no_hint_available));
 		}
 		alertDialog.setButton("OK", new DialogInterface.OnClickListener()
 		{
@@ -806,21 +808,24 @@ public class CacheDetailActivity extends TabActivity
 		final StringBuilder travelBugs = new StringBuilder();
 		if (this.mCache.getTravelBugs() != null)
 		{
-			for (TravelBug tb : this.mCache.getTravelBugs())
+			for (final TravelBug tb : this.mCache.getTravelBugs())
 			{
-				travelBugs.append(tb.toString()).append("\n");
+				travelBugs.append("&nbsp;").append(tb.toHtmlString()).append("\n");
 			}
 			// Remove trailing newline
 			travelBugs.delete(travelBugs.length() - 1, travelBugs.length());
 		}
 		else
 		{
-			travelBugs.append("Sorry, there are no coins / travelbugs in this cache.");
+			travelBugs.append(this.mResources.getString(R.string.no_travelbugs_available));
 		}
 
 		final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-		alertDialog.setTitle("Inventory");
-		alertDialog.setMessage(travelBugs);
+		alertDialog.setTitle(R.string.inventory);
+		final TextView message = new TextView(this);
+		message.setText(Html.fromHtml(travelBugs.toString()));
+		message.setMovementMethod(LinkMovementMethod.getInstance());
+		alertDialog.setView(message);
 		alertDialog.setButton("OK", new DialogInterface.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog, int which)

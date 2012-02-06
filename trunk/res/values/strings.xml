@@ -163,4 +163,9 @@
 <string name="clear_database_question">Do you really want to clear the cache database?</string>
 <string name="log_decrypted">Log (decrypted)</string>
 <string name="waypoint">Waypoint</string>
+<string name="hint">Hint</string>
+<string name="information">Information</string>
+<string name="no_hint_available">Sorry, no hint available.</string>
+<string name="inventory">Inventory</string>
+<string name="no_travelbugs_available">Sorry, there are no coins / travelbugs in this cache.</string>
 </resources>
