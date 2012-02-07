@@ -810,10 +810,10 @@ public class CacheDetailActivity extends TabActivity
 		{
 			for (final TravelBug tb : this.mCache.getTravelBugs())
 			{
-				travelBugs.append("&nbsp;").append(tb.toHtmlString()).append("\n");
+				travelBugs.append("&nbsp;").append(tb.toHtmlString()).append("<br>");
 			}
 			// Remove trailing newline
-			travelBugs.delete(travelBugs.length() - 1, travelBugs.length());
+			travelBugs.delete(travelBugs.length() - 4, travelBugs.length());
 		}
 		else
 		{
