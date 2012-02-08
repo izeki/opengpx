@@ -130,7 +130,8 @@ public class CacheDetailActivity extends TabActivity
 
 		if (bunExtras.getBoolean("isSearchResult"))
 			this.mCache = CacheDatabase.getInstance().getCacheFromSearch(strCacheCode);
-		else this.mCache = CacheDatabase.getInstance().getCache(strCacheCode);
+		else 
+			this.mCache = CacheDatabase.getInstance().getCache(strCacheCode);
 
 		if (this.mCache != null)
 		{
@@ -849,15 +850,14 @@ public class CacheDetailActivity extends TabActivity
 			return 0xFFFF8040; // orange
 		else return 0xFFFF0000; // red
 	} */
-
+	
 	/**
 	 * 
 	 */
 	private void initializeWaypointList()
 	{
 		final CoordinateFormat coordinateFormat = this.mPreferences.getCoordinateFormat();
-
-		int intExtractedNum = 1;
+		
 		// Extract waypoints from description & logs
 		final Text txtShortDescription = new Text();
 		txtShortDescription.setPlainText(this.mCache.shortDescription);
@@ -870,20 +870,12 @@ public class CacheDetailActivity extends TabActivity
 		alExtractedCoordinates.addAll(txtLongDescription.extractCoordinates());
 		if (alExtractedCoordinates.size() > 0)
 		{
+			int intExtractedNum = 1;
 			for (Coordinates coords : alExtractedCoordinates)
 			{
-				final Waypoint wp = new Waypoint();
 				final String strName = String.format("Description #%d", intExtractedNum);
-				wp.name = strName;
-				wp.description = strName;
-				wp.setType(WaypointType.Extracted);
-				wp.symbol = "Extracted";
-				// wp.setCoordinates(coords);
-				// wp.latitude = coords.getLatitude().getD();
-				// wp.longitude = coords.getLongitude().getD();
-				wp.latitude = coords.getLatitude();
-				wp.longitude = coords.getLongitude();
-				this.mCache.addWaypoint(wp);
+				final Waypoint waypoint = Waypoint.create(strName, strName, WaypointType.Extracted, "Extracted", coords.getLatitude(), coords.getLongitude());
+				this.mCache.addWaypoint(waypoint);
 				intExtractedNum++;
 			}
 		}
@@ -894,34 +886,39 @@ public class CacheDetailActivity extends TabActivity
 			{
 				if ((logEntry.latitude != 0) && (logEntry.longitude != 0))
 				{
-					final Waypoint wp = new Waypoint();
 					final String strName = String.format("Log entry (%s)", logEntry.finder);
-					wp.name = strName;
-					wp.description = strName;
-					wp.setType(WaypointType.Extracted);
-					wp.symbol = "Extracted";
-					wp.time = logEntry.time;
-					wp.latitude = logEntry.latitude;
-					wp.longitude = logEntry.longitude;
-					this.mCache.addWaypoint(wp);
+					final Waypoint waypoint = Waypoint.create(strName, strName, WaypointType.Extracted, "Extracted", logEntry.latitude, logEntry.longitude, logEntry.time);
+					this.mCache.addWaypoint(waypoint);
 				}
 				final Text textLogEntry = new Text(logEntry.text);
 				for (Coordinates coords : textLogEntry.extractCoordinates())
 				{
-					final Waypoint wp = new Waypoint();
 					final String strName = String.format("Log entry (%s)", logEntry.finder);
-					wp.name = strName;
-					wp.description = strName;
-					wp.setType(WaypointType.Extracted);
-					wp.symbol = "Extracted";
-					// wp.latitude = coords.getLatitude().getD();
-					// wp.longitude = coords.getLongitude().getD();
-					wp.latitude = coords.getLatitude();
-					wp.longitude = coords.getLongitude();
-					this.mCache.addWaypoint(wp);
+					final Waypoint waypoint = Waypoint.create(strName, strName, WaypointType.Extracted, "Extracted", coords.getLatitude(), coords.getLongitude());
+					this.mCache.addWaypoint(waypoint);
 				}
 			}
 		}
+
+		// Add waypoints from personal notes
+		final PersonalNote personalNote = this.mCacheDatabase.getPersonalNote(this.mCache.code);
+		final Text textPersonalNote = new Text();
+		textPersonalNote.setPlainText(personalNote.text);
+		// textPersonalNote.setIsHtml(this.mCache.shortDescriptionIsHtml);
+
+		final ArrayList<Coordinates> extractedCoordinates = textPersonalNote.extractCoordinates();
+		if (extractedCoordinates.size() > 0)
+		{
+			int intExtractedNum = 1;
+			for (Coordinates coords : extractedCoordinates)
+			{
+				final String strName = String.format("Personal Note #%d", intExtractedNum);
+				final Waypoint waypoint = Waypoint.create(strName, strName, WaypointType.Extracted, "Extracted", coords.getLatitude(), coords.getLongitude());
+				this.mCache.addWaypoint(waypoint);
+				intExtractedNum++;
+			}
+		}
+		
 		final ListView lvWaypointList = (ListView) this.findViewById(R.id.WaypointList);
 		lvWaypointList.setAdapter(new WaypointListAdapter(this, this.mCache.getWaypoints(), this.mCache.code, this.mCache.getCacheType(), coordinateFormat));
 
