@@ -37,6 +37,45 @@ public class Waypoint
 
 	/**
 	 * 
+	 * @param name
+	 * @param description
+	 * @param type
+	 * @param symbol
+	 * @param latitude
+	 * @param longitude
+	 * @return
+	 */
+	public static Waypoint create(final String name, final String description, final WaypointType type, final String symbol, final double latitude, final double longitude)
+	{
+		return Waypoint.create(name, description, type, symbol, latitude, longitude, null);
+	}
+
+	/**
+	 * 
+	 * @param name
+	 * @param description
+	 * @param type
+	 * @param symbol
+	 * @param latitude
+	 * @param longitude
+	 * @param time
+	 * @return
+	 */
+	public static Waypoint create(final String name, final String description, final WaypointType type, final String symbol, final double latitude, final double longitude, final Date time)
+	{
+		final Waypoint waypoint = new Waypoint();
+		waypoint.name = name;
+		waypoint.description = description;
+		waypoint.setType(type);
+		waypoint.symbol = symbol;
+		waypoint.latitude = latitude;
+		waypoint.longitude = longitude;
+		if (time != null) waypoint.time = time;
+		return waypoint;
+	}
+
+	/**
+	 * 
 	 * @param strText
 	 */
 	public void parseTypeString(String strText)
@@ -129,7 +168,8 @@ public class Waypoint
 	/**
 	 * Returns a readable interpretation of the waypoint
 	 */
-	@Override public String toString()
+	@Override 
+	public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append(String.format("Name: %s\n", this.name));
