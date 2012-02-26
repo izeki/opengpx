@@ -9,6 +9,9 @@ import org.opengpx.lib.Coordinates;
 import org.opengpx.lib.Text;
 import org.opengpx.lib.geocache.Waypoint;
 import org.opengpx.lib.geocache.WaypointType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -31,6 +34,9 @@ public class AddWaypointDialog extends Dialog {
 	private Context mContext;
 	private Coordinates mReferenceCoordinates;
 	
+	@SuppressWarnings("unused")
+	private final Logger mLogger = LoggerFactory.getLogger(AddWaypointDialog.class);
+
 	/**
 	 * 
 	 * @param context
@@ -43,6 +49,8 @@ public class AddWaypointDialog extends Dialog {
 		this.mContext = context;
 		this.readyListener = readyListener;
 		this.mReferenceCoordinates = new Coordinates(headerWaypoint.latitude, headerWaypoint.longitude);
+		// this.mLogger.debug(this.mReferenceCoordinates.toString(CoordinateFormat.DM));
+		
 	}
 
 	/**
