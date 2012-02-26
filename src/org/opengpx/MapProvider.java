@@ -8,5 +8,6 @@ package org.opengpx;
 public enum MapProvider 
 {
 	Google,
-	OpenStreetMap
+	OpenStreetMap,
+	OruxMap
 }

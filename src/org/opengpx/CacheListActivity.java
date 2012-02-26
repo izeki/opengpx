@@ -16,6 +16,7 @@ import org.opengpx.Preferences;
 import org.opengpx.lib.map.GoogleElevation;
 import org.opengpx.lib.map.GoogleMapViewer;
 import org.opengpx.lib.map.MapViewer;
+import org.opengpx.lib.map.OruxMapViewer;
 import org.opengpx.lib.map.OsmMapViewer;
 import org.opengpx.lib.map.GoogleElevation.GoogleLocation;
 
@@ -441,9 +442,14 @@ public class CacheListActivity extends ListActivity
 					mapViewer = new GoogleMapViewer(this);
 					mapViewer.addCaches(this.mCacheDatabase.getCacheCodesSortedByDistance());
 				}	
-				else
+				else if (mapProvider == MapProvider.OpenStreetMap)
 				{
 					mapViewer = new OsmMapViewer(this);
+					mapViewer.addCaches(this.mCacheDatabase.getCacheCodes());
+				}
+				else
+				{
+					mapViewer = new OruxMapViewer(this);
 					mapViewer.addCaches(this.mCacheDatabase.getCacheCodes());
 				}
 				mapViewer.setCenter(locationInfo.latitude, locationInfo.longitude, locationInfo.provider);
@@ -454,7 +460,7 @@ public class CacheListActivity extends ListActivity
 			{
 				Toast.makeText(this, R.string.no_caches_available, Toast.LENGTH_SHORT).show();
 			}
-			
+
 			return true;
 		case R.id.SortByDistance:
 			this.sortCachesByDistance();

@@ -64,7 +64,7 @@ public class Preferences
 	private static final String  PREFS_DEFAULT_HOME_COORDINATES = "";
 	private static final String  PREFS_DEFAULT_DATA_FOLDER = "/sdcard/gpx";
 	private static final boolean PREFS_DEFAULT_USE_WEB_VIEW = true;
-	private static final MapProvider PREFS_DEFAULT_MAP_PROVIDER = MapProvider.Google;
+	private static final MapProvider PREFS_DEFAULT_MAP_PROVIDER = MapProvider.OpenStreetMap;
 	private static final String  PREFS_DEFAULT_COORDINATE_FORMAT = "DM";
 	private static final int     PREFS_DEFAULT_CACHE_LIMIT = 100;
 	// private static final String  PREFS_DEFAULT_USERNAME = "Unknown";
@@ -411,4 +411,3 @@ public class Preferences
 		return WaypointClickAction.valueOf(strWaypointClickAction);
 	}
 }
-
