@@ -42,6 +42,9 @@ import org.opengpx.lib.geocache.FieldNote.LogType;
 import org.opengpx.lib.xml.GCVoteReader;
 import org.opengpx.lib.tools.AndroidSystem;
 import org.opengpx.lib.tools.HtmlCodeBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.app.TabActivity;
@@ -106,6 +109,9 @@ public class CacheDetailActivity extends TabActivity
 
 	// public static final String	ANDNAV2_VIEW_ACTION	= "org.andnav2.intent.ACTION_VIEW";
 	// public static final String	ANDNAV2_NAV_ACTION	= "org.andnav2.intent.ACTION_NAV_TO";
+
+	@SuppressWarnings("unused")
+	private final Logger mLogger = LoggerFactory.getLogger(CacheDetailActivity.class);
 
 	/**
 	 * 
@@ -465,6 +471,7 @@ public class CacheDetailActivity extends TabActivity
 	private void addWaypoint()
 	{
 		final Waypoint wpHeader = this.mCache.getHeaderWaypoint();
+		// this.mLogger.debug(String.format("Lat/Lon: %.5f/%.5f", wpHeader.latitude, wpHeader.longitude));
 		final AddWaypointDialog dialog = new AddWaypointDialog(this, new OnWaypointAddedListener(), wpHeader);
 		dialog.show();
 	}

@@ -73,7 +73,7 @@ public class CacheListActivity extends ListActivity
 	private GpsLocationListener	mLocationListener = null;
 	private Resources mResources;
 
-	private static final Logger mLogger = LoggerFactory.getLogger(CacheListActivity.class);
+	private final Logger mLogger = LoggerFactory.getLogger(CacheListActivity.class);
 	
 	private static final int MENU_DELETE = Menu.FIRST;
 

@@ -54,7 +54,8 @@ public class Coordinates
 	 */
 	public static String convert(double coordinate, CoordinateType coordinateType, CoordinateFormat coordinateFormat)
 	{
-		final Coordinate coord = new Coordinate(coordinateType, coordinate);
+		final Coordinate coord = new Coordinate(coordinateType);
+		coord.setD(coordinate);
 		return coord.toString(coordinateFormat);
 	}
 	
