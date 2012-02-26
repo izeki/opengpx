@@ -1072,6 +1072,10 @@ public class CacheDetailActivity extends TabActivity
 			showWaypointOnRadar(waypoint);	
 	}
 	
+	/**
+	 * 
+	 * @param waypoint
+	 */
 	private void showWaypointOnGeo(final Waypoint waypoint)
 	{
 		final String destinationLatitude = ((Double) waypoint.latitude).toString().replace(",", ".");
