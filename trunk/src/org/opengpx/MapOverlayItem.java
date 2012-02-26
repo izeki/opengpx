@@ -71,9 +71,27 @@ public class MapOverlayItem implements Serializable
 	 * 
 	 * @return
 	 */
+	public double getLatitude()
+	{
+		return (this.mintLatitude / 1E6);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getLongitudeE6()
 	{
 		return this.mintLongitude;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public double getLongitude()
+	{
+		return (this.mintLongitude / 1E6);
 	}
 
 	/**

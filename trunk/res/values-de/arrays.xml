@@ -1,7 +1,9 @@
 <resources>
     
-<string-array name="map_provider"><item>Google Maps</item><item>OpenStreetMap</item>
-
+<string-array name="map_provider">
+    <item>Google Maps</item>
+    <item>OpenStreetMap</item>
+    <item>OruxMap</item>
 </string-array>
 <string-array name="screen_orientation"><item>Unspecified</item>
 <item>Portrait</item>
@@ -50,8 +52,10 @@
 <string-array name="screen_orientation_values"><item>Unspecified</item>
 <item>Portrait</item>
 <item>Landscape</item></string-array>
-<string-array name="map_provider_values"><item>Google</item>
+<string-array name="map_provider_values">
+    <item>Google</item>
 <item>OpenStreetMap</item>
+<item>OruxMap</item>
 </string-array>
 <string-array name="compass_provider_items"><item>CompassNavi</item>
 <item>Radar</item>

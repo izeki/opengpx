@@ -14,9 +14,13 @@ import org.opengpx.lib.CoordinateFormat;
 import org.opengpx.lib.Coordinates;
 import org.opengpx.lib.geocache.Waypoint;
 
+/**
+ * 
+ * @author Martin Preishuber
+ *
+ */
 class MapViewerBase
 {
-	// private static final String TAG = "com.opengpx.lib.map.MapViewerBase";
 	private static final int CACHE_IMAGE_WIDTH = 24;
 	private static final int CACHE_IMAGE_HEIGHT = 24;
 	private static final int WAYPOINT_IMAGE_WIDTH = 20;

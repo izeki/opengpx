@@ -21,6 +21,7 @@ import org.opengpx.Preferences;
 import org.opengpx.WaypointDetailDialog;
 import org.opengpx.lib.map.GoogleMapViewer;
 import org.opengpx.lib.map.MapViewer;
+import org.opengpx.lib.map.OruxMapViewer;
 import org.opengpx.lib.map.OsmMapViewer;
 
 import org.opengpx.lib.geocache.Cache;
@@ -436,13 +437,15 @@ public class CacheDetailActivity extends TabActivity
 			this.showInventory();
 			return true;
 		case R.id.MenuCacheDetailMap:
-			final MapProvider mapProvder = this.mPreferences.getMapProvider();
+			final MapProvider mapProvider = this.mPreferences.getMapProvider();
 			final Waypoint wpHeader = this.mCache.getHeaderWaypoint();
 			MapViewer mapViewer;
-			if (mapProvder == MapProvider.Google)
+			if (mapProvider == MapProvider.Google)
 				mapViewer = new GoogleMapViewer(this);
-			else
+			else if (mapProvider == MapProvider.OpenStreetMap)
 				mapViewer = new OsmMapViewer(this);
+			else
+				mapViewer = new OruxMapViewer(this);
 			mapViewer.addWaypoints(this.mCache.getWaypoints());
 			mapViewer.setCenter(wpHeader.latitude, wpHeader.longitude, wpHeader.description);
 			mapViewer.setZoomLevel(16);
