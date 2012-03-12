@@ -73,7 +73,7 @@ public class FieldNoteHistoryAdapter extends ArrayAdapter<FieldNote>
         if (fieldNote != null)
         {	        
 	        final TextView tvLine1 = fieldNoteViewHolder.twoLineListItem.getText1();
-	        tvLine1.setText(fieldNote.gcName);
+	        tvLine1.setText(fieldNote.gcName + " (" + fieldNote.gcId + ")");
 	        final TextView tvLine2 = fieldNoteViewHolder.twoLineListItem.getText2();
 	        tvLine2.setText(fieldNote.noteTime.toString());
 	        
