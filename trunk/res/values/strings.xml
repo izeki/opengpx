@@ -167,5 +167,5 @@
 <string name="information">Information</string>
 <string name="no_hint_available">Sorry, no hint available.</string>
 <string name="inventory">Inventory</string>
-<string name="no_travelbugs_available">Sorry, there are no coins / travelbugs in this cache.</string>
+<string name="no_travelbugs_available">Sorry, there are no coins / travelbugs in this cache.</string><string name="delete">Delete</string>
 </resources>

@@ -943,7 +943,7 @@ public class CacheDetailActivity extends TabActivity
 				menu.add(0, MENU_MAP, Menu.NONE, "Map View");
 				menu.add(0, MENU_NAVIGATE, Menu.NONE, "Navigate");
 				menu.add(0, MENU_GEO, Menu.NONE, "Geo");
-				menu.add(0, MENU_DELETE, Menu.NONE, "Delete");
+				menu.add(0, MENU_DELETE, Menu.NONE, R.string.delete);
 			}
 		});
 

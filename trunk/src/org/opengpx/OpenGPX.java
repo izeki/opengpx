@@ -103,7 +103,7 @@ public class OpenGPX extends Application
 	private void initializeDatabase()
 	{
 		this.mCacheDatabase = CacheDatabase.getInstance();
-
+		
 		final String strDataPath = this.mPreferences.getDataFolder();
 		// Set database properties
 		this.mCacheDatabase.setBaseFolder(strDataPath);
