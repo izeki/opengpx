@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
   <PreferenceCategory android:title="@string/pref_osm_main_category">
-  <ListPreference android:key="osmRenderer" android:summary="Select OSM Renderer (most common used renderer is Mapnik)" android:title="Map Renderer"></ListPreference>
+  <ListPreference android:key="osmRenderer" android:summary="@string/osm_pref_map_renderer_desc" android:title="@string/osm_pref_map_renderer"></ListPreference>
 </PreferenceCategory>
   
 </PreferenceScreen>

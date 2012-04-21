@@ -168,4 +168,11 @@
 <string name="no_hint_available">Sorry, no hint available.</string>
 <string name="inventory">Inventory</string>
 <string name="no_travelbugs_available">Sorry, there are no coins / travelbugs in this cache.</string><string name="delete">Delete</string>
+<string name="waypoint_options">Waypoint Options</string>
+<string name="compass">Compass</string>
+<string name="map_view">Map View</string>
+<string name="waypoint_navigate_to">Navigate to</string>
+<string name="waypoint_geo_intent">Geo (Intent)</string>
+<string name="osm_pref_map_renderer">Map Renderer</string>
+<string name="osm_pref_map_renderer_desc">Select OSM Renderer (most common used renderer is Mapnik)</string>
 </resources>
