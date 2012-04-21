@@ -11,6 +11,11 @@ import org.opengpx.lib.CacheDatabase;
 import org.opengpx.lib.CacheIndexItem;
 import org.opengpx.lib.Coordinates;
 import org.opengpx.lib.NavigationInfo;
+import org.opengpx.lib.geocache.FieldNote;
+import org.opengpx.lib.geocache.helpers.FieldNoteList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -37,6 +42,8 @@ public class CacheListAdapter extends ArrayAdapter<String> implements Filterable
 	protected Coordinates mReferenceCoordinates;
 	protected UnitSystem mUnitSystem;
 
+	private final Logger mLogger = LoggerFactory.getLogger(CacheListAdapter.class);
+
 	/**
 	 * 
 	 * @param context
@@ -51,8 +58,27 @@ public class CacheListAdapter extends ArrayAdapter<String> implements Filterable
         this.mhmIcons = new HashMap<String, Drawable>();
         this.mUnitSystem = (new Preferences(context)).getUnitSystem();
         
-        for (String cacheCode : items)
-        	this.add(cacheCode);
+        Boolean filterFinds = false;
+        
+        if (filterFinds)
+        {
+        	final FieldNoteList fieldNoteList = new FieldNoteList();
+            final ArrayList<String> cachesFound = fieldNoteList.getCacheCodes(FieldNote.LogType.FOUND);
+            
+	        for (final String filterableItem : items)
+	        {
+	        	final String cacheCode = this.mCacheDatabase.getCacheCodeFromFilterable(filterableItem);
+	        	
+	        	mLogger.debug("found " + cacheCode + ": " + cachesFound.contains(cacheCode));
+	        	if (!cachesFound.contains(cacheCode))
+	        		this.add(cacheCode);
+	        }
+        }
+        else
+        {
+	        for (final String filterableItem : items)
+	        	this.add(filterableItem);
+        }
     }
 
 	/**
@@ -60,7 +86,7 @@ public class CacheListAdapter extends ArrayAdapter<String> implements Filterable
 	 * @param cacheIndexItem
 	 * @param textView
 	 */
-	public void drawCacheName(CacheIndexItem cacheIndexItem, TextView textView)
+	public void drawCacheName(final CacheIndexItem cacheIndexItem, final TextView textView)
 	{
         String strExtraNameTag = "";
         // Set text properties according to cache status

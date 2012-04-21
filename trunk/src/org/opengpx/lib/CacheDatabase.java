@@ -263,14 +263,25 @@ public class CacheDatabase
 	 */
 	public ObjectSet<FieldNote> getFieldNotes(boolean sortByDateReverse)
 	{
+		return this.getFieldNotes(sortByDateReverse, null);
+	}
+
+	/**
+	 * 
+	 * @param sortByDateReverse
+	 * @param logType
+	 * @return
+	 */
+	public ObjectSet<FieldNote> getFieldNotes(boolean sortByDateReverse, FieldNote.LogType logType)
+	{
 		final Query q = fieldNoteDB.query();
 		
 		q.constrain(FieldNote.class);
 		if (sortByDateReverse)
-		{
 			q.descend("noteTime").orderDescending();
-		}
-		
+		if (logType != null)
+			q.descend("logType").constrain(logType);
+
 		return q.execute();
 	}
 	
@@ -601,7 +612,7 @@ public class CacheDatabase
 		final Query queryPersonalNote = this.mDB4ODatabase.query();
 		queryPersonalNote.constrain(PersonalNote.class);
 		queryPersonalNote.descend("code").constrain(cacheCode);
-		final ObjectSet<?> result = queryPersonalNote.execute();
+		final ObjectSet<PersonalNote> result = queryPersonalNote.execute();
 		if (result.size() >= 1)
 		{
 			PersonalNote personalNote = (PersonalNote) result.next();
@@ -629,9 +640,9 @@ public class CacheDatabase
 	 */
 	private CacheIndexItem createCacheIndexItem(Cache cache, float gcvote)
 	{
-		Waypoint headerWaypoint = cache.getHeaderWaypoint();
+		final Waypoint headerWaypoint = cache.getHeaderWaypoint();
 
-		CacheIndexItem cii = new CacheIndexItem();
+		final CacheIndexItem cii = new CacheIndexItem();
 		cii.code = cache.code;
 		cii.type = cache.getCacheType().toString();
 		cii.container = cache.getContainerType().toString();
@@ -713,11 +724,11 @@ public class CacheDatabase
 	{
 		this.mhmCacheIndexItems.clear();
 		
-		Query queryItems = this.mDB4ODatabase.query();
+		final Query queryItems = this.mDB4ODatabase.query();
 		// Read items sorted by cache name
 		queryItems.constrain(CacheIndexItem.class);
 		queryItems.descend("name").orderAscending();
-		ObjectSet<?> result = queryItems.execute();
+		final ObjectSet<CacheIndexItem> result = queryItems.execute();
 		while (result.hasNext())
 		{
 			CacheIndexItem cii = (CacheIndexItem) result.next();
@@ -729,11 +740,11 @@ public class CacheDatabase
 	{
 		searchIndexItems.clear();
 		
-		Query queryItems = searchCacheDB.query();
+		final Query queryItems = searchCacheDB.query();
 		// Read items sorted by cache name
 		queryItems.constrain(CacheIndexItem.class);
 		queryItems.descend("name").orderAscending();
-		ObjectSet<?> result = queryItems.execute();
+		ObjectSet<CacheIndexItem> result = queryItems.execute();
 		while (result.hasNext())
 		{
 			CacheIndexItem cii = (CacheIndexItem) result.next();
@@ -749,7 +760,7 @@ public class CacheDatabase
 	{
 		if (this.mDB4ODatabase != null)
 		{
-			List<CacheIndexItem> ciis = this.mDB4ODatabase.query(CacheIndexItem.class);
+			final List<CacheIndexItem> ciis = this.mDB4ODatabase.query(CacheIndexItem.class);
 			return ciis.size();
 		}
 		else
@@ -766,7 +777,7 @@ public class CacheDatabase
 	{
 		if (this.mDB4ODatabase != null)
 		{
-			List<Cache> caches = this.mDB4ODatabase.query(Cache.class);
+			final List<Cache> caches = this.mDB4ODatabase.query(Cache.class);
 			return caches.size();
 		}
 		else
@@ -783,7 +794,7 @@ public class CacheDatabase
 	{
 		if (this.mDB4ODatabase != null)
 		{
-			List<PersonalNote> personalNotes = this.mDB4ODatabase.query(PersonalNote.class);
+			final List<PersonalNote> personalNotes = this.mDB4ODatabase.query(PersonalNote.class);
 			return personalNotes.size();
 		}
 		else
@@ -834,7 +845,7 @@ public class CacheDatabase
 	{
 		if (this.mDB4ODatabase != null)
 		{
-			List<UserDefinedVariables> variables = this.mDB4ODatabase.query(UserDefinedVariables.class);
+			final List<UserDefinedVariables> variables = this.mDB4ODatabase.query(UserDefinedVariables.class);
 			return variables.size();
 		}
 		else
@@ -873,6 +884,10 @@ public class CacheDatabase
 			return new ArrayList<String>(this.mhmCacheIndexItems.keySet());
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public ArrayList<String> getSearchList()
 	{
 		if (this.mintSortOrder == SORT_ORDER_NAME)
@@ -886,6 +901,10 @@ public class CacheDatabase
 		else return getSearchCacheCodesSortedByName();
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getSearchIndexSize()
 	{
 		return searchIndexItems.size();
@@ -1473,6 +1492,11 @@ public class CacheDatabase
 	public boolean isSearchDatabaseOpen()
 	{
 		return searchCacheDBIsOpen;
+	}
+	
+	public boolean isFieldNoteDatabaseOpen()
+	{
+		return this.fieldNoteDBIsOpen;
 	}
 	
 	/**
