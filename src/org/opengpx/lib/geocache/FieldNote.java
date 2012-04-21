@@ -57,7 +57,8 @@ public class FieldNote
 		};
 		
 		private final String mText;
-		private final String mIconFilename;
+		@SuppressWarnings("unused")
+		private final String mIconFilename; // This should be used, but doesn't work
 		
 		/**
 		 * 
