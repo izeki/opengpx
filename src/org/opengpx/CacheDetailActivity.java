@@ -937,12 +937,12 @@ public class CacheDetailActivity extends TabActivity
 		{
 			public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
 			{
-				menu.setHeaderTitle("Waypoint Options");
-				menu.add(0, MENU_INFO, Menu.NONE, "Information");
-				menu.add(0, MENU_COMPASS, Menu.NONE, "Compass");
-				menu.add(0, MENU_MAP, Menu.NONE, "Map View");
-				menu.add(0, MENU_NAVIGATE, Menu.NONE, "Navigate");
-				menu.add(0, MENU_GEO, Menu.NONE, "Geo");
+				menu.setHeaderTitle(R.string.waypoint_options);
+				menu.add(0, MENU_INFO, Menu.NONE, R.string.information);
+				menu.add(0, MENU_COMPASS, Menu.NONE, R.string.compass);
+				menu.add(0, MENU_MAP, Menu.NONE, R.string.map_view);
+				menu.add(0, MENU_NAVIGATE, Menu.NONE, R.string.waypoint_navigate_to);
+				menu.add(0, MENU_GEO, Menu.NONE, R.string.waypoint_geo_intent);
 				menu.add(0, MENU_DELETE, Menu.NONE, R.string.delete);
 			}
 		});
@@ -1076,18 +1076,17 @@ public class CacheDetailActivity extends TabActivity
 	}
 	
 	/**
-	 * 
+	 * Show waypoint with geo intent
 	 * @param waypoint
 	 */
 	private void showWaypointOnGeo(final Waypoint waypoint)
 	{
 		final String destinationLatitude = ((Double) waypoint.latitude).toString().replace(",", ".");
 		final String destinationLongitude = ((Double) waypoint.longitude).toString().replace(",", ".");
-		
+
 		final String actionView = "geo:" + destinationLatitude + "," + destinationLongitude;
         final Intent geoIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(actionView));
 		startActivity(geoIntent);
-
 	}
 	
 	/**
@@ -1122,7 +1121,7 @@ public class CacheDetailActivity extends TabActivity
 	 * 
 	 * @param waypoint
 	 */
-	private void showWaypointOnCompassNavi(Waypoint waypoint)
+	private void showWaypointOnCompassNavi(final Waypoint waypoint)
 	{
 		if (AndroidSystem.isIntentAvailable(this, "mpr.compassNavi.SHOW_NAVI"))
 		{
@@ -1168,7 +1167,7 @@ public class CacheDetailActivity extends TabActivity
 	 * 
 	 * @param waypoint
 	 */
-	private void navigateToWaypointWithGoogleMaps(Waypoint waypoint)
+	private void navigateToWaypointWithGoogleMaps(final Waypoint waypoint)
 	{
 		final String destinationLatitude = ((Double) waypoint.latitude).toString().replace(",", ".");
 		final String destinationLongitude = ((Double) waypoint.longitude).toString().replace(",", ".");
