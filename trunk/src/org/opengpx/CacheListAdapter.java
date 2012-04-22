@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
@@ -36,6 +37,8 @@ import android.widget.TwoLineListItem;
  */
 public class CacheListAdapter extends ArrayAdapter<String> implements Filterable
 {
+	private Context mContext;
+	
 	protected CacheDatabase mCacheDatabase;
 	protected LayoutInflater mLayoutInflater;
 	protected HashMap<String, Drawable> mhmIcons;
@@ -54,31 +57,13 @@ public class CacheListAdapter extends ArrayAdapter<String> implements Filterable
 	{
         super(context, R.layout.cachelistitem);
 
+        this.mContext = context;
         this.mLayoutInflater = LayoutInflater.from(context);
         this.mCacheDatabase = CacheDatabase.getInstance();
         this.mhmIcons = new HashMap<String, Drawable>();
-        final Preferences preferences = new Preferences(context);
-        this.mUnitSystem = preferences.getUnitSystem();
-        
-        if (preferences.getHideCachesFound())
-        {
-        	final FieldNoteList fieldNoteList = new FieldNoteList();
-            final ArrayList<String> cachesFound = fieldNoteList.getCacheCodes(FieldNote.LogType.FOUND);
-            
-	        for (final String filterableItem : items)
-	        {
-	        	final String cacheCode = this.mCacheDatabase.getCacheCodeFromFilterable(filterableItem);
-	        	
-	        	// mLogger.debug("found " + cacheCode + ": " + cachesFound.contains(cacheCode));
-	        	if (!cachesFound.contains(cacheCode))
-	        		this.add(filterableItem);
-	        }
-        }
-        else
-        {
-	        for (final String filterableItem : items)
-	        	this.add(filterableItem);
-        }
+        this.mUnitSystem = (new Preferences(context)).getUnitSystem();
+
+		this.addCacheItems(items);
     }
 
 	/**
@@ -144,7 +129,6 @@ public class CacheListAdapter extends ArrayAdapter<String> implements Filterable
 			cacheListViewHolder = (CacheListViewHolder) convertView.getTag();
 		}
 
-        // final String strFilterableString = this.mItems.get(position);
         final String strFilterableString = this.getItem(position);
         final CacheIndexItem cacheIndexItem = this.mCacheDatabase.getCacheIndexItemForFilter(strFilterableString);
 
@@ -180,42 +164,46 @@ public class CacheListAdapter extends ArrayAdapter<String> implements Filterable
 
 	/**
 	 * 
+	 * @param items
+	 */
+	private void addCacheItems(final ArrayList<String> items)
+	{
+        final Preferences preferences = new Preferences(this.mContext);
+
+        if (preferences.getHideCachesFound())
+        {
+        	final FieldNoteList fieldNoteList = new FieldNoteList();
+            final ArrayList<String> cachesFound = fieldNoteList.getCacheCodes(FieldNote.LogType.FOUND);
+            
+	        for (final String filterableItem : items)
+	        {
+	        	final String cacheCode = this.mCacheDatabase.getCacheCodeFromFilterable(filterableItem);
+	        	
+	        	if (!cachesFound.contains(cacheCode))
+	        		this.add(filterableItem);
+	        }
+        }
+        else
+        {
+	        for (final String filterableItem : items)
+	        	this.add(filterableItem);
+        }
+	}
+	
+	/**
+	 * 
 	 * @param cacheCodes
 	 */
 	public void updateListContent(ArrayList<String> cacheCodes, CharSequence constraint)
 	{
 		this.clear();
-		// this.mItems = cacheCodes;
-		
-		for (String strCacheCode : cacheCodes)
-		{
-			this.add(strCacheCode);
-		}
+
+		this.addCacheItems(cacheCodes);
 
 		// This is necessary, otherwise updating of values doesn't work after text filtering
 		this.getFilter().filter(constraint);
 		super.notifyDataSetChanged();
 	} 
-	
-	/* @Override
-	public int getCount()
-	{
-		// return super.getCount();
-		return this.mItems.size();
-	} */
-
-	/* @Override
-	public void remove(String item)
-	{
-		this.mItems.remove(item);
-		super.notifyDataSetChanged();
-	} */
-	
-	/* @Override
-	public String getItem(int position)
-	{
-		return this.mItems.get(position);
-	} */
 
 	/**
 	 * 
