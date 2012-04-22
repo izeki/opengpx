@@ -79,19 +79,19 @@
 <string name="welcome_option_copy_files">1. Copy gpx files (geocaching files!) to the folder</string>
 <string name="welcome_option_bcaching">2. Enter your bcaching.com credentials in preferences (Menu / Preferences) and search online for caches</string>
 <string name="welcome_note_disable">Note: you can disable this dialog in preferences</string>
-<string name="pref_import_path_list">Import path list</string>
-<string name="pref_import_path_list_summary">List of additional folders containing gpx,zip files</string>
+<string name="pref_import_path_list">Import Verzeichnisse</string>
+<string name="pref_import_path_list_summary">Zusätzliche Verzeichnisse mit GPX/ZIP Dateien</string>
 <string name="app_title">OpenGPX - Du bist die Suchmaschine</string>
-<string name="pref_home_coords">Home coordinates</string>
-<string name="pref_home_coords_summary">Set or update your home coordinates</string>
-<string name="pref_set_home_coords">Set home coordinates</string>
-<string name="pref_set_home_coords_summary">Use this element to set your home coordintates from GPS</string>
-<string name="pref_data_path">Data folder</string>
-<string name="pref_data_path_summary">Folder containing gpx files, cache database and spoiler pics</string>
-<string name="pref_screen_orientation">Screen orientation</string>
-<string name="pref_screen_orientation_summary">Lock screen orientation to portrait or landscape</string>
-<string name="pref_coord_format">Coordinate format</string>
-<string name="pref_coord_format_summary">Set coordinate format to Decimal, DDD MM.MMM or DDD MM SS.SSS</string>
+<string name="pref_home_coords">Heimatkoordinaten</string>
+<string name="pref_home_coords_summary">Setzen oder Aktualisieren der Heimatkoordinaten</string>
+<string name="pref_set_home_coords">Setzen der Heimatkoordinaten</string>
+<string name="pref_set_home_coords_summary">Setzen der Heimatkoordinaten mit den aktuellen GPS / Netzwerkkoordinaten</string>
+<string name="pref_data_path">Datenverzeichnis</string>
+<string name="pref_data_path_summary">Verzeichnis mit GPX Dateien, Datenbank und Spoiler-Bildern</string>
+<string name="pref_screen_orientation">Bildschirm-Ausrichtung</string>
+<string name="pref_screen_orientation_summary">Sperren der Bildschirm-Ausrichtung in Hoch- (Portrait) oder Querformat (Landscapte)</string>
+<string name="pref_coord_format">Koordinaten-Format</string>
+<string name="pref_coord_format_summary">Setzen des Koordinaten-Formats (Dezimal, DDD MM.MMM oder DDD MM SS.SSS)</string>
 <string name="pref_map_provider">Map Provider</string>
 <string name="pref_map_provider_summary">Choose Google or OpenStreetMap</string>
 <string name="pref_osm_renderer">OSM Map Renderer</string>
@@ -154,5 +154,23 @@
 <string name="no_caches_available">Es sind keine Caches vorhanden</string>
 <string name="question">Frage</string>
 <string name="delete_cache_question">Willst du den Cache \'%s\' wirklich löschen?</string><string name="yes">Ja</string><string name="no">Nein</string><string name="cache_options">Cache Optionen</string><string name="delete_cache">Cache löschen</string><string name="clear_database_question">Willst Du wirklich alles Caches in der Datenbank löschen?</string><string name="log_decrypted">Log (entschlüsselt)</string><string name="waypoint">Wegpunkt</string><string name="hint">Hinweis</string><string name="information">Information</string><string name="no_hint_available">Es ist leider kein Hinweis vorhanden.</string><string name="inventory">Inventar</string><string name="no_travelbugs_available">Es sind leider keine Coins / Travelbugs vorhanden.</string>
-<string name="delete">Löschen</string><string name="waypoint_options">Wegpunkt Optionen</string><string name="compass">Kompass</string><string name="map_view">Kartenansicht</string><string name="waypoint_navigate_to">Navigiere zu</string><string name="waypoint_geo_intent">Geo (Intent)</string><string name="osm_pref_map_renderer">Karten Renderer</string><string name="osm_pref_map_renderer_desc">Auswahl des OSM Renderers (Standard-Renderer ist Mapnik)</string>
+<string name="delete">Löschen</string>
+<string name="waypoint_options">Wegpunkt Optionen</string><string name="compass">Kompass</string><string name="map_view">Kartenansicht</string><string name="waypoint_navigate_to">Navigiere zu</string><string name="waypoint_geo_intent">Geo (Intent)</string><string name="osm_pref_map_renderer">Karten Renderer</string><string name="osm_pref_map_renderer_desc">Auswahl des OSM Renderers (Standard-Renderer ist Mapnik)</string>
+<string name="pref_general">Allgemein</string>
+<string name="pref_backup_gpx_file">Sichere GPX Dateien</string>
+<string name="pref_backup_gpx_file_on">Sichere GPX Dateien im Verzeichnis ./backup nach dem Import</string>
+<string name="pref_backup_gpx_file_off">Lösche GPX Dateien nach dem Import</string>
+<string name="pref_ui">Benutzerschnittstelle</string>
+<string name="pref_cache_filter_limit">Cache-Filter Limitierung</string>
+<string name="pref_cache_filter_limit_desc">Limitiert die Anzahl der angezeigten Caches</string>
+<string name="pref_show_db_help">Hilfe anzeigen</string>
+<string name="pref_show_db_help_desc">Zeige Hilfe bei leerer Datenbank</string>
+<string name="pref_unit_system">Einheiten</string>
+<string name="pref_unit_system_desc">Metrische oder britische Einheiten (benötigt Neustart)</string>
+<string name="pref_auto_update_votes">Votes automatisch aktualisieren</string>
+<string name="pref_auto_update_votes_on">Aktualisieren von GCVotes beim Einlesen von Caches</string><string name="pref_auto_update_votes_off">GCVotes werden beim Einlesen von Caches nicht aktualisiert</string>
+<string name="pref_maps">Karten</string>
+<string name="pref_hide_caches_found">Gefundene Caches verstecken</string>
+<string name="pref_hide_caches_found_on">Verstecke Caches mit \'Found it\' Fieldnotes</string>
+<string name="pref_hide_caches_found_off">Zeige alle verfügbaren Caches in der Datenbank</string>
 </resources>

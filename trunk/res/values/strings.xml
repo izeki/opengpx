@@ -174,5 +174,15 @@
 <string name="waypoint_navigate_to">Navigate to</string>
 <string name="waypoint_geo_intent">Geo (Intent)</string>
 <string name="osm_pref_map_renderer">Map Renderer</string>
-<string name="osm_pref_map_renderer_desc">Select OSM Renderer (most common used renderer is Mapnik)</string>
+<string name="osm_pref_map_renderer_desc">Select OSM Renderer (most common used renderer is Mapnik)</string><string name="pref_general">General</string>
+<string name="pref_backup_gpx_file">Backup GPX files</string><string name="pref_backup_gpx_file_on">Backup gpx files to the ./backup folder</string><string name="pref_backup_gpx_file_off">Delete GPX files after importing</string>
+<string name="pref_ui">User Interface</string>
+<string name="pref_cache_filter_limit">Cache filter limit</string><string name="pref_cache_filter_limit_desc">Limits the number of shown caches</string>
+<string name="pref_show_db_help">Display Help</string><string name="pref_show_db_help_desc">Display Help with empty database</string>
+<string name="pref_unit_system">Unit System</string><string name="pref_unit_system_desc">Choose metric or imperial (requires restart)</string>
+<string name="pref_auto_update_votes">Auto-update votes</string><string name="pref_auto_update_votes_on">Update GCVotes when indexing caches</string><string name="pref_auto_update_votes_off">Do not update GCVotes when indexing caches</string>
+<string name="pref_maps">Maps</string>
+<string name="pref_hide_caches_found">Hide caches found</string>
+<string name="pref_hide_caches_found_on">Hide caches with \'Found it\' field note</string>
+<string name="pref_hide_caches_found_off">Show all available caches in database</string>
 </resources>

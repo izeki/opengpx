@@ -38,6 +38,7 @@ public class Preferences
 	private static final String	PREFS_KEY_MAP_PROVIDER = "MapProvider";
 	private static final String	PREFS_KEY_COORDINATE_FORMAT = "CoordinateFormat";
 	private static final String	PREFS_KEY_CACHE_LIMIT = "CacheLimit";
+	private static final String	PREFS_KEY_HIDE_CACHES_FOUND = "HideCachesFound";
 	// private static final String	PREFS_KEY_USERNAME = "Username";
 	private static final String	PREFS_KEY_DB_FILENAME = "DatabaseFilename";
 	private static final String	PREFS_KEY_SORT_ORDER = "SortOrder";
@@ -67,6 +68,7 @@ public class Preferences
 	private static final MapProvider PREFS_DEFAULT_MAP_PROVIDER = MapProvider.OpenStreetMap;
 	private static final String  PREFS_DEFAULT_COORDINATE_FORMAT = "DM";
 	private static final int     PREFS_DEFAULT_CACHE_LIMIT = 100;
+	private static final boolean PREFS_DEFAULT_HIDE_CACHES_FOUND = true;
 	// private static final String  PREFS_DEFAULT_USERNAME = "Unknown";
 	private static final String  PREFS_DEFAULT_DB_FILENAME = "database.db4o";
 	private static final int     PREFS_DEFAULT_SORT_ORDER = CacheDatabase.SORT_ORDER_NAME;
@@ -95,6 +97,7 @@ public class Preferences
 	{
 		this.mContext = context;
 		this.mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+		PreferenceManager.setDefaultValues(context, R.xml.preferences, true);
 	}
 	
 	/**
@@ -298,6 +301,14 @@ public class Preferences
 		return intMaxCaches;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean getHideCachesFound()
+	{
+		return this.mSharedPreferences.getBoolean(PREFS_KEY_HIDE_CACHES_FOUND, PREFS_DEFAULT_HIDE_CACHES_FOUND);
+	}
 	/**
 	 * 
 	 * @return
