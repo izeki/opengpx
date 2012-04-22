@@ -86,6 +86,8 @@ public class CacheListActivity extends ListActivity
 	{
 		super.onCreate(savedInstanceState);
 		
+		// mLogger.debug("onCreate");
+
 		setTitle(R.string.app_title);
 		setContentView(R.layout.cachelist);
 
@@ -128,6 +130,7 @@ public class CacheListActivity extends ListActivity
 
 		if (this.mCacheDatabase.isUpdated.compareAndSet(true, false))
 		{
+			// mLogger.debug("loading cache list ...");
 			loadCacheList();
 		} 
 		else
@@ -144,6 +147,13 @@ public class CacheListActivity extends ListActivity
 				// mCacheListAdapter has been initialized
 				if ((this.mCacheDatabase != null) && (this.mCacheListAdapter != null))
 					this.setGpsDatabaseProperties(locationInfo);
+			}
+			
+			if ((this.mCacheDatabase != null) && (this.mCacheListAdapter != null))
+			{	
+				// Update cache list (e.g. after marking a cache as found)
+				// mLogger.debug("reload cache list ...");
+				this.mCacheListAdapter.updateListContent(this.mCacheDatabase.getFilterableList(), this.getListView().getTextFilter());
 			}
 		}
 	}
@@ -170,7 +180,7 @@ public class CacheListActivity extends ListActivity
 	/**
      * 
      */
-	private Runnable	doBackgroundInitialization	= new Runnable()
+	private Runnable doBackgroundInitialization	= new Runnable()
 	{
 		public void run()
 		{
