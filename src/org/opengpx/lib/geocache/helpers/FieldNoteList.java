@@ -35,11 +35,11 @@ public class FieldNoteList
 	public ArrayList<String> getCacheCodes(final FieldNote.LogType logType)
 	{
 		final List<FieldNote> fieldNotes = this.mCacheDatabase.getFieldNotes(false, logType);
-		
+
 		final ArrayList<String> cacheCodes = new ArrayList<String>();
 		for (final FieldNote fieldNote : fieldNotes)
         {
-				cacheCodes.add(fieldNote.gcId);
+			cacheCodes.add(fieldNote.gcId);
         }
 
 		return cacheCodes;

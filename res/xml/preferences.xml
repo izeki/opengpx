@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-  <PreferenceCategory android:title="General">
+  <PreferenceCategory android:title="@string/pref_general">
   <EditTextPreference android:key="HomeCoordinates" android:title="@string/pref_home_coords" android:summary="@string/pref_home_coords_summary"></EditTextPreference>
 <Preference android:key="SetHomeCoordinates" android:title="@string/pref_set_home_coords" android:summary="@string/pref_set_home_coords_summary"></Preference>
 <EditTextPreference android:key="DataFolder" android:defaultValue="/sdcard/gpx" android:title="@string/pref_data_path" android:summary="@string/pref_data_path_summary"></EditTextPreference>
-<EditTextPreference android:title="@string/pref_import_path_list" android:key="ImportPathList" android:summary="@string/pref_import_path_list_summary"></EditTextPreference><CheckBoxPreference android:summaryOff="Delete GPX files after importing" android:defaultValue="true" android:title="Backup GPX files" android:summaryOn="Backup gpx files to the ./backup folder" android:key="BackupGpxFiles"></CheckBoxPreference>
+<EditTextPreference android:title="@string/pref_import_path_list" android:key="ImportPathList" android:summary="@string/pref_import_path_list_summary"></EditTextPreference><CheckBoxPreference android:summaryOff="@string/pref_backup_gpx_file_off" android:defaultValue="true" android:title="@string/pref_backup_gpx_file" android:summaryOn="@string/pref_backup_gpx_file_on" android:key="BackupGpxFiles"></CheckBoxPreference>
 
 </PreferenceCategory>
-<PreferenceCategory android:title="User interface"><ListPreference android:entryValues="@array/coordinate_format_values" android:key="CoordinateFormat" android:entries="@array/coordinate_format_items" android:defaultValue="DM" android:title="@string/pref_coord_format" android:summary="@string/pref_coord_format_summary"></ListPreference>
-<EditTextPreference android:summary="Limits the number of shown caches" android:key="CacheLimit" android:title="Cache filter limit" android:defaultValue="100"></EditTextPreference>
-<ListPreference android:key="ScreenOrientation" android:entryValues="@array/screen_orientation_values" android:entries="@array/screen_orientation_items" android:defaultValue="Unspecified" android:title="@string/pref_screen_orientation" android:summary="@string/pref_screen_orientation_summary"></ListPreference>
-<CheckBoxPreference android:title="Display Help" android:key="ShowEmptyDBHelp" android:defaultValue="true" android:summary="Display Help with empty database"></CheckBoxPreference>
-<ListPreference android:key="UnitSystem" android:title="Unit System" android:entryValues="@array/unit_system_values" android:entries="@array/unit_system_items" android:summary="Choose metric or imperial (requires restart)"></ListPreference>
-<CheckBoxPreference android:key="AutoUpdateVotes" android:title="Auto-update votes" android:summary="Update GCVotes when indexing caches"></CheckBoxPreference>
+<PreferenceCategory android:title="@string/pref_ui"><ListPreference android:entryValues="@array/coordinate_format_values" android:key="CoordinateFormat" android:entries="@array/coordinate_format_items" android:defaultValue="DM" android:title="@string/pref_coord_format" android:summary="@string/pref_coord_format_summary"></ListPreference>
+<EditTextPreference android:summary="@string/pref_cache_filter_limit_desc" android:key="CacheLimit" android:title="@string/pref_cache_filter_limit" android:defaultValue="100"></EditTextPreference>
+<CheckBoxPreference android:key="HideCachesFound" android:summaryOff="@string/pref_hide_caches_found_off" android:title="@string/pref_hide_caches_found" android:summaryOn="@string/pref_hide_caches_found_on" android:defaultValue="true"/><ListPreference android:key="ScreenOrientation" android:entryValues="@array/screen_orientation_values" android:entries="@array/screen_orientation_items" android:defaultValue="Unspecified" android:title="@string/pref_screen_orientation" android:summary="@string/pref_screen_orientation_summary"></ListPreference>
+<CheckBoxPreference android:title="@string/pref_show_db_help" android:key="ShowEmptyDBHelp" android:defaultValue="true" android:summary="@string/pref_show_db_help_desc"></CheckBoxPreference>
+<ListPreference android:key="UnitSystem" android:title="@string/pref_unit_system" android:entryValues="@array/unit_system_values" android:entries="@array/unit_system_items" android:summary="@string/pref_unit_system_desc"></ListPreference>
+<CheckBoxPreference android:key="AutoUpdateVotes" android:title="@string/pref_auto_update_votes" android:defaultValue="false" android:summaryOff="@string/pref_auto_update_votes_off" android:summaryOn="@string/pref_auto_update_votes_on"></CheckBoxPreference>
+
 </PreferenceCategory>
-<PreferenceCategory android:title="Maps">
+<PreferenceCategory android:title="@string/pref_maps">
   <ListPreference android:entryValues="@array/map_provider_values" android:key="MapProvider" android:entries="@array/map_provider" android:title="@string/pref_map_provider" android:summary="@string/pref_map_provider_summary"></ListPreference>
   <ListPreference android:key="osmRenderer" android:title="@string/pref_osm_renderer" android:summary="@string/pref_osm_renderer_summary"></ListPreference>  
 <CheckBoxPreference android:key="osmUseMinimap" android:title="OSM Use Minimap" android:summary="Shows an overview map on the lower right corner"></CheckBoxPreference><ListPreference android:key="CompassProvider" android:entryValues="@array/compass_provider_values" android:entries="@array/compass_provider_items" android:title="@string/pref_compass_provider" android:summary="@string/pref_compass_provider_summary"></ListPreference>

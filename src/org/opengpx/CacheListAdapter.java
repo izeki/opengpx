@@ -42,6 +42,7 @@ public class CacheListAdapter extends ArrayAdapter<String> implements Filterable
 	protected Coordinates mReferenceCoordinates;
 	protected UnitSystem mUnitSystem;
 
+	@SuppressWarnings("unused")
 	private final Logger mLogger = LoggerFactory.getLogger(CacheListAdapter.class);
 
 	/**
@@ -56,11 +57,10 @@ public class CacheListAdapter extends ArrayAdapter<String> implements Filterable
         this.mLayoutInflater = LayoutInflater.from(context);
         this.mCacheDatabase = CacheDatabase.getInstance();
         this.mhmIcons = new HashMap<String, Drawable>();
-        this.mUnitSystem = (new Preferences(context)).getUnitSystem();
+        final Preferences preferences = new Preferences(context);
+        this.mUnitSystem = preferences.getUnitSystem();
         
-        Boolean filterFinds = false;
-        
-        if (filterFinds)
+        if (preferences.getHideCachesFound())
         {
         	final FieldNoteList fieldNoteList = new FieldNoteList();
             final ArrayList<String> cachesFound = fieldNoteList.getCacheCodes(FieldNote.LogType.FOUND);
@@ -69,9 +69,9 @@ public class CacheListAdapter extends ArrayAdapter<String> implements Filterable
 	        {
 	        	final String cacheCode = this.mCacheDatabase.getCacheCodeFromFilterable(filterableItem);
 	        	
-	        	mLogger.debug("found " + cacheCode + ": " + cachesFound.contains(cacheCode));
+	        	// mLogger.debug("found " + cacheCode + ": " + cachesFound.contains(cacheCode));
 	        	if (!cachesFound.contains(cacheCode))
-	        		this.add(cacheCode);
+	        		this.add(filterableItem);
 	        }
         }
         else
