@@ -11,8 +11,8 @@
   * <strike>handle encrypted logs (e.g. muri quelle)</strike> (done)
   * <strike>add notes to caches</strike> (done)
   * <strike>improve cache details for LOC files (Waypoint type)</strike> (done)
-  * Filter out finds
-  * Mark caches found
+  * <strike>Filter out finds</strike> (done [field notes])
+  * <strike>Mark caches found</strike> (done[field notes])
   * <strike>associate gpx/loc files with opengpx</strike> (done)
   * <strike>add</strike> / edit <strike>user-defined waypoints</strike> (use variables in coordinates?) (partly done)
   * multi-language support (multiple strings.xml)
