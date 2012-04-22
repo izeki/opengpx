@@ -12,6 +12,7 @@ Version *1.2.0* (not released yet):
  * added personal notes
  * added field note history
  * added support for encrypted log entries
+ * added option to hide caches with 'Found it' field notes
 
 Version *1.1.0* (15. October 2011):
 
