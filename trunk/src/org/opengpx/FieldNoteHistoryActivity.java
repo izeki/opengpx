@@ -2,8 +2,8 @@ package org.opengpx;
 
 import org.opengpx.lib.CacheDatabase;
 import org.opengpx.lib.geocache.FieldNote;
-// import org.slf4j.Logger;
-// import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.db4o.ObjectSet;
 
@@ -23,7 +23,8 @@ public class FieldNoteHistoryActivity extends ListActivity
 
 	private FieldNoteHistoryAdapter mFieldNoteHistoryAdapter;
 	
-	// private static final Logger mLogger = LoggerFactory.getLogger(FieldNoteHistoryActivity.class);
+	@SuppressWarnings("unused")
+	private static final Logger mLogger = LoggerFactory.getLogger(FieldNoteHistoryActivity.class);
 
 	/**
 	 * 

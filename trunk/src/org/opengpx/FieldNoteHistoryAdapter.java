@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.opengpx.lib.geocache.FieldNote;
 import org.opengpx.lib.geocache.FieldNote.LogType;
+import org.opengpx.lib.geocache.helpers.FieldNoteList;
 
 import com.db4o.ObjectSet;
 
@@ -41,6 +42,9 @@ public class FieldNoteHistoryAdapter extends ArrayAdapter<FieldNote>
         this.mLayoutInflater = LayoutInflater.from(context);
         this.mhmIcons = new HashMap<LogType, Drawable>();
         
+        // final FieldNoteList fieldNoteList = new FieldNoteList();
+        final Integer distinctiveDateCount = FieldNoteList.getDistinctiveDateCount(context, items);
+
         for (FieldNote fieldNote : items)
         {
         	this.add(fieldNote);
