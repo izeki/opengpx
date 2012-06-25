@@ -28,6 +28,7 @@ import org.opengpx.lib.geocache.Cache;
 import org.opengpx.lib.geocache.FieldNote;
 import org.opengpx.lib.geocache.GCVote;
 import org.opengpx.lib.geocache.Waypoint;
+import org.opengpx.lib.geocache.helpers.FieldNoteList;
 import org.opengpx.lib.ImportResult;
 import org.opengpx.lib.xml.GCVoteReader;
 
@@ -441,6 +442,14 @@ public class CacheListActivity extends ListActivity
 			{
 				final MapProvider mapProvider = this.mPreferences.getMapProvider();
 				final LocationInfo locationInfo = this.getLastKnownLocation();
+				
+				// Check whether we filter out finds
+				ArrayList<String> cachesFound = null;
+		        if (this.mPreferences.getHideCachesFound())
+		        {
+		        	final FieldNoteList fieldNoteList = new FieldNoteList();
+		        	cachesFound = fieldNoteList.getCacheCodes(FieldNote.LogType.FOUND);
+		        }
 
 				MapViewer mapViewer;
 				if (mapProvider == MapProvider.Google)
@@ -450,17 +459,17 @@ public class CacheListActivity extends ListActivity
 					this.mCacheDatabase.setReferenceCoordinates(locationInfo.latitude, locationInfo.longitude);
 
 					mapViewer = new GoogleMapViewer(this);
-					mapViewer.addCaches(this.mCacheDatabase.getCacheCodesSortedByDistance());
-				}	
+					mapViewer.addCaches(this.mCacheDatabase.getCacheCodesSortedByDistance(cachesFound));
+				}
 				else if (mapProvider == MapProvider.OpenStreetMap)
 				{
 					mapViewer = new OsmMapViewer(this);
-					mapViewer.addCaches(this.mCacheDatabase.getCacheCodes());
+					mapViewer.addCaches(this.mCacheDatabase.getCacheCodes(cachesFound));
 				}
 				else
 				{
 					mapViewer = new OruxMapViewer(this);
-					mapViewer.addCaches(this.mCacheDatabase.getCacheCodes());
+					mapViewer.addCaches(this.mCacheDatabase.getCacheCodes(cachesFound));
 				}
 				mapViewer.setCenter(locationInfo.latitude, locationInfo.longitude, locationInfo.provider);
 				mapViewer.setUnitSystem(this.mPreferences.getUnitSystem());

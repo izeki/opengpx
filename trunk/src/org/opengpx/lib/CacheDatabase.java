@@ -876,14 +876,56 @@ public class CacheDatabase
 	 */
 	public ArrayList<String> getCacheCodes()
 	{
-		if (this.mintSortOrder == SORT_ORDER_NAME)
-			return new ArrayList<String>(this.mhmCacheIndexItems.keySet());
+		/* if (this.mintSortOrder == SORT_ORDER_NAME)
+		 	return new ArrayList<String>(this.mhmCacheIndexItems.keySet());
 		else if (this.mintSortOrder == SORT_ORDER_DISTANCE)
 			return this.getCacheCodesSortedByDistance();
 		else
-			return new ArrayList<String>(this.mhmCacheIndexItems.keySet());
+			return new ArrayList<String>(this.mhmCacheIndexItems.keySet()); */
+		return this.getCacheCodes(null);
 	}
 
+	/**
+	 * 
+	 * @param filterCacheCodes
+	 * @return
+	 */
+	public ArrayList<String> getCacheCodes(final ArrayList<String> filterCacheCodes)
+	{
+		if (this.mintSortOrder == SORT_ORDER_DISTANCE)
+			return this.getCacheCodesSortedByDistance(filterCacheCodes);
+		else
+			return this.getCacheCodesSortedByName(filterCacheCodes);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public ArrayList<String> getCacheCodesSortedByName()
+	{
+		return this.getCacheCodesSortedByName(null);
+	}
+
+	/**
+	 * 
+	 * @param filterCacheCodes
+	 * @return
+	 */
+	public ArrayList<String> getCacheCodesSortedByName(final ArrayList<String> filterCacheCodes)
+	{
+		if (filterCacheCodes != null)
+		{
+			final ArrayList<String> result = new ArrayList<String>();
+			for (final String cacheCode : this.mhmCacheIndexItems.keySet())
+				if (!filterCacheCodes.contains(cacheCode))
+					result.add(cacheCode);
+			return result;
+		}
+		else
+			return new ArrayList<String>(this.mhmCacheIndexItems.keySet());
+	}
+	
 	/**
 	 * 
 	 * @return
@@ -980,11 +1022,9 @@ public class CacheDatabase
 	 */
 	public CacheIndexItem getSearchCacheIndexItemForFilter(String filterableString)
 	{
-		String key = filterableString;
-		
-		if (searchIndexItems.containsKey(key))
+		if (searchIndexItems.containsKey(filterableString))
 		{
-			return searchIndexItems.get(key);
+			return searchIndexItems.get(filterableString);
 		}
 		else 
 		{
@@ -998,19 +1038,35 @@ public class CacheDatabase
 	 */
 	public ArrayList<String> getCacheCodesSortedByDistance()
 	{
+		return this.getCacheCodesSortedByDistance(null);
+	}
+
+	/**
+	 * 
+	 * @param filterCacheCodes
+	 * @return
+	 */
+	public ArrayList<String> getCacheCodesSortedByDistance(final ArrayList<String> filterCacheCodes)
+	{
 		final TreeMap<Double, String> tmSortedItems = new TreeMap<Double, String>();
 		final Coordinates coords = new Coordinates(this.mdblReferenceLatitude, this.mdblReferenceLongitude);
 		// add items to a sorted treemap
-		for (String strCacheCode : this.mhmCacheIndexItems.keySet())
+		for (final String strCacheCode : this.mhmCacheIndexItems.keySet())
 		{
-			final CacheIndexItem cii = this.mhmCacheIndexItems.get(strCacheCode);
-			final Coordinates coordsCompare = new Coordinates(cii.latitude, cii.longitude);
-			final double dblDistance = coords.getDistanceTo(coordsCompare);
-			tmSortedItems.put(dblDistance, strCacheCode);	
+			Boolean addCacheCode = true;
+			if (filterCacheCodes != null)
+				addCacheCode = !(filterCacheCodes.contains(strCacheCode));
+			if (addCacheCode)
+			{
+				final CacheIndexItem cii = this.mhmCacheIndexItems.get(strCacheCode);
+				final Coordinates coordsCompare = new Coordinates(cii.latitude, cii.longitude);
+				final double dblDistance = coords.getDistanceTo(coordsCompare);
+				tmSortedItems.put(dblDistance, strCacheCode);
+			}
 		}
 		
 		int intCounter = 0;
-		ArrayList<String> alCacheCodes = new ArrayList<String>();
+		final ArrayList<String> alCacheCodes = new ArrayList<String>();
 		for (String strCacheCode : tmSortedItems.values())
 		{
 			if (intCounter < this.mintMaxResults)
@@ -1023,6 +1079,10 @@ public class CacheDatabase
 		return alCacheCodes;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	private ArrayList<String> getSearchCacheCodesSortedByName()
 	{
 		TreeSet<CacheIndexItem> sortedCacheList = new TreeSet<CacheIndexItem>(new CacheNameComparator());
