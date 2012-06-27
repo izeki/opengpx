@@ -1,5 +1,6 @@
 package org.opengpx.lib.geocache;
 
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,6 +22,7 @@ public class FieldNote
 	public String logText;
 
 	private static final String DATE_FORMAT_STRING = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+	private static char SINGLE_QUOTE = 39;
 
 	/**
 	 * 
@@ -30,12 +32,12 @@ public class FieldNote
 	public enum LogType
 	{
 		FOUND("Found it", "log_found_it.gif"),
-		NOT_FOUND("Didn’t find it", "log_didnt_find_it.gif"),
+		NOT_FOUND("Didn" + SINGLE_QUOTE + "t find it", "log_didnt_find_it.gif"),
 		WRITE_NOTE("Write note", "log_write_note.gif"),
 		ATTENDED("Attended", "log_attended.gif"),
 		WEBCAM_TAKEN("Webcam photo taken", "log_webcam_photo_taken.gif"),
 		PRIVATE("Private note", "log_write_note.gif");
-	
+
 		/**
 		 * This map is a workaround for mIconFilename being null on Android
 		 */
@@ -64,10 +66,10 @@ public class FieldNote
 		 * 
 		 * @param text
 		 */
-		private LogType(String text, String iconFilename)
+		private LogType(final String text, final String iconFilename)
 		{
-			mText = text;
-			mIconFilename = iconFilename;
+			this.mText = text;
+			this.mIconFilename = iconFilename;
 		}
 
 		/**
@@ -75,9 +77,29 @@ public class FieldNote
 		 */
 		public String toString()
 		{
-			return mText;
+			// FIXME: this is a workaround. logType.toString() returns an invalid
+			// character for single quote in "Didn't find it"
+			if (this == LogType.NOT_FOUND)
+			{
+				return "Didn't find it";
+			}
+			else
+			{
+				return this.mText;
+			}
 		}
 
+		/**
+		 * 
+		 * @param encoding
+		 * @return
+		 * @throws UnsupportedEncodingException
+		 */
+		public byte[] getBytes(String encoding) throws UnsupportedEncodingException
+		{
+			return this.mText.getBytes(encoding);
+		}
+		
 		/**
 		 * 
 		 * @return
@@ -127,7 +149,7 @@ public class FieldNote
 		final FieldNote fn = new FieldNote();
 		fn.gcId = "GC123456";
 		fn.gcName = "Test cache";
-		fn.logType = LogType.WRITE_NOTE;
+		fn.logType = LogType.NOT_FOUND;
 		
 		System.out.println(fn);
 		System.out.println(fn.logType.toString());

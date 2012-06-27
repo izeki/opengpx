@@ -154,7 +154,7 @@ public class Communication
 			p.append("\"\n");
 		}
 
-		PrintWriter out = new PrintWriter(conn.getOutputStream());
+		final PrintWriter out = new PrintWriter(conn.getOutputStream());
 		out.print(p.toString());
 		out.close();		
 
@@ -178,7 +178,7 @@ public class Communication
 		else 
 			return null;
 	}
-	
+
 	private URL getURL(String username, String hashword, String params) throws Exception
 	{
 		return new URL(mBaseUrl + "/q.ashx?" + encodeQueryString(username, hashword, params));
