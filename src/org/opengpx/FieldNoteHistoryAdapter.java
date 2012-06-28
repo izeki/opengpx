@@ -1,6 +1,8 @@
 package org.opengpx;
 
 import java.io.IOException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
@@ -33,6 +35,10 @@ public class FieldNoteHistoryAdapter extends BaseAdapter
 
 	private ArrayList<FieldNote> mData = new ArrayList<FieldNote>();
     private TreeSet<Integer> mSeparatorsSet = new TreeSet<Integer>();
+    
+    private java.text.DateFormat mDateFormat;
+    private java.text.DateFormat mTimeFormat;
+    private Format mWeekdayFormat = new SimpleDateFormat("EEEE");
 
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_SEPARATOR = 1;
@@ -53,18 +59,19 @@ public class FieldNoteHistoryAdapter extends BaseAdapter
         // final Integer distinctiveDateCount = FieldNoteList.getDistinctiveDateCount(context, items);
 
         String currentDateString = "";
-		final java.text.DateFormat dateFormat = DateFormat.getDateFormat(context);
-        
+		this.mDateFormat = DateFormat.getDateFormat(context);
+		this.mTimeFormat = DateFormat.getTimeFormat(context);
+
         for (final FieldNote fieldNote : items)
         {
         	// Get date of the fieldnote
-    		final String dateString = dateFormat.format(fieldNote.noteTime);
+    		final String dateString = this.mDateFormat.format(fieldNote.noteTime);
     		if (!dateString.equals(currentDateString))
     		{
     			// Add separator item
     			final FieldNote separatorFieldNote = new FieldNote();
-    			separatorFieldNote.gcId = "SEP";
-    			separatorFieldNote.gcName = "SEP";
+    			separatorFieldNote.gcId = "---";
+    			separatorFieldNote.gcName = "-----";
     			separatorFieldNote.logType = FieldNote.LogType.WRITE_NOTE;
     			separatorFieldNote.noteTime = fieldNote.noteTime;
     			separatorFieldNote.logText = dateString;
@@ -157,34 +164,54 @@ public class FieldNoteHistoryAdapter extends BaseAdapter
       */
 	public View getView(int position, View convertView, ViewGroup parent) 
 	{
-		FieldNoteViewHolder fieldNoteViewHolder = null;
+		FieldNoteViewHolder viewHolder = null;
 		
         int type = getItemViewType(position);
         
 		if (convertView == null)
 		{
-			convertView = this.mLayoutInflater.inflate(R.layout.fieldnotelistitem, null);
+			viewHolder = new FieldNoteViewHolder();
+			
+			if (type == TYPE_ITEM)
+			{
+				convertView = this.mLayoutInflater.inflate(R.layout.fieldnotelistitem, null);
+	
+				viewHolder.twoLineListItem = (TwoLineListItem) convertView.findViewById(R.id.FieldNoteItem);
+				viewHolder.icon = (ImageView) convertView.findViewById(R.id.FieldNoteIcon);
+			}
+			else // type == TYPE_SEPARATOR
+			{
+				convertView = this.mLayoutInflater.inflate(R.layout.fieldnoteseparator, null);
 
-			fieldNoteViewHolder = new FieldNoteViewHolder();
-			fieldNoteViewHolder.twoLineListItem = (TwoLineListItem) convertView.findViewById(R.id.FieldNoteItem);
-			fieldNoteViewHolder.icon = (ImageView) convertView.findViewById(R.id.FieldNoteIcon);
-
-			convertView.setTag(fieldNoteViewHolder);
+				viewHolder.textView = (TextView) convertView.findViewById(R.id.FieldNoteSeparator);
+			}
+			convertView.setTag(viewHolder);
 		}
 		else 
 		{
-			fieldNoteViewHolder = (FieldNoteViewHolder) convertView.getTag();
+			viewHolder = (FieldNoteViewHolder) convertView.getTag();
 		}
 
         final FieldNote fieldNote = this.getItem(position);
         if (fieldNote != null)
         {
-	        final TextView tvLine1 = fieldNoteViewHolder.twoLineListItem.getText1();
-	        tvLine1.setText(fieldNote.gcName + " (" + fieldNote.gcId + ")");
-	        final TextView tvLine2 = fieldNoteViewHolder.twoLineListItem.getText2();
-	        tvLine2.setText(fieldNote.noteTime.toString());
-	        
-        	fieldNoteViewHolder.icon.setImageDrawable(this.getIcon(parent, fieldNote.logType));
+			if (type == TYPE_ITEM)
+			{
+		        final TextView tvLine1 = viewHolder.twoLineListItem.getText1();
+		        tvLine1.setText(this.mTimeFormat.format(fieldNote.noteTime) + " " + fieldNote.gcId);
+		        final TextView tvLine2 = viewHolder.twoLineListItem.getText2();
+		        tvLine2.setText(fieldNote.gcName); // + " (" + fieldNote.gcId + ")");
+		        
+		        viewHolder.icon.setImageDrawable(this.getIcon(parent, fieldNote.logType));
+			}
+			else // type == TYPE_SEPARATOR
+			{
+		        final TextView separator = viewHolder.textView;
+	        	// Get date of the fieldnote
+	    		final String dateString = this.mWeekdayFormat.format(fieldNote.noteTime) + ", " + this.mDateFormat.format(fieldNote.noteTime);
+		        
+		        separator.setText(dateString);
+			}			
         }
 
         return convertView;
@@ -227,5 +254,6 @@ public class FieldNoteHistoryAdapter extends BaseAdapter
 	{
 		TwoLineListItem twoLineListItem;
 		ImageView icon;
+		TextView textView;
 	}
 }
