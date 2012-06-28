@@ -18,7 +18,7 @@ public class OruxMapViewer extends MapViewerBase implements MapViewer
 {
 
 	private static final String	ORUX_VIEW_OFFLINE = "com.oruxmaps.VIEW_MAP_OFFLINE";
-	private static final String	ORUX_VIEW_ONLINE = "com.oruxmaps.VIEW_MAP_ONLINE";
+	// private static final String	ORUX_VIEW_ONLINE = "com.oruxmaps.VIEW_MAP_ONLINE";
 
 	/**
 	 * 
