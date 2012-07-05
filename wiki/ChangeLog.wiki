@@ -5,6 +5,7 @@ Version *1.2.0* (not released yet):
  * performance improvments in XML reader
  * improvments to zip file reading
  * fixed gpx file handler (if path contains multiple dots)
+ * fixed field note upload to bcaching.com
  * added loc file handler
  * improved loc file support (added difficulty, terrain, container)
  * german translation added (wip)
