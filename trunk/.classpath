@@ -8,6 +8,6 @@
 	<classpathentry kind="lib" path="libs/slf4j-android-1.5.8.jar"/>
 	<classpathentry kind="lib" path="libs/vtd-xml-2.10.jar"/>
 	<classpathentry kind="lib" path="libs/osmdroid-android-3.0.8.jar"/>
-	<classpathentry kind="lib" path="libs/db4o-8.0.249.16098-core-java5.jar"/>
+	<classpathentry kind="lib" path="libs/db4o-8.1.249.16099-core-java5.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
