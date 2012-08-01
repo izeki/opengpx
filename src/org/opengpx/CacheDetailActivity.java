@@ -110,6 +110,7 @@ public class CacheDetailActivity extends TabActivity
 
 	// public static final String	ANDNAV2_VIEW_ACTION	= "org.andnav2.intent.ACTION_VIEW";
 	// public static final String	ANDNAV2_NAV_ACTION	= "org.andnav2.intent.ACTION_NAV_TO";
+	private static final String		COMPASS_NAVI_ACTION = "org.compassNavi.SHOW_NAVI";
 
 	@SuppressWarnings("unused")
 	private final Logger mLogger = LoggerFactory.getLogger(CacheDetailActivity.class);
@@ -1123,9 +1124,9 @@ public class CacheDetailActivity extends TabActivity
 	 */
 	private void showWaypointOnCompassNavi(final Waypoint waypoint)
 	{
-		if (AndroidSystem.isIntentAvailable(this, "mpr.compassNavi.SHOW_NAVI"))
+		if (AndroidSystem.isIntentAvailable(this, COMPASS_NAVI_ACTION))
 		{
-			final Intent intCompassNavi = new Intent("mpr.compassNavi.SHOW_NAVI");
+			final Intent intCompassNavi = new Intent(COMPASS_NAVI_ACTION);
 			intCompassNavi.putExtra("latitude", waypoint.latitude);
 			intCompassNavi.putExtra("longitude", waypoint.longitude);
 			intCompassNavi.putExtra("name", waypoint.getSnippet());
