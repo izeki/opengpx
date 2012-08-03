@@ -1126,10 +1126,14 @@ public class CacheDetailActivity extends TabActivity
 	private void showWaypointOnCompassNavi(final Waypoint waypoint)
 	{
 		String compassNaviIntent = COMPASS_NAVI_ACTION;
-		if (!AndroidSystem.isIntentAvailable(this, compassNaviIntent))
+		boolean compassNaviIntentAvailable = AndroidSystem.isIntentAvailable(this, compassNaviIntent);
+		if (!compassNaviIntentAvailable)
+		{
 			compassNaviIntent = COMPASS_NAVI_ACTION_OLD;
+			compassNaviIntentAvailable = AndroidSystem.isIntentAvailable(this, compassNaviIntent);
+		}
 		
-		if (AndroidSystem.isIntentAvailable(this, compassNaviIntent))
+		if (compassNaviIntentAvailable)
 		{
 			final Intent intCompassNavi = new Intent(compassNaviIntent);
 			intCompassNavi.putExtra("latitude", waypoint.latitude);
