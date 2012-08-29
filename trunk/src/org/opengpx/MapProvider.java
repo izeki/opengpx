@@ -9,5 +9,7 @@ public enum MapProvider
 {
 	Google,
 	OpenStreetMap,
-	OruxMap
+	OruxMapsOnline,
+	OruxMapsOffline,
+	Locus
 }
