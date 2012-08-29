@@ -3,7 +3,8 @@
 <string-array name="map_provider">
     <item>Google Maps</item>
     <item>OpenStreetMap</item>
-    <item>OruxMap</item>
+    <item>OruxMaps (Online)</item>
+    <item >OruxMaps (Offline)</item>
 
 </string-array>
 <string-array name="screen_orientation"><item>Unspecified</item>
@@ -56,7 +57,8 @@
 <string-array name="map_provider_values">
     <item>Google</item>
 	<item>OpenStreetMap</item>
-	<item>OruxMap</item>
+	<item>OruxMapsOnline</item>
+	<item >OruxMapsOffline</item>
 </string-array>
 <string-array name="compass_provider_items"><item>CompassNavi</item>
 <item>Radar</item>

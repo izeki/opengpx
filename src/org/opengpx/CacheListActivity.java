@@ -468,7 +468,13 @@ public class CacheListActivity extends ListActivity
 				}
 				else
 				{
-					mapViewer = new OruxMapViewer(this);
+					final OruxMapViewer oruxMapViewer = new OruxMapViewer(this);
+					if (mapProvider == MapProvider.OruxMapsOnline)
+						oruxMapViewer.setUseOfflineMap(false);
+					else
+						oruxMapViewer.setUseOfflineMap(true);
+						
+					mapViewer = oruxMapViewer;
 					mapViewer.addCaches(this.mCacheDatabase.getCacheCodes(cachesFound));
 				}
 				mapViewer.setCenter(locationInfo.latitude, locationInfo.longitude, locationInfo.provider);
