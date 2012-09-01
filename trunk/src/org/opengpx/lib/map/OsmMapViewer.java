@@ -1,6 +1,7 @@
 package org.opengpx.lib.map;
 
 import org.opengpx.lib.UnitSystem;
+import org.opengpx.lib.map.MapOverlayItem.MapOverlayItemType;
 
 import android.content.Context;
 import android.content.Intent;
@@ -34,7 +35,7 @@ public class OsmMapViewer extends MapViewerBase implements MapViewer
 			{
 				intOsmMap.putExtra("target", this.moiTarget);
 			}
-			
+
 			this.mContext.startActivity(intOsmMap);
 		}
 		else
@@ -42,7 +43,7 @@ public class OsmMapViewer extends MapViewerBase implements MapViewer
 			Toast.makeText(this.mContext, "No caches available.", Toast.LENGTH_SHORT).show();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param latitude
@@ -51,6 +52,7 @@ public class OsmMapViewer extends MapViewerBase implements MapViewer
 	 */
 	public void setTarget(double latitude, double longitude, String name)
 	{
-		this.moiTarget = new MapOverlayItem(latitude, longitude, "Target", name);
+		// FIXME: set MapOverlayItemType
+		this.moiTarget = new MapOverlayItem(MapOverlayItemType.Unknown, latitude, longitude, "Target", name);
 	}
 }
