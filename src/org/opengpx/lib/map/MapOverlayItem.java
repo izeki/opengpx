@@ -3,6 +3,8 @@ package org.opengpx.lib.map;
 import java.io.Serializable;
 
 import org.opengpx.lib.ResourceHelper;
+import org.opengpx.lib.geocache.CacheType;
+import org.opengpx.lib.geocache.WaypointType;
 
 import android.graphics.drawable.Drawable;
 
@@ -15,6 +17,18 @@ public class MapOverlayItem implements Serializable
 {
 	/**
 	 * 
+	 * @author Martin Preishuber
+	 *
+	 */
+	public enum MapOverlayItemType
+	{
+		Unknown,
+		Geocache,
+		Waypoint
+	}
+	
+	/**
+	 * 
 	 */
 	private static final long serialVersionUID = 8102549452609012590L;
 
@@ -25,9 +39,31 @@ public class MapOverlayItem implements Serializable
 	private int mintDrawableWidth = 0;
 	private int mintDrawableHeight = 0;
 
-	final private String mTitle;	// Cache title or waypoint name
-	final private String mSnippet;	// Cache type, difficulty, terrain or waypoint type
+	private MapOverlayItemType mMapOverlayItemType = MapOverlayItemType.Unknown;
+	private String mTitle = "";			// Cache title or waypoint name
+	private String mSnippet = "";		// Cache type, difficulty, terrain or waypoint type
 
+	// Geocache properties
+	public String GeocacheID;
+	// public int GeocacheType;
+	public CacheType CacheType = org.opengpx.lib.geocache.CacheType.Unknown;
+	// public String Owner;
+	// public String PlacedBy;
+	// public String ShortDescription;
+	// public String LongDescription;
+	
+	// Waypoint properties
+	public WaypointType WaypointType = org.opengpx.lib.geocache.WaypointType.Unknown;
+	
+	/**
+	 * 
+	 * @param type
+	 */
+	public MapOverlayItem(MapOverlayItemType type)
+	{
+		this.mMapOverlayItemType = type;
+	}
+	
 	/**
 	 * 
 	 * @param latitude
@@ -35,7 +71,7 @@ public class MapOverlayItem implements Serializable
 	 * @param title
 	 * @param snippet
 	 */
-	public MapOverlayItem(double latitude, double longitude, String title, String snippet)
+	public MapOverlayItem(MapOverlayItemType type, double latitude, double longitude, String title, String snippet)
 	{
 		this.mTitle = title;
 		this.mSnippet = snippet;
@@ -50,7 +86,7 @@ public class MapOverlayItem implements Serializable
 	 * @param title
 	 * @param snippet
 	 */
-	public MapOverlayItem(int latitude, int longitude, String title, String snippet)
+	public MapOverlayItem(MapOverlayItemType type, int latitude, int longitude, String title, String snippet)
 	{
 		this.mTitle = title;
 		this.mSnippet = snippet;
@@ -58,6 +94,15 @@ public class MapOverlayItem implements Serializable
 		this.mintLongitude = longitude;		
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	public MapOverlayItemType getMapOverlayItemType()
+	{
+		return this.mMapOverlayItemType;
+	}
+	
 	/**
 	 * 
 	 * @return
@@ -105,11 +150,29 @@ public class MapOverlayItem implements Serializable
 	
 	/**
 	 * 
+	 * @param title
+	 */
+	public void setTitle(String title)
+	{
+		this.mTitle = title;
+	}
+
+	/**
+	 * 
 	 * @return
 	 */
 	public String getSnippet()
 	{
 		return this.mSnippet;
+	}
+	
+	/**
+	 * 
+	 * @param value
+	 */
+	public void setSnippet(String snippet)
+	{
+		this.mSnippet = snippet;
 	}
 	
 	/**

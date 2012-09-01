@@ -11,7 +11,9 @@ import org.opengpx.lib.CacheDatabase;
 import org.opengpx.lib.CacheIndexItem;
 import org.opengpx.lib.CoordinateFormat;
 import org.opengpx.lib.Coordinates;
+import org.opengpx.lib.geocache.CacheType;
 import org.opengpx.lib.geocache.Waypoint;
+import org.opengpx.lib.map.MapOverlayItem.MapOverlayItemType;
 
 /**
  * 
@@ -49,7 +51,7 @@ class MapViewerBase
 		boolean blnFirstItem = true;
 		boolean blnUseSearchResults = false;
 		
-		for (String strCacheCode : cacheCodes)
+		for (final String strCacheCode : cacheCodes)
 		{
 			// Find out, which database we use for getting cache index items
 			if (blnFirstItem)
@@ -76,7 +78,9 @@ class MapViewerBase
 			if (cii != null)
 			{
 				final String strSnippet = String.format("%s\n%s / %s [D%.1f,T%.1f]", cii.name, cii.type, cii.container, cii.difficulty, cii.terrain);
-				final MapOverlayItem item = new MapOverlayItem(cii.latitude, cii.longitude, cii.name, strSnippet);
+				final MapOverlayItem item = new MapOverlayItem(MapOverlayItemType.Geocache, cii.latitude, cii.longitude, cii.name, strSnippet);
+				item.GeocacheID = cii.code;
+				item.CacheType = CacheType.parseString(cii.type);
 				item.setDrawable(cii.type, CACHE_IMAGE_WIDTH, CACHE_IMAGE_HEIGHT);
 				this.mMapOverlayItems.add(item);
 			}
@@ -100,7 +104,8 @@ class MapViewerBase
 	{
 		for (Waypoint wp : waypoints)
 		{
-			final MapOverlayItem mapOverlayItem = new MapOverlayItem(wp.latitude, wp.longitude, wp.symbol, wp.getSnippet());
+			final MapOverlayItem mapOverlayItem = new MapOverlayItem(MapOverlayItemType.Waypoint, wp.latitude, wp.longitude, wp.symbol, wp.getSnippet());
+			mapOverlayItem.WaypointType = wp.getType();
 			mapOverlayItem.setDrawable(wp.getType().toString().toLowerCase(), WAYPOINT_IMAGE_WIDTH, WAYPOINT_IMAGE_HEIGHT);
 			this.mMapOverlayItems.add(mapOverlayItem);
 		}
@@ -117,13 +122,14 @@ class MapViewerBase
 	/**
 	 * 
 	 */
-	public void setCenter(Double latitude, Double longitude, String title) 
+	public void setCenter(final Double latitude, final Double longitude, final String title) 
 	{
 		final Coordinates coords = new Coordinates(latitude, longitude);
 		// final String strMessage = String.format("Map Center: %s (%s)", title, coords.toString(CoordinateFormat.DM));
 		// Log.d(TAG, strMessage);
 		// Toast.makeText(this.mContext, strMessage, Toast.LENGTH_LONG).show();
-		this.mOverlayItemCenter = new MapOverlayItem(latitude, longitude, "Map Center", coords.toString(CoordinateFormat.DM));
+		// FIXME: change MapOverlayItemType
+		this.mOverlayItemCenter = new MapOverlayItem(MapOverlayItemType.Unknown, latitude, longitude, "Map Center", coords.toString(CoordinateFormat.DM));
 	}
 
 	/**
