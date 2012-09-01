@@ -2,7 +2,6 @@ package org.opengpx.lib.map;
 
 import org.opengpx.lib.UnitSystem;
 
-import org.opengpx.MapOverlayItem;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;

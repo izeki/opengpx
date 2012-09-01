@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.opengpx.MapOverlayItem;
-
 import android.content.Context;
 import android.content.Intent;
 

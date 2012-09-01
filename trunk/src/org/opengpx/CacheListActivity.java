@@ -15,6 +15,8 @@ import org.opengpx.OpenGpxPreferenceActivity;
 import org.opengpx.Preferences;
 import org.opengpx.lib.map.GoogleElevation;
 import org.opengpx.lib.map.GoogleMapViewer;
+import org.opengpx.lib.map.LocusMapViewer;
+import org.opengpx.lib.map.MapProvider;
 import org.opengpx.lib.map.MapViewer;
 import org.opengpx.lib.map.OruxMapViewer;
 import org.opengpx.lib.map.OsmMapViewer;
@@ -464,6 +466,11 @@ public class CacheListActivity extends ListActivity
 				else if (mapProvider == MapProvider.OpenStreetMap)
 				{
 					mapViewer = new OsmMapViewer(this);
+					mapViewer.addCaches(this.mCacheDatabase.getCacheCodes(cachesFound));
+				}
+				else if (mapProvider.equals(MapProvider.Locus))
+				{
+					mapViewer = new LocusMapViewer(this);
 					mapViewer.addCaches(this.mCacheDatabase.getCacheCodes(cachesFound));
 				}
 				else

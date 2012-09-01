@@ -20,6 +20,7 @@ import org.opengpx.NavigationProvider;
 import org.opengpx.Preferences;
 import org.opengpx.WaypointDetailDialog;
 import org.opengpx.lib.map.GoogleMapViewer;
+import org.opengpx.lib.map.MapProvider;
 import org.opengpx.lib.map.MapViewer;
 import org.opengpx.lib.map.OruxMapViewer;
 import org.opengpx.lib.map.OsmMapViewer;

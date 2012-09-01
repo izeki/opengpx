@@ -21,6 +21,7 @@ import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 import org.opengpx.Preferences;
 import org.opengpx.lib.ResourceHelper;
+import org.opengpx.lib.map.MapOverlayItem;
 
 /**
  * 

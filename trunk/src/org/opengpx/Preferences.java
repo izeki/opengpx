@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.opengpx.lib.UnitSystem;
-
-import org.opengpx.MapProvider;
 import org.opengpx.R;
 import org.opengpx.lib.CacheDatabase;
 import org.opengpx.lib.CoordinateFormat;
 import org.opengpx.lib.Coordinates;
+import org.opengpx.lib.map.MapProvider;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;

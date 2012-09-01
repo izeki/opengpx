@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.opengpx.Preferences;
 import org.opengpx.lib.map.GoogleMapViewer;
+import org.opengpx.lib.map.MapProvider;
 import org.opengpx.lib.map.MapViewer;
 import org.opengpx.lib.map.OsmMapViewer;
 
