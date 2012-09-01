@@ -1,4 +1,4 @@
-package org.opengpx;
+package org.opengpx.lib.map;
 
 import java.io.Serializable;
 

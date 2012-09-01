@@ -7,7 +7,6 @@ import org.opengpx.lib.UnitSystem;
 import android.content.Context;
 // import android.util.Log;
 
-import org.opengpx.MapOverlayItem;
 import org.opengpx.lib.CacheDatabase;
 import org.opengpx.lib.CacheIndexItem;
 import org.opengpx.lib.CoordinateFormat;

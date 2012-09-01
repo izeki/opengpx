@@ -5,6 +5,7 @@
     <item>OpenStreetMap</item>
     <item>OruxMaps (Online)</item>
     <item >OruxMaps (Offline)</item>
+    <item >Locus</item>
 </string-array>
 <string-array name="screen_orientation"><item>Unspecified</item>
 <item>Portrait</item>
@@ -58,6 +59,7 @@
 <item>OpenStreetMap</item>
 <item>OruxMapsOnline</item>
 <item >OruxMapsOffline</item>
+<item >Locus</item>
 </string-array>
 <string-array name="compass_provider_items"><item>CompassNavi</item>
 <item>Radar</item>

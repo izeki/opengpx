@@ -2,7 +2,6 @@ package org.opengpx.lib.map;
 
 import java.util.ArrayList;
 
-import org.opengpx.MapOverlayItem;
 import org.opengpx.R;
 
 import org.osmdroid.DefaultResourceProxyImpl;
