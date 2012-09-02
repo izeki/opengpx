@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import org.opengpx.lib.UnitSystem;
 
 import android.content.Context;
-// import android.util.Log;
+import android.content.Intent;
+import android.widget.Toast;
 
 import org.opengpx.lib.CacheDatabase;
 import org.opengpx.lib.CacheIndexItem;
@@ -14,6 +15,9 @@ import org.opengpx.lib.Coordinates;
 import org.opengpx.lib.geocache.CacheType;
 import org.opengpx.lib.geocache.Waypoint;
 import org.opengpx.lib.map.MapOverlayItem.MapOverlayItemType;
+import org.opengpx.lib.tools.AndroidSystem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -33,6 +37,8 @@ class MapViewerBase
 	protected MapOverlayItem mOverlayItemCenter = null;
 	protected ArrayList<MapOverlayItem> mMapOverlayItems = new ArrayList<MapOverlayItem>();
 	protected UnitSystem mUnitSystem = UnitSystem.Metric;
+
+	private final Logger mLogger = LoggerFactory.getLogger(MapViewerBase.class);
 
 	/**
 	 * 
@@ -111,6 +117,26 @@ class MapViewerBase
 		}
 	}
 
+	/**
+	 * 
+	 * @param intent
+	 * @param humanReadableName
+	 */
+	protected void startActivity(final Intent intent, final String humanReadableName)
+	{
+		final String action = intent.getAction();
+		this.mLogger.debug("Mapviewer intent action: " + action);
+		final boolean intentAvailable = AndroidSystem.isIntentAvailable(this.mContext, action);
+		if (intentAvailable)
+		{
+			this.mContext.startActivity(intent);
+		}
+		else
+		{
+			Toast.makeText(this.mContext, humanReadableName + " is not installed", Toast.LENGTH_LONG).show();
+		}
+	}
+	
 	/**
 	 * 
 	 */
