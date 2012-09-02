@@ -22,7 +22,6 @@ import android.location.Location;
 public class LocusMapViewer extends MapViewerBase implements MapViewer 
 {
 	private static final String TAG = "";
-	private Context mContext;
 	
 	/**
 	 * 
@@ -31,8 +30,6 @@ public class LocusMapViewer extends MapViewerBase implements MapViewer
 	public LocusMapViewer(Context context) 
 	{
 		super(context);
-		
-		this.mContext = context;
 	}
 
 	/**
@@ -42,8 +39,8 @@ public class LocusMapViewer extends MapViewerBase implements MapViewer
 	{
 		if (this.mMapOverlayItems.size() > 0)
 		{
-			try {
-
+			try 
+			{
 				final PointsData pd = new PointsData("LocusMapStartActivity");
 				
 				for (final MapOverlayItem moi : this.mMapOverlayItems)
@@ -64,10 +61,5 @@ public class LocusMapViewer extends MapViewerBase implements MapViewer
 				e.printStackTrace();
 			}
 		}
-		/* else
-		{
-			// no map items
-		}	*/
 	}
-
 }

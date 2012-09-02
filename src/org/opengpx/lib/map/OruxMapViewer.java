@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.opengpx.lib.geocache.WaypointType;
 import org.opengpx.lib.map.MapOverlayItem.MapOverlayItemType;
 
 import android.content.Context;
@@ -17,6 +18,11 @@ import android.content.Intent;
 public class OruxMapViewer extends MapViewerBase implements MapViewer 
 {
 
+	/**
+	 * 
+	 * @author Martin Preishuber
+	 *
+	 */
 	private enum OruxMapIcon
 	{
 		Waypoint (1),
@@ -79,7 +85,7 @@ public class OruxMapViewer extends MapViewerBase implements MapViewer
 			return this.mIntegerValue; 
 		}
 	}
-	
+		
 	private static final String	ORUX_VIEW_OFFLINE = "com.oruxmaps.VIEW_MAP_OFFLINE";
 	private static final String	ORUX_VIEW_ONLINE = "com.oruxmaps.VIEW_MAP_ONLINE";
 
@@ -99,7 +105,7 @@ public class OruxMapViewer extends MapViewerBase implements MapViewer
 	 * @param doubles
 	 * @return
 	 */
-	public static double[] convertDoubles(List<Double> doubles)
+	private static double[] convertDoubles(List<Double> doubles)
 	{
 	    final double[] ret = new double[doubles.size()];
 	    final Iterator<Double> iterator = doubles.iterator();
@@ -115,7 +121,7 @@ public class OruxMapViewer extends MapViewerBase implements MapViewer
 	 * @param integers
 	 * @return
 	 */
-	public static int[] convertIntegers(List<Integer> integers)
+	private static int[] convertIntegers(List<Integer> integers)
 	{
 	    final int[] ret = new int[integers.size()];
 	    final Iterator<Integer> iterator = integers.iterator();
@@ -143,13 +149,45 @@ public class OruxMapViewer extends MapViewerBase implements MapViewer
 	{
 		return this.mUseOfflineMap;
 	}
-	
+
+	/**
+	 * 
+	 * @param waypointType
+	 * @return
+	 */
+	private int getOruxMapIcon(final WaypointType waypointType)
+	{
+		int oruxMapIcon = OruxMapIcon.Waypoint.integerValue();
+		switch (waypointType)
+		{
+		case Cache:
+		case Final:
+			oruxMapIcon = OruxMapIcon.Geocache.integerValue();
+			break;
+		case Parking: 
+			oruxMapIcon = OruxMapIcon.ParkingArea.integerValue();
+			break;
+		case Trailhead: 
+			oruxMapIcon = OruxMapIcon.StartingPoint.integerValue();
+			break;
+		case Question:
+		case Stages:
+		case Extracted: 
+		case Log:
+		case UserDefined: 
+		case Reference: 
+		default:
+			oruxMapIcon = OruxMapIcon.Waypoint.integerValue();
+			break;
+		}
+		return oruxMapIcon;
+	}
+
 	/**
 	 * 
 	 */
 	public void startActivity() 
 	{
-		
 		if (this.mMapOverlayItems.size() > 0)
 		{
 			final ArrayList<Double> listLatitude = new ArrayList<Double>();
@@ -163,13 +201,9 @@ public class OruxMapViewer extends MapViewerBase implements MapViewer
 				listLongitude.add(moi.getLongitude());
 				listNames.add(moi.getTitle());
 				if (moi.getMapOverlayItemType().equals(MapOverlayItemType.Geocache))
-				{
 					listSymbols.add(OruxMapIcon.Geocache.integerValue());
-				}
 				else
-				{
-					listSymbols.add(OruxMapIcon.Waypoint.integerValue());					
-				}
+					listSymbols.add(this.getOruxMapIcon(moi.WaypointType));					
 			}
 
 			final String intent = this.mUseOfflineMap ? ORUX_VIEW_OFFLINE : ORUX_VIEW_ONLINE;
@@ -185,13 +219,7 @@ public class OruxMapViewer extends MapViewerBase implements MapViewer
 			// Ignored elements:
 			// map_center, title, zoom_level, unit_system
 			
-			// FIXME: check whether intent exists
-			
-			this.mContext.startActivity(oruxmap);
+			this.startActivity(oruxmap, "OruxMaps");
 		}
-		else
-		{
-			// no map items
-		}	
 	}
 }

@@ -20,6 +20,7 @@ import org.opengpx.NavigationProvider;
 import org.opengpx.Preferences;
 import org.opengpx.WaypointDetailDialog;
 import org.opengpx.lib.map.GoogleMapViewer;
+import org.opengpx.lib.map.LocusMapViewer;
 import org.opengpx.lib.map.MapProvider;
 import org.opengpx.lib.map.MapViewer;
 import org.opengpx.lib.map.OruxMapViewer;
@@ -443,12 +444,21 @@ public class CacheDetailActivity extends TabActivity
 			final MapProvider mapProvider = this.mPreferences.getMapProvider();
 			final Waypoint wpHeader = this.mCache.getHeaderWaypoint();
 			MapViewer mapViewer;
-			if (mapProvider == MapProvider.Google)
+			if (mapProvider.equals(MapProvider.Google))
 				mapViewer = new GoogleMapViewer(this);
-			else if (mapProvider == MapProvider.OpenStreetMap)
+			else if (mapProvider.equals(MapProvider.OpenStreetMap))
 				mapViewer = new OsmMapViewer(this);
+			else if (mapProvider.equals(MapProvider.Locus))
+				mapViewer = new LocusMapViewer(this);
 			else
-				mapViewer = new OruxMapViewer(this);
+			{
+				final OruxMapViewer oruxMapViewer = new OruxMapViewer(this);
+				if (mapProvider.equals(MapProvider.OruxMapsOffline))
+					oruxMapViewer.setUseOfflineMap(true);
+				else
+					oruxMapViewer.setUseOfflineMap(false);
+				mapViewer = oruxMapViewer;
+			}
 			mapViewer.addWaypoints(this.mCache.getWaypoints());
 			mapViewer.setCenter(wpHeader.latitude, wpHeader.longitude, wpHeader.description);
 			mapViewer.setZoomLevel(16);
