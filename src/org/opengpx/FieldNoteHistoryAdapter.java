@@ -198,9 +198,11 @@ public class FieldNoteHistoryAdapter extends BaseAdapter
 			if (type == TYPE_ITEM)
 			{
 		        final TextView tvLine1 = viewHolder.twoLineListItem.getText1();
-		        tvLine1.setText(this.mTimeFormat.format(fieldNote.noteTime) + " " + fieldNote.gcId);
+		        // tvLine1.setText(this.mTimeFormat.format(fieldNote.noteTime) + " " + fieldNote.gcId);
+		        tvLine1.setText(this.mTimeFormat.format(fieldNote.noteTime) + " " + fieldNote.gcName);
 		        final TextView tvLine2 = viewHolder.twoLineListItem.getText2();
-		        tvLine2.setText(fieldNote.gcName); // + " (" + fieldNote.gcId + ")");
+		        // tvLine2.setText(fieldNote.gcName); // + " (" + fieldNote.gcId + ")");
+		        tvLine2.setText(fieldNote.gcId + " (" + fieldNote.logType.toString() + ")");
 		        
 		        viewHolder.icon.setImageDrawable(this.getIcon(parent, fieldNote.logType));
 			}
