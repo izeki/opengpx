@@ -37,6 +37,7 @@ class MapViewerBase
 	protected MapOverlayItem mOverlayItemCenter = null;
 	protected ArrayList<MapOverlayItem> mMapOverlayItems = new ArrayList<MapOverlayItem>();
 	protected UnitSystem mUnitSystem = UnitSystem.Metric;
+	protected boolean mFollowCurrentPosition = true;
 
 	private final Logger mLogger = LoggerFactory.getLogger(MapViewerBase.class);
 
@@ -184,5 +185,12 @@ class MapViewerBase
 		this.mUnitSystem = unitSystem;
 	}
 	
-	
+	/**
+	 * 
+	 * @param followCurrentPosition
+	 */
+	public void setFollowCurrentPosition(boolean followCurrentPosition)
+	{
+		this.mFollowCurrentPosition = followCurrentPosition;
+	}
 }

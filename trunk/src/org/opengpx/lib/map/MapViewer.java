@@ -13,6 +13,7 @@ public interface MapViewer
 	public void addWaypoints(ArrayList<Waypoint> waypoints);
 	
 	public void setCenter(Double latitude, Double longitude, String title);
+	public void setFollowCurrentPosition(boolean followCurrentPosition);
 	
 	public int getZoomLevel();
 	public void setZoomLevel(int zoomLevel);
