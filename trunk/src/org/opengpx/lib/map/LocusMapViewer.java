@@ -1,10 +1,14 @@
 package org.opengpx.lib.map;
 
+import org.opengpx.lib.map.MapOverlayItem.MapOverlayItemType;
+
 import menion.android.locus.addon.publiclib.DisplayData;
 // import menion.android.locus.addon.publiclib.LocusConst;
 // import menion.android.locus.addon.publiclib.LocusIntents;
 // import menion.android.locus.addon.publiclib.LocusUtils;
 import menion.android.locus.addon.publiclib.geoData.Point;
+import menion.android.locus.addon.publiclib.geoData.PointGeocachingData;
+import menion.android.locus.addon.publiclib.geoData.PointGeocachingDataWaypoint;
 // import menion.android.locus.addon.publiclib.geoData.PointGeocachingData;
 import menion.android.locus.addon.publiclib.geoData.PointsData;
 // import menion.android.locus.addon.publiclib.geoData.Track;
@@ -45,13 +49,30 @@ public class LocusMapViewer extends MapViewerBase implements MapViewer
 				
 				for (final MapOverlayItem moi : this.mMapOverlayItems)
 				{
-					final Location loc = new Location(TAG);
-					loc.setLatitude(moi.getLatitude());
-					loc.setLongitude(moi.getLongitude());
-
-					final Point pt = new Point(moi.getTitle(), loc);
-
-					pd.addPoint(pt);
+					
+					switch (moi.getMapOverlayItemType())
+					{
+					case Waypoint:
+					case Unknown:
+						final Location loc = new Location(TAG);
+						loc.setLatitude(moi.getLatitude());
+						loc.setLongitude(moi.getLongitude());
+						final Point pt = new Point(moi.getTitle(), loc);
+						pd.addPoint(pt);
+						break;
+					case Geocache:
+						final PointGeocachingDataWaypoint gcWP = new PointGeocachingDataWaypoint();
+						gcWP.name = moi.getTitle();
+						gcWP.lat = moi.getLatitude();
+						gcWP.lon = moi.getLongitude();
+						final PointGeocachingData gcData = new PointGeocachingData();
+						gcData.name = moi.getTitle();
+						gcData.cacheID = moi.GeocacheID;
+						gcData.waypoints.add(gcWP);
+						break;
+					// case Waypoint:
+					// 	break;
+					}
 				}
 
 				DisplayData.sendData(this.mContext, pd, true);
