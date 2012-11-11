@@ -73,6 +73,7 @@ public class MapOverlayItem implements Serializable
 	 */
 	public MapOverlayItem(MapOverlayItemType type, double latitude, double longitude, String title, String snippet)
 	{
+		this.mMapOverlayItemType = type;
 		this.mTitle = title;
 		this.mSnippet = snippet;
 		this.mintLatitude = ((Double) (latitude * 1E6)).intValue();
@@ -88,6 +89,7 @@ public class MapOverlayItem implements Serializable
 	 */
 	public MapOverlayItem(MapOverlayItemType type, int latitude, int longitude, String title, String snippet)
 	{
+		this.mMapOverlayItemType = type;
 		this.mTitle = title;
 		this.mSnippet = snippet;
 		this.mintLatitude = latitude;
