@@ -4,7 +4,7 @@
 
 Current Version: *1.1.0* (Release 15.10.2011) [ChangeLog]
 
-*Info*: ScreenShots, PlannedFeatures, CompassNavi, KnownIssues
+*Info*: ScreenShots, PlannedFeatures, CompassNavi, KnownIssues, [http://cache.ath.cx/opengpx/ Einführung]
 
 == Usage ==
 
@@ -47,6 +47,7 @@ Variant 3 (Online):
   * [http://www.androids.lv/2009/09/paperless-geocaching-opengpx/ Androids.lv] (latvian)
   * [http://blogausgraz.wordpress.com/2009/10/05/schnitzeljagt-mit-dem-android-geocaching/ BlogAusGraz] (german)
   * [http://google-produkt-kompass.blogspot.com/2009/10/geocoaching-mit-android.html Google Produkt Kompass] (german, actually just a short mention at the end of the article)
+ * [http://cache.ath.cx/opengpx/ Einführung in OpenGPX] (german)
 
 == Notes ==
 
