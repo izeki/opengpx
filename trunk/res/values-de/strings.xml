@@ -68,7 +68,7 @@
 <string name="navigation_mode">Navigationsmodus</string>
 <string name="button_ok">OK</string>
 <string name="title_votes">Votes</string>
-<string name="button_close">Schliessen</string>
+<string name="button_close">Schließen</string>
 <string name="vote_average">Durchschnitt:</string>
 <string name="vote_median">(Median</string>
 <string name="vote_total">Gesamt:</string>
@@ -110,8 +110,8 @@
 <string name="pref_waypoint_action_desc">Action performed when clicking on a waypoint</string>
 <string name="unknown">Unknown</string>
 <string name="menu_field_notes">Fieldnotes</string><string name="database">Datenbank</string>
-<string name="cache_index_size">Cache-Index Grösse</string>
-<string name="cache_database_size">Cache-Datenbank Grösse</string>
+<string name="cache_index_size">Cache-Index Größe</string>
+<string name="cache_database_size">Cache-Datenbank Größe</string>
 <string name="cache_variables">Cache-Variablen</string>
 <string name="cache_votes">Cache Votes</string>
 <string name="field_notes">Fieldnotes</string><string name="menu_show_field_notes">Anzeigen</string>
@@ -130,7 +130,7 @@
 <string name="cache_desc_long_description">Ausführliche Beschreibung</string>
 <string name="cache_detail_send_log">Log senden</string>
 <string name="cache_detail_save_log">Log speichern</string>
-<string name="cache_detail_size">Grösse:</string>
+<string name="cache_detail_size">Größe:</string>
 <string name="cache_detail_difficulty">Schwierigkeit:</string>
 <string name="cache_detail_terrain">Gelände:</string>
 <string name="tools_command">Auswahl:</string><string name="tools_text">Eingabe:</string>
@@ -173,4 +173,7 @@
 <string name="pref_hide_caches_found">Gefundene Caches verstecken</string>
 <string name="pref_hide_caches_found_on">Verstecke Caches mit \'Found it\' Fieldnotes</string>
 <string name="pref_hide_caches_found_off">Zeige alle verfügbaren Caches in der Datenbank</string>
+<string name="drive">Fahren</string>
+<string name="walk">Gehen</string>
+<string name="show">Anzeigen</string>
 </resources>

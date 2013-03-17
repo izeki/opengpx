@@ -194,6 +194,7 @@ public class SpoilerDownloader
 	        {
 	        	dos.write(buf, 0, numRead);
 	        }
+	        dos.close();
 		} 
 		catch (MalformedURLException e) 
 		{

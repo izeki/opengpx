@@ -1,21 +1,13 @@
 package org.opengpx.lib.map;
 
-import org.opengpx.lib.map.MapOverlayItem.MapOverlayItemType;
-
 import menion.android.locus.addon.publiclib.DisplayData;
-// import menion.android.locus.addon.publiclib.LocusConst;
-// import menion.android.locus.addon.publiclib.LocusIntents;
-// import menion.android.locus.addon.publiclib.LocusUtils;
 import menion.android.locus.addon.publiclib.geoData.Point;
 import menion.android.locus.addon.publiclib.geoData.PointGeocachingData;
 import menion.android.locus.addon.publiclib.geoData.PointGeocachingDataWaypoint;
-// import menion.android.locus.addon.publiclib.geoData.PointGeocachingData;
 import menion.android.locus.addon.publiclib.geoData.PointsData;
-// import menion.android.locus.addon.publiclib.geoData.Track;
 import menion.android.locus.addon.publiclib.utils.RequiredVersionMissingException;
 
 import android.content.Context;
-// import android.content.Intent;
 import android.location.Location;
 
 /**
@@ -65,9 +57,11 @@ public class LocusMapViewer extends MapViewerBase implements MapViewer
 						gcWP.name = moi.getTitle();
 						gcWP.lat = moi.getLatitude();
 						gcWP.lon = moi.getLongitude();
+						gcWP.type = "a";
 						final PointGeocachingData gcData = new PointGeocachingData();
 						gcData.name = moi.getTitle();
 						gcData.cacheID = moi.GeocacheID;
+						gcData.type = 1;
 						gcData.waypoints.add(gcWP);
 						break;
 					// case Waypoint:
