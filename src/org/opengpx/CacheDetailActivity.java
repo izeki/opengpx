@@ -1111,9 +1111,8 @@ public class CacheDetailActivity extends TabActivity
 		final NavigationProvider navigationProvider = this.mPreferences.getNavigationProvider();
 		if (navigationProvider.equals(NavigationProvider.Google))
 			this.navigateToWaypointWithGoogleMaps(waypoint);
-		// else
-		//	this.navigateToWaypointWithAndNav2(waypoint);
-
+		else if (navigationProvider.equals(NavigationProvider.Sygic))
+			this.navigateToWaypointWithSygic(waypoint);
 	}
 	
 	/**
@@ -1221,6 +1220,55 @@ public class CacheDetailActivity extends TabActivity
 		alert.show();
 	}
 
+	/**
+	 * 
+	 * @param waypoint
+	 */
+	private void navigateToWaypointWithSygic(final Waypoint waypoint)
+	{
+		final String destinationLatitude = ((Double) waypoint.latitude).toString().replace(",", ".");
+		final String destinationLongitude = ((Double) waypoint.longitude).toString().replace(",", ".");
+		
+		final String drive = getResources().getString(R.string.drive);
+		final String walk = getResources().getString(R.string.walk);
+		final String show = getResources().getString(R.string.show);
+		
+		final CharSequence[] items = { drive, walk, show };
+
+		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.navigation_mode);
+		builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() 
+		{
+		    public void onClick(DialogInterface dialog, int item) 
+		    {
+		    	String action = "http://com.sygic.aura/coordinate|" + 
+		    			destinationLongitude + "|" +
+		    			destinationLatitude + "|";
+		    	String mode = "";
+		    	switch (item)
+		    	{
+		    	case 0:
+		    		mode = "drive";
+		    		break;
+		    	case 1:
+		    		mode = "walk";
+		    		break;
+		    	case 2:
+		    		mode = "show";
+		    		break;
+		    	}
+		    	action = action + mode;
+		    	
+		    	dialog.dismiss();
+		    	
+		    	startActivity( new Intent(Intent.ACTION_VIEW, Uri.parse(action)));
+		    }
+		});
+		
+		final AlertDialog alert = builder.create();
+		alert.show();
+	}
+	
 	/**
 	 * 
 	 */

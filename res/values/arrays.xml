@@ -71,8 +71,10 @@
 
 </string-array>
 <string-array name="navigation_provider_items"><item>Google</item>
+<item >Sygic</item>
 </string-array>
 <string-array name="navigation_provider_values"><item>Google</item>
+<item >Sygic</item>
 </string-array>
 <string-array name="unit_system_items"><item>Metric</item>
 <item>Imperial</item>
