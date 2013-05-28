@@ -22,11 +22,13 @@ import org.opengpx.OsmPreferenceActivity;
 import org.opengpx.Preferences;
 import org.opengpx.lib.ResourceHelper;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -138,6 +140,11 @@ public class OsmMapViewerActivity extends Activity
         final RelativeLayout rl = new RelativeLayout(this);        
 
         this.mOsmv = new MapView(this, TILE_SIZE_PIXELS);
+        
+        this.mOsmv.setUseSafeCanvas(true);
+        this.mOsmv.setLayerType(View.LAYER_TYPE_SOFTWARE, null); // Required to make overlays work properly!
+        this.setHardwareAccelerationOff();
+        
         this.mOsmvController = this.mOsmv.getController();
         this.mOsmv.setTileSource(this.mTileSource);
         rl.addView(this.mOsmv, new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
@@ -195,6 +202,13 @@ public class OsmMapViewerActivity extends Activity
 		this.setContentView(rl);
 	}
 	
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    private void setHardwareAccelerationOff()
+    {
+        // Turn off hardware acceleration here, or in manifest
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+        	this.mOsmv.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+    }
 	/**
 	 * 
 	 * @param name
