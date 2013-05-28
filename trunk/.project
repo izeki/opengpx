@@ -3,6 +3,7 @@
 	<name>OpenGPX</name>
 	<comment></comment>
 	<projects>
+		<project>LocusAPI_android</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
