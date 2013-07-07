@@ -1,6 +1,7 @@
 package org.opengpx;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -80,7 +81,12 @@ public class WaypointDetailDialog extends AlertDialog.Builder
 		if (this.mWaypoint.elevation != Integer.MIN_VALUE)
 			sbWaypointDetail.append(String.format("\nElevation: %dm", this.mWaypoint.elevation));
 		sbWaypointDetail.append(String.format("\nSymbol: %s", this.mWaypoint.symbol));
-		if (this.mWaypoint.time != null) sbWaypointDetail.append(String.format("\nTime: %s", this.mWaypoint.time.toLocaleString()));
+		// if (this.mWaypoint.time != null) sbWaypointDetail.append(String.format("\nTime: %s", this.mWaypoint.time.toLocaleString()));
+		if (this.mWaypoint.time != null)
+		{
+			final DateFormat dateFormat = DateFormat.getDateTimeInstance();
+			sbWaypointDetail.append(String.format("\nTime: %s", dateFormat.format(this.mWaypoint.time)));
+		}
 
 		// Add address to waypoint details
 		final ConnectivityManager cm = (ConnectivityManager) this.mContext.getSystemService(Context.CONNECTIVITY_SERVICE);

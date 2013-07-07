@@ -464,19 +464,24 @@ public class SearchListActivity extends ListActivity
 		});		
 	}
 
+	/**
+	 * 
+	 */
 	private void showBCachingError()
 	{
 		// Show a dialog to let the user know something died....
-		AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-		alertDialog.setTitle("Error");
-		alertDialog.setMessage("BCaching.com query failed.\n\nPlease check your login information.\n\nIf the error persists please email a log to the developers.");
-		alertDialog.setButton("OK", new DialogInterface.OnClickListener()
+		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Error");
+		builder.setMessage("BCaching.com query failed.\n\nPlease check your login information.\n\nIf the error persists please email a log to the developers.");
+		builder.setCancelable(false);
+		builder.setNegativeButton("OK", new DialogInterface.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog, int which)
 			{
-				return;
+				dialog.cancel();
 			}
 		});
+		final AlertDialog alertDialog = builder.create();
 		alertDialog.show();
 	}
 

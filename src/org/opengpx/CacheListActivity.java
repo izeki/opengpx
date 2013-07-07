@@ -322,16 +322,18 @@ public class CacheListActivity extends ListActivity
      */
 	private void showDbOpenError()
 	{
-		final AlertDialog errorDialog = new AlertDialog.Builder(this).create();
-		errorDialog.setTitle("Unable to open db4o database");
-		errorDialog.setMessage(this.mCacheDatabase.getErrorMessage());
-		errorDialog.setButton("OK", new DialogInterface.OnClickListener()
+		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Unable to open db4o database");
+		builder.setMessage(this.mCacheDatabase.getErrorMessage());
+		builder.setCancelable(false);
+		builder.setNegativeButton("OK", new DialogInterface.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog, int which)
 			{
-				return;
+				dialog.cancel();
 			}
 		});
+		final AlertDialog errorDialog = builder.create();
 		errorDialog.show();
 	}
 
