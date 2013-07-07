@@ -62,6 +62,7 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTabHost;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
@@ -172,6 +173,10 @@ public class CacheDetailActivity extends TabActivity
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	protected FieldNote getFieldNote()
 	{
 		final EditText text = (EditText) findViewById(R.id.CacheLogVisitText);
@@ -196,6 +201,9 @@ public class CacheDetailActivity extends TabActivity
 		}
 	}
 
+	/**
+	 * 
+	 */
 	protected void initializeLogVisit()
 	{
 		// Show existing field note (if available)
@@ -330,11 +338,17 @@ public class CacheDetailActivity extends TabActivity
 		});
 	}
 
+	/**
+	 * 
+	 */
 	private void showUploadingDialog()
 	{
 		progressDialog = ProgressDialog.show(this, "Uploading Field Note", "Please wait - this may take a while ...", true, false);
 	}
 
+	/**
+	 * 
+	 */
 	private void dismissProgressDialog()
 	{
 		try
@@ -353,6 +367,9 @@ public class CacheDetailActivity extends TabActivity
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	private void showBCachingErrorInUIThread()
 	{
 		runOnUiThread(new Runnable()
@@ -364,28 +381,39 @@ public class CacheDetailActivity extends TabActivity
 		});		
 	}
 
+	/**
+	 * 
+	 */
 	private void showBCachingError()
 	{
 		// Show a dialog to let the user know something died....
-		final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-		alertDialog.setTitle("Error");
-		alertDialog.setMessage("BCaching.com query failed.\n\nPlease check your login information.\n\nIf the error persists please email a log to the developers.");
-		alertDialog.setButton("OK", new DialogInterface.OnClickListener()
+		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Error");
+		builder.setMessage("BCaching.com query failed.\n\nPlease check your login information.\n\nIf the error persists please email a log to the developers.");
+		builder.setCancelable(false);
+		builder.setNegativeButton("OK", new DialogInterface.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog, int which)
 			{
-				return;
+				dialog.cancel();
 			}
 		});
+		final AlertDialog alertDialog = builder.create();
 		alertDialog.show();
 	}
 
-	
+	/**
+	 * 
+	 */
 	private void showSearchingDialog()
 	{
 		progressDialog = ProgressDialog.show(this, "Running Online Search", "Please wait - this may take a while ...", true, false);
 	}	
 
+	/**
+	 * 
+	 * @param isCacheSaved
+	 */
 	public void showNewDetailView(boolean isCacheSaved)
 	{
 		final Intent intent = new Intent(this, CacheDetailActivity.class);
@@ -719,7 +747,7 @@ public class CacheDetailActivity extends TabActivity
 		if (this.mCache.shortDescription.trim().length() > 0)
 		{
 			final TextView tvShortDescHeader = new TextView(this);
-			tvShortDescHeader.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+			tvShortDescHeader.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 			tvShortDescHeader.setBackgroundColor(0xFFc8c8c8);
 			tvShortDescHeader.setTextColor(0xFF000000);
 			tvShortDescHeader.setTextSize(10);
@@ -730,7 +758,7 @@ public class CacheDetailActivity extends TabActivity
 			if ((this.mCache.shortDescriptionIsHtml) && (blnUseWebView))
 			{
 				WebView wvShortDescription = new WebView(this);
-				wvShortDescription.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
+				wvShortDescription.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 				// wvShortDescription.getSettings().setJavaScriptEnabled(true);
 				HtmlCodeBuilder hcb = new HtmlCodeBuilder();
 				hcb.setBody(this.mCache.shortDescription);
@@ -740,7 +768,7 @@ public class CacheDetailActivity extends TabActivity
 			else
 			{
 				TextView tvShortDescription = new TextView(this);
-				tvShortDescription.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
+				tvShortDescription.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 				tvShortDescription.setTypeface(null, Typeface.ITALIC);
 				tvShortDescription.setAutoLinkMask(Linkify.WEB_URLS);
 				tvShortDescription.setText(this.mCache.shortDescription);
@@ -749,7 +777,7 @@ public class CacheDetailActivity extends TabActivity
 		}
 
 		final TextView tvLongDescHeader = new TextView(this);
-		tvLongDescHeader.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		tvLongDescHeader.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		tvLongDescHeader.setBackgroundColor(0xFFc8c8c8);
 		tvLongDescHeader.setTextColor(0xFF000000);
 		tvLongDescHeader.setTextSize(10);
@@ -760,7 +788,7 @@ public class CacheDetailActivity extends TabActivity
 		if ((this.mCache.longDescriptionIsHtml) && (blnUseWebView))
 		{
 			final WebView wvLongDescription = new WebView(this);
-			wvLongDescription.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
+			wvLongDescription.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 			HtmlCodeBuilder hcb = new HtmlCodeBuilder();
 			hcb.setBody(this.mCache.longDescription);
 			wvLongDescription.loadDataWithBaseURL(null, hcb.getFullPage(), "text/html", "utf-8", "about:blank");
@@ -769,7 +797,7 @@ public class CacheDetailActivity extends TabActivity
 		else
 		{
 			final TextView tvLongDescription = new TextView(this);
-			tvLongDescription.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
+			tvLongDescription.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 			tvLongDescription.setAutoLinkMask(Linkify.WEB_URLS);
 			tvLongDescription.setText(this.mCache.longDescription);
 			llCacheDescription.addView(tvLongDescription);
@@ -802,25 +830,27 @@ public class CacheDetailActivity extends TabActivity
 	 */
 	private void showHint()
 	{
-		final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		final String strHintText = mCache.hint.trim();
 		if (strHintText.length() > 0)
 		{
-			alertDialog.setTitle(R.string.hint);
-			alertDialog.setMessage(strHintText);
+			builder.setTitle(R.string.hint);
+			builder.setMessage(strHintText);
 		}
 		else
 		{
-			alertDialog.setTitle(R.string.information);
-			alertDialog.setMessage(this.mResources.getString(R.string.no_hint_available));
+			builder.setTitle(R.string.information);
+			builder.setMessage(this.mResources.getString(R.string.no_hint_available));
 		}
-		alertDialog.setButton("OK", new DialogInterface.OnClickListener()
+		builder.setCancelable(false);
+		builder.setNegativeButton("OK", new DialogInterface.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog, int which)
 			{
-				return;
+				dialog.cancel();
 			}
 		});
+		final AlertDialog alertDialog = builder.create();
 		alertDialog.show();
 	}
 
@@ -844,19 +874,21 @@ public class CacheDetailActivity extends TabActivity
 			travelBugs.append(this.mResources.getString(R.string.no_travelbugs_available));
 		}
 
-		final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-		alertDialog.setTitle(R.string.inventory);
+		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.inventory);
 		final TextView message = new TextView(this);
 		message.setText(Html.fromHtml(travelBugs.toString()));
 		message.setMovementMethod(LinkMovementMethod.getInstance());
-		alertDialog.setView(message);
-		alertDialog.setButton("OK", new DialogInterface.OnClickListener()
+		builder.setView(message);
+		builder.setCancelable(false);
+		builder.setNegativeButton("OK", new DialogInterface.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog, int which)
 			{
-				return;
+				dialog.cancel();
 			}
 		});
+		final AlertDialog alertDialog = builder.create();
 		alertDialog.show();
 	}
 
@@ -1375,16 +1407,18 @@ public class CacheDetailActivity extends TabActivity
 				{
 					if (logEntry.isTextEncoded)
 					{
-						final AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-						alertDialog.setTitle(R.string.log_decrypted);
-						alertDialog.setMessage(logEntry.text);
-						alertDialog.setButton("OK", new DialogInterface.OnClickListener()
+						final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+						builder.setTitle(R.string.log_decrypted);
+						builder.setMessage(logEntry.text);
+						builder.setCancelable(false);
+						builder.setNegativeButton("OK", new DialogInterface.OnClickListener()
 						{
 							public void onClick(DialogInterface dialog, int which)
 							{
-								return;
+								dialog.cancel();
 							}
 						});
+						final AlertDialog alertDialog = builder.create();
 						alertDialog.show();
 					}
 				}

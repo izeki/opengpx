@@ -63,7 +63,7 @@ public class Communication
 
 		StringBuffer sb = new StringBuffer();
 		sb.append("u=");
-		sb.append(URLEncoder.encode(username));
+		sb.append(URLEncoder.encode(username, "UTF-8"));
 		sb.append("&");
 		sb.append(params);
 		sb.append("&time=");
@@ -71,7 +71,7 @@ public class Communication
 		sb.append(date.getTime());
 		String signature = encodeMd5Base64(sb.toString() + hashword);
 		sb.append("&sig=");
-		sb.append(URLEncoder.encode(signature));
+		sb.append(URLEncoder.encode(signature, "UTF-8"));
 		return sb.toString();
 	}
 
@@ -89,7 +89,7 @@ public class Communication
 			String k = keys.nextElement();
 			sb.append(k);
 			sb.append('=');
-			sb.append(URLEncoder.encode(params.get(k)));
+			sb.append(URLEncoder.encode(params.get(k), "UTF-8"));
 		}
 
 		return sendRequest(sb.toString());

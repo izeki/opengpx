@@ -108,7 +108,7 @@ public class ResourceHelper
 				// Rescale bitmap
 				final Bitmap bitmapOrg = ((BitmapDrawable) drawable).getBitmap();
 				final Bitmap bitmapNew = Bitmap.createScaledBitmap(bitmapOrg, intRealWidth, intRealHeight, true);
-				drawable = new BitmapDrawable(bitmapNew);
+				drawable = new BitmapDrawable(this.mContext.getResources(), bitmapNew);
 			}
 			final Rect rect = new Rect(0, 0, intRealWidth, intRealHeight);
 			drawable.setBounds(rect);

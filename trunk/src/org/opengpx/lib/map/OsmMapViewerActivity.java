@@ -142,12 +142,11 @@ public class OsmMapViewerActivity extends Activity
         this.mOsmv = new MapView(this, TILE_SIZE_PIXELS);
         
         this.mOsmv.setUseSafeCanvas(true);
-        this.mOsmv.setLayerType(View.LAYER_TYPE_SOFTWARE, null); // Required to make overlays work properly!
         this.setHardwareAccelerationOff();
         
         this.mOsmvController = this.mOsmv.getController();
         this.mOsmv.setTileSource(this.mTileSource);
-        rl.addView(this.mOsmv, new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+        rl.addView(this.mOsmv, new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 
         // Set zoom level
         this.mOsmvController.setZoom(this.mintZoomLevel);
@@ -201,7 +200,7 @@ public class OsmMapViewerActivity extends Activity
 		
 		this.setContentView(rl);
 	}
-	
+		
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void setHardwareAccelerationOff()
     {

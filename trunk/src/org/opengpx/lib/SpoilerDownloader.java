@@ -2,12 +2,14 @@ package org.opengpx.lib;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -96,16 +98,21 @@ public class SpoilerDownloader
 	{
 		URL url = null;
 		InputStream is = null;
-		DataInputStream dis = null;
+		InputStreamReader isr = null;
+		BufferedReader br = null;
+		// DataInputStream dis = null;
 		String strLine;
 		StringBuilder sbWebPage = new StringBuilder();;
-		
-		try 
+
+		try
 		{
 			url = new URL(strURL);
 			is = url.openStream();
-			dis = new DataInputStream(new BufferedInputStream(is));
-			while ((strLine = dis.readLine()) != null)
+			isr = new InputStreamReader(url.openStream());
+			br = new BufferedReader(isr);
+			// dis = new DataInputStream(new BufferedInputStream(is));
+			// while ((strLine = dis.readLine()) != null)
+			while ((strLine = br.readLine()) != null)
 			{
 				sbWebPage.append(strLine + "\n");
 			}
@@ -122,6 +129,8 @@ public class SpoilerDownloader
 		{
 			try 
 			{
+				br.close();
+				isr.close();
 				is.close();
 			} 
 			catch (IOException e) 

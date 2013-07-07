@@ -159,18 +159,25 @@ public class CommandActivity extends Activity
             	
             	if (commandType == CommandType.Calculate)
             	{
-            		AlertDialog alertDialog = new AlertDialog.Builder(mCommandText.getContext()).create();
-            	    alertDialog.setTitle(R.string.help_command_custom_functions);
-            	    alertDialog.setMessage(mCommandText.getContext().getString(R.string.help_command_calculate));
-            	    alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
-            	      public void onClick(DialogInterface dialog, int which) {
-            	        return;
-            	      } }); 
+            		final AlertDialog.Builder builder = new AlertDialog.Builder(mCommandText.getContext());
+            		builder.setTitle(R.string.help_command_custom_functions);
+            		builder.setMessage(mCommandText.getContext().getString(R.string.help_command_calculate));
+            		builder.setCancelable(false);
+            		builder.setNegativeButton("OK", new DialogInterface.OnClickListener() 
+            		{
+            			public void onClick(DialogInterface dialog, int which) 
+            			{
+            				dialog.cancel();
+            			} 
+            		}); 
+            		final AlertDialog alertDialog = builder.create();
             	    alertDialog.show();
-            	} else {
-                // Perform action on click
-            	Toast help = Toast.makeText(mCommandText.getContext(), R.string.no_help_for_command_type, Toast.LENGTH_LONG);
-            	help.show();
+            	} 
+            	else 
+            	{
+	                // Perform action on click
+	            	final Toast help = Toast.makeText(mCommandText.getContext(), R.string.no_help_for_command_type, Toast.LENGTH_LONG);
+	            	help.show();
             	}
             }
 		});

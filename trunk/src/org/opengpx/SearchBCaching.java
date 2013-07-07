@@ -114,7 +114,7 @@ public class SearchBCaching
 		params.put("maxcount", Integer.toString(maxCaches));
 		params.put("maxdistance", Integer.toString(maxDistance));
 
-		if (name != null) params.put("find", URLEncoder.encode(name));
+		if (name != null) params.put("find", URLEncoder.encode(name, "UTF-8"));
 		if (data != null) addAdvancedSearchParams(data);
 
 		InputStream in = comm.sendRequest(params);
