@@ -27,6 +27,7 @@ import org.slf4j.LoggerFactory;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import com.db4o.config.AndroidSupport;
 import com.db4o.config.EmbeddedConfiguration;
 import com.db4o.ext.DatabaseFileLockedException;
 import com.db4o.ext.Db4oIOException;
@@ -312,7 +313,7 @@ public class CacheDatabase
 		try 
 		{
 			final EmbeddedConfiguration config = Db4oEmbedded.newConfiguration();
-			// config.common().add(new AndroidSupport()); // FIXME: Should work with db4o 8.1
+			config.common().add(new AndroidSupport()); // FIXME: Should work with db4o 8.1
 			// Make sure that all sub-classes are updated on updates
 			config.common().objectClass(Cache.class).cascadeOnUpdate(true);
 			config.common().objectClass(UserDefinedVariables.class).cascadeOnUpdate(true);
