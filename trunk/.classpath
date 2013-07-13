@@ -11,6 +11,6 @@
 	<classpathentry kind="lib" path="libs/android-support-v4.jar"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="lib" path="libs/osmdroid-android-3.0.10.jar"/>
-	<classpathentry kind="lib" path="libs/db4o-8.1.302.16154-all-java5.jar"/>
+	<classpathentry kind="lib" path="libs/db4o-8.1.249.16099-all-java5.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
