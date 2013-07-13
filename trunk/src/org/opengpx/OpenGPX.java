@@ -18,7 +18,7 @@ import android.widget.Toast;
  */
 public class OpenGPX extends Application
 {
-	private CacheDatabase mCacheDatabase;
+	// private CacheDatabase mCacheDatabase;
 	private boolean mblnDatabaseInitialized;
 	private String mstrErrorMessage;
 	private Preferences mPreferences;
@@ -89,11 +89,11 @@ public class OpenGPX extends Application
 	{
 		super.onTerminate();
 
-		if (this.mCacheDatabase != null)
+		final CacheDatabase cacheDatabase = CacheDatabase.getInstance();
+		if (cacheDatabase.isDatabaseOpen())
 		{
-			this.mCacheDatabase.close();
-			this.mCacheDatabase.closeFieldNoteDatabase();
-			this.mCacheDatabase = null;
+			cacheDatabase.close();
+			cacheDatabase.closeFieldNoteDatabase();
 		}
 	}
 
@@ -102,26 +102,26 @@ public class OpenGPX extends Application
      */
 	private void initializeDatabase()
 	{
-		this.mCacheDatabase = CacheDatabase.getInstance();
+		final CacheDatabase cacheDatabase = CacheDatabase.getInstance();
 		
 		final String strDataPath = this.mPreferences.getDataFolder();
 		// Set database properties
-		this.mCacheDatabase.setBaseFolder(strDataPath);
-		this.mCacheDatabase.setDatabaseFolder(String.format("%s%sdatabase", strDataPath, File.separator));
-		this.mCacheDatabase.setBackupFolder(String.format("%s%sbackup", strDataPath, File.separator));
-		this.mCacheDatabase.setSortOrder(CacheDatabase.SORT_ORDER_NAME);
+		cacheDatabase.setBaseFolder(strDataPath);
+		cacheDatabase.setDatabaseFolder(String.format("%s%sdatabase", strDataPath, File.separator));
+		cacheDatabase.setBackupFolder(String.format("%s%sbackup", strDataPath, File.separator));
+		cacheDatabase.setSortOrder(CacheDatabase.SORT_ORDER_NAME);
 
 		final String strDatabaseFilename = this.mPreferences.getDatabaseFilename();
 
-		this.mblnDatabaseInitialized = this.mCacheDatabase.openDatabase(strDatabaseFilename);
+		this.mblnDatabaseInitialized = cacheDatabase.openDatabase(strDatabaseFilename);
 		if (!this.mblnDatabaseInitialized)
 		{
-			this.mstrErrorMessage = this.mCacheDatabase.getErrorMessage();
+			this.mstrErrorMessage = cacheDatabase.getErrorMessage();
 		}
 		
-		if (!mCacheDatabase.openFieldNoteDatabase())
+		if (!cacheDatabase.openFieldNoteDatabase())
 		{
-			this.mstrErrorMessage = this.mCacheDatabase.getErrorMessage();			
+			this.mstrErrorMessage = cacheDatabase.getErrorMessage();			
 		}
 	}
 

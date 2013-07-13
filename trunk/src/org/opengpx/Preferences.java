@@ -70,7 +70,7 @@ public class Preferences
 	private static final int     PREFS_DEFAULT_CACHE_LIMIT = 100;
 	private static final boolean PREFS_DEFAULT_HIDE_CACHES_FOUND = true;
 	// private static final String  PREFS_DEFAULT_USERNAME = "Unknown";
-	private static final String  PREFS_DEFAULT_DB_FILENAME = "database.db4o";
+	private static final String  PREFS_DEFAULT_DB_FILENAME = "Database.db4o";
 	private static final int     PREFS_DEFAULT_SORT_ORDER = CacheDatabase.SORT_ORDER_NAME;
 	// private static final int     PREFS_DEFAULT_SCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
 	private static final String  PREFS_DEFAULT_BCACHING_USERNAME = "";
